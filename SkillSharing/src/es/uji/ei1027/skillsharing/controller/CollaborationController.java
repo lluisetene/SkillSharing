@@ -21,7 +21,6 @@ import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 @Controller
 @RequestMapping("/collaboration")
 public class CollaborationController {
-	//hola
 	
 	private CollaborationDAO collaborationDao;
 	

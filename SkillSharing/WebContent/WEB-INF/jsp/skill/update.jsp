@@ -43,9 +43,8 @@
 	            
 	                <td><form:label path="level">level</form:label></td>
 					<td><select id="level" name="level">
-						<option value="" selected="selected"> -select-</option>
+						<option value="medium" selected="selected">medium</option>
 						<option value="high">high</option>
-						<option value="medium">medium</option>
 						<option value="low">low</option>
 					</select></td>
 	            

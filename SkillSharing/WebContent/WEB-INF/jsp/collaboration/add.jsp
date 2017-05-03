@@ -12,7 +12,49 @@
 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+		<script>
+		$(function () {
+			var dateFormat = "mm/dd/yy",
+			//BeginningDate
+			from = $("#datepickerbeginning").datepicker({
+				changeMonth:true,
+				changeYear:true,
+				showOn:"button",
+				buttonText:"Calendar",
+				}).datepicker("setDate", new Date()).on( "change", function() {
+					to.datepicker( "option", "minDate", getDate( this ));
+				}),
+			//EndingDate
+			to = $("#datepickerending").datepicker({
+				changeMonth:true, 
+				changeYear:true,
+				showOn:"button", 
+				buttonText:"Calendar",
+				}).datepicker("setDate", new Date()).on( "change", function() {
+					from.datepicker( "option", "maxDate", getDate( this ) );
+				});
+
+			function getDate( element ) {
+				var date;
+				try {
+					date = $.datepicker.parseDate( dateFormat, element.value );
+				} catch( error ) {
+					date = null;
+				}
+
+				return date;
+			}
+		
+		} 
+		
+		);
+		</script>
+		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/offer.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/calendar.css">
 
 		<title>Add Collaboration</title>
 
@@ -52,16 +94,17 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="beginningDate">BeginningDate</form:label></td>
-	                <td><form:input type = "text" maxlength = "10" path="beginningDate" placeholder="DD/MM/YYYY" /></td>
-	          
+	  	            <td><form:label path="beginningDate">BeginningDate</form:label></td>
+	                <td><form:input type="date" path="beginningDate" name="datepicker" id="datepickerbeginning" size="10" /><td>
+	                <td><form:errors path="beginningDate" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	            
 	                <td><form:label path="endingDate">EndingDate</form:label></td>
-	                <td><form:input type = "text" maxlength = "10" path="endingDate" placeholder="DD/MM/YYYY" /></td>
-	            
+	                <td><form:input type="date" path="endingDate" name="datepicker" id="datepickerending" size="10"/><td>
+	                <td><form:errors path="endingDate" cssClass="error" /></td>
+	                
 	            </tr>
 	            
 	            <tr>

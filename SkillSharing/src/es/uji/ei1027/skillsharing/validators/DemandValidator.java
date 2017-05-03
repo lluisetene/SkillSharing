@@ -26,46 +26,46 @@ public class DemandValidator implements Validator {
 		
 		// ------- IDDEMAND ------ /
 		if ( demand.getIdDemand() .trim().equals("") )
-			errors.rejectValue("idDemand", "required", "It is empty");
+			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
 		else if ( demand.getIdDemand() .trim().length() > 5 )
-			errors.rejectValue("idDemand", "required", "Too long");
+			errors.rejectValue("idDemand", "required", "El IDDemand debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(demand.getIdDemand().toLowerCase()) )  {
-					errors.rejectValue("idDemand", "required", "It Already Exists");
+					errors.rejectValue("idDemand", "required", "Este IDDemand ya está en uso");
 					break;
 				}
 		}
 		
 		// -------- NID -------- //
 		if ( demand.getNid().trim().equals("") )
-			errors.rejectValue("nid", "required", "It is empty");
+			errors.rejectValue("nid", "required", "Este campo es obligatorio");
 		else if ( demand.getNid().length() != 9 )
-			errors.rejectValue("nid", "required", "Too long");
+			errors.rejectValue("nid", "required", "Tamaño incorrecto");
 		else {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getNid().toLowerCase().equals(demand.getNid().toLowerCase()) ) {
-					errors.rejectValue("nid", "required", "It Already Exists");
+					errors.rejectValue("nid", "required", "Este NID ya está en uso");
 					break;
 				}
 		}
 		
 		// -------- NAME ----- //
 		if ( demand.getName().trim().equals("") )
-			errors.rejectValue("name", "required", "It is empty");
+			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( demand.getName().length() < 5 )
-			errors.rejectValue("name", "required", "Too long");
+			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
 		
 		
 		// ------- IDDEMAND ------ /
 		if ( demand.getIdSkill() .trim().equals("") )
-			errors.rejectValue("idSkill", "required", "It is empty");
+			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		else if ( demand.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "Too long");
+			errors.rejectValue("idSkill", "required", "El IDDemand debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getIdSkill().toLowerCase().equals(demand.getIdSkill().toLowerCase()) )  {
-					errors.rejectValue("idSkill", "required", "It Already Exists");
+					errors.rejectValue("idSkill", "required", "Este IDDemand ya está en uso");
 					break;
 				}
 		}				
@@ -77,13 +77,13 @@ public class DemandValidator implements Validator {
 		
 		// ------- IDDEMAND ------ /
 		if ( demand.getIdDemand() .trim().equals("") )
-			errors.rejectValue("idDemand", "required", "It is empty");
+			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
 		else if ( demand.getIdDemand() .trim().length() > 5 )
-			errors.rejectValue("idDemand", "required", "Too long");
+			errors.rejectValue("idDemand", "required", "El IDDemand debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(demand.getIdDemand().toLowerCase()) )  {
-					errors.rejectValue("idDemand", "required", "It Already Exists");
+					errors.rejectValue("idDemand", "required", "Este IDDemand ya está en uso");
 					break;
 				}
 		}		

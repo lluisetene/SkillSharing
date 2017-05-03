@@ -26,37 +26,37 @@ public class DegreeValidator implements Validator {
 		
 		// ----- IDDEGREE ------ //
 		if ( degree.getIdDegree() .trim().equals("") )
-			errors.rejectValue("idDegree", "required", "It is empty");
+			errors.rejectValue("idDegree", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < degreesList.size(); i++ )
 				if ( degreesList.get(i).getIdDegree().toLowerCase().equals(degree.getIdDegree().toLowerCase()) )  {
-					errors.rejectValue("idDegree", "required", "It Already Exists");
+					errors.rejectValue("idDegree", "required", "Este IDDegree ya está en uso");
 					break;
 				}
 		}
 		
 		// -------- NAME ----- //
 		if ( degree.getName().trim().equals("") )
-			errors.rejectValue("name", "required", "It is empty");
+			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( degree.getName().length() < 5 )
-			errors.rejectValue("name", "required", "Too long");
+			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < degreesList.size(); i++ )
 				if ( degreesList.get(i).getName().toLowerCase().equals(degree.getName().toLowerCase()) )  {
-					errors.rejectValue("name", "required", "It Already Exists");
+					errors.rejectValue("name", "required", "Este Name ya está en uso");
 					break;
 				}
 		}
 		
 		// -------- NID -------- //
 		if ( degree.getNid().trim().equals("") )
-			errors.rejectValue("nid", "required", "It is empty");
+			errors.rejectValue("nid", "required", "Este campo es obligatorio");
 		else if ( degree.getNid().length() != 9 )
-			errors.rejectValue("nid", "required", "Too long");
+			errors.rejectValue("nid", "required", "Tamaño incorrecto");
 		else {
 			for ( int i = 0; i < degreesList.size(); i++ )
 				if ( degreesList.get(i).getNid().toLowerCase().equals(degree.getNid().toLowerCase()) ) {
-					errors.rejectValue("nid", "required", "It Already Exists");
+					errors.rejectValue("nid", "required", "Este NID ya está en uso");
 					break;
 				}
 			}
@@ -68,11 +68,11 @@ public class DegreeValidator implements Validator {
 		Degree degree = (Degree) obj;
 		
 		if ( degree.getIdDegree() .trim().equals("") )
-			errors.rejectValue("idDegree", "required", "It is empty");
+			errors.rejectValue("idDegree", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < degreesList.size(); i++ )
 				if ( degreesList.get(i).getIdDegree().toLowerCase().equals(degree.getIdDegree().toLowerCase()) )  {
-					errors.rejectValue("idDegree", "required", "It Already Exists");
+					errors.rejectValue("idDegree", "required", "Este IDDegree ya está en uso");
 					break;
 				}
 		}

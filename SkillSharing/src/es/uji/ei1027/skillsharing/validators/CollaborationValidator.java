@@ -26,39 +26,39 @@ public class CollaborationValidator implements Validator {
 		
 		// ------ IDCOLLABORATION -------- //
 		if ( collaboration.getIdCollaboration() .trim().equals("") )
-			errors.rejectValue("idCollaboration", "required", "It is empty");
+			errors.rejectValue("idCollaboration", "required", "Este campo es obligatorio");
 		else if ( collaboration.getIdCollaboration() .trim().length() > 5 )
-			errors.rejectValue("idCollaboration", "required", "Too long");
+			errors.rejectValue("idCollaboration", "required", "El IDCollaboration debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < collaborationsList.size(); i++ )
 				if ( collaborationsList.get(i).getIdCollaboration().toLowerCase().equals(collaboration.getIdCollaboration().toLowerCase()) )  {
-					errors.rejectValue("idCollaboration", "required", "It Already Exists");
+					errors.rejectValue("idCollaboration", "required", "Este IDCollaboration ya está en uso");
 					break;
 				}
 		}
 		
 		// ------ IDOFFER ----------- //
 		if ( collaboration.getIdOffer().trim().equals("") )
-			errors.rejectValue("idOffer", "required", "It is empty");
+			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
 		else if ( collaboration.getIdOffer() .trim().length() > 5 )
-			errors.rejectValue("idOffer", "required", "Too long");
+			errors.rejectValue("idOffer", "required", "El IDOffer debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < collaborationsList.size(); i++ )
 				if ( collaborationsList.get(i).getIdOffer().toLowerCase().equals(collaboration.getIdOffer().toLowerCase()) )  {
-					errors.rejectValue("idOffer", "required", "It Already Exists");
+					errors.rejectValue("idOffer", "required", "Este IDOffer ya está en uso");
 					break;
 				}
 		}
 		
 		// ------- IDDEMAND ----------- //
 		if ( collaboration.getIdDemand().trim().equals("") )
-			errors.rejectValue("idDemand", "required", "It is empty");
+			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
 		else if ( collaboration.getIdDemand() .trim().length() > 5 )
-			errors.rejectValue("idDemand", "required", "Too long");
+			errors.rejectValue("idDemand", "required", "El IDDemand debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < collaborationsList.size(); i++ )
 				if ( collaborationsList.get(i).getIdDemand().toLowerCase().equals(collaboration.getIdDemand().toLowerCase()) )  {
-					errors.rejectValue("idDemand", "required", "It Already Exists");
+					errors.rejectValue("idDemand", "required", "Este IDDemand ya está en uso");
 					break;
 				}
 		}
@@ -70,13 +70,13 @@ public class CollaborationValidator implements Validator {
 		Collaboration collaboration = (Collaboration) obj;
 		
 		if ( collaboration.getIdCollaboration() .trim().equals("") )
-			errors.rejectValue("idCollaboration", "required", "It is empty");
+			errors.rejectValue("idCollaboration", "required", "Este campo es obligatorio");
 		else if ( collaboration.getIdCollaboration() .trim().length() > 5 )
-			errors.rejectValue("idCollaboration", "required", "Too long");
+			errors.rejectValue("idCollaboration", "required", "El IDCollaboration debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < collaborationsList.size(); i++ )
 				if ( collaborationsList.get(i).getIdCollaboration().toLowerCase().equals(collaboration.getIdCollaboration().toLowerCase()) )  {
-					errors.rejectValue("idCollaboration", "required", "It Already Exists");
+					errors.rejectValue("idCollaboration", "required", "Este IDCollaboration ya está en uso");
 					break;
 				}
 		}

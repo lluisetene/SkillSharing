@@ -7,6 +7,8 @@
 
 	<head>
 	
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
+	
 		<title>Skills</title>
 
 		<style>

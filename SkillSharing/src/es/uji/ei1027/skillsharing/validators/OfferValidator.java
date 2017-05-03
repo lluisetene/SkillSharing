@@ -26,46 +26,46 @@ public class OfferValidator implements Validator {
 		
 		// ------- IDOFFER ------ /
 		if ( offer.getIdOffer() .trim().equals("") )
-			errors.rejectValue("idOffer", "required", "It is empty");
+			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
 		else if ( offer.getIdOffer() .trim().length() > 5 )
-			errors.rejectValue("idOffer", "required", "Too long");
+			errors.rejectValue("idOffer", "required", "El IDOffer debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < offersList.size(); i++ )
 				if ( offersList.get(i).getIdOffer().toLowerCase().equals(offer.getIdOffer().toLowerCase()) )  {
-					errors.rejectValue("idOffer", "required", "It Already Exists");
+					errors.rejectValue("idOffer", "required", "Este IDOffer ya está en uso");
 					break;
 				}
 		}
 		
 		// -------- NID -------- //
 		if ( offer.getNid().trim().equals("") )
-			errors.rejectValue("nid", "required", "It is empty");
+			errors.rejectValue("nid", "required", "Este campo es obligatorio");
 		else if ( offer.getNid().length() != 9 )
-			errors.rejectValue("nid", "required", "Too long");
+			errors.rejectValue("nid", "required", "Tamaño incorrecto");
 		else {
 			for ( int i = 0; i < offersList.size(); i++ )
 				if ( offersList.get(i).getNid().toLowerCase().equals(offer.getNid().toLowerCase()) ) {
-					errors.rejectValue("nid", "required", "It Already Exists");
+					errors.rejectValue("nid", "required", "Este NID ya está en uso");
 					break;
 				}
 		}
 		
 		// -------- NAME ----- //
 		if ( offer.getName().trim().equals("") )
-			errors.rejectValue("name", "required", "It is empty");
+			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( offer.getName().length() < 5 )
 			errors.rejectValue("name", "required", "Too long");
 		
 		
 		// ------- IDoffer ------ /
 		if ( offer.getIdSkill() .trim().equals("") )
-			errors.rejectValue("idSkill", "required", "It is empty");
+			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		else if ( offer.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "Too long");
+			errors.rejectValue("idSkill", "required", "El IDOffer debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < offersList.size(); i++ )
 				if ( offersList.get(i).getIdSkill().toLowerCase().equals(offer.getIdSkill().toLowerCase()) )  {
-					errors.rejectValue("idSkill", "required", "It Already Exists");
+					errors.rejectValue("idSkill", "required", "Este IDOffer ya está en uso");
 					break;
 				}
 		}				
@@ -76,13 +76,13 @@ public class OfferValidator implements Validator {
 		
 		// ------- IDOFFER ------ /
 		if ( offer.getIdOffer() .trim().equals("") )
-			errors.rejectValue("idOffer", "required", "It is empty");
+			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
 		else if ( offer.getIdOffer() .trim().length() > 5 )
-			errors.rejectValue("idOffer", "required", "Too long");
+			errors.rejectValue("idOffer", "required", "El IDOffer debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < offersList.size(); i++ )
 				if ( offersList.get(i).getIdOffer().toLowerCase().equals(offer.getIdOffer().toLowerCase()) )  {
-					errors.rejectValue("idOffer", "required", "It Already Exists");
+					errors.rejectValue("idOffer", "required", "Este IDOffer ya está en uso");
 					break;
 				}
 		}

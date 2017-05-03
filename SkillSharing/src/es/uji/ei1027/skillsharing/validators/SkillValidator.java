@@ -26,20 +26,20 @@ public class SkillValidator implements Validator {
 		
 		//---------- IDSKILL ----------//
 		if ( skill.getIdSkill().trim().equals("") )
-			errors.rejectValue("idSkill", "required", "It is empty");
+			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < skillsList.size(); i++ )
 				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(skill.getIdSkill().toLowerCase()) )  {
-					errors.rejectValue("idSkill", "required", "It Already Exists");
+					errors.rejectValue("idSkill", "required", "Este IDSkill ya está en uso");
 					break;
 				}
 		}
 		
 		// -------- NAME ----- //
 		if ( skill.getName().trim().equals("") )
-			errors.rejectValue("name", "required", "It is empty");
+			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( skill.getName().length() < 5 )
-			errors.rejectValue("name", "required", "Too long");
+			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
 		
 	}
 
@@ -49,7 +49,7 @@ public class SkillValidator implements Validator {
 		
 		//---------- IDSKILL ----------//
 		if ( skill.getIdSkill().trim().equals("") )
-			errors.rejectValue("idSkill", "required", "It is empty");
+			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		else {
 			int i = 0;
 			boolean notFound = true;
@@ -60,7 +60,7 @@ public class SkillValidator implements Validator {
 			}
 			
 			if ( notFound )
-				errors.rejectValue("idSkill", "required", "Data Not Exist");
+				errors.rejectValue("idSkill", "required", "Este IDSkill no existe");
 		}		
 	}
 

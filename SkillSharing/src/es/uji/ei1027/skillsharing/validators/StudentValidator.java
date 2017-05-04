@@ -26,33 +26,33 @@ public class StudentValidator implements Validator {
 		
 		// -------- NAME ----- //
 		if ( student.getName().trim().equals("") )
-			errors.rejectValue("name", "required", "It is empty");
+			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( student.getName().length() < 5 )
-			errors.rejectValue("name", "required", "Too long");
+			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
 		
 		
 		// -------- NID -------- //
 		if ( student.getNid().trim().equals("") )
-			errors.rejectValue("nid", "required", "It is empty");
+			errors.rejectValue("nid", "required", "Este campo es obligatorio");
 		else if ( student.getNid().length() != 9 )
-			errors.rejectValue("nid", "required", "Too long");
+			errors.rejectValue("nid", "required", "Tamaño incorrecto");
 		else {
 			for ( int i = 0; i < studentsList.size(); i++ )
 				if ( studentsList.get(i).getNid().toLowerCase().equals(student.getNid().toLowerCase()) ) {
-					errors.rejectValue("nid", "required", "It Already Exists");
+					errors.rejectValue("nid", "required", "Este NID ya está en uso");
 					break;
 				}
 			}
 				
 		// ------ USERNAME ------ //
 		if ( student.getUsername().trim().equals("") )
-			errors.rejectValue("username", "required", "It is empty");
+			errors.rejectValue("username", "required", "Este campo es obligatorio");
 		else if ( student.getUsername().length() < 3 )
-			errors.rejectValue("username", "required", "Too long");
+			errors.rejectValue("username", "required", "El Username debe tener más de 3 caracteres");
 		else {
 			for ( int i = 0; i < studentsList.size(); i++ )
 				if ( studentsList.get(i).getUsername().toLowerCase().equals(student.getUsername().toLowerCase()) ) {
-					errors.rejectValue("username", "required", "It Already Exists");
+					errors.rejectValue("username", "required", "Este Username ya está en uso");
 					break;
 				}
 			}
@@ -60,18 +60,18 @@ public class StudentValidator implements Validator {
 		
 		// ----- PASSWORD ---- //
 		if ( student.getPassword().trim().equals("") )
-			errors.rejectValue("password", "required", "It is empty");
+			errors.rejectValue("password", "required", "Este campo es obligatorio");
 		else if ( student.getPassword().length() < 6 )
-			errors.rejectValue("password",  "required", "Too long");
+			errors.rejectValue("password",  "required", "La password debe tener más de 6 caracteres");
 			
 		
 		// ------ MAIL ----- //
 		if( student.getMail().trim().equals("") )
-			errors.rejectValue("mail", "required", "It is empty");
+			errors.rejectValue("mail", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < studentsList.size(); i++ )
 				if ( studentsList.get(i).getMail().toLowerCase().equals(student.getMail().toLowerCase() )) {
-					errors.rejectValue("mail", "required", "It Already Exists");
+					errors.rejectValue("mail", "required", "Este Mail ya está en uso");
 					break;
 				}
 		}
@@ -83,7 +83,9 @@ public class StudentValidator implements Validator {
 		Student student = (Student) obj;
 		
 		if ( student.getNid().trim().equals("") )
-			errors.rejectValue("nid", "required", "It is empty");
+			errors.rejectValue("nid", "required", "Este campo es obligatorio");
+		else if ( student.getNid().length() != 9 )
+			errors.rejectValue("nid", "required", "Tamaño incorrecto");
 		else {
 			int i = 0;
 			boolean notFound = true;
@@ -94,9 +96,11 @@ public class StudentValidator implements Validator {
 			}
 			
 			if ( notFound )
-				errors.rejectValue("nid", "required", "Data Not Exist");
+				errors.rejectValue("nid", "required", "El NID introducido no existe");
 		}
 					
 	}
+	
+	
 
 }

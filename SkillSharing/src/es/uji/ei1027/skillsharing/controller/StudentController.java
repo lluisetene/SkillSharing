@@ -131,21 +131,17 @@ public class StudentController {
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String processEditSubmit(@ModelAttribute("student") Student student, BindingResult bindingResult) {
+
+		StudentValidator studentValidator = new StudentValidator();
+		
+		studentValidator.setStudentDAO(studentDao);
+		
+		studentValidator.validateAdd(student, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			
 			return "student/update";
-		
-		try {
 			
-			studentDao.updateStudent(student);
-		
-		} catch (Exception e) {
-			
-			return "student/update";
-			
-		}
-		
 		return "redirect:main.html";
 	}
 	

@@ -6,5 +6,5 @@ public interface Validator {
 	public boolean supports(Class<?> cls);
 	public void validateAdd(Object obj, Errors errors);
 	public void validateSearch(Object obj, Errors errors);
-	//chorrada
+	// prueba
 }

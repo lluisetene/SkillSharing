@@ -95,6 +95,7 @@ public class DemandValidator implements Validator {
 				}
 			if ( notFound )
 				errors.rejectValue("idDemand", "required", "El IdDemand introducido no existe");
+			notFound = true;
 		}		
 	}
 

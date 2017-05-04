@@ -10,6 +10,7 @@ import es.uji.ei1027.skillsharing.model.Demand;
 public class DemandValidator implements Validator {
 
 	private List<Demand> demandsList;
+	boolean notFound = true;
 	
 	public void setDemandDAO(DemandDAO demandDao) {
 		demandsList = demandDao.getDemands();
@@ -28,11 +29,11 @@ public class DemandValidator implements Validator {
 		if ( demand.getIdDemand() .trim().equals("") )
 			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
 		else if ( demand.getIdDemand() .trim().length() > 5 )
-			errors.rejectValue("idDemand", "required", "El IDDemand debe tener menos de 5 caracteres");
+			errors.rejectValue("idDemand", "required", "El IdDemand debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(demand.getIdDemand().toLowerCase()) )  {
-					errors.rejectValue("idDemand", "required", "Este IDDemand ya está en uso");
+					errors.rejectValue("idDemand", "required", "Este IdDemand ya está en uso");
 					break;
 				}
 		}
@@ -57,17 +58,20 @@ public class DemandValidator implements Validator {
 			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
 		
 		
-		// ------- IDDEMAND ------ /
+		// ------- IDSKILL ------ /
 		if ( demand.getIdSkill() .trim().equals("") )
 			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		else if ( demand.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "El IDDemand debe tener más de 5 caracteres");
+			errors.rejectValue("idSkill", "required", "El IdSkill debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getIdSkill().toLowerCase().equals(demand.getIdSkill().toLowerCase()) )  {
-					errors.rejectValue("idSkill", "required", "Este IDDemand ya está en uso");
+					errors.rejectValue("idSkill", "required", "Este IdSkill ya está en uso");
+					notFound = false;
 					break;
 				}
+			if ( notFound )
+				errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
 		}				
 	}
 
@@ -79,13 +83,15 @@ public class DemandValidator implements Validator {
 		if ( demand.getIdDemand() .trim().equals("") )
 			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
 		else if ( demand.getIdDemand() .trim().length() > 5 )
-			errors.rejectValue("idDemand", "required", "El IDDemand debe tener más de 5 caracteres");
+			errors.rejectValue("idDemand", "required", "El IdDemand debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(demand.getIdDemand().toLowerCase()) )  {
-					errors.rejectValue("idDemand", "required", "Este IDDemand ya está en uso");
+					notFound = false;
 					break;
 				}
+			if ( notFound )
+				errors.rejectValue("idDemand", "required", "El IdDemand introducido no existe");
 		}		
 	}
 

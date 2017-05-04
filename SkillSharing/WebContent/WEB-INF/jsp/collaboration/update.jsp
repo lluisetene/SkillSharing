@@ -7,9 +7,52 @@
 
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+		<script>
+		$(function () {
+			var dateFormat = "mm/dd/yy",
+			//BeginningDate
+			from = $("#datepickerbeginning").datepicker({
+				changeMonth:true,
+				changeYear:true,
+				showOn:"button",
+				buttonText:"Calendar",
+				}).datepicker("setDate", new Date()).on( "change", function() {
+					to.datepicker( "option", "minDate", getDate( this ));
+				}),
+			//EndingDate
+			to = $("#datepickerending").datepicker({
+				changeMonth:true, 
+				changeYear:true,
+				showOn:"button", 
+				buttonText:"Calendar",
+				}).datepicker("setDate", new Date()).on( "change", function() {
+					from.datepicker( "option", "maxDate", getDate( this ) );
+				});
+
+			function getDate( element ) {
+				var date;
+				try {
+					date = $.datepicker.parseDate( dateFormat, element.value );
+				} catch( error ) {
+					date = null;
+				}
+
+				return date;
+			}
+		
+		} 
+		
+		);
+		</script>
+		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/offer.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/calendar.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 		
 		<title>Update Collaboration</title>
 

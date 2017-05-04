@@ -58,15 +58,15 @@
     
     	<h2>New Demand</h2>
     	
-	    <form:form method="post" modelAttribute="offer">
+	    <form:form method="post" modelAttribute="demand">
 		       
 			<table>
 	        	
 	        	<tr>
 	                
-	                <td><form:label path="idOffer">IdOffer</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idOffer" /></td>
-	            	<td><form:errors path="idOffer" cssClass="error"/></td>
+	                <td><form:label path="idDemand">IdOffer</form:label></td>
+	                <td><form:input type = "text" maxlength = "5" path="idDemand" /></td>
+	            	<td><form:errors path="idDemand" cssClass="error"/></td>
 	            </tr>
 	            
 	            <tr>

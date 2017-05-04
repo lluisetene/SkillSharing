@@ -6,6 +6,9 @@
 <html>
 
 	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
@@ -58,15 +61,15 @@
     
     	<h2>New Demand</h2>
     	
-	    <form:form method="post" modelAttribute="offer">
+	    <form:form method="post" modelAttribute="demand">
 		       
 			<table>
 	        	
 	        	<tr>
 	                
-	                <td><form:label path="idOffer">IdOffer</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idOffer" /></td>
-	            	<td><form:errors path="idOffer" cssClass="error"/></td>
+	                <td><form:label path="idDemand">IdDemand</form:label></td>
+	                <td><form:input type = "text" maxlength = "5" path="idDemand" /></td>
+	            	<td><form:errors path="idDemand" cssClass="error"/></td>
 	            </tr>
 	            
 	            <tr>
@@ -113,7 +116,7 @@
 	        </table>
 	        
 	        	<input type = "submit" name = "submit" value = "Accept">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/offer/main.html'" name = "cancel" value = "Cancel">
+	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/demand/main.html'" name = "cancel" value = "Cancel">
 	    
 	    </form:form>
 	    	

@@ -47,8 +47,11 @@ public class DemandValidator implements Validator {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getNid().toLowerCase().equals(demand.getNid().toLowerCase()) ) {
 					errors.rejectValue("nid", "required", "Este NID ya está en uso");
+					notFound = false;
 					break;
 				}
+			if ( notFound )
+				errors.rejectValue("nid", "required", "El NID introducido no existe");
 		}
 		
 		// -------- NAME ----- //

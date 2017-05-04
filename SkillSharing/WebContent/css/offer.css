@@ -1,0 +1,23 @@
+/* Estilo del cuerpo de la pagina */
+body {
+   font-family: Helvetica, Arial, sans-serif; 
+   background-color: white;
+}
+
+/* Cabecera de nivel 1 */
+h1 {
+   font-size: large; 
+   color: #008000;
+}
+
+h2{
+	font-size: large;
+	color: #008000;
+}
+
+
+/* Clase CSS error */
+.error {
+     color: red;
+     font-size:80%
+}

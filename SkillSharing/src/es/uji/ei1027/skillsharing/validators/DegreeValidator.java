@@ -10,6 +10,7 @@ import es.uji.ei1027.skillsharing.model.Degree;
 public class DegreeValidator implements Validator {
 
 	private List<Degree> degreesList;
+	boolean notFound = true;
 	
 	public void setDegreeDAO(DegreeDAO degreeDao) {
 		degreesList = degreeDao.getDegrees();
@@ -24,13 +25,14 @@ public class DegreeValidator implements Validator {
 	public void validateAdd(Object obj, Errors errors) {
 		Degree degree = (Degree) obj;
 		
+		
 		// ----- IDDEGREE ------ //
 		if ( degree.getIdDegree() .trim().equals("") )
 			errors.rejectValue("idDegree", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < degreesList.size(); i++ )
 				if ( degreesList.get(i).getIdDegree().toLowerCase().equals(degree.getIdDegree().toLowerCase()) )  {
-					errors.rejectValue("idDegree", "required", "Este IDDegree ya está en uso");
+					errors.rejectValue("idDegree", "required", "Este IdDegree ya está en uso");
 					break;
 				}
 		}
@@ -57,8 +59,12 @@ public class DegreeValidator implements Validator {
 			for ( int i = 0; i < degreesList.size(); i++ )
 				if ( degreesList.get(i).getNid().toLowerCase().equals(degree.getNid().toLowerCase()) ) {
 					errors.rejectValue("nid", "required", "Este NID ya está en uso");
+					notFound = false;
 					break;
 				}
+			if ( notFound )
+				errors.rejectValue("nid", "required", "El NID introducido no existe");
+			notFound = true;
 			}
 		
 	}
@@ -72,9 +78,12 @@ public class DegreeValidator implements Validator {
 		else {
 			for ( int i = 0; i < degreesList.size(); i++ )
 				if ( degreesList.get(i).getIdDegree().toLowerCase().equals(degree.getIdDegree().toLowerCase()) )  {
-					errors.rejectValue("idDegree", "required", "Este IDDegree ya está en uso");
+					errors.rejectValue("idDegree", "required", "Este IdDegree ya está en uso");
+					notFound = false;
 					break;
 				}
+			if ( notFound )
+				errors.rejectValue("idDegree", "required", "El IdDegree introducido no existe");
 		}
 	}
 

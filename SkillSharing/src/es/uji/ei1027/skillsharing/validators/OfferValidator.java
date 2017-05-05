@@ -15,9 +15,8 @@ public class OfferValidator implements Validator {
 	private List<Student> studentsList;
 	boolean notFound = true;
 	
-	public void setOfferDAO(OfferDAO offerDao, StudentDAO studentDao) {
+	public void setOfferDAO(OfferDAO offerDao) {
 		offersList = offerDao.getOffers();
-		studentsList = studentDao.getStudents();
 	}
 	
 	@Override

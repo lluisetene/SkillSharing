@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
+import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.validators.OfferValidator;
 
@@ -23,14 +24,17 @@ import es.uji.ei1027.skillsharing.validators.OfferValidator;
 public class OfferController {
 	
 	private OfferDAO offerDao;
+	private StudentDAO studentDao;
+	private OfferValidator offerValidator;
 	
 	
 	@Autowired
 	public void setOfferDao(OfferDAO offerDao) {
-		
 		this.offerDao = offerDao;
-	
+		offerValidator = new OfferValidator();
+		offerValidator.setOfferDAO(offerDao, studentDao);
 	}
+	
 	
 	//Método para convertir el formato String a Date en el formulario
 	@InitBinder
@@ -77,10 +81,6 @@ public class OfferController {
 	@RequestMapping(value="/consult", method=RequestMethod.POST)
 	public String processConsultSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
 		
-		OfferValidator offerValidator = new OfferValidator();
-		
-		offerValidator.setOfferDAO(offerDao);
-		
 		offerValidator.validateSearch(offer, bindingResult);
 		
 		if (bindingResult.hasErrors())
@@ -105,10 +105,6 @@ public class OfferController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
-		
-		OfferValidator offerValidator = new OfferValidator();
-		
-		offerValidator.setOfferDAO(offerDao);
 		
 		offerValidator.validateAdd(offer, bindingResult);
 		
@@ -135,10 +131,6 @@ public class OfferController {
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String processEditSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
 		
-		OfferValidator offerValidator = new OfferValidator();
-		
-		offerValidator.setOfferDAO(offerDao);
-		
 		offerValidator.validateAdd(offer, bindingResult);
 		
 		if (bindingResult.hasErrors())
@@ -162,10 +154,6 @@ public class OfferController {
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String processDeleteSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
-		
-		OfferValidator offerValidator = new OfferValidator();
-		
-		offerValidator.setOfferDAO(offerDao);
 		
 		offerValidator.validateSearch(offer, bindingResult);
 		

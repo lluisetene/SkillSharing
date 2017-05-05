@@ -108,10 +108,9 @@ public class StudentController {
 		
 		studentValidator.validateAdd(student, bindingResult);
 		
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors())
 
 			return "student/add";
-		}
 		
 		studentDao.addStudent(student);
 		

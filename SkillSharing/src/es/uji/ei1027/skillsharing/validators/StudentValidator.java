@@ -63,7 +63,6 @@ public class StudentValidator implements Validator {
 			errors.rejectValue("password", "required", "Este campo es obligatorio");
 		else if ( student.getPassword().length() < 6 )
 			errors.rejectValue("password",  "required", "La password debe tener más de 6 caracteres");
-			
 		
 		// ------ MAIL ----- //
 		if( student.getMail().trim().equals("") )

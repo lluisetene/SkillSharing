@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.skillsharing.dao.DegreeDAO;
+import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Degree;
 import es.uji.ei1027.skillsharing.validators.DegreeValidator;
 
@@ -17,11 +18,13 @@ import es.uji.ei1027.skillsharing.validators.DegreeValidator;
 public class DegreeController {
 
 	private DegreeDAO degreeDao;
+	private StudentDAO studentDao;
 	
 	@Autowired
-	public void setDegreeDao(DegreeDAO degreeDao) {
+	public void setDegreeDao(DegreeDAO degreeDao, StudentDAO studentDao) {
 		
 		this.degreeDao = degreeDao;
+		this.studentDao = studentDao;
 		
 	}
 	
@@ -60,9 +63,9 @@ public class DegreeController {
 		
 		DegreeValidator degreeValidator = new DegreeValidator();
 		
-		degreeValidator.setDegreeDAO(degreeDao);
+		degreeValidator.setDegreeDAO(degreeDao, studentDao);
 		
-		degreeValidator.validateSearch(degree, bindingResult);
+		degreeValidator.validateConsult(degree, bindingResult);
 		
 		if (bindingResult.hasErrors())
 		
@@ -89,7 +92,7 @@ public class DegreeController {
 		
 		DegreeValidator degreeValidator = new DegreeValidator();
 		
-		degreeValidator.setDegreeDAO(degreeDao);
+		degreeValidator.setDegreeDAO(degreeDao, studentDao);
 		
 		degreeValidator.validateAdd(degree, bindingResult);
 		
@@ -119,9 +122,9 @@ public class DegreeController {
 		
 		DegreeValidator degreeValidator = new DegreeValidator();
 		
-		degreeValidator.setDegreeDAO(degreeDao);
+		degreeValidator.setDegreeDAO(degreeDao, studentDao);
 		
-		degreeValidator.validateAdd(degree, bindingResult);
+		degreeValidator.validateUpdate(degree, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			
@@ -147,9 +150,9 @@ public class DegreeController {
 		
 		DegreeValidator degreeValidator = new DegreeValidator();
 		
-		degreeValidator.setDegreeDAO(degreeDao);
+		degreeValidator.setDegreeDAO(degreeDao, studentDao);
 		
-		degreeValidator.validateSearch(degree, bindingResult);
+		degreeValidator.validateDelete(degree, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			

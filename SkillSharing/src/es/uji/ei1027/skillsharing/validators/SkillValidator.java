@@ -94,6 +94,7 @@ public class SkillValidator implements ValidatorBeta {
 		Skill skill = (Skill) obj;
 		boolean encontrado = false;
 		
+		//---------- IDSKILL ----------//
 		for (int i = 0; i < offerList.size(); i++){
 			
 			if (skill.getIdSkill().equals(offerList.get(i).getIdSkill())){
@@ -114,9 +115,10 @@ public class SkillValidator implements ValidatorBeta {
 			
 		}
 		
+		
 		if ( skill.getIdSkill().trim().equals("") )
 			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
-	
+		
 		else {
 			for ( int i = 0; i < skillsList.size(); i++ )
 				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(skill.getIdSkill().toLowerCase()) )  {
@@ -125,8 +127,10 @@ public class SkillValidator implements ValidatorBeta {
 				}
 			
 			if (!encontrado)
-		
+				
 				errors.rejectValue("idSkill", "required", "Este IDSkill no existe");
+			
+			
 		}
 	}
 

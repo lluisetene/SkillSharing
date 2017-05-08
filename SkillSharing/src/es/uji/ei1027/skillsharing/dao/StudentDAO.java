@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -32,10 +33,12 @@ public class StudentDAO {
 			
 			Student student = new Student();
 			
+			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+			
 			student.setNid(rs.getString("nid"));
 			student.setName(rs.getString("name"));
 			student.setUsername(rs.getString("username"));
-			student.setPassword(rs.getString("password"));
+			student.setPassword(passwordEncryptor.encryptPassword(rs.getString("password")));
 			student.setMail(rs.getString("mail"));
 			student.setCourse(rs.getInt("course"));
 			student.setOfferHours(rs.getTime("offerHours"));

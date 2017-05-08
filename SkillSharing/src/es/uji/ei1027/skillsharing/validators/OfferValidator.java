@@ -5,14 +5,11 @@ import java.util.List;
 import org.springframework.validation.Errors;
 
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
-import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Offer;
-import es.uji.ei1027.skillsharing.model.Student;
 
 public class OfferValidator implements Validator {
 
 	private List<Offer> offersList;
-	private List<Student> studentsList;
 	boolean notFound = true;
 	
 	public void setOfferDAO(OfferDAO offerDao) {
@@ -47,17 +44,17 @@ public class OfferValidator implements Validator {
 			errors.rejectValue("nid", "required", "Este campo es obligatorio");
 		else if ( offer.getNid().length() != 9 )
 			errors.rejectValue("nid", "required", "Tamaño incorrecto");
-		else {
-			for ( int i = 0; i < studentsList.size(); i++ ) {
-				if ( studentsList.get(i).getNid().toLowerCase().equals(offer.getNid().toLowerCase()) ) {
-					notFound = false;
-					break;
-				}
-			}
-			if ( notFound )
-				errors.rejectValue("nid", "required", "El NID introducido no existe");
-			notFound = true;
-		}
+//		else {
+//			for ( int i = 0; i < studentsList.size(); i++ ) {
+//				if ( studentsList.get(i).getNid().toLowerCase().equals(offer.getNid().toLowerCase()) ) {
+//					notFound = false;
+//					break;
+//				}
+//			}
+//			if ( notFound )
+//				errors.rejectValue("nid", "required", "El NID introducido no existe");
+//			notFound = true;
+//		}
 		
 		
 		// -------- NAME ----- //

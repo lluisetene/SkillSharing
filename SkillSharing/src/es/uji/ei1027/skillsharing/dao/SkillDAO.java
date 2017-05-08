@@ -56,11 +56,11 @@ private JdbcTemplate jdbcTemplate;
 	
 	public void updateSkill(Skill skill) {
 	
-		this.jdbcTemplate.update("update skill set idSkill = ?, name = ?, level = ?, description = ?", skill.getIdSkill(), skill.getName(), skill.getLevel(), skill.getDescription());
+		this.jdbcTemplate.update("update skill set name = ?, level = ?, description = ? where idSkill = ?", skill.getName(), skill.getLevel(), skill.getDescription(), skill.getIdSkill());
 	
 	}
 	
-	public void deleteSkill(Skill skill) {
+	public void deleteSkill(Skill skill){
 	
 		this.jdbcTemplate.update("delete from skill where idSkill = ?", skill.getIdSkill());
 	

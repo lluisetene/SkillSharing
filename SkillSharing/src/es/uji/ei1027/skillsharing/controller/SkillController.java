@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.validators.SkillValidator;
@@ -16,12 +18,16 @@ import es.uji.ei1027.skillsharing.validators.SkillValidator;
 @RequestMapping("/skill")
 public class SkillController {
 	
-private SkillDAO skillDao;
-	
+	private SkillDAO skillDao;
+	private OfferDAO offerDao;
+	private DemandDAO demandDao;
 	
 	@Autowired
-	public void setSkillDao(SkillDAO skillDao) {
+	public void setSkillDao(SkillDAO skillDao, OfferDAO offerDao, DemandDAO demandDao) {
 		this.skillDao = skillDao;
+		this.offerDao = offerDao;
+		this.demandDao = demandDao;
+		
 	}
 	
 	//---------- página de métodos ---------
@@ -59,9 +65,9 @@ private SkillDAO skillDao;
 		
 		SkillValidator skillValidator = new SkillValidator();
 		
-		skillValidator.setSkillDAO(skillDao);
+		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
 		
-		skillValidator.validateSearch(skill, bindingResult);
+		skillValidator.validateConsult(skill, bindingResult);
 		
 		if (bindingResult.hasErrors())
 		
@@ -88,7 +94,7 @@ private SkillDAO skillDao;
 		
 		SkillValidator skillValidator = new SkillValidator();
 		
-		skillValidator.setSkillDAO(skillDao);
+		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
 		
 		skillValidator.validateAdd(skill, bindingResult);
 		
@@ -117,9 +123,9 @@ private SkillDAO skillDao;
 		
 		SkillValidator skillValidator = new SkillValidator();
 		
-		skillValidator.setSkillDAO(skillDao);
+		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
 		
-		skillValidator.validateAdd(skill, bindingResult);
+		skillValidator.validateUpdate(skill, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			
@@ -145,9 +151,9 @@ private SkillDAO skillDao;
 		
 		SkillValidator skillValidator = new SkillValidator();
 		
-		skillValidator.setSkillDAO(skillDao);
+		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
 		
-		skillValidator.validateSearch(skill, bindingResult);
+		skillValidator.validateDelete(skill, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			

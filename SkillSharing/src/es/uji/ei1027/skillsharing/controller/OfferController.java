@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
+import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.validators.OfferValidator;
 
@@ -23,12 +25,15 @@ import es.uji.ei1027.skillsharing.validators.OfferValidator;
 public class OfferController {
 	
 	private OfferDAO offerDao;
+	private StudentDAO studentDao;
+	private CollaborationDAO collaborationDao;
 	private OfferValidator offerValidator;
 	
-	
 	@Autowired
-	public void setOfferDao(OfferDAO offerDao) {
+	public void setOfferDao(OfferDAO offerDao, StudentDAO studentDao, CollaborationDAO collaborationDao) {
 		this.offerDao = offerDao;
+		this.studentDao = studentDao;
+		this.collaborationDao = collaborationDao;
 	}
 	
 	
@@ -79,9 +84,9 @@ public class OfferController {
 		
 		offerValidator = new OfferValidator();
 		
-		offerValidator.setOfferDAO(offerDao);
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao);
 		
-		offerValidator.validateSearch(offer, bindingResult);
+		offerValidator.validateConsult(offer, bindingResult);
 		
 		if (bindingResult.hasErrors())
 		
@@ -108,7 +113,7 @@ public class OfferController {
 		
 		offerValidator = new OfferValidator();
 		
-		offerValidator.setOfferDAO(offerDao);
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao);
 		
 		offerValidator.validateAdd(offer, bindingResult);
 		
@@ -137,9 +142,9 @@ public class OfferController {
 		
 		offerValidator = new OfferValidator();
 		
-		offerValidator.setOfferDAO(offerDao);
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao);
 		
-		offerValidator.validateAdd(offer, bindingResult);
+		offerValidator.validateUpdate(offer, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			
@@ -165,9 +170,9 @@ public class OfferController {
 		
 		offerValidator = new OfferValidator();
 		
-		offerValidator.setOfferDAO(offerDao);
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao);
 		
-		offerValidator.validateSearch(offer, bindingResult);
+		offerValidator.validateDelete(offer, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			

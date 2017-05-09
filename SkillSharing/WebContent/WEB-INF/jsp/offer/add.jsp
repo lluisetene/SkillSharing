@@ -46,8 +46,6 @@
 		
 		);
 		</script>
-		
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/offer.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/calendar.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 		<title>Add Offer</title>
@@ -99,14 +97,14 @@
 	            <tr>
 	            
 	  	            <td><form:label path="beginningDate">BeginningDate</form:label></td>
-	                <td><form:input type="date" path="beginningDate" name="datepicker" id="datepickerbeginning" size="10" /><td>
+	                <td><form:input type="date" path="beginningDate" name="datepicker" id="datepickerbeginning" size="10" readonly="true" /><td>
 	                <td><form:errors path="beginningDate" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	            
 	                <td><form:label path="endingDate">EndingDate</form:label></td>
-	                <td><form:input type="date" path="endingDate" name="datepicker" id="datepickerending" size="10"/><td>
+	                <td><form:input type="date" path="endingDate" name="datepicker" id="datepickerending" size="10" readonly="true"/><td>
 	                <td><form:errors path="endingDate" cssClass="error" /></td>
 	                
 	            </tr>

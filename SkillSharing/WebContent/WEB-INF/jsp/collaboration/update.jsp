@@ -77,7 +77,7 @@
 	            <tr>
 	            
 	                <td><form:label path="idOffer">IdOffer</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idOffer" /></td>
+	             	<td><form:input type = "text" maxlength = "5" path="idOffer"/></td>
 	                <td><form:errors path = "idOffer" cssClass = "error" /></td>
 	                
 	            </tr>

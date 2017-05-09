@@ -15,20 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 
 @Controller
 @RequestMapping("/collaboration")
 public class CollaborationController {
-	//no acabamos de entender su funcionamiento
 	
 	private CollaborationDAO collaborationDao;
+	private OfferDAO offerDao;
+	private DemandDAO demandDao;
 	
 	@Autowired
-	public void setCollaborationDao(CollaborationDAO collaborationDao) {
+	public void setCollaborationDao(CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao) {
 		
 		this.collaborationDao = collaborationDao;
+		this.offerDao = offerDao;
+		this.demandDao = demandDao;
 		
 	}
 	
@@ -80,9 +85,9 @@ public class CollaborationController {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
-		collaborationValidator.setCollaborationDAO(collaborationDao);
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
 		
-		collaborationValidator.validateSearch(collaboration, bindingResult);
+		collaborationValidator.validateConsult(collaboration, bindingResult);
 		
 		if (bindingResult.hasErrors())
 		
@@ -110,7 +115,7 @@ public class CollaborationController {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
-		collaborationValidator.setCollaborationDAO(collaborationDao);
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
 		
 		collaborationValidator.validateAdd(collaboration, bindingResult);
 		
@@ -140,9 +145,9 @@ public class CollaborationController {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
-		collaborationValidator.setCollaborationDAO(collaborationDao);
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
 		
-		collaborationValidator.validateAdd(collaboration, bindingResult);
+		collaborationValidator.validateUpdate(collaboration, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			
@@ -168,9 +173,9 @@ public class CollaborationController {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
-		collaborationValidator.setCollaborationDAO(collaborationDao);
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
 		
-		collaborationValidator.validateSearch(collaboration, bindingResult);
+		collaborationValidator.validateDelete(collaboration, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			

@@ -97,7 +97,7 @@ public class SkillValidator implements ValidatorBeta {
 		//---------- IDSKILL ----------//
 		for (int i = 0; i < offerList.size(); i++){
 			
-			if (skill.getIdSkill().equals(offerList.get(i).getIdSkill())){
+			if (skill.getIdSkill().trim().toLowerCase().equals(offerList.get(i).getIdSkill())){
 				
 				errors.rejectValue("idSkill", "required", "Esta habilidad está siendo usada");
 				break;
@@ -107,7 +107,7 @@ public class SkillValidator implements ValidatorBeta {
 		
 		for (int i = 0; i < demandList.size(); i++){
 			
-			if (skill.getIdSkill().equals(demandList.get(i).getIdSkill())){
+			if (skill.getIdSkill().trim().toLowerCase().equals(demandList.get(i).getIdSkill())){
 				
 				errors.rejectValue("idSkill", "required", "Esta habilidad está siendo usada");
 				break;

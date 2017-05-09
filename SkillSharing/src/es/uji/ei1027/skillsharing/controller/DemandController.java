@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
 
@@ -23,12 +25,16 @@ import es.uji.ei1027.skillsharing.validators.DemandValidator;
 public class DemandController {
 
 	private DemandDAO demandDao;
+	private StudentDAO studentDao;
+	private CollaborationDAO collaborationDao;
 	
 	
 	@Autowired
-	public void setDemandDao(DemandDAO demandDao) {
+	public void setDemandDao(DemandDAO demandDao, StudentDAO studentDao, CollaborationDAO collaborationDao) {
 		
 		this.demandDao = demandDao;
+		this.studentDao = studentDao;
+		this.collaborationDao = collaborationDao;
 		
 	}
 	
@@ -79,9 +85,9 @@ public class DemandController {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
-		demandValidator.setDemandDAO(demandDao);
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao);
 		
-		demandValidator.validateSearch(demand, bindingResult);
+		demandValidator.validateConsult(demand, bindingResult);
 		
 		if (bindingResult.hasErrors())
 		
@@ -108,7 +114,7 @@ public class DemandController {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
-		demandValidator.setDemandDAO(demandDao);
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao);
 		
 		demandValidator.validateAdd(demand, bindingResult);
 		
@@ -137,9 +143,9 @@ public class DemandController {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
-		demandValidator.setDemandDAO(demandDao);
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao);
 		
-		demandValidator.validateAdd(demand, bindingResult);
+		demandValidator.validateUpdate(demand, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			
@@ -165,9 +171,9 @@ public class DemandController {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
-		demandValidator.setDemandDAO(demandDao);
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao);
 		
-		demandValidator.validateSearch(demand, bindingResult);
+		demandValidator.validateDelete(demand, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			

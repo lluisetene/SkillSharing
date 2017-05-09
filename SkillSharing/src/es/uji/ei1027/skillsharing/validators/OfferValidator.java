@@ -8,7 +8,6 @@ import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
-import es.uji.ei1027.skillsharing.model.Degree;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Student;
 
@@ -87,7 +86,7 @@ public class OfferValidator implements ValidatorBeta {
 		if ( offer.getIdSkill() .trim().equals("") )
 			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		else if ( offer.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "El IDOffer debe tener menos de 5 caracteres");
+			errors.rejectValue("idSkill", "required", "El IDSkill debe tener menos de 5 caracteres");
 		else {
 			for ( int i = 0; i < offersList.size(); i++ )
 				if ( offersList.get(i).getIdSkill().toLowerCase().equals(offer.getIdSkill().toLowerCase()) )  {

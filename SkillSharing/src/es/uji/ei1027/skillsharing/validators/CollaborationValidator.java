@@ -4,16 +4,25 @@ import java.util.List;
 import org.springframework.validation.Errors;
 
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
+import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Offer;
 
 
-public class CollaborationValidator implements Validator {
+public class CollaborationValidator implements ValidatorBeta {
 
 	private List<Collaboration> collaborationsList;
-	boolean notFound = true;
+	private List<Offer> offersList;
+	private List<Demand> demandsList;
+	boolean encontrado = false;
 	
-	public void setCollaborationDAO(CollaborationDAO collaborationDao) {
+	public void setCollaborationDAO(CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao) {
+	
 		collaborationsList = collaborationDao.getCollaborations();
+		offersList = offerDao.getOffers();
+		demandsList = demandDao.getDemands();
 	}
 	
 	@Override
@@ -47,13 +56,21 @@ public class CollaborationValidator implements Validator {
 		else {
 			for ( int i = 0; i < collaborationsList.size(); i++ )
 				if ( collaborationsList.get(i).getIdOffer().toLowerCase().equals(collaboration.getIdOffer().toLowerCase()) )  {
-					errors.rejectValue("idOffer", "required", "Este IdOffer ya está en uso");
-					notFound = false;
+					errors.rejectValue("idOffer",  "required", "Este IdOffer ya está en uso");
+					encontrado = true;
 					break;
 				}
-			if ( notFound ) 
-				errors.rejectValue("idOffer", "required", "El IdOffer introducido no existe");
-			notFound = true;
+			if ( !encontrado )  {
+				for ( int i = 0; i < offersList.size(); i++ )
+					if ( offersList.get(i).getIdOffer().toLowerCase().equals(collaboration.getIdOffer().toLowerCase()) ) {
+						encontrado = true;
+						break;
+					}
+				if ( !encontrado ) {
+					errors.rejectValue("idOffer", "required", "El IdOffer introducido no existe");
+					encontrado = false;
+				}
+			}
 		}
 		
 		
@@ -65,19 +82,39 @@ public class CollaborationValidator implements Validator {
 		else {
 			for ( int i = 0; i < collaborationsList.size(); i++ )
 				if ( collaborationsList.get(i).getIdDemand().toLowerCase().equals(collaboration.getIdDemand().toLowerCase()) )  {
-					errors.rejectValue("idDemand", "required", "Este IdDemand ya está en uso");
-					notFound = false;
+					errors.rejectValue("idDemand",  "required", "Este IdDemand ya está en uso");
+					encontrado = true;
 					break;
 				}
-			if ( notFound )
-				errors.rejectValue("idDemand", "required", "El IdDemand introducido no existe");
-			notFound = true;
+			if ( !encontrado ) {
+				for ( int i = 0; i < demandsList.size(); i++ )
+					if ( demandsList.get(i).getIdDemand().toLowerCase().equals(collaboration.getIdDemand().toLowerCase()) ) {
+						encontrado = true;
+						break;
+					}
+				if ( !encontrado ) {
+					errors.rejectValue("idDemand", "required", "El IdDemand introducido no existe");
+					encontrado = false;
+				}
+			}
 		}
 		
 	}
 
 	@Override
-	public void validateSearch(Object obj, Errors errors) {
+	public void validateUpdate(Object obj, Errors errors) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void validateDelete(Object obj, Errors errors) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void validateConsult(Object obj, Errors errors) {
 		Collaboration collaboration = (Collaboration) obj;
 		
 		if ( collaboration.getIdCollaboration() .trim().equals("") )
@@ -85,14 +122,15 @@ public class CollaborationValidator implements Validator {
 		else {
 			for ( int i = 0; i < collaborationsList.size(); i++ )
 				if ( collaborationsList.get(i).getIdCollaboration().toLowerCase().equals(collaboration.getIdCollaboration().toLowerCase()) )  {
-					notFound = false;
+					encontrado = true;
 					break;
 				}
-			if ( notFound ) {
+			if ( !encontrado ) {
 				errors.rejectValue("idCollaboration", "required", "El IdCollaboration introducido no existe");
-				notFound = true;
+				encontrado = false;
 			}
 		}
+		
 	}
 
 }

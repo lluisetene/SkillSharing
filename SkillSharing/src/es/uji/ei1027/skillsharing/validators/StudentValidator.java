@@ -7,7 +7,7 @@ import org.springframework.validation.Errors;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Student;
 
-public class StudentValidator implements Validator {
+public class StudentValidator implements ValidatorBeta {
 
 	private List<Student> studentsList;
 	
@@ -78,7 +78,7 @@ public class StudentValidator implements Validator {
 	}
 
 	@Override
-	public void validateSearch(Object obj, Errors errors) {
+	public void validateUpdate(Object obj, Errors errors) {
 		Student student = (Student) obj;
 		
 		if ( student.getNid().trim().equals("") )
@@ -99,7 +99,52 @@ public class StudentValidator implements Validator {
 		}
 					
 	}
-	
+
+	@Override
+	public void validateDelete(Object obj, Errors errors) {
+		Student student = (Student) obj;
+		
+		if ( student.getNid().trim().equals("") )
+			errors.rejectValue("nid", "required", "Este campo es obligatorio");
+		else if ( student.getNid().length() != 9 )
+			errors.rejectValue("nid", "required", "Tamaño incorrecto");
+		else {
+			int i = 0;
+			boolean notFound = true;
+			while ( notFound && i < studentsList.size() ) {
+				if ( studentsList.get(i).getNid().toLowerCase().equals(student.getNid().toLowerCase()) )
+					notFound = false;
+				i++;
+			}
+			
+			if ( notFound )
+				errors.rejectValue("nid", "required", "El NID introducido no existe");
+		}
+					
+	}
+
+	@Override
+	public void validateConsult(Object obj, Errors errors) {
+		Student student = (Student) obj;
+		
+		if ( student.getNid().trim().equals("") )
+			errors.rejectValue("nid", "required", "Este campo es obligatorio");
+		else if ( student.getNid().length() != 9 )
+			errors.rejectValue("nid", "required", "Tamaño incorrecto");
+		else {
+			int i = 0;
+			boolean notFound = true;
+			while ( notFound && i < studentsList.size() ) {
+				if ( studentsList.get(i).getNid().toLowerCase().equals(student.getNid().toLowerCase()) )
+					notFound = false;
+				i++;
+			}
+			
+			if ( notFound )
+				errors.rejectValue("nid", "required", "El NID introducido no existe");
+		}
+					
+	}
 	
 
 }

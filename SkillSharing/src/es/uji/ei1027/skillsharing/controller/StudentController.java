@@ -77,7 +77,7 @@ public class StudentController {
 		
 		studentValidator.setStudentDAO(studentDao);
 		
-		studentValidator.validateSearch(student, bindingResult);
+		studentValidator.validateConsult(student, bindingResult);
 		
 		if (bindingResult.hasErrors())
 		
@@ -135,7 +135,7 @@ public class StudentController {
 		
 		studentValidator.setStudentDAO(studentDao);
 		
-		studentValidator.validateAdd(student, bindingResult);
+		studentValidator.validateUpdate(student, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			
@@ -161,7 +161,7 @@ public class StudentController {
 		
 		studentValidator.setStudentDAO(studentDao);
 		
-		studentValidator.validateSearch(student, bindingResult);
+		studentValidator.validateDelete(student, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			

@@ -18,13 +18,15 @@
 	
 		<h1>Available operations</h1>
 	
+		<h2>No hay datos, así que no probéis a meter nada</h2>
+		
 		<ul>
 		
 			<li><a href = "add.html">Add</a></li>
 			<li><a href = "update.html">Update</a></li>
 			<li><a href = "delete.html">Delete</a></li>
 			<li><a href = "consult.html">Consult</a></li>
-			<li><a href = "list.html">List (si le das peta porque no hay admins)</a></li>	
+			<li><a href = "list.html">List</a></li>	
 		
 		</ul>
 

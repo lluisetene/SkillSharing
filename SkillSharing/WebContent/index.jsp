@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<t:paginaBasica title="Skill Sharing">
+
+<jsp:body>
 
 <html>
 
@@ -8,8 +13,6 @@
 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
-		<title>Skill Sharing</title>
-
 	</head>
 
 	<body>
@@ -31,3 +34,7 @@
 	</body>
 
 </html>
+
+</jsp:body>
+
+</t:paginaBasica>

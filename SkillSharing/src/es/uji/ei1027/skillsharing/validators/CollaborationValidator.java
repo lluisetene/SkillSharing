@@ -9,7 +9,6 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Offer;
-import es.uji.ei1027.skillsharing.model.Skill;
 
 
 public class CollaborationValidator implements ValidatorBeta {

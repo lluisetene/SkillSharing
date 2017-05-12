@@ -36,18 +36,18 @@ public class UserLoginValidator implements ValidatorUserLogin {
 		//---------- USERNAME -----------//
 		UserLogin user = (UserLogin) obj;
 		
-		if (user.getUserName().trim().equals(""))
+		if (user.getUsername().trim().equals(""))
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < usersloginList.size(); i++ )
-				if ( usersloginList.get(i).getUserName().toLowerCase().equals(user.getUserName().toLowerCase()) ) {
+				if ( usersloginList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
 					admin = true; //login de un admin
 					break;
 				}
 			
 			if ( !admin ) { //si no es admin
 				for ( int i = 0; i < studentsList.size(); i++ )
-					if ( studentsList.get(i).getUsername().toLowerCase().equals(user.getUserName().toLowerCase()) ) {
+					if ( studentsList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
 						usuario = true; //login de un usuario
 						break;
 					}
@@ -88,18 +88,18 @@ public class UserLoginValidator implements ValidatorUserLogin {
 	public void validateSearchUserLogin(Object obj, Errors errors) {
 		UserLogin user = (UserLogin) obj;
 		
-		if (user.getUserName().trim().equals(""))
+		if (user.getUsername().trim().equals(""))
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < usersloginList.size(); i++ )
-				if ( usersloginList.get(i).getUserName().toLowerCase().equals(user.getUserName().toLowerCase()) ) {
+				if ( usersloginList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
 					admin = true; //login de un admin
 					break;
 				}
 			
 			if ( !admin ) { //si no es admin
 				for ( int i = 0; i < studentsList.size(); i++ )
-					if ( studentsList.get(i).getUsername().toLowerCase().equals(user.getUserName().toLowerCase()) ) {
+					if ( studentsList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
 						usuario = true; //login de un usuario
 						break;
 					}

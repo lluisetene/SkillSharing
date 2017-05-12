@@ -33,7 +33,7 @@ private JdbcTemplate jdbcTemplate;
 			
 			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 			
-			user.setUserName(rs.getString("username"));
+			user.setUsername(rs.getString("username"));
 			user.setPassword(passwordEncryptor.encryptPassword(rs.getString("password")));
 			
 			return user;
@@ -50,25 +50,25 @@ private JdbcTemplate jdbcTemplate;
 	
 	public UserLogin getUser(UserLogin user) {
 		
-		return this.jdbcTemplate.queryForObject("select * from userlogin where username = ?", new Object[] {user.getUserName()}, new UserLoginMapper());
+		return this.jdbcTemplate.queryForObject("select * from userlogin where username = ?", new Object[] {user.getUsername()}, new UserLoginMapper());
 	
 	}
 	
 	public void updateUser(UserLogin user) {
 	
-		this.jdbcTemplate.update("update userlogin set password = ?, where username = ?", user.getPassword(), user.getUserName());
+		this.jdbcTemplate.update("update userlogin set password = ?, where username = ?", user.getPassword(), user.getUsername());
 	
 	}
 	
 	public void deleteUser(UserLogin user) {
 	
-		this.jdbcTemplate.update("delete from userlogin where username = ?", user.getUserName());
+		this.jdbcTemplate.update("delete from userlogin where username = ?", user.getUsername());
 	
 	}
 	
 	public void addUser(UserLogin user) {
 		
-		this.jdbcTemplate.update("insert into userlogin(username, password) values(?, ?)", user.getUserName(), user.getPassword());
+		this.jdbcTemplate.update("insert into userlogin(username, password) values(?, ?)", user.getUsername(), user.getPassword());
 	
 	}
 	

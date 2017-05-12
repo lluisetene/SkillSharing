@@ -24,11 +24,18 @@ public class UserLoginController {
 	private StudentDAO studentDao;
 	private UserLoginValidator userLoginValidator;
 	
+//	@Autowired
+//	public void setUserLoginDao(UserLoginDAO userLoginDao, StudentDAO studentDao) {
+//		
+//		this.userLoginDao = userLoginDao;
+//		this.studentDao = studentDao;
+//	}
+	
 	@Autowired
-	public void setStudentDao(UserLoginDAO userLoginDao, StudentDAO studentDao) {
+	public void setUserLoginDao(StudentDAO studentDao) {
 		
-		this.userLoginDao = userLoginDao;
 		this.studentDao = studentDao;
+		
 	}
 	
 	//-------------------------------------------

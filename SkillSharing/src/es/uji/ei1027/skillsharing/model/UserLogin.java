@@ -2,16 +2,16 @@ package es.uji.ei1027.skillsharing.model;
 
 public class UserLogin {
 	
-	public String userName;
+	public String username;
 	public String password;
 	
 	
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 	
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	public String getPassword() {

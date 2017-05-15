@@ -15,7 +15,6 @@ import es.uji.ei1027.skillsharing.dao.UserLoginDAO;
 import es.uji.ei1027.skillsharing.model.UserLogin;
 import es.uji.ei1027.skillsharing.validators.UserLoginValidator;
 
-
 @Controller
 @RequestMapping("/login")
 public class UserLoginController {
@@ -27,10 +26,8 @@ public class UserLoginController {
 
 	@Autowired
 	public void setUserLoginDao(UserLoginDAO userLoginDao, StudentDAO studentDao) {
-		
 		this.userLoginDao = userLoginDao;
 		this.studentDao = studentDao;
-		
 	}
 	
 	//-------------------------------------------
@@ -65,7 +62,7 @@ public class UserLoginController {
 		
 		userLoginValidator.setUserLoginDAO(userLoginDao, studentDao);
 		
-		userLoginValidator.validateSearchUserLogin(userlogin, bindingResult);
+		userLoginValidator.validateConsult(userlogin, bindingResult);
 		
 		if ( bindingResult.hasErrors() )
 			
@@ -93,7 +90,7 @@ public class UserLoginController {
 		
 		userLoginValidator.setUserLoginDAO(userLoginDao, studentDao);
 		
-		userLoginValidator.validateUserLogin(userLogin, bindingResult);
+		userLoginValidator.validateAdd(userLogin, bindingResult);
 		
 		if ( bindingResult.hasErrors() )
 			
@@ -123,7 +120,7 @@ public class UserLoginController {
 		
 		userLoginValidator.setUserLoginDAO(userLoginDao, studentDao);
 		
-		userLoginValidator.validateUserLogin(userLogin, bindingResult);
+		userLoginValidator.validateUpdate(userLogin, bindingResult);
 		
 		if ( bindingResult.hasErrors() )
 			
@@ -152,7 +149,7 @@ public class UserLoginController {
 		
 		userLoginValidator.setUserLoginDAO(userLoginDao, studentDao);
 		
-		userLoginValidator.validateSearchUserLogin(userLogin, bindingResult);
+		userLoginValidator.validateDelete(userLogin, bindingResult);
 		
 		if ( bindingResult.hasErrors() )
 			
@@ -177,7 +174,7 @@ public class UserLoginController {
 		
 		userLoginValidator = new UserLoginValidator();
 		
-		userLoginValidator.validateUserLogin(userLogin, bindingResult);
+		userLoginValidator.validateLogin(userLogin, bindingResult);
 		
 		if ( bindingResult.hasErrors() )
 			

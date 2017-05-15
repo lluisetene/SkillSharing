@@ -10,9 +10,11 @@ import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.skillsharing.model.UserLogin;
 
+@Repository
 public class UserLoginDAO  {
 
 private JdbcTemplate jdbcTemplate;
@@ -31,10 +33,11 @@ private JdbcTemplate jdbcTemplate;
 			
 			UserLogin user = new UserLogin();
 			
-			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+			//BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 			
 			user.setUsername(rs.getString("username"));
-			user.setPassword(passwordEncryptor.encryptPassword(rs.getString("password")));
+			user.setPassword(rs.getString("password"));
+			//user.setPassword(passwordEncryptor.encryptPassword(rs.getString("password")));
 			user.setName(rs.getString("name"));
 			user.setMail(rs.getString("mail"));
 			
@@ -46,19 +49,19 @@ private JdbcTemplate jdbcTemplate;
 	
 	public List<UserLogin> getUsers() {
 		
-		return this.jdbcTemplate.query("select * from userlogin", new UserLoginMapper());
+		return this.jdbcTemplate.query("select * from admin", new UserLoginMapper());
 	
 	}
 	
 	public UserLogin getUser(UserLogin user) {
 		
-		return this.jdbcTemplate.queryForObject("select * from userlogin where username = ?", new Object[] {user.getUsername()}, new UserLoginMapper());
+		return this.jdbcTemplate.queryForObject("select * from admin where username = ?", new Object[] {user.getUsername()}, new UserLoginMapper());
 	
 	}
 	
 	public void updateUser(UserLogin user) {
 	
-		this.jdbcTemplate.update("update userlogin set name = ?, mail = ?, password = ?, where username = ?", user.getName(), user.getMail(), user.getPassword(), user.getUsername());
+		this.jdbcTemplate.update("update admin set name = ?, mail = ?, password = ?, where username = ?", user.getName(), user.getMail(), user.getPassword(), user.getUsername());
 	
 	}
 	
@@ -70,7 +73,7 @@ private JdbcTemplate jdbcTemplate;
 	
 	public void addUser(UserLogin user) {
 		
-		this.jdbcTemplate.update("insert into userlogin(name, mail, username, password) values(?, ?, ?, ?)", user.getName(), user.getMail(), user.getUsername(), user.getPassword());
+		this.jdbcTemplate.update("insert into admin(name, mail, username, password) values(?, ?, ?, ?)", user.getName(), user.getMail(), user.getUsername(), user.getPassword());
 	
 	}
 	

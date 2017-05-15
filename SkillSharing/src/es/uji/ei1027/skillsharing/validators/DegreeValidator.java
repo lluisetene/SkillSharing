@@ -9,7 +9,7 @@ import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Degree;
 import es.uji.ei1027.skillsharing.model.Student;
 
-public class DegreeValidator implements ValidatorBeta {
+public class DegreeValidator implements Validator {
 
 	private List<Degree> degreesList;
 	private List<Student> studentList;

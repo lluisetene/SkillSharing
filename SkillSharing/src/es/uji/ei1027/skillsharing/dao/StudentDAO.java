@@ -38,7 +38,7 @@ public class StudentDAO {
 			student.setNid(rs.getString("nid"));
 			student.setName(rs.getString("name"));
 			student.setUsername(rs.getString("username"));
-			student.setPassword(passwordEncryptor.encryptPassword(rs.getString("password")));
+			student.setPassword(/*passwordEncryptor.encryptPassword*/(rs.getString("password")));
 			student.setMail(rs.getString("mail"));
 			student.setCourse(rs.getInt("course"));
 			student.setOfferHours(rs.getTime("offerHours"));

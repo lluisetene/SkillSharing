@@ -13,7 +13,7 @@ import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.model.Student;
 
-public class DemandValidator implements ValidatorBeta {
+public class DemandValidator implements Validator {
 
 	private List<Demand> demandsList;
 	private List<Student> studentsList;

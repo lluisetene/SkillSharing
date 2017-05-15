@@ -7,7 +7,7 @@ import org.springframework.validation.Errors;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Student;
 
-public class StudentValidator implements ValidatorBeta {
+public class StudentValidator implements Validator {
 
 	private List<Student> studentsList;
 	

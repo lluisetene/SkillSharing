@@ -111,40 +111,16 @@
 	                <td><form:label path="hours">Hours</form:label></td>
 					<td><select id = "hours" name = "hours">
 						<option value="10:00" selected="selected">10 hours (default)</option>
-						<option value="00:15">00:15</option>
-						<option value="00:30">00:30</option>
-						<option value="00:45">00:45</option>
 						<option value="01:00">01:00</option>
-						<option value="01:15">01:15</option>
-						<option value="01:30">01:30</option>
-						<option value="01:45">01:45</option>
 						<option value="02:00">02:00</option>
-						<option value="02:15">02:15</option>
-						<option value="02:30">02:30</option>
-						<option value="02:45">02:45</option>
 						<option value="03:00">03:00</option>
-						<option value="03:15">03:15</option>
-						<option value="03:30">03:30</option>
-						<option value="03:45">03:45</option>
 						<option value="04:00">04:00</option>
-						<option value="04:15">04:15</option>
-						<option value="04:30">04:30</option>
-						<option value="04:45">04:45</option>
 						<option value="05:00">05:00</option>
-						<option value="05:15">05:15</option>
-						<option value="05:30">05:30</option>
-						<option value="05:45">05:45</option>
 						<option value="06:00">06:00</option>
-						<option value="06:30">06:30</option>
 						<option value="07:00">07:00</option>
 						<option value="08:00">08:00</option>
-						<option value="16:00">16:00</option>
-						<option value="24:00">24:00</option>
-						<option value="32:00">32:00</option>
-						<option value="40:00">40:00</option>
-						<option value="80:00">80:00</option>
-						<option value="120:00">120:00</option>
-						<option value="160:00">160:00</option>
+						<option value="09:00">09:00</option>
+						
 					</select></td>
 	           
 	            </tr>
@@ -152,7 +128,7 @@
 	            <tr>
 	            
 	                <td><form:label path="rate">Rate</form:label></td>
-	              	<td><select id = "hours" name = "hours">
+	              	<td><select id = "rate" name = "rate">
 		               <option value= "5" selected="selected">5 (default)</option>
 		               <option value="0">0</option>
 		               <option value="1">1</option>

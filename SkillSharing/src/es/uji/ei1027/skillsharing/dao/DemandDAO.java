@@ -76,4 +76,10 @@ public class DemandDAO {
 	
 	}
 	
+public Demand getDemand(String idDemand) {
+		
+		return this.jdbcTemplate.queryForObject("select * from demand where idDemand = ?", new Object[] {idDemand}, new DemandMapper());
+	
+	}
+	
 }

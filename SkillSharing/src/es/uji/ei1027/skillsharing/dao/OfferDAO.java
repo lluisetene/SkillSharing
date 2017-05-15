@@ -75,5 +75,11 @@ public class OfferDAO {
 		this.jdbcTemplate.update("insert into offer(idoffer, nid, name, idskill, description, beginningdate, endingdate) values(?, ?, ?, ?, ?, ?, ?)", offer.getIdOffer(), offer.getNid(), offer.getName(), offer.getIdSkill(), offer.getDescription(), offer.getBeginningDate(), offer.getEndingDate());
 	
 	}
+	
+	public Offer getOffer(String idOffer) {
+		
+		return this.jdbcTemplate.queryForObject("select * from offer where idOffer = ?", new Object[] {idOffer}, new OfferMapper());
+	
+	}
 
 }

@@ -11,7 +11,7 @@ import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Offer;
 
 
-public class CollaborationValidator implements ValidatorBeta {
+public class CollaborationValidator implements Validator {
 
 	private List<Collaboration> collaborationsList;
 	private List<Offer> offersList;

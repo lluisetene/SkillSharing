@@ -121,7 +121,7 @@ public class CollaborationValidator implements ValidatorBeta {
 			
 			if (!valido){
 				
-				errors.rejectValue("idCollaboration", "required", "Las IdCollaboration IdOffer e IdDemand no figuran como colaboración");
+				errors.rejectValue("idCollaboration", "required", "Las IdOffer e IdDemand no figuran como colaboración");
 				
 			}
 			

@@ -151,7 +151,7 @@
 	            <tr>
 	            
 	                <td><form:label path="rate">Rate</form:label></td>
-	              	<td><select id = "hours" name = "hours">
+	              	<td><select id = "rate" name = "rate">
 		               <option value= "5" selected="selected">5 (default)</option>
 		               <option value="0">0</option>
 		               <option value="1">1</option>

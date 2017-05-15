@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
@@ -27,14 +28,16 @@ public class DemandController {
 	private DemandDAO demandDao;
 	private StudentDAO studentDao;
 	private CollaborationDAO collaborationDao;
+	private SkillDAO skillDao;
 	
 	
 	@Autowired
-	public void setDemandDao(DemandDAO demandDao, StudentDAO studentDao, CollaborationDAO collaborationDao) {
+	public void setDemandDao(DemandDAO demandDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao) {
 		
 		this.demandDao = demandDao;
 		this.studentDao = studentDao;
 		this.collaborationDao = collaborationDao;
+		this.skillDao = skillDao;
 		
 	}
 	
@@ -85,7 +88,7 @@ public class DemandController {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
-		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao);
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
 		
 		demandValidator.validateConsult(demand, bindingResult);
 		
@@ -114,7 +117,7 @@ public class DemandController {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
-		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao);
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
 		
 		demandValidator.validateAdd(demand, bindingResult);
 		
@@ -143,7 +146,7 @@ public class DemandController {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
-		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao);
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
 		
 		demandValidator.validateUpdate(demand, bindingResult);
 		
@@ -171,7 +174,7 @@ public class DemandController {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
-		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao);
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
 		
 		demandValidator.validateDelete(demand, bindingResult);
 		

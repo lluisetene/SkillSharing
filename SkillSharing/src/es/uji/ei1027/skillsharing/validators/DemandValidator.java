@@ -6,9 +6,11 @@ import org.springframework.validation.Errors;
 
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.model.Student;
 
 public class DemandValidator implements ValidatorBeta {
@@ -16,12 +18,14 @@ public class DemandValidator implements ValidatorBeta {
 	private List<Demand> demandsList;
 	private List<Student> studentsList;
 	private List<Collaboration> collaborationsList;
+	private List<Skill> skillsList;
 	boolean encontrado = false;
 	
-	public void setDemandDAO(DemandDAO demandDao, StudentDAO studentDao, CollaborationDAO collaborationDao) {
+	public void setDemandDAO(DemandDAO demandDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao) {
 		demandsList = demandDao.getDemands();
 		studentsList = studentDao.getStudents();
 		collaborationsList = collaborationDao.getCollaborations();
+		skillsList = skillDao.getSkills();
 	}
 	
 	@Override
@@ -82,14 +86,14 @@ public class DemandValidator implements ValidatorBeta {
 		}
 		
 		
-		// ------- IDSKILL ------ /
+		// ------- IDSKILL ------ //
 		if ( demand.getIdSkill() .trim().equals("") )
 			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		else if ( demand.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "El IDSkill debe tener menos de 5 caracteres");
+			errors.rejectValue("idSkill", "required", "El IDSkill debe tener más de 5 caracteres");
 		else {
-			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getIdSkill().toLowerCase().equals(demand.getIdSkill().toLowerCase()) )  {
+			for ( int i = 0; i < skillsList.size(); i++ )
+				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(demand.getIdSkill().toLowerCase()) )  {
 					encontrado = true;
 					break;
 				}

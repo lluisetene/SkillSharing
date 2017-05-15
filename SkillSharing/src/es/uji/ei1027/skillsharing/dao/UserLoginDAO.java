@@ -35,6 +35,8 @@ private JdbcTemplate jdbcTemplate;
 			
 			user.setUsername(rs.getString("username"));
 			user.setPassword(passwordEncryptor.encryptPassword(rs.getString("password")));
+			user.setName(rs.getString("name"));
+			user.setMail(rs.getString("mail"));
 			
 			return user;
 		
@@ -56,7 +58,7 @@ private JdbcTemplate jdbcTemplate;
 	
 	public void updateUser(UserLogin user) {
 	
-		this.jdbcTemplate.update("update userlogin set password = ?, where username = ?", user.getPassword(), user.getUsername());
+		this.jdbcTemplate.update("update userlogin set name = ?, mail = ?, password = ?, where username = ?", user.getName(), user.getMail(), user.getPassword(), user.getUsername());
 	
 	}
 	
@@ -68,7 +70,7 @@ private JdbcTemplate jdbcTemplate;
 	
 	public void addUser(UserLogin user) {
 		
-		this.jdbcTemplate.update("insert into userlogin(username, password) values(?, ?)", user.getUsername(), user.getPassword());
+		this.jdbcTemplate.update("insert into userlogin(name, mail, username, password) values(?, ?, ?, ?)", user.getName(), user.getMail(), user.getUsername(), user.getPassword());
 	
 	}
 	

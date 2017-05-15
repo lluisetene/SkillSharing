@@ -30,6 +30,8 @@
     	
 	        <tr>
 	        
+	        	<th>Name</th>
+	        	<th>Mail</th>
 	            <th>UserName</th>
 	            <th>Password</th>
 	            
@@ -39,8 +41,10 @@
 	          
 	            <tr>
 	          
-	                <td>${student.username}</td>
-	           		<td>${student.password}</td>
+	          		<td>${userlogin.name}</td>
+	          		<td>${userlogin.mail}</td>
+	                <td>${userlogin.username}</td>
+	           		<td>${userlogin.password}</td>
 	           
 	            </tr>
 	        

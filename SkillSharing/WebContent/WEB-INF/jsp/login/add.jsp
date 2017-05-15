@@ -23,6 +23,23 @@
 			
 			<table>
 			
+				<tr>
+	        	
+	                <td><form:label path="name">Name</form:label></td>
+	                <td><form:input type = "text" maxlength = "30" path="name" /></td>
+	                <td><form:errors path="name" cssClass="error" /></td>
+	                	                
+	            </tr>
+			
+				<tr>
+	        	
+	                <td><form:label path="mail">Mail</form:label></td>
+	                <td><form:input type = "email" maxlength = "30" path="mail" /></td>
+	                <td><form:errors path="mail" cssClass="error" /></td>
+	                	                
+	            </tr>
+			
+			
 	        	<tr>
 	        	
 	                <td><form:label path="username">Username</form:label></td>

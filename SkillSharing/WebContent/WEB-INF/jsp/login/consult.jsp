@@ -55,6 +55,8 @@
     	
 		        <tr>
 		        
+		        	<th>Name</th>
+		        	<th>Mail</th>
 		            <th>UserName</th>
 		            <th>Password</th>
 		            
@@ -62,6 +64,8 @@
 		        
 		        <tr>
 		        
+		        	<td>${userloginResponse.name}</td>
+		        	<td>${userloginResponse.mail}</td>
 		            <td>${userloginResponse.username}</td>
 		      		<td>${userloginResponse.password}</td>
 		      

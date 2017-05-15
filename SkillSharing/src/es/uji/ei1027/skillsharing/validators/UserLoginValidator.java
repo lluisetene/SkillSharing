@@ -31,12 +31,21 @@ public class UserLoginValidator implements ValidatorUserLogin {
 	@Override
 	public void validateUserLogin(Object obj, Errors errors) {
 		
+		UserLogin user = (UserLogin) obj;
 		BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 		
-		//---------- USERNAME -----------//
-		UserLogin user = (UserLogin) obj;
+		//---------- NAME ----------------//
+		if ( user.getName().trim().equals("") )
+			errors.rejectValue("name", "required", "Este campo es obligatorio");
+
 		
-		if (user.getUsername().trim().equals(""))
+		//---------- MAIL ---------------//
+		if ( user.getMail().trim().equals("") )
+			errors.rejectValue("mail",  "required", "Este campo es obligatorio");
+		
+		//---------- USERNAME -----------//
+		
+		if ( user.getUsername().trim().equals("") )
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < usersloginList.size(); i++ )

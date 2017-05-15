@@ -140,6 +140,8 @@ public class StudentController {
 		if (bindingResult.hasErrors())
 			
 			return "student/update";
+		
+		studentDao.updateStudent(student);
 			
 		return "redirect:main.html";
 	}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
+import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.validators.OfferValidator;
@@ -27,13 +28,15 @@ public class OfferController {
 	private OfferDAO offerDao;
 	private StudentDAO studentDao;
 	private CollaborationDAO collaborationDao;
+	private SkillDAO skillDao;
 	private OfferValidator offerValidator;
 	
 	@Autowired
-	public void setOfferDao(OfferDAO offerDao, StudentDAO studentDao, CollaborationDAO collaborationDao) {
+	public void setOfferDao(OfferDAO offerDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao) {
 		this.offerDao = offerDao;
 		this.studentDao = studentDao;
 		this.collaborationDao = collaborationDao;
+		this.skillDao = skillDao;
 	}
 	
 	
@@ -84,7 +87,7 @@ public class OfferController {
 		
 		offerValidator = new OfferValidator();
 		
-		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao);
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
 		
 		offerValidator.validateConsult(offer, bindingResult);
 		
@@ -113,7 +116,7 @@ public class OfferController {
 		
 		offerValidator = new OfferValidator();
 		
-		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao);
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
 		
 		offerValidator.validateAdd(offer, bindingResult);
 		
@@ -142,7 +145,7 @@ public class OfferController {
 		
 		offerValidator = new OfferValidator();
 		
-		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao);
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
 		
 		offerValidator.validateUpdate(offer, bindingResult);
 		
@@ -170,7 +173,7 @@ public class OfferController {
 		
 		offerValidator = new OfferValidator();
 		
-		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao);
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
 		
 		offerValidator.validateDelete(offer, bindingResult);
 		

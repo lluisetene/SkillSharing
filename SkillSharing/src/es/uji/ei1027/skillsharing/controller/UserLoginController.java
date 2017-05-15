@@ -26,8 +26,9 @@ public class UserLoginController {
 	
 
 	@Autowired
-	public void setUserLoginDao(StudentDAO studentDao) {
+	public void setUserLoginDao(UserLoginDAO userLoginDao, StudentDAO studentDao) {
 		
+		this.userLoginDao = userLoginDao;
 		this.studentDao = studentDao;
 		
 	}

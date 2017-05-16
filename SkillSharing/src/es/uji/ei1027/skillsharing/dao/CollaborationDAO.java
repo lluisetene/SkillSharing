@@ -48,7 +48,7 @@ public class CollaborationDAO {
 	
 	public List<Collaboration> getCollaborations() {
 		
-		return this.jdbcTemplate.query("select * from collaboration", new CollaborationMapper());
+		return this.jdbcTemplate.query("select * from collaboration order by idcollaboration", new CollaborationMapper());
 	
 	}
 	

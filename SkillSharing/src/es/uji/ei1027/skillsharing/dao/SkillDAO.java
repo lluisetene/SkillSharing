@@ -44,25 +44,25 @@ private JdbcTemplate jdbcTemplate;
 	
 	public List<Skill> getSkills() {
 		
-		return this.jdbcTemplate.query("select * from skill", new SkillMapper());
+		return this.jdbcTemplate.query("select * from skill order by idskill", new SkillMapper());
 	
 	}
 	
 	public Skill getSkill(Skill skill) {
 	
-		return this.jdbcTemplate.queryForObject("select * from skill where idSkill = ?", new Object[] {skill.getIdSkill()}, new SkillMapper());
+		return this.jdbcTemplate.queryForObject("select * from skill where idskill = ?", new Object[] {skill.getIdSkill()}, new SkillMapper());
 	
 	}
 	
 	public void updateSkill(Skill skill) {
 	
-		this.jdbcTemplate.update("update skill set name = ?, level = ?, description = ? where idSkill = ?", skill.getName(), skill.getLevel(), skill.getDescription(), skill.getIdSkill());
+		this.jdbcTemplate.update("update skill set name = ?, level = ?, description = ? where idskill = ?", skill.getName(), skill.getLevel(), skill.getDescription(), skill.getIdSkill());
 	
 	}
 	
 	public void deleteSkill(Skill skill){
 	
-		this.jdbcTemplate.update("delete from skill where idSkill = ?", skill.getIdSkill());
+		this.jdbcTemplate.update("delete from skill where idskill = ?", skill.getIdSkill());
 	
 	}
 	

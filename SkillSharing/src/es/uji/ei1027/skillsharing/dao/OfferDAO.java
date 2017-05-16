@@ -48,13 +48,13 @@ public class OfferDAO {
 	
 	public List<Offer> getOffers() {
 		
-		return this.jdbcTemplate.query("select * from offer", new OfferMapper());
+		return this.jdbcTemplate.query("select * from offer order by idoffer", new OfferMapper());
 	
 	}
 	
 	public Offer getOffer(Offer offer) {
 	
-		return this.jdbcTemplate.queryForObject("select * from offer where idOffer = ?", new Object[] {offer.getIdOffer()}, new OfferMapper());
+		return this.jdbcTemplate.queryForObject("select * from offer where idoffer = ?", new Object[] {offer.getIdOffer()}, new OfferMapper());
 	
 	}
 	

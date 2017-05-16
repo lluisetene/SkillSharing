@@ -48,13 +48,13 @@ public class DemandDAO {
 	
 	public List<Demand> getDemands() {
 		
-		return this.jdbcTemplate.query("select * from demand", new DemandMapper());
+		return this.jdbcTemplate.query("select * from demand order by iddemand", new DemandMapper());
 	
 	}
 	
 	public Demand getDemand(Demand demand) {
 	
-		return this.jdbcTemplate.queryForObject("select * from demand where idDemand = ?", new Object[] {demand.getIdDemand()}, new DemandMapper());
+		return this.jdbcTemplate.queryForObject("select * from demand where iddemand = ?", new Object[] {demand.getIdDemand()}, new DemandMapper());
 	
 	}
 	

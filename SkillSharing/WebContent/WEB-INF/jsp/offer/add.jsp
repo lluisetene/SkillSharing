@@ -5,12 +5,14 @@
 <html>
 	
 	<head>
+	
 	<title>Add Offer</title>
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/calendar.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
+	</head>
 	<body>
     
     	<h2>New Offer</h2>

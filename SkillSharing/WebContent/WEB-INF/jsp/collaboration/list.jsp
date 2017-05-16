@@ -53,6 +53,8 @@
 	                <td>${collaboration.endingDate}</td>
 	                <td>${collaboration.hours}</td>
 	                <td>${collaboration.rate}</td>
+	                <td><a href="update/${collaboration.idCollaboration}.html">Update</a>
+               		<td><a href="delete/${collaboration.idCollaboration}.html">Delete</a>
 	           
 	            </tr>
 	        

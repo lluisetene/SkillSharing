@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -83,7 +84,7 @@ public class StudentController {
 		
 			return "student/consult";
 		
-		model.addAttribute("studentResponse", studentDao.getStudent(student));
+		model.addAttribute("studentResponse", studentDao.getStudent(student.getNid()));
 		
 		return "student/consult";
 	
@@ -119,60 +120,37 @@ public class StudentController {
 	}
 	
 	//----------- actualización ------------------
-	@RequestMapping("/update")
-	public String editStudent(Model model) {
+	@RequestMapping(value="/update/{nid}", method = RequestMethod.GET)
+	public String processUpdateSubmit(Model model, @PathVariable String nid) {
 		
-		model.addAttribute("student", new Student());
+		model.addAttribute("student", studentDao.getStudent(nid));
 		
-		return "student/update";
+		return "student/update"; 
 		
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String processEditSubmit(@ModelAttribute("student") Student student, BindingResult bindingResult) {
+	@RequestMapping(value="/update/{nid}", method = RequestMethod.POST) 
+	public String processUpdateSubmit(@PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "student/update";
+		
+		 studentDao.updateStudent(student);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 
-		StudentValidator studentValidator = new StudentValidator();
-		
-		studentValidator.setStudentDAO(studentDao);
-		
-		studentValidator.validateUpdate(student, bindingResult);
-		
-		if (bindingResult.hasErrors())
-			
-			return "student/update";
-		
-		studentDao.updateStudent(student);
-			
-		return "redirect:main.html";
-	}
+
 	
 	//----------- eliminación ------------------
-	@RequestMapping("/delete")
-	public String deleteStudent(Model model) {
-		
-		model.addAttribute("student", new Student());
-		
-		return "student/delete";
-		
-	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String processDeleteSubmit(@ModelAttribute("student") Student student, BindingResult bindingResult) {
-		
-		StudentValidator studentValidator = new StudentValidator();
-		
-		studentValidator.setStudentDAO(studentDao);
-		
-		studentValidator.validateDelete(student, bindingResult);
-		
-		if (bindingResult.hasErrors())
+	@RequestMapping(value="/delete/{nid}")
+	public String processDeleteSubmit(@PathVariable String nid) {
 			
-			return "student/delete";
+		studentDao.deleteStudent(nid);
 		
-			
-			studentDao.deleteStudent(student);
-		
-		return "redirect:main.html";
+		return "redirect:../list.html";
 	
 	}
 	

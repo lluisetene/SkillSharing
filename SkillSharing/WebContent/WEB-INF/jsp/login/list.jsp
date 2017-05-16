@@ -37,7 +37,7 @@
 	            
 	        </tr>
 	        
-	        <c:forEach items="${userlogin}" var="userlogin">
+	        <c:forEach items="${userslogin}" var="userlogin">
 	          
 	            <tr>
 	          
@@ -45,6 +45,8 @@
 	          		<td>${userlogin.mail}</td>
 	                <td>${userlogin.username}</td>
 	           		<td>${userlogin.password}</td>
+	           		<td><a href="update/${userlogin.username}.html">Update</a>
+               		<td><a href="delete/${userlogin.username}.html">Delete</a>
 	           
 	            </tr>
 	        

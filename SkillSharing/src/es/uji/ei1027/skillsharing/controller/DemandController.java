@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,6 +20,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
 
 @Controller
@@ -96,7 +98,7 @@ public class DemandController {
 		
 			return "demand/consult";
 		
-		model.addAttribute("demandResponse", demandDao.getDemand(demand));
+		model.addAttribute("demandResponse", demandDao.getDemand(demand.getIdDemand()));
 		
 		return "demand/consult";
 	
@@ -132,59 +134,35 @@ public class DemandController {
 	}
 	
 	//----------- actualización ------------------
-	@RequestMapping("/update")
-	public String editDemand(Model model) {
+	@RequestMapping(value="/update/{idDemand}", method = RequestMethod.GET)
+	public String processUpdateSubmit(Model model, @PathVariable String idDemand) {
 		
-		model.addAttribute("demand", new Demand());
+		model.addAttribute("demand", demandDao.getDemand(idDemand));
 		
-		return "demand/update";
+		return "demand/update"; 
 		
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String processEditSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
+	@RequestMapping(value="/update/{idDemand}", method = RequestMethod.POST) 
+	public String processUpdateSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
 		
-		DemandValidator demandValidator = new DemandValidator();
-		
-		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
-		
-		demandValidator.validateUpdate(demand, bindingResult);
-		
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) 
 			
-			return "demand/update";
+			 return "demand/update";
 		
-		demandDao.updateDemand(demand);
-		
-		return "redirect:main.html";
-	}
+		 demandDao.updateDemand(demand);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping("/delete")
-	public String deleteDemand(Model model) {
-		
-		model.addAttribute("demand", new Demand());
-		
-		return "demand/delete";
-		
-	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String processDeleteSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
-		
-		DemandValidator demandValidator = new DemandValidator();
-		
-		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
-		
-		demandValidator.validateDelete(demand, bindingResult);
-		
-		if (bindingResult.hasErrors())
+	@RequestMapping(value="/delete/{idDemand}")
+	public String processDeleteSubmit(@PathVariable String idDemand) {
 			
-			return "demand/delete";
+		demandDao.deleteDemand(idDemand);
 		
-		demandDao.deleteDemand(demand);
-		
-		return "redirect:main.html";
+		return "redirect:../list.html";
 	
 	}
 	

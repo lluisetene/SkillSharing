@@ -53,6 +53,8 @@
 	                <td>${demand.description}</td>
 	                <td>${demand.beginningDate}</td>
 	                <td>${demand.endingDate}</td>
+	                <td><a href="update/${demand.idDemand}.html">Update</a>
+               		<td><a href="delete/${demand.idDemand}.html">Delete</a>
 	           
 	            </tr>
 	        

@@ -5,12 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.skillsharing.dao.DegreeDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Degree;
+import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.DegreeValidator;
 
 @Controller
@@ -71,7 +73,7 @@ public class DegreeController {
 		
 			return "degree/consult";
 		
-		model.addAttribute("degreeResponse", degreeDao.getDegree(degree));
+		model.addAttribute("degreeResponse", degreeDao.getDegree(degree.getIdDegree()));
 		
 		return "degree/consult";
 	
@@ -108,59 +110,35 @@ public class DegreeController {
 	
 
 	//----------- actualización ------------------
-	@RequestMapping("/update")
-	public String editDegree(Model model) {
+	@RequestMapping(value="/update/{idDegree}", method = RequestMethod.GET)
+	public String processUpdateSubmit(Model model, @PathVariable String idDegree) {
 		
-		model.addAttribute("degree", new Degree());
+		model.addAttribute("degree", degreeDao.getDegree(idDegree));
 		
-		return "degree/update";
+		return "degree/update"; 
 		
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String processEditSubmit(@ModelAttribute("degree") Degree degree, BindingResult bindingResult) {
+	@RequestMapping(value="/update/{idDegree}", method = RequestMethod.POST) 
+	public String processUpdateSubmit(@PathVariable String idDegree, @ModelAttribute("degree") Degree degree, BindingResult bindingResult) {
 		
-		DegreeValidator degreeValidator = new DegreeValidator();
-		
-		degreeValidator.setDegreeDAO(degreeDao, studentDao);
-		
-		degreeValidator.validateUpdate(degree, bindingResult);
-		
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) 
 			
-			return "degree/update";
+			 return "degree/update";
 		
-		degreeDao.updateDegree(degree);
-		
-		return "redirect:main.html";
-	}
+		 degreeDao.updateDegree(degree);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping("/delete")
-	public String deleteDegree(Model model) {
-		
-		model.addAttribute("degree", new Degree());
-		
-		return "degree/delete";
-		
-	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String processDeleteSubmit(@ModelAttribute("degree") Degree degree, BindingResult bindingResult) {
-		
-		DegreeValidator degreeValidator = new DegreeValidator();
-		
-		degreeValidator.setDegreeDAO(degreeDao, studentDao);
-		
-		degreeValidator.validateDelete(degree, bindingResult);
-		
-		if (bindingResult.hasErrors())
+	@RequestMapping(value="/delete/{idDegree}")
+	public String processDeleteSubmit(@PathVariable String idDegree) {
 			
-			return "degree/delete";
-			
-		degreeDao.deleteDegree(degree);
+		degreeDao.deleteDegree(idDegree);
 		
-		return "redirect:main.html";
+		return "redirect:../list.html";
 	
 	}
 	

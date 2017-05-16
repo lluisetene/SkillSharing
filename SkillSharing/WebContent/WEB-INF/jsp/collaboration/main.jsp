@@ -21,8 +21,6 @@
 		<ul>
 		
 			<li><a href = "add.html">Add</a></li>
-			<li><a href = "update.html">Update</a></li>
-			<li><a href = "delete.html">Delete</a></li>
 			<li><a href = "consult.html">Consult</a></li>
 			<li><a href = "list.html">List</a></li>	
 		

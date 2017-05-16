@@ -48,13 +48,13 @@ public class CollaborationDAO {
 	
 	public List<Collaboration> getCollaborations() {
 		
-		return this.jdbcTemplate.query("select * from collaboration order by idcollaboration", new CollaborationMapper());
+		return this.jdbcTemplate.query("select * from collaboration", new CollaborationMapper());
 	
 	}
 	
-	public Collaboration getCollaboration(Collaboration collaboration) {
+	public Collaboration getCollaboration(String idCollaboration) {
 		
-		return this.jdbcTemplate.queryForObject("select * from collaboration where idcollaboration = ?", new Object[] {collaboration.getIdCollaboration()}, new CollaborationMapper());
+		return this.jdbcTemplate.queryForObject("select * from collaboration where idcollaboration = ?", new Object[] {idCollaboration}, new CollaborationMapper());
 	
 	}
 	
@@ -64,9 +64,9 @@ public class CollaborationDAO {
 	
 	}
 	
-	public void deleteCollaboration(Collaboration collaboration) {
+	public void deleteCollaboration(String idCollaboration) {
 	
-		this.jdbcTemplate.update("delete from collaboration where idcollaboration = ?", collaboration.getIdCollaboration());
+		this.jdbcTemplate.update("delete from collaboration where idcollaboration = ?", idCollaboration);
 	
 	}
 	

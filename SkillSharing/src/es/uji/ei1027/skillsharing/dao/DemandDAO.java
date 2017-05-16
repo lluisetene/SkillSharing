@@ -48,13 +48,13 @@ public class DemandDAO {
 	
 	public List<Demand> getDemands() {
 		
-		return this.jdbcTemplate.query("select * from demand order by iddemand", new DemandMapper());
+		return this.jdbcTemplate.query("select * from demand", new DemandMapper());
 	
 	}
 	
-	public Demand getDemand(Demand demand) {
+	public Demand getDemand(String idDemand) {
 	
-		return this.jdbcTemplate.queryForObject("select * from demand where iddemand = ?", new Object[] {demand.getIdDemand()}, new DemandMapper());
+		return this.jdbcTemplate.queryForObject("select * from demand where idDemand = ?", new Object[] {idDemand}, new DemandMapper());
 	
 	}
 	
@@ -64,21 +64,15 @@ public class DemandDAO {
 	
 	}
 	
-	public void deleteDemand(Demand demand) {
+	public void deleteDemand(String idDemand) {
 	
-		this.jdbcTemplate.update("delete from demand where idDemand = ?", demand.getIdDemand());
+		this.jdbcTemplate.update("delete from demand where idDemand = ?", idDemand);
 	
 	}
 	
 	public void addDemand(Demand demand) {
 	
 		this.jdbcTemplate.update("insert into demand(iddemand, nid, name, idskill, description, beginningdate, endingdate) values(?, ?, ?, ?, ?, ?, ?)", demand.getIdDemand(), demand.getNid(), demand.getName(), demand.getIdSkill(), demand.getDescription(), demand.getBeginningDate(), demand.getEndingDate());
-	
-	}
-	
-public Demand getDemand(String idDemand) {
-		
-		return this.jdbcTemplate.queryForObject("select * from demand where idDemand = ?", new Object[] {idDemand}, new DemandMapper());
 	
 	}
 	

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -12,6 +13,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.model.Skill;
+import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.SkillValidator;
 
 @Controller
@@ -73,7 +75,7 @@ public class SkillController {
 		
 			return "skill/consult";
 		
-		model.addAttribute("skillResponse", skillDao.getSkill(skill));
+		model.addAttribute("skillResponse", skillDao.getSkill(skill.getIdSkill()));
 		
 		return "skill/consult";
 	
@@ -109,59 +111,35 @@ public class SkillController {
 	}
 	
 	//----------- actualización ------------------
-	@RequestMapping("/update")
-	public String editSkill(Model model) {
+	@RequestMapping(value="/update/{idSkill}", method = RequestMethod.GET)
+	public String processUpdateSubmit(Model model, @PathVariable String idSkill) {
 		
-		model.addAttribute("skill", new Skill());
+		model.addAttribute("skill", skillDao.getSkill(idSkill));
 		
-		return "skill/update";
+		return "skill/update"; 
 		
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String processEditSubmit(@ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
+	@RequestMapping(value="/update/{idSkill}", method = RequestMethod.POST) 
+	public String processUpdateSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
 		
-		SkillValidator skillValidator = new SkillValidator();
-		
-		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
-		
-		skillValidator.validateUpdate(skill, bindingResult);
-		
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) 
 			
-			return "skill/update";
+			 return "skill/update";
 		
-		skillDao.updateSkill(skill);
-		
-		return "redirect:main.html";
-	}
+		 skillDao.updateSkill(skill);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping("/delete")
-	public String deleteSkill(Model model) {
-		
-		model.addAttribute("skill", new Skill());
-		
-		return "skill/delete";
-		
-	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String processDeleteSubmit(@ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
-		
-		SkillValidator skillValidator = new SkillValidator();
-		
-		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
-		
-		skillValidator.validateDelete(skill, bindingResult);
-		
-		if (bindingResult.hasErrors())
+	@RequestMapping(value="/delete/{idSkill}")
+	public String processDeleteSubmit(@PathVariable String idSkill) {
 			
-			return "skill/delete";
-			
-		skillDao.deleteSkill(skill);
+		skillDao.deleteSkill(idSkill);
 		
-		return "redirect:main.html";
+		return "redirect:../list.html";
 	
 	}
 	

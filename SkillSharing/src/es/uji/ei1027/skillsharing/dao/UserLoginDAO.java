@@ -53,9 +53,9 @@ private JdbcTemplate jdbcTemplate;
 	
 	}
 	
-	public UserLogin getUser(UserLogin user) {
+	public UserLogin getUser(String user) {
 		
-		return this.jdbcTemplate.queryForObject("select * from admin where username = ?", new Object[] {user.getUsername()}, new UserLoginMapper());
+		return this.jdbcTemplate.queryForObject("select * from admin where username = ?", new Object[] {user}, new UserLoginMapper());
 	
 	}
 	
@@ -65,9 +65,9 @@ private JdbcTemplate jdbcTemplate;
 	
 	}
 	
-	public void deleteUser(UserLogin user) {
+	public void deleteUser(String user) {
 	
-		this.jdbcTemplate.update("delete from userlogin where username = ?", user.getUsername());
+		this.jdbcTemplate.update("delete from admin where username = ?", user);
 	
 	}
 	

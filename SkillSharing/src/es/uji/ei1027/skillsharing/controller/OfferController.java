@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,6 +20,7 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.validators.OfferValidator;
 
 @Controller
@@ -95,7 +97,7 @@ public class OfferController {
 		
 			return "offer/consult";
 		
-		model.addAttribute("offerResponse", offerDao.getOffer(offer));
+		model.addAttribute("offerResponse", offerDao.getOffer(offer.getIdOffer()));
 		
 		return "offer/consult";
 	
@@ -130,61 +132,38 @@ public class OfferController {
 		
 	}
 	
-	//----------- actualización ------------------
-	@RequestMapping("/update")
-	public String editOffer(Model model) {
+	//----------- actualización -----------------//
+	@RequestMapping(value="/update/{idOffer}", method = RequestMethod.GET)
+	public String processUpdateSubmit(Model model, @PathVariable String idOffer) {
 		
-		model.addAttribute("offer", new Offer());
+		model.addAttribute("offer", offerDao.getOffer(idOffer));
 		
-		return "offer/update";
+		return "offer/update"; 
 		
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String processEditSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
+	@RequestMapping(value="/update/{idOffer}", method = RequestMethod.POST) 
+	public String processUpdateSubmit(@PathVariable String idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
 		
-		offerValidator = new OfferValidator();
-		
-		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
-		
-		offerValidator.validateUpdate(offer, bindingResult);
-		
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) 
 			
-			return "offer/update";
+			 return "offer/update";
 		
-		offerDao.updateOffer(offer);
-		
-		return "redirect:main.html";
-	}
+		 offerDao.updateOffer(offer);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping("/delete")
-	public String deleteOffer(Model model) {
-		
-		model.addAttribute("offer", new Offer());
-		
-		return "offer/delete";
-		
-	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String processDeleteSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
-		
-		offerValidator = new OfferValidator();
-		
-		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
-		
-		offerValidator.validateDelete(offer, bindingResult);
-		
-		if (bindingResult.hasErrors())
+	@RequestMapping(value="/delete/{idOffer}")
+	public String processDeleteSubmit(@PathVariable String idOffer) {
 			
-			return "offer/delete";
+		offerDao.deleteOffer(idOffer);
 		
-		offerDao.deleteOffer(offer);
-		
-		return "redirect:main.html";
+		return "redirect:../list.html";
 	
 	}
+	
 	
 }

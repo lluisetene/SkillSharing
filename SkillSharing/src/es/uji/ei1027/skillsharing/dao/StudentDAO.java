@@ -53,13 +53,13 @@ public class StudentDAO {
 	
 	public List<Student> getStudents() {
 		
-		return this.jdbcTemplate.query("select * from student order by nid", new StudentMapper());
+		return this.jdbcTemplate.query("select * from student", new StudentMapper());
 	
 	}
 	
-	public Student getStudent(Student student) {
+	public Student getStudent(String nid) {
 		
-		return this.jdbcTemplate.queryForObject("select * from student where nid = ?", new Object[] {student.getNid()}, new StudentMapper());
+		return this.jdbcTemplate.queryForObject("select * from student where nid = ?", new Object[] {nid}, new StudentMapper());
 	
 	}
 	
@@ -69,9 +69,9 @@ public class StudentDAO {
 	
 	}
 	
-	public void deleteStudent(Student student) {
+	public void deleteStudent(String nid) {
 	
-		this.jdbcTemplate.update("delete from student where nid = ?", student.getNid());
+		this.jdbcTemplate.update("delete from student where nid = ?", nid);
 	
 	}
 	

@@ -48,13 +48,13 @@ public class OfferDAO {
 	
 	public List<Offer> getOffers() {
 		
-		return this.jdbcTemplate.query("select * from offer order by idoffer", new OfferMapper());
+		return this.jdbcTemplate.query("select * from offer", new OfferMapper());
 	
 	}
 	
-	public Offer getOffer(Offer offer) {
+	public Offer getOffer(String idOffer) {
 	
-		return this.jdbcTemplate.queryForObject("select * from offer where idoffer = ?", new Object[] {offer.getIdOffer()}, new OfferMapper());
+		return this.jdbcTemplate.queryForObject("select * from offer where idOffer = ?", new Object[] {idOffer}, new OfferMapper());
 	
 	}
 	
@@ -64,21 +64,15 @@ public class OfferDAO {
 	
 	}
 	
-	public void deleteOffer(Offer offer) {
+	public void deleteOffer(String idOffer) {
 	
-		this.jdbcTemplate.update("delete from offer where idOffer = ?", offer.getIdOffer());
+		this.jdbcTemplate.update("delete from offer where idOffer = ?", idOffer);
 	
 	}
 	
 	public void addOffer(Offer offer) {
 	
 		this.jdbcTemplate.update("insert into offer(idoffer, nid, name, idskill, description, beginningdate, endingdate) values(?, ?, ?, ?, ?, ?, ?)", offer.getIdOffer(), offer.getNid(), offer.getName(), offer.getIdSkill(), offer.getDescription(), offer.getBeginningDate(), offer.getEndingDate());
-	
-	}
-	
-	public Offer getOffer(String idOffer) {
-		
-		return this.jdbcTemplate.queryForObject("select * from offer where idOffer = ?", new Object[] {idOffer}, new OfferMapper());
 	
 	}
 

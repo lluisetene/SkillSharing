@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,6 +21,7 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.HoursControlBETA;
+import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 
 @Controller
@@ -97,7 +99,7 @@ public class CollaborationController {
 		
 			return "collaboration/consult";
 		
-		model.addAttribute("collaborationResponse", collaborationDao.getCollaboration(collaboration));
+		model.addAttribute("collaborationResponse", collaborationDao.getCollaboration(collaboration.getIdCollaboration()));
 		
 		return "collaboration/consult";
 	
@@ -118,7 +120,7 @@ public class CollaborationController {
 	public String processAddSubmit(@ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
-		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
+		// controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 		
 		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
 		
@@ -129,7 +131,7 @@ public class CollaborationController {
 			return "collaboration/add";
 		
 		collaborationDao.addCollaboration(collaboration);
-		controlHoras.addHours(collaboration.getHours());
+		//controlHoras.addHours(collaboration.getHours());
 		
 		return "redirect:main.html";
 		
@@ -137,66 +139,35 @@ public class CollaborationController {
 	
 	
 	//----------- actualización ------------------
-	@RequestMapping("/update")
-	public String editCollaboration(Model model) {
+	@RequestMapping(value="/update/{idCollaboration}", method = RequestMethod.GET)
+	public String processUpdateSubmit(Model model, @PathVariable String idCollaboration) {
 		
-		model.addAttribute("collaboration", new Collaboration());
+		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		
-		return "collaboration/update";
+		return "collaboration/update"; 
 		
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String processEditSubmit(@ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
+	@RequestMapping(value="/update/{idCollaboration}", method = RequestMethod.POST) 
+	public String processUpdateSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
 		
-		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
-		CollaborationValidator collaborationValidator = new CollaborationValidator();
-		
-		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
-		
-		collaborationValidator.validateUpdate(collaboration, bindingResult);
-		
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) 
 			
-			return "collaboration/update";
+			 return "collaboration/update";
 		
-		controlHoras.addHours(collaboration.getHours());
-		collaborationDao.updateCollaboration(collaboration);
-		
-		return "redirect:main.html";
-	}
+		 collaborationDao.updateCollaboration(collaboration);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping("/delete")
-	public String deleteCollaboration(Model model) {
-		
-		model.addAttribute("collaboration", new Collaboration());
-		
-		return "collaboration/delete";
-		
-	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String processDeleteSubmit(@ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
-		
-		
-		
-		CollaborationValidator collaborationValidator = new CollaborationValidator();
-		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
-		
-		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
-		
-		collaborationValidator.validateDelete(collaboration, bindingResult);
-		
-		if (bindingResult.hasErrors())
+	@RequestMapping(value="/delete/{idCollaboration}")
+	public String processDeleteSubmit(@PathVariable String idCollaboration) {
 			
-			return "collaboration/delete";
+		collaborationDao.deleteCollaboration(idCollaboration);
 		
-		controlHoras.removeHours(collaboration.getHours());
-		collaborationDao.deleteCollaboration(collaboration);
-		
-		
-		return "redirect:main.html";
+		return "redirect:../list.html";
 	
 	}
 	

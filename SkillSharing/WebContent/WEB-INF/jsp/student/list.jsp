@@ -55,6 +55,9 @@
 	                <td>${student.offerHours}</td>
 	           		<td>${student.demandHours}</td>
 	           		<td>${student.banned}</td>
+	           		<td><a href="update/${student.nid}.html">Update</a>
+               		<td><a href="delete/${student.nid}.html">Delete</a>
+	           		
 	           
 	            </tr>
 	        

@@ -45,6 +45,8 @@
 	                <td>${degree.idDegree}</td>
 	                <td>${degree.name}</td>
 	                <td>${degree.nid}</td>
+	                <td><a href="update/${degree.idDegree}.html">Update</a>
+               		<td><a href="delete/${degree.idDegree}.html">Delete</a>
 	           
 	            </tr>
 	        

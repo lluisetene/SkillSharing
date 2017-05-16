@@ -47,6 +47,8 @@
 	                <td>${skill.name}</td>
 	                <td>${skill.level}</td>
 	           		<td>${skill.description}</td>
+	           		<td><a href="update/${skill.idSkill}.html">Update</a>
+               		<td><a href="delete/${skill.idSkill}.html">Delete</a>
 	           
 	            </tr>
 	        

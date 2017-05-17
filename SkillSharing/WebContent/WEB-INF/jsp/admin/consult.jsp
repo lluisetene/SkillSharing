@@ -12,7 +12,7 @@
 
 		<meta charset="UTF-8" />
 
-		<title>Consult Admin</title>
+		<title>Admin</title>
 
 		<style>
 			
@@ -29,9 +29,9 @@
 	
 	<body>
 	
-    	<h2>Consult Student</h2>
+    	<h2>Consult Admin</h2>
     
-    	<form:form method="post" modelAttribute="userlogin">
+    	<form:form method="post" modelAttribute="admin">
         
         	<table>
 	        
@@ -46,7 +46,7 @@
         	</table>
         
         	<input type = "submit" name = "submit" value = "Accept">
-        	<input type = "button" name = "cancel" value = "Cancel" onclick = "location='http://localhost:8080/SkillSharing/login/main.html'"/>
+        	<input type = "button" name = "cancel" value = "Cancel" onclick = "location='http://localhost:8080/SkillSharing/admin/main.html'"/>
    			
    			<br>
    			<br>
@@ -64,10 +64,10 @@
 		        
 		        <tr>
 		        
-		        	<td>${userloginResponse.name}</td>
-		        	<td>${userloginResponse.mail}</td>
-		            <td>${userloginResponse.username}</td>
-		      		<td>${userloginResponse.password}</td>
+		        	<td>${adminResponse.name}</td>
+		        	<td>${adminResponse.mail}</td>
+		            <td>${adminResponse.username}</td>
+		      		<td>${adminResponse.password}</td>
 		      
 		        </tr> 
    		

@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="user" scope="request" value='${session.getAttribute("userlogin")}'/>
+<c:set var="user" scope="request" value='${session.getAttribute("login")}'/>
 
 <p class="userlogin">
 

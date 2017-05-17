@@ -6,32 +6,32 @@
 <html>
 
 	<head>
-
+	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
 		<meta charset="UTF-8" />
-
-		<title>Add Admin</title>
+		
+		<title>Update Admin</title>
 
 	</head>
 
 	<body>
     
-    	<h2>New Admin</h2>
-    	
-	    <form:form method="post" modelAttribute="userlogin"> 
-			
-			<table>
-			
-				<tr>
+    	<h2>Change Admin</h2>
+    
+    	<form:form method="post" modelAttribute="admin">
+        
+	        <table>
+	        
+	        	<tr>
 	        	
 	                <td><form:label path="name">Name</form:label></td>
 	                <td><form:input type = "text" maxlength = "30" path="name" /></td>
 	                <td><form:errors path="name" cssClass="error" /></td>
 	                	                
 	            </tr>
-			
-				<tr>
+	            
+	            <tr>
 	        	
 	                <td><form:label path="mail">Mail</form:label></td>
 	                <td><form:input type = "email" maxlength = "30" path="mail" /></td>
@@ -39,13 +39,12 @@
 	                	                
 	            </tr>
 			
-			
 	        	<tr>
 	        	
-	                <td><form:label path="username">Username</form:label></td>
-	                <td><form:input type = "text" maxlength = "30" path="username" /></td>
+	                <td><form:label path="username">UseNname</form:label></td>
+	                <td><form:input type = "text" maxlength = "30" path="username" readonly="true" /></td>
 	                <td><form:errors path="username" cssClass="error" /></td>
-	                	                
+	                
 	            </tr>
 	            
 	            <tr>
@@ -57,12 +56,12 @@
 	            </tr>
 	            
 	        </table>
-	    
-	    	<input type = "submit" name = "submit" value = "Accept">
-	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/login/main.html'" name = "cancel" value = "Cancel">
-	    
-	    </form:form>
-	    	
+	        
+	        <input type = "submit" name = "submit" value = "Accept">
+	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/admin/main.html'" name = "cancel" value = "Cancel">
+	   
+    	</form:form>
+    
 	</body>
-	
+
 </html>

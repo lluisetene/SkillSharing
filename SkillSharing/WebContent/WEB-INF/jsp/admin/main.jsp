@@ -18,8 +18,6 @@
 	
 		<h1>Available operations</h1>
 	
-		<h2>No hay datos, así que no probéis a meter nada</h2>
-		
 		<ul>
 		
 			<li><a href = "add.html">Add</a></li>

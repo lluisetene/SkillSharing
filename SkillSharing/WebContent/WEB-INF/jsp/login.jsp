@@ -15,7 +15,7 @@
     
     	<h2>Authentication</h2>
     	
-    		<form:form method="post" modelAttribute="user" action="${pageContext.request.contextPath}/login.html">
+    		<form:form method="post" modelAttribute="login" action="${pageContext.request.contextPath}/login.html">
     		
         	<p>
         
@@ -34,6 +34,7 @@
         	</p>
                 
         	<input type="submit" value="Log in" />
+        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/index.jsp'" name = "cancel" value = "Cancel">
         
     	</form:form>
     	

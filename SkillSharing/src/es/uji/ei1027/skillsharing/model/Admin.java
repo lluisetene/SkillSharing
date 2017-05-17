@@ -1,6 +1,6 @@
 package es.uji.ei1027.skillsharing.model;
 
-public class UserLogin {
+public class Admin {
 	
 	public String username;
 	public String password;
@@ -29,7 +29,7 @@ public class UserLogin {
 	}
 	
 	public void setUsername(String username) {
-		this.username = username;
+		this.username = username.toLowerCase();
 	}
 	
 	public String getPassword() {

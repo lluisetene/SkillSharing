@@ -37,16 +37,16 @@
 	            
 	        </tr>
 	        
-	        <c:forEach items="${userslogin}" var="userlogin">
+	        <c:forEach items="${admins}" var="admin">
 	          
 	            <tr>
 	          
-	          		<td>${userlogin.name}</td>
-	          		<td>${userlogin.mail}</td>
-	                <td>${userlogin.username}</td>
-	           		<td>${userlogin.password}</td>
-	           		<td><a href="update/${userlogin.username}.html">Update</a>
-               		<td><a href="delete/${userlogin.username}.html">Delete</a>
+	          		<td>${admin.name}</td>
+	          		<td>${admin.mail}</td>
+	                <td>${admin.username}</td>
+	           		<td>${admin.password}</td>
+	           		<td><a href="update/${admin.username}.html">Update</a>
+               		<td><a href="delete/${admin.username}.html">Delete</a>
 	           
 	            </tr>
 	        
@@ -56,7 +56,7 @@
     
     	<br>
     
-    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/login/main.html'" name = "cancel" value = "Cancel">
+    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/admin/main.html'" name = "cancel" value = "Cancel">
     
 	</body>
 	

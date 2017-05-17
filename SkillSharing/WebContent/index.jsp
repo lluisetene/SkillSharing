@@ -27,7 +27,7 @@
 			<li><a href = "offer/main.html">Offer</a></li>
 			<li><a href = "skill/main.html">Skill</a></li>
 			<li><a href = "student/main.html">Student</a></li>
-			<li><a href = "login/main.html">Log in</a></li>
+			<li><a href = "admin/main.html">Admin</a></li>
 		
 		</ul>
 

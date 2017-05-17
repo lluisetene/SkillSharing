@@ -20,8 +20,6 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
-import es.uji.ei1027.skillsharing.model.HoursControlBETA;
-import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 
 @Controller

@@ -13,7 +13,6 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.model.Skill;
-import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.SkillValidator;
 
 @Controller

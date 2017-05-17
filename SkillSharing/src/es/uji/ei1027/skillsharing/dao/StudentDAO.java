@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -32,8 +31,6 @@ public class StudentDAO {
 		public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
 			
 			Student student = new Student();
-			
-			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 			
 			student.setNid(rs.getString("nid"));
 			student.setName(rs.getString("name"));

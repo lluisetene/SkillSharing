@@ -1,6 +1,7 @@
 package es.uji.ei1027.skillsharing.controller;
 
 import java.util.Date;
+
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
+import es.uji.ei1027.skillsharing.model.HoursControlBETA;
 import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 
 @Controller
@@ -118,18 +120,19 @@ public class CollaborationController {
 	public String processAddSubmit(@ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
-		// controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 		
 		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
 		
 		collaborationValidator.validateAdd(collaboration, bindingResult);
+		
+		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 		
 		if (bindingResult.hasErrors())
 			
 			return "collaboration/add";
 		
 		collaborationDao.addCollaboration(collaboration);
-		//controlHoras.addHours(collaboration.getHours());
+		controlHoras.addHours(collaboration.getHours());
 		
 		return "redirect:main.html";
 		
@@ -138,10 +141,10 @@ public class CollaborationController {
 	
 	//----------- actualización ------------------
 	@RequestMapping(value="/update/{idCollaboration}", method = RequestMethod.GET)
-	public String processUpdateSubmit(Model model, @PathVariable String idCollaboration) {
+	public String processUpdateSubmit(Model model, @PathVariable String idCollaboration){
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
-		
+	
 		return "collaboration/update"; 
 		
 	}
@@ -149,10 +152,18 @@ public class CollaborationController {
 	@RequestMapping(value="/update/{idCollaboration}", method = RequestMethod.POST) 
 	public String processUpdateSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
 		
+		CollaborationValidator collaborationValidator = new CollaborationValidator();
+		
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
+		
+		collaborationValidator.validateUpdate(collaboration, bindingResult);
+		
 		if (bindingResult.hasErrors()) 
 			
 			 return "collaboration/update";
 		
+		
+		 
 		 collaborationDao.updateCollaboration(collaboration);
 		 
 		 return "redirect:../list.html"; 
@@ -160,13 +171,30 @@ public class CollaborationController {
 	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping(value="/delete/{idCollaboration}")
-	public String processDeleteSubmit(@PathVariable String idCollaboration) {
-			
-		collaborationDao.deleteCollaboration(idCollaboration);
+	@RequestMapping(value="/delete/{idCollaboration}", method = RequestMethod.GET)
+	public String processDeleteSubmit(Model model, @PathVariable String idCollaboration) {
 		
-		return "redirect:../list.html";
-	
+		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
+		
+		return "collaboration/delete"; 
+		
 	}
+	
+	@RequestMapping(value="/delete/{idCollaboration}", method = RequestMethod.POST) 
+	public String processDeleteSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
+		
+		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "collaboration/delete";
+		
+		 controlHoras.removeHours(collaboration.getHours());
+		
+		 collaborationDao.deleteCollaboration(idCollaboration);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 }

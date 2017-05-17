@@ -20,7 +20,9 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
+
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
+
 
 @Controller
 @RequestMapping("/demand")
@@ -145,6 +147,12 @@ public class DemandController {
 	@RequestMapping(value="/update/{idDemand}", method = RequestMethod.POST) 
 	public String processUpdateSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
 		
+		DemandValidator demandValidator = new DemandValidator();
+		
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
+		
+		demandValidator.validateUpdate(demand, bindingResult);
+		
 		if (bindingResult.hasErrors()) 
 			
 			 return "demand/update";
@@ -156,13 +164,32 @@ public class DemandController {
 	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping(value="/delete/{idDemand}")
-	public String processDeleteSubmit(@PathVariable String idDemand) {
-			
-		demandDao.deleteDemand(idDemand);
+	@RequestMapping(value="/delete/{idDemand}", method = RequestMethod.GET)
+	public String processDeleteSubmit(Model model, @PathVariable String idDemand) {
 		
-		return "redirect:../list.html";
-	
+		model.addAttribute("demand", demandDao.getDemand(idDemand));
+		
+		return "demand/delete"; 
+		
 	}
+	
+	@RequestMapping(value="/delete/{idDemand}", method = RequestMethod.POST) 
+	public String processDeleteSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
+		
+		DemandValidator demandValidator = new DemandValidator();
+		
+		demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
+		
+		demandValidator.validateDelete(demand, bindingResult);
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "demand/delete";
+		
+		 demandDao.deleteDemand(idDemand);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 }

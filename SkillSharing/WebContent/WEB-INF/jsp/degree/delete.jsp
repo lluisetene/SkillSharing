@@ -6,50 +6,53 @@
 <html>
 
 	<head>
-
+	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
 		<meta charset="UTF-8" />
 		
-		<title>Update Degree</title>
+		<title>Delete Degree</title>
 
 	</head>
 
 	<body>
     
-    	<h2>Change Degree</h2>
+    	<h2>Delete Degree</h2>
     
     	<form:form method="post" modelAttribute="degree">
         
-	        <table>
+	         <table>
 	        	
 	        	<tr>
 	                
-	                <td><form:label path="idDegree">IdDegree</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idDegree" disabled = "true"/></td>
+	             
+	                <td><form:input type = "hidden" maxlength = "5" path="idDegree" /></td>
 	                <td><form:errors path = "idDegree" cssClass = "error" /></td>
 	            
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="name">Name</form:label></td>
-	                <td><form:input type = "text" maxlength = "100" path="name" /></td>
+	             
+	                <td><form:input type = "hidden" maxlength = "100" path="name" /></td>
 	                <td><form:errors path = "name" cssClass = "error" /></td>
 	            
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="nid">NID</form:label></td>
-	                <td><form:input type = "text" maxlength = "9" path="nid" /></td>
+	            
+	                <td><form:input type = "hidden" maxlength = "9" path="nid" /></td>
 	                <td><form:errors path = "nid" cssClass = "error" /></td>
 	            
 	            </tr>
 	        
 	        </table>
 	        
-	        <input type = "submit" name = "submit" value = "Accept" onclick = "document.getElementById('idDegree').disabled=false;">
+	         ¿Seguro que desea borrar el grado con id ${degree.idDegree}?
+	        <br><br>
+	        
+	        <input type = "submit" name = "submit" value = "Accept">
 	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/degree/list.html'" name = "cancel" value = "Cancel">
 	   
     	</form:form>

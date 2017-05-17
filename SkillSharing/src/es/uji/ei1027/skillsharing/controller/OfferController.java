@@ -144,6 +144,12 @@ public class OfferController {
 	@RequestMapping(value="/update/{idOffer}", method = RequestMethod.POST) 
 	public String processUpdateSubmit(@PathVariable String idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
 		
+		offerValidator = new OfferValidator();
+		
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
+		
+		offerValidator.validateUpdate(offer, bindingResult);
+		
 		if (bindingResult.hasErrors()) 
 			
 			 return "offer/update";
@@ -155,14 +161,33 @@ public class OfferController {
 	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping(value="/delete/{idOffer}")
-	public String processDeleteSubmit(@PathVariable String idOffer) {
-			
-		offerDao.deleteOffer(idOffer);
+	@RequestMapping(value="/delete/{idOffer}", method = RequestMethod.GET)
+	public String processDeleteSubmit(Model model, @PathVariable String idOffer) {
 		
-		return "redirect:../list.html";
-	
+		model.addAttribute("offer", offerDao.getOffer(idOffer));
+		
+		return "offer/delete"; 
+		
 	}
+	
+	@RequestMapping(value="/delete/{idOffer}", method = RequestMethod.POST) 
+	public String processDeleteSubmit(@PathVariable String idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
+		
+		offerValidator = new OfferValidator();
+		
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
+		
+		offerValidator.validateDelete(offer, bindingResult);
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "offer/delete";
+		
+		 offerDao.deleteOffer(idOffer);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 	
 }

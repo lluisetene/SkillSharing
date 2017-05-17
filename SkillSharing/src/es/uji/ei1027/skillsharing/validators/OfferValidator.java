@@ -151,17 +151,12 @@ public class OfferValidator implements Validator {
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( offer.getName().length() < 5 )
 			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
-		else {
-			for ( int i = 0; i < offersList.size(); i++ )
-				if ( offersList.get(i).getName().toLowerCase().equals(offer.getName().toLowerCase()) ) {
-					encontrado = true;
-					break;
-				}
-			if ( encontrado )
-				errors.rejectValue("name", "required", "El Name introducido ya está en uso");
-			encontrado = false;
-				
-		}
+		
+		for ( int i = 0; i < offersList.size(); i++ )
+			if ( offersList.get(i).getName().toLowerCase().equals(offer.getName().toLowerCase()) && offersList.get(i).getIdOffer().equals(offer.getIdOffer()) == false) {
+				errors.rejectValue("name", "required", "Este name ya está en uso");
+				break;
+			}
 		
 		
 		// ------- IDSKILL ------ /
@@ -186,7 +181,6 @@ public class OfferValidator implements Validator {
 	public void validateDelete(Object obj, Errors errors) {
 
 		Offer offer = (Offer) obj;
-		boolean encontrado = false;
 		
 		//---------- IDOFFER ----------//
 		
@@ -194,34 +188,9 @@ public class OfferValidator implements Validator {
 			
 			if (collaborationsList.get(i).getIdOffer().equals(offer.getIdOffer().trim().toLowerCase())){
 				
-				encontrado = true;
-				break;
+				errors.rejectValue("idOffer", "required", "No se puede borrar, elimina primero las colaboraciones que tengan esta oferta");
 				
 			}
-			
-		}
-		
-		if (encontrado){
-			
-			errors.rejectValue("idOffer", "required", "Esta oferta está siendo usada");
-			
-		}
-		
-		
-		if ( offer.getIdOffer().trim().equals("") )
-			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
-		
-		else {
-			for ( int i = 0; i < offersList.size(); i++ )
-				if ( offersList.get(i).getIdOffer().toLowerCase().equals(offer.getIdOffer().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			
-			if (!encontrado)
-				
-				errors.rejectValue("idOffer", "required", "Este IDoffer no existe");
-			
 			
 		}
 		

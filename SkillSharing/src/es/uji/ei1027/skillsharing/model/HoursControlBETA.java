@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,21 +36,32 @@ public class HoursControlBETA {
 			Student student = studentsCollaboration.get(indice);
 			
 			if (student.getNid().trim().toUpperCase().equals(NIDOfferer.trim().toUpperCase())){
-				
-				Date horasTenidas = student.getOfferHours();
+			
+				Date horasTenidas = student.getOfferHours();			
 				int nuevasHoras = student.getOfferHours().getHours() + hours.getHours();
-				horasTenidas.setHours(nuevasHoras);
+
+				if (nuevasHoras >= 20){
+					
+					nuevasHoras = 20;
+					
+				}
 				
+				horasTenidas.setHours(nuevasHoras);				
 				student.setOfferHours(horasTenidas);
 				studentDao.updateStudent(student);
-				
 				
 			}else if (student.getNid().trim().toUpperCase().equals(NIDDemandant.trim().toUpperCase())){
 				
 				Date horasTenidas = student.getDemandHours();
 				int nuevasHoras = student.getDemandHours().getHours() + hours.getHours();
-				horasTenidas.setHours(nuevasHoras);
 				
+				if (nuevasHoras >= 20){
+				
+					nuevasHoras = 20;
+					
+				}
+				
+				horasTenidas.setHours(nuevasHoras);
 				student.setDemandHours(horasTenidas);
 				studentDao.updateStudent(student);
 				
@@ -72,10 +84,19 @@ public class HoursControlBETA {
 			
 			if (student.getNid().trim().toUpperCase().equals(NIDOfferer.trim().toUpperCase())){
 				
+				
 				Date horasTenidas = student.getOfferHours();
 				int nuevasHoras = student.getOfferHours().getHours() - hours.getHours();
-				horasTenidas.setHours(nuevasHoras);
 				
+				
+				
+				if (nuevasHoras <= 0){
+					
+					nuevasHoras = 0;
+					
+				}
+				
+				horasTenidas.setHours(nuevasHoras);
 				student.setOfferHours(horasTenidas);
 				studentDao.updateStudent(student);
 				
@@ -84,8 +105,14 @@ public class HoursControlBETA {
 				
 				Date horasTenidas = student.getDemandHours();
 				int nuevasHoras = student.getDemandHours().getHours() - hours.getHours();
-				horasTenidas.setHours(nuevasHoras);
 				
+				if (nuevasHoras <= 0){
+					
+					nuevasHoras = 0;
+					
+				}
+				
+				horasTenidas.setHours(nuevasHoras);		
 				student.setDemandHours(horasTenidas);
 				studentDao.updateStudent(student);
 				
@@ -94,5 +121,5 @@ public class HoursControlBETA {
 		}
 		
 	}
-
+	
 }

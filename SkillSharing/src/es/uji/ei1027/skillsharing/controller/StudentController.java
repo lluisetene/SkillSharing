@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.StudentValidator;
@@ -24,11 +27,17 @@ import es.uji.ei1027.skillsharing.validators.StudentValidator;
 public class StudentController {
 
 	private StudentDAO studentDao;
+	private CollaborationDAO collaborationDao;
+	private OfferDAO offerDao;
+	private DemandDAO demandDao;
 	
 	
 	@Autowired
-	public void setStudentDato(StudentDAO studentDao) {
+	public void setStudentDato(StudentDAO studentDao, CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao) {
 		this.studentDao = studentDao;
+		this.collaborationDao = collaborationDao;
+		this.offerDao = offerDao;
+		this.demandDao = demandDao;
 	}
 	
 	//Método para convertir el formato String a Date en el formulario
@@ -76,7 +85,7 @@ public class StudentController {
 		
 		StudentValidator studentValidator = new StudentValidator();
 		
-		studentValidator.setStudentDAO(studentDao);
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
 		
 		studentValidator.validateConsult(student, bindingResult);
 		
@@ -105,7 +114,7 @@ public class StudentController {
 		
 		StudentValidator studentValidator = new StudentValidator();
 		
-		studentValidator.setStudentDAO(studentDao);
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
 		
 		studentValidator.validateAdd(student, bindingResult);
 		
@@ -132,6 +141,12 @@ public class StudentController {
 	@RequestMapping(value="/update/{nid}", method = RequestMethod.POST) 
 	public String processUpdateSubmit(@PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult) {
 		
+		StudentValidator studentValidator = new StudentValidator();
+		
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
+		
+		studentValidator.validateUpdate(student, bindingResult);
+		
 		if (bindingResult.hasErrors()) 
 			
 			 return "student/update";
@@ -145,13 +160,32 @@ public class StudentController {
 
 	
 	//----------- eliminación ------------------
-	@RequestMapping(value="/delete/{nid}")
-	public String processDeleteSubmit(@PathVariable String nid) {
-			
-		studentDao.deleteStudent(nid);
+	@RequestMapping(value="/delete/{nid}", method = RequestMethod.GET)
+	public String processDeleteSubmit(Model model, @PathVariable String nid) {
 		
-		return "redirect:../list.html";
-	
+		model.addAttribute("student", studentDao.getStudent(nid));
+		
+		return "student/delete"; 
+		
 	}
+	
+	@RequestMapping(value="/delete/{nid}", method = RequestMethod.POST) 
+	public String processDeleteSubmit(@PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult) {
+	
+		StudentValidator studentValidator = new StudentValidator();
+		
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
+		
+		studentValidator.validateDelete(student, bindingResult);
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "student/delete";
+		
+		 studentDao.deleteStudent(nid);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 }

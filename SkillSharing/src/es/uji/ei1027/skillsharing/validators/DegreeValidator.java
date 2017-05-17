@@ -60,13 +60,7 @@ public class DegreeValidator implements Validator {
 		else if ( degree.getNid().length() != 9 )
 			errors.rejectValue("nid", "required", "Tamaño incorrecto");
 		else {
-			for ( int i = 0; i < degreesList.size(); i++ )
-				if ( degreesList.get(i).getNid().toLowerCase().equals(degree.getNid().toLowerCase()) ) {
-					errors.rejectValue("nid", "required", "Este NID ya está en uso");
-					notFound = false;
-					break;
-				}
-			
+		
 			for (int i = 0; i < studentList.size(); i++){
 				
 				if (degree.getNid().equals(studentList.get(i).getNid())){
@@ -163,26 +157,7 @@ public class DegreeValidator implements Validator {
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
 
-		Degree degree = (Degree) obj;
-		boolean encontrado = false;
-		
-		//---------- IDDEGREE ----------//
-		if ( degree.getIdDegree().trim().equals("") )
-			errors.rejectValue("idDegree", "required", "Este campo es obligatorio");
-		
-		else {
-			for ( int i = 0; i < degreesList.size(); i++ )
-				if ( degreesList.get(i).getIdDegree().toLowerCase().equals(degree.getIdDegree().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			
-			if (!encontrado)
-				
-				errors.rejectValue("idDegree", "required", "Este IDDegree no existe");
-			
-			
-		}
+		//Pendiente de borrar
 		
 	}
 

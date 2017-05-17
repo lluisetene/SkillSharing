@@ -33,17 +33,49 @@ public class CollaborationValidator implements Validator {
 	@Override
 	public void validateAdd(Object obj, Errors errors) {
 		Collaboration collaboration = (Collaboration) obj;
+		String NIDoferta = null;
+		String NIDdemand = null;
+		String idSkillOffer = null;
+		String idSkillDemand = null;
 		
 		for (int i = 0; i < collaborationsList.size(); i++){
 			
 			if (collaborationsList.get(i).getIdOffer().equals(collaboration.getIdOffer()) && collaborationsList.get(i).getIdDemand().equals(collaboration.getIdDemand())){
 				
 				errors.rejectValue("idCollaboration", "required", "Las IdOffer e IdDemand ya existen como colaboración");
-				
+			
 			}
 			
+		}
+
+		for (int i = 0; i < offersList.size(); i++){
+			
+			if (offersList.get(i).getIdOffer().equals(collaboration.getIdOffer())){
+				
+				NIDoferta = offersList.get(i).getNid();
+				idSkillOffer = offersList.get(i).getIdSkill();
+				
+			}
+		}
+		
+		for (int i = 0; i < demandsList.size(); i++){	
+			
+			if (demandsList.get(i).getIdDemand().equals(collaboration.getIdDemand())){
+			
+				NIDdemand = demandsList.get(i).getNid();
+				idSkillDemand = demandsList.get(i).getIdSkill();
+				
+		}
 			
 		}
+		
+		if ((NIDoferta != null && NIDdemand != null) && NIDoferta.equals(NIDdemand)){
+			
+			errors.rejectValue("idCollaboration", "required", "No puedes crear una colaboración en el que la oferta y la demanda sea del mismo estudiante");
+			
+		}else if((idSkillOffer != null && idSkillDemand != null) && idSkillOffer.equals(idSkillDemand) == false)
+	
+			errors.rejectValue("idCollaboration", "required", "La oferta y la demanda no tienen la misma habilidad");
 		
 		
 		// ------ IDCOLLABORATION -------- //
@@ -93,6 +125,8 @@ public class CollaborationValidator implements Validator {
 			encontrado = false;
 		
 		}
+		
+		
 		
 	}
 
@@ -179,21 +213,9 @@ public class CollaborationValidator implements Validator {
 
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
-		Collaboration collaboration = (Collaboration) obj;
 		
-		if ( collaboration.getIdCollaboration() .trim().equals("") )
-			errors.rejectValue("idCollaboration", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < collaborationsList.size(); i++ )
-				if ( collaborationsList.get(i).getIdCollaboration().toLowerCase().equals(collaboration.getIdCollaboration().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado ) {
-				errors.rejectValue("idCollaboration", "required", "El IdCollaboration introducido no existe");
-				encontrado = false;
-			}
-		}
+		//Pendiente de ser borrado
+		
 	}
 
 	@Override

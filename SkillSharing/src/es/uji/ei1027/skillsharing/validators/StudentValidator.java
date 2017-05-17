@@ -4,15 +4,25 @@ import java.util.List;
 
 import org.springframework.validation.Errors;
 
+import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Student;
 
 public class StudentValidator implements Validator {
 
 	private List<Student> studentsList;
+	private List<Collaboration> collaborationsList;
+	private OfferDAO offerDao;
+	private DemandDAO demandDao;
 	
-	public void setStudentDAO(StudentDAO studentDAO) {
+	public void setStudentDAO(StudentDAO studentDAO, CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao) {
 		studentsList = studentDAO.getStudents();
+		collaborationsList = collaborationDao.getCollaborations();
+		this.offerDao = offerDao;
+		this.demandDao = demandDao;
 	}
 	
 	@Override
@@ -99,13 +109,14 @@ public class StudentValidator implements Validator {
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
 		else if ( student.getUsername().length() < 3 )
 			errors.rejectValue("username", "required", "El Username debe tener más de 3 caracteres");
-		else {
-			for ( int i = 0; i < studentsList.size(); i++ )
-				if ( studentsList.get(i).getUsername().toLowerCase().equals(student.getUsername().toLowerCase()) ) {
-					errors.rejectValue("username", "required", "Este Username ya está en uso");
-					break;
-				}
+		
+
+		for ( int i = 0; i < studentsList.size(); i++ )
+			if ( studentsList.get(i).getUsername().toLowerCase().equals(student.getUsername().toLowerCase()) && studentsList.get(i).getNid().equals(student.getNid()) == false) {
+				errors.rejectValue("username", "required", "Este Username ya está en uso");
+				break;
 			}
+		
 		
 		
 		// ----- PASSWORD ---- //
@@ -117,29 +128,6 @@ public class StudentValidator implements Validator {
 		// ------ MAIL ----- //
 		if( student.getMail().trim().equals("") )
 			errors.rejectValue("mail", "required", "Este campo es obligatorio");
-					
-	}
-
-	@Override
-	public void validateDelete(Object obj, Errors errors) {
-		Student student = (Student) obj;
-		
-		if ( student.getNid().trim().equals("") )
-			errors.rejectValue("nid", "required", "Este campo es obligatorio");
-		else if ( student.getNid().length() != 9 )
-			errors.rejectValue("nid", "required", "Tamaño incorrecto");
-		else {
-			int i = 0;
-			boolean notFound = true;
-			while ( notFound && i < studentsList.size() ) {
-				if ( studentsList.get(i).getNid().toLowerCase().equals(student.getNid().toLowerCase()) )
-					notFound = false;
-				i++;
-			}
-			
-			if ( notFound )
-				errors.rejectValue("nid", "required", "El NID introducido no existe");
-		}
 					
 	}
 
@@ -164,6 +152,28 @@ public class StudentValidator implements Validator {
 				errors.rejectValue("nid", "required", "El NID introducido no existe");
 		}
 					
+	}
+	
+	@Override
+	public void validateDelete(Object obj, Errors errors){
+	
+		Student student = (Student) obj;
+		
+		for(int indice = 0; indice < collaborationsList.size(); indice += 1){
+			
+			String idOffer = collaborationsList.get(indice).getIdOffer();
+			String idDemand = collaborationsList.get(indice).getIdDemand();
+			String nidOffer = offerDao.getOffer(idOffer).getNid();
+			String nidDemand = demandDao.getDemand(idDemand).getNid();
+			
+			if (student.getNid().trim().toUpperCase().equals(nidOffer) || student.getNid().trim().toUpperCase().equals(nidDemand)){
+				
+				errors.rejectValue("nid", "required", "No se puede borrar, elimina primero las colaboraciones de este estudiante");
+				
+			}
+			
+		}
+		
 	}
 	
 

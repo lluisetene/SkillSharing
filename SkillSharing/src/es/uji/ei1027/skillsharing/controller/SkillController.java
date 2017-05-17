@@ -122,6 +122,13 @@ public class SkillController {
 	@RequestMapping(value="/update/{idSkill}", method = RequestMethod.POST) 
 	public String processUpdateSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
 		
+		SkillValidator skillValidator = new SkillValidator();
+		
+		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
+		
+		skillValidator.validateUpdate(skill, bindingResult);
+		
+		
 		if (bindingResult.hasErrors()) 
 			
 			 return "skill/update";
@@ -133,13 +140,33 @@ public class SkillController {
 	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping(value="/delete/{idSkill}")
-	public String processDeleteSubmit(@PathVariable String idSkill) {
-			
-		skillDao.deleteSkill(idSkill);
+	@RequestMapping(value="/delete/{idSkill}", method = RequestMethod.GET)
+	public String processDeleteSubmit(Model model, @PathVariable String idSkill) {
 		
-		return "redirect:../list.html";
-	
+		model.addAttribute("skill", skillDao.getSkill(idSkill));
+		
+		return "skill/delete"; 
+		
 	}
+	
+	@RequestMapping(value="/delete/{idSkill}", method = RequestMethod.POST) 
+	public String processDeleteSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
+		
+		SkillValidator skillValidator = new SkillValidator();
+		
+		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
+		
+		skillValidator.validateDelete(skill, bindingResult);
+		
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "skill/delete";
+		
+		 skillDao.deleteSkill(idSkill);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 }

@@ -86,20 +86,28 @@ public class SkillValidator implements Validator {
 		else if ( skill.getName().length() < 5 )
 			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
 		
+		
+		for ( int i = 0; i < skillsList.size(); i++ )
+			if ( skillsList.get(i).getName().toLowerCase().equals(skill.getName().toLowerCase()) && skillsList.get(i).getIdSkill().equals(skill.getIdSkill()) == false) {
+				errors.rejectValue("name", "required", "Este name ya está en uso");
+				break;
+			}
+			
+		
+		
 	}
 
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
 
 		Skill skill = (Skill) obj;
-		boolean encontrado = false;
 		
 		//---------- IDSKILL ----------//
 		for (int i = 0; i < offerList.size(); i++){
 			
 			if (skill.getIdSkill().trim().toLowerCase().equals(offerList.get(i).getIdSkill())){
 				
-				errors.rejectValue("idSkill", "required", "Esta habilidad está siendo usada");
+				errors.rejectValue("idSkill", "required", "No se puede borrar, elimina primero las ofertas que tengan esta habilidad");
 				break;
 			}
 			
@@ -109,29 +117,12 @@ public class SkillValidator implements Validator {
 			
 			if (skill.getIdSkill().trim().toLowerCase().equals(demandList.get(i).getIdSkill())){
 				
-				errors.rejectValue("idSkill", "required", "Esta habilidad está siendo usada");
+				errors.rejectValue("idSkill", "required", "No se puede borrar, elimina primero las demandas que tengan esta habilidad");
 				break;
 			}
 			
 		}
 		
-		
-		if ( skill.getIdSkill().trim().equals("") )
-			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
-		
-		else {
-			for ( int i = 0; i < skillsList.size(); i++ )
-				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(skill.getIdSkill().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			
-			if (!encontrado)
-				
-				errors.rejectValue("idSkill", "required", "Este IDSkill no existe");
-			
-			
-		}
 	}
 
 	@Override

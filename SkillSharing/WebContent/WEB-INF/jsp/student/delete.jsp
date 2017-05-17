@@ -11,13 +11,13 @@
 
 		<meta charset="UTF-8" />
 		
-		<title>Update Student</title>
+		<title>Delete Student</title>
 
 	</head>
 
 	<body>
     
-    	<h2>Change Student</h2>
+    	<h2>Delete Student</h2>
     
     	<form:form method="post" modelAttribute="student">
         
@@ -25,56 +25,51 @@
 			
 	        	<tr>
 	        	
-	                <td><form:label path="nid">NID</form:label></td>
-	                <td><form:input type = "text" maxlength = "9" path="nid" readonly = "true" disabled = "true"/></td>
+	                <td><form:input type = "hidden" maxlength = "9" path="nid"/></td>
 	                <td><form:errors path="nid" cssClass="error" /></td>
 	                
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="name">Name</form:label></td>
-	                <td><form:input type = "text" maxlength = "50" path="name" /></td>
+	                <td><form:input type = "hidden" maxlength = "50" path="name"/></td>
 	                <td><form:errors path="name" cssClass="error" /></td>
 	                
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="username">Username</form:label></td>
-	                <td><form:input type = "text" maxlength = "30" path="username"/></td>
+	                <td><form:input type = "hidden" maxlength = "30" path="username"/></td>
 	                <td><form:errors path="username" cssClass="error" /></td>
 	                
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="password">Password</form:label></td>
-	                <td><form:input type = "password" maxlength = "30" path="password" /></td>
+	      
+	                <td><form:input type = "hidden" maxlength = "30" path="password"/></td>
 	                <td><form:errors path="password" cssClass="error" /></td>
 	                
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="mail">Email</form:label></td>
-	                <td><form:input type = "email" maxlength = "30" path="mail" /></td>
+	                <td><form:input type = "hidden" maxlength = "30" path="mail" /></td>
 	                <td><form:errors path="mail" cssClass="error" /></td>
 	                
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="course">Course</form:label></td>
-	                <td><form:input type = "number" maxlength = "1" name = "course" min = "1" max = "4" value = "1" placeholder="º" path="course" /></td>
+	          
+	                <td><form:input type = "hidden" maxlength = "1" name = "course" min = "1" max = "4" value = "1" placeholder="º" path="course"/></td>
 	                <td><form:errors path="course" cssClass="error" /></td>
 	                
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="offerHours">OfferHours</form:label></td>
-	                <td><select id = "offerHours" name = "offerHours">
+	                <td><select id = "offerHours" name = "offerHours" style="display:none">
 						<option value="20:00" selected="selected">20 hours (default)</option>
 						<option value="01:00">01:00</option>
 						<option value="02:00">02:00</option>
@@ -92,8 +87,8 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="demandHours">DemandHours</form:label></td>
-	                <td><select id = "demandHours" name = "demandHours">
+	            
+	                <td><select id = "demandHours" name = "demandHours" style="display:none">
 						<option value="00:00" selected="selected">00 hours (default)</option>
 						<option value="01:00">01:00</option>
 						<option value="02:00">02:00</option>
@@ -111,8 +106,8 @@
 	            
 	             <tr>
 	            
-	                <td><form:label path="banned">Banned</form:label></td>
-	                <td><select id="banned" name="banned">
+	
+	                <td><select id="banned" name="banned" style="display:none">
 						<option value="false" selected="selected">false</option>
 						<option value="true">true</option>
 					</select></td>
@@ -121,7 +116,10 @@
 	        
 	        </table>
 	        
-	        <input type = "submit" name = "submit" value = "Accept" onclick = "document.getElementById('nid').disabled=false;"/>
+	        ¿Seguro que desea borrar al estudiante con nid ${student.nid}?
+	        <br><br>
+	        
+	        <input type = "submit" name = "submit" value = "Accept"/>
 	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/list.html'" name = "cancel" value = "Cancel">
 	   
     	</form:form>

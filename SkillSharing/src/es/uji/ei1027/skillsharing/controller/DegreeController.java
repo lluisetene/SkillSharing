@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.skillsharing.dao.DegreeDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Degree;
-import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.DegreeValidator;
 
 @Controller
@@ -122,6 +121,12 @@ public class DegreeController {
 	@RequestMapping(value="/update/{idDegree}", method = RequestMethod.POST) 
 	public String processUpdateSubmit(@PathVariable String idDegree, @ModelAttribute("degree") Degree degree, BindingResult bindingResult) {
 		
+		DegreeValidator degreeValidator = new DegreeValidator();
+		
+		degreeValidator.setDegreeDAO(degreeDao, studentDao);
+		
+		degreeValidator.validateUpdate(degree, bindingResult);
+		
 		if (bindingResult.hasErrors()) 
 			
 			 return "degree/update";
@@ -133,13 +138,27 @@ public class DegreeController {
 	  }
 	
 	//----------- eliminación ------------------
-	@RequestMapping(value="/delete/{idDegree}")
-	public String processDeleteSubmit(@PathVariable String idDegree) {
-			
-		degreeDao.deleteDegree(idDegree);
+	@RequestMapping(value="/delete/{idDegree}", method = RequestMethod.GET)
+	public String processDeleteSubmit(Model model, @PathVariable String idDegree) {
 		
-		return "redirect:../list.html";
-	
+		model.addAttribute("degree", degreeDao.getDegree(idDegree));
+		
+		return "degree/delete"; 
+		
 	}
+	
+	@RequestMapping(value="/delete/{idDegree}", method = RequestMethod.POST) 
+	public String processDeleteSubmit(@PathVariable String idDegree, @ModelAttribute("degree") Degree degree, BindingResult bindingResult) {
+		
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "degree/delete";
+		
+		 degreeDao.deleteDegree(idDegree);
+		 
+		 return "redirect:../list.html"; 
+		 
+	  }
 	
 }

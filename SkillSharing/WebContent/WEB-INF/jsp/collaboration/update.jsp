@@ -69,7 +69,7 @@
 	        	<tr>
 	        	
 	                <td><form:label path = "idCollaboration">IdCollaboration</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idCollaboration" /></td>
+	                <td><form:input type = "text" maxlength = "5" path="idCollaboration" disabled = "true"/></td>
 	                <td><form:errors path = "idCollaboration" cssClass = "error" /></td>
 	                
 	            </tr>
@@ -77,7 +77,7 @@
 	            <tr>
 	            
 	                <td><form:label path="idOffer">IdOffer</form:label></td>
-	             	<td><form:input type = "text" maxlength = "5" path="idOffer"/></td>
+	             	<td><form:input type = "text" maxlength = "5" path="idOffer" disabled = "true"/></td>
 	                <td><form:errors path = "idOffer" cssClass = "error" /></td>
 	                
 	            </tr>
@@ -85,7 +85,7 @@
 	            <tr>
 	            
 	                <td><form:label path="idDemand">IdDemand</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idDemand" /></td>
+	                <td><form:input type = "text" maxlength = "5" path="idDemand" disabled = "true"/></td>
 	                <td><form:errors path = "idDemand" cssClass = "error" /></td>
 	                
 	            </tr>
@@ -108,17 +108,9 @@
 	            <tr>
 	            
 	                <td><form:label path="hours">Hours</form:label></td>
-					<td><select id = "hours" name = "hours">
-						<option value="10:00" selected="selected">10 hours (default)</option>
-						<option value="01:00">01:00</option>
-						<option value="02:00">02:00</option>
-						<option value="03:00">03:00</option>
-						<option value="04:00">04:00</option>
-						<option value="05:00">05:00</option>
-						<option value="06:00">06:00</option>
-						<option value="07:00">07:00</option>
-						<option value="08:00">08:00</option>
-						<option value="09:00">09:00</option>
+					<td><select id = "hours" name = "hours" disabled>
+						<option value="${collaboration.hours}">${collaboration.hours}</option>
+	
 					</select></td>
 						
 	           
@@ -127,25 +119,21 @@
 	            <tr>
 	            
 	                <td><form:label path="rate">Rate</form:label></td>
-	              	<td><select id = "rate" name = "rate">
-		               <option value= "5" selected="selected">5 (default)</option>
-		               <option value="0">0</option>
-		               <option value="1">1</option>
-		               <option value="2">2</option>
-		               <option value="3">3</option>
-		               <option value="4">4</option>
-		               <option value="6">6</option>
-		               <option value="7">7</option>
-		               <option value="8">8</option>
-		               <option value="9">9</option>
-		               <option value="10">10</option>
+	              	<td><select id = "rate" name = "rate" disabled>
+		               <option value= "${collaboration.rate}">${collaboration.rate}</option>
+
 	               </select></td>
 	           
 	            </tr>
 	       
 	        </table>
-	        <input type = "submit" name = "submit" value = "Accept">
-	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/main.html'" name = "cancel" value = "Cancel">
+	        <input type = "submit" name = "submit" value = "Accept" onclick = "document.getElementById('idCollaboration').disabled=false, 
+	        																   document.getElementById('idOffer').disabled=false,
+	        																   document.getElementById('idDemand').disabled=false,
+	        																   document.getElementById('hours').disabled=false,
+	        																   document.getElementById('rate').disabled=false;">
+	        																  
+	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/list.html'" name = "cancel" value = "Cancel">
 	   
     	</form:form>
     

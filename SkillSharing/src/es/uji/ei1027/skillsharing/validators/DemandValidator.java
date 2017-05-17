@@ -151,18 +151,12 @@ public class DemandValidator implements Validator {
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( demand.getName().length() < 5 )
 			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
-		else {
-			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getName().toLowerCase().equals(demand.getName().toLowerCase()) ) {
-					encontrado = true;
-					break;
-				}
-			if ( encontrado )
-				errors.rejectValue("name", "required", "El Name introducido ya está en uso");
-			encontrado = false;
-				
-		}
 		
+		for ( int i = 0; i < demandsList.size(); i++ )
+			if ( demandsList.get(i).getName().toLowerCase().equals(demand.getName().toLowerCase()) && demandsList.get(i).getIdDemand().equals(demand.getIdDemand()) == false) {
+				errors.rejectValue("name", "required", "Este name ya está en uso");
+				break;
+			}
 		
 		// ------- IDSKILL ------ /
 		if ( demand.getIdSkill() .trim().equals("") )
@@ -186,42 +180,15 @@ public class DemandValidator implements Validator {
 	public void validateDelete(Object obj, Errors errors) {
 
 		Demand demand = (Demand) obj;
-		boolean encontrado = false;
 		
-		//---------- IDDEMAND ----------//
 		
 		for(int i = 0; i < collaborationsList.size(); i++){
 			
 			if (collaborationsList.get(i).getIdDemand().equals(demand.getIdDemand().trim().toLowerCase())){
 				
-				encontrado = true;
-				break;
+				errors.rejectValue("idDemand", "required", "No se puede borrar, elimina primero las colaboraciones que tengan esta demanda");
 				
 			}
-			
-		}
-		
-		if (encontrado){
-			
-			errors.rejectValue("idDemand", "required", "Esta demanda está siendo usada");
-			
-		}
-		
-		
-		if ( demand.getIdDemand().trim().equals("") )
-			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
-		
-		else {
-			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(demand.getIdDemand().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			
-			if (!encontrado)
-				
-				errors.rejectValue("idDemand", "required", "Este IdDemand no existe");
-			
 			
 		}
 		

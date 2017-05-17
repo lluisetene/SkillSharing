@@ -66,35 +66,35 @@
 	        	<tr>
 	                
 	                <td><form:label path="idOffer">IdOffer</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idOffer" /></td>
+	                <td><form:input type = "text" maxlength = "5" path="idOffer" disabled = "true"/></td>
 	            	<td><form:errors path="idOffer" cssClass="error"/></td>
 	            </tr>
 	            
 	            <tr>
 	            
 	                <td><form:label path="nid">NID</form:label></td>
-	                <td><form:input type = "text" maxlength = "9" path="nid" /></td>
+	                <td><form:input type = "text" maxlength = "9" path="nid" disabled = "true"/></td>
 	            	<td><form:errors path="nid" cssClass="error"/></td>
 	            </tr>
 	            
 	            <tr>
 	            
 	                <td><form:label path="name">Name</form:label></td>
-	                <td><form:input type = "text" maxlength = "100" path="name" /></td>
+	                <td><form:input type = "text" maxlength = "100" path="name" disabled = "true"/></td>
 	            	<td><form:errors path="name" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	                
 	                <td><form:label path="idSkill">IdSkill</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idSkill" /></td>
+	                <td><form:input type = "text" maxlength = "5" path="idSkill" disabled = "true"/></td>
 	            	<td><form:errors path="idSkill" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	                
 	                <td><form:label path="description">Description</form:label></td>
-	                <td><form:input type = "text" maxlength = "300" path="description" /></td>
+	                <td><form:input type = "text" maxlength = "300" path="description" disabled = "true"/></td>
 	            </tr>
 	            
 	            <tr>
@@ -113,8 +113,13 @@
 	            
 	        </table>
 	        
-	        	<input type = "submit" name = "submit" value = "Accept">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/offer/main.html'" name = "cancel" value = "Cancel">
+	        	<input type = "submit" name = "submit" value = "Accept" onclick = "document.getElementById('idOffer').disabled=false, 
+	        																	   document.getElementById('nid').disabled=false,
+	        																	   document.getElementById('name').disabled=false,
+	        																	   document.getElementById('idSkill').disabled=false,
+	        																	   document.getElementById('description').disabled=false;">
+	        														
+	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/offer/list.html'" name = "cancel" value = "Cancel">
 	    
 	    </form:form>
 	    	

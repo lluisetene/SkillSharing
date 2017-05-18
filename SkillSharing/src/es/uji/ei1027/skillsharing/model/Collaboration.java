@@ -9,7 +9,7 @@ public class Collaboration {
 	private String idDemand;
 	private Date beginningDate;
 	private Date endingDate;
-	private Date hours;
+	private String hours;
 	private float rate;
 	
 	public String getIdCollaboration() {
@@ -72,13 +72,13 @@ public class Collaboration {
 		
 	}
 
-	public Date getHours() {
+	public String getHours() {
 		
 		return hours;
 		
 	}
 
-	public void setHours(Date hours) {
+	public void setHours(String hours) {
 		
 		this.hours = hours;
 		

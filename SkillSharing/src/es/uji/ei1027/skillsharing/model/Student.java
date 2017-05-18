@@ -10,8 +10,8 @@ public class Student {
 	private String password; 
 	private String mail; 
 	private int course; 
-	private Date offerHours;
-	private Date demandHours;
+	private String offerHours;
+	private String demandHours;
 	private boolean banned;
 
 	public String getNid() {
@@ -86,25 +86,25 @@ public class Student {
 		
 	}
 
-	public Date getOfferHours() {
+	public String getOfferHours() {
 		
 		return offerHours;
 		
 	}
 
-	public void setOfferHours(Date offerHours) {
+	public void setOfferHours(String offerHours) {
 		
 		this.offerHours = offerHours;
 		
 	}
 
-	public Date getDemandHours() {
+	public String getDemandHours() {
 		
 		return demandHours;
 		
 	}
 
-	public void setDemandHours(Date demandHours) {
+	public void setDemandHours(String demandHours) {
 		
 		this.demandHours = demandHours;
 		

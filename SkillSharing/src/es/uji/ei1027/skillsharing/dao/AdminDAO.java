@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,6 +18,7 @@ import es.uji.ei1027.skillsharing.model.Admin;
 public class AdminDAO  {
 
 	private JdbcTemplate jdbcTemplate;
+	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 	
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -69,7 +71,7 @@ public class AdminDAO  {
 	
 	public void addAdmin(Admin admin) {
 		
-		this.jdbcTemplate.update("insert into admin(name, mail, username, password) values(?, ?, ?, ?)", admin.getName(), admin.getMail(), admin.getUsername(), admin.getPassword());
+		this.jdbcTemplate.update("insert into admin(name, mail, username, password) values(?, ?, ?, ?)", admin.getName(), admin.getMail(), admin.getUsername(), passwordEncryptor.encryptPassword(admin.getPassword()));
 	
 	}
 	

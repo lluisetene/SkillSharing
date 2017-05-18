@@ -24,7 +24,7 @@ public class HoursControlBETA {
 		
 	}
 	
-	public void addHours(Date hours){
+	public void addHours(String hours){
 		
 		String NIDOfferer = offerDao.getOffer(collaboration.getIdOffer()).getNid();
 		String NIDDemandant = demandDao.getDemand(collaboration.getIdDemand()).getNid();
@@ -37,41 +37,34 @@ public class HoursControlBETA {
 			
 			if (student.getNid().trim().toUpperCase().equals(NIDOfferer.trim().toUpperCase())){
 			
-				Date horasTenidas = student.getOfferHours();			
-				int nuevasHoras = student.getOfferHours().getHours() + hours.getHours();
-
-				if (nuevasHoras >= 20){
-					
-					nuevasHoras = 20;
-					
-				}
+				String [] horasActuales = student.getOfferHours().split(":");
+				int horasTengo = Integer.parseInt(horasActuales[0]);
+				String [] horasAcumular = hours.split((":"));
+				int horasSumar = Integer.parseInt(horasAcumular[0]);
+				int sumado = horasTengo + horasSumar;
+				String setHoras = String.valueOf(sumado) + ":" + "00"; 
 				
-				horasTenidas.setHours(nuevasHoras);				
-				student.setOfferHours(horasTenidas);
+				student.setOfferHours(setHoras);
 				studentDao.updateStudent(student);
 				
 			}else if (student.getNid().trim().toUpperCase().equals(NIDDemandant.trim().toUpperCase())){
 				
-				Date horasTenidas = student.getDemandHours();
-				int nuevasHoras = student.getDemandHours().getHours() + hours.getHours();
+				String [] horasActuales = student.getDemandHours().split(":");
+				int horasTengo = Integer.parseInt(horasActuales[0]);
+				String [] horasAcumular = hours.split((":"));
+				int horasSumar = Integer.parseInt(horasAcumular[0]);
+				int sumado = horasTengo + horasSumar;
+				String setHoras = String.valueOf(sumado) + ":" + "00"; 
 				
-				if (nuevasHoras >= 20){
-				
-					nuevasHoras = 20;
-					
-				}
-				
-				horasTenidas.setHours(nuevasHoras);
-				student.setDemandHours(horasTenidas);
+				student.setDemandHours(setHoras);
 				studentDao.updateStudent(student);
-				
-			}
 			
+			}
 		}
 		
 	}
 	
-	public void removeHours(Date hours){
+	public void removeHours(String hours){
 		
 		String NIDOfferer = offerDao.getOffer(collaboration.getIdOffer()).getNid();
 		String NIDDemandant = demandDao.getDemand(collaboration.getIdDemand()).getNid();
@@ -85,41 +78,32 @@ public class HoursControlBETA {
 			if (student.getNid().trim().toUpperCase().equals(NIDOfferer.trim().toUpperCase())){
 				
 				
-				Date horasTenidas = student.getOfferHours();
-				int nuevasHoras = student.getOfferHours().getHours() - hours.getHours();
+				String [] horasActuales = student.getOfferHours().split(":");
+				int horasTengo = Integer.parseInt(horasActuales[0]);
+				String [] horasAcumular = hours.split((":"));
+				int horasSumar = Integer.parseInt(horasAcumular[0]);
+				int sumado = horasTengo - horasSumar;
+				String setHoras = String.valueOf(sumado) + ":" + "00"; 
 				
-				
-				
-				if (nuevasHoras <= 0){
-					
-					nuevasHoras = 0;
-					
-				}
-				
-				horasTenidas.setHours(nuevasHoras);
-				student.setOfferHours(horasTenidas);
+				student.setOfferHours(setHoras);
 				studentDao.updateStudent(student);
 				
 				
 			}else if (student.getNid().trim().toUpperCase().equals(NIDDemandant.trim().toUpperCase())){
 				
-				Date horasTenidas = student.getDemandHours();
-				int nuevasHoras = student.getDemandHours().getHours() - hours.getHours();
+				String [] horasActuales = student.getDemandHours().split(":");
+				int horasTengo = Integer.parseInt(horasActuales[0]);
+				String [] horasAcumular = hours.split((":"));
+				int horasSumar = Integer.parseInt(horasAcumular[0]);
+				int sumado = horasTengo - horasSumar;
+				String setHoras = String.valueOf(sumado) + ":" + "00"; 
 				
-				if (nuevasHoras <= 0){
-					
-					nuevasHoras = 0;
-					
-				}
-				
-				horasTenidas.setHours(nuevasHoras);		
-				student.setDemandHours(horasTenidas);
+				student.setDemandHours(setHoras);
 				studentDao.updateStudent(student);
-				
 			}
 			
 		}
 		
 	}
-	
 }
+	

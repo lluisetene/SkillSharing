@@ -2,6 +2,7 @@ package es.uji.ei1027.skillsharing.validators;
 
 import java.util.List;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 
@@ -16,6 +17,7 @@ public class LoginValidator implements ValidatorLogin {
 
 	private List<Student> studentsList;
 	private List<Admin> adminsList;
+	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 	boolean enUso = false;
 	
 	
@@ -66,8 +68,7 @@ public class LoginValidator implements ValidatorLogin {
 			errors.rejectValue("password", "required", "Este campo es obligatorio");
 		else {
 			for ( int i = 0; i < adminsList.size(); i++ )
-				if ( adminsList.get(i).getPassword().toLowerCase().equals(user.getPassword().toLowerCase()) ) {
-					//if ( passwordEncryptor.checkPassword(user.getPassword().toLowerCase(), adminsList.get(i).getPassword()) ) {
+				if ( passwordEncryptor.checkPassword(user.getPassword(), adminsList.get(i).getPassword()) ) {
 					enUso = true;
 					break;
 				}
@@ -75,8 +76,7 @@ public class LoginValidator implements ValidatorLogin {
 						
 			if ( !enUso )
 				for ( int j = 0; j < studentsList.size(); j++ )
-					if ( studentsList.get(j).getPassword().toLowerCase().equals(user.getPassword().toLowerCase()) )  {
-					//if ( passwordEncryptor.checkPassword(user.getPassword().toLowerCase(), studentsList.get(j).getPassword().toLowerCase()) ) {
+					if ( passwordEncryptor.checkPassword(user.getPassword(), studentsList.get(j).getPassword()) ) {
 						enUso = true;
 						break;
 					}

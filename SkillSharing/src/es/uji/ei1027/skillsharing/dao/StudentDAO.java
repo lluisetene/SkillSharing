@@ -18,6 +18,7 @@ import es.uji.ei1027.skillsharing.model.Student;
 public class StudentDAO {
 
 	private JdbcTemplate jdbcTemplate;
+	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 	
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -33,16 +34,14 @@ public class StudentDAO {
 			
 			Student student = new Student();
 			
-			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-			
 			student.setNid(rs.getString("nid"));
 			student.setName(rs.getString("name"));
 			student.setUsername(rs.getString("username"));
-			student.setPassword(/*passwordEncryptor.encryptPassword*/(rs.getString("password")));
+			student.setPassword(rs.getString("password"));
 			student.setMail(rs.getString("mail"));
 			student.setCourse(rs.getInt("course"));
-			student.setOfferHours(rs.getTime("offerHours"));
-			student.setDemandHours(rs.getTime("demandHours"));
+			student.setOfferHours(rs.getString("offerHours"));
+			student.setDemandHours(rs.getString("demandHours"));
 			student.setBanned(rs.getBoolean("banned"));
 			
 			return student;
@@ -53,7 +52,7 @@ public class StudentDAO {
 	
 	public List<Student> getStudents() {
 		
-		return this.jdbcTemplate.query("select * from student order by nid", new StudentMapper());
+		return this.jdbcTemplate.query("select * from student", new StudentMapper());
 	
 	}
 	
@@ -77,7 +76,7 @@ public class StudentDAO {
 	
 	public void addStudent(Student student) {
 		
-		this.jdbcTemplate.update("insert into student(nid, name, username, password, mail, course, offerhours, demandhours, banned) values(?, ?, ?, ?, ?, ?, ?, ?, ?)", student.getNid(), student.getName(), student.getUsername(), student.getPassword(), student.getMail(), student.getCourse(), student.getOfferHours(), student.getDemandHours(), student.getBanned());
+		this.jdbcTemplate.update("insert into student(nid, name, username, password, mail, course, offerhours, demandhours, banned) values(?, ?, ?, ?, ?, ?, ?, ?, ?)", student.getNid(), student.getName(), student.getUsername(), passwordEncryptor.encryptPassword(student.getPassword()), student.getMail(), student.getCourse(), student.getOfferHours(), student.getDemandHours(), student.getBanned());
 	
 	}
 		

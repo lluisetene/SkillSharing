@@ -37,7 +37,7 @@ public class CollaborationDAO {
 			collaboration.setIdDemand(rs.getString("iddemand"));
 			collaboration.setBeginningDate(rs.getDate("beginningDate"));
 			collaboration.setEndingDate(rs.getDate("endingDate"));
-			collaboration.setHours(rs.getTime("hours"));
+			collaboration.setHours(rs.getString("hours"));
 			collaboration.setRate(rs.getFloat("rate"));
 			
 			return collaboration;
@@ -48,7 +48,7 @@ public class CollaborationDAO {
 	
 	public List<Collaboration> getCollaborations() {
 		
-		return this.jdbcTemplate.query("select * from collaboration order by idcollaboration", new CollaborationMapper());
+		return this.jdbcTemplate.query("select * from collaboration", new CollaborationMapper());
 	
 	}
 	

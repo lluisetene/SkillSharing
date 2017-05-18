@@ -38,7 +38,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(Model model) {
 		
-		model.addAttribute("login", null);
+		model.addAttribute("login", new Login());
 		
 		return "login";
 	}

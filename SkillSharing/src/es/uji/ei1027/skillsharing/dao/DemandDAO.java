@@ -48,7 +48,7 @@ public class DemandDAO {
 	
 	public List<Demand> getDemands() {
 		
-		return this.jdbcTemplate.query("select * from demand", new DemandMapper());
+		return this.jdbcTemplate.query("select * from demand order by iddemand", new DemandMapper());
 	
 	}
 	

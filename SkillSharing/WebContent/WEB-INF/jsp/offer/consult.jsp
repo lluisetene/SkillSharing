@@ -72,10 +72,13 @@
 		            <td>${offerResponse.description}</td>
 		            <td>${offerResponse.beginningDate}</td>
 		            <td>${offerResponse.endingDate}</td>
-		      
+		           	<td><a href="update/${offer.idOffer}.html">Update</a>
+               		<td><a href="delete/${offer.idOffer}.html">Delete</a>
+		            
+		            
 		        </tr> 
-   		
-   			</table>
+   			
+   			</table> 
    			
     	</form:form>
     

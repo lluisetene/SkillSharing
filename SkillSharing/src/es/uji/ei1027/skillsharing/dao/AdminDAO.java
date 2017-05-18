@@ -45,7 +45,7 @@ public class AdminDAO  {
 	
 	public List<Admin> getAdmins() {
 		
-		return this.jdbcTemplate.query("select * from admin", new AdminMapper());
+		return this.jdbcTemplate.query("select * from admin order by username", new AdminMapper());
 	
 	}
 	

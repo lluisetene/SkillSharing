@@ -44,7 +44,7 @@ public class DegreeDAO {
 	
 	public List<Degree> getDegrees() {
 		
-		return this.jdbcTemplate.query("select * from degree", new DegreeMapper());
+		return this.jdbcTemplate.query("select * from degree order by iddegree", new DegreeMapper());
 		
 	}
 	

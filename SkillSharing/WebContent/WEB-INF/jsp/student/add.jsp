@@ -66,7 +66,13 @@
 	            <tr>
 	            
 	                <td><form:label path="course">Course</form:label></td>
-	                <td><form:input type = "number" maxlength = "1" name = "course" min = "1" max = "4" value = "1" path="course" /></td>
+	                <td><select id = "course" name = "course">
+	                	<option value="1" selected="selected">Primero</option>
+	                	<option value="2">Segundo</option>
+	                	<option value="3">Tercero</option>
+	                	<option value="2">Cuarto</option>                	
+	                	</select>
+	                </td>
 	                
 	            </tr>
 	            

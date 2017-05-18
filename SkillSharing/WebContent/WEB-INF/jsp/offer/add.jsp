@@ -58,14 +58,14 @@
 	            <tr>
 	            
 	  	            <td><form:label path="beginningDate">BeginningDate</form:label></td>
-	                <td><form:input type="date" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/><td>
+	                <td><form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/><td>
 	                <td><form:errors path="beginningDate" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	            
 	                <td><form:label path="endingDate">EndingDate</form:label></td>
-	                <td><form:input type="date" path="endingDate" name="endingdate" id="to" size="10" readonly="true" /><td>
+	                <td><form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" /><td>
 	                <td><form:errors path="endingDate" cssClass="error" /></td>
 	                
 	            </tr>

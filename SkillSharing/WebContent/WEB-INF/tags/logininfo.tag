@@ -1,19 +1,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="user" scope="request" value='${session.getAttribute("login")}'/>
+<c:set var="adminLogin" scope="request" value="${session.getAttribute('adminLogin')}" />
+<c:set var="studentLogin" scope="request" value='${session.getAttribute("studentLogin")}'/>
 
 <p class="userlogin">
 
 <c:choose>
+<c:when test='${adminLogin == null && studentLogin == null}'>
 
-<c:when test='${user == null}'>
-
-	No autenticat <a href="${pageContext.request.contextPath}/login.html">Entrar</a> </c:when>
-
-	<c:otherwise>
+		<a href="${pageContext.request.contextPath}/login.html">Log in</a>
 	
-		Autenticat com ${user.username}
+	</c:when>
+
+	
+	<c:when test="${adminLogin != null}"> 
+	
+		${adminLogin.username} <a href="${pageContext.request.contextPath}/logout.html">Log out</a>
 		
-	<a href="${pageContext.request.contextPath}/logout.html">Eixir</a> </c:otherwise>
+	</c:when>
+		
+		
+	<c:when test="${studentLogin != null}"> 
+	
+		${studentLogin.username} <a href="${pageContext.request.contextPath}/logout.html">Log out</a>
+		
+	</c:when>
 	
 	</c:choose>
+	
 </p>

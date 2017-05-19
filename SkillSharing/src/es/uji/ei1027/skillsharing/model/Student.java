@@ -1,7 +1,5 @@
 package es.uji.ei1027.skillsharing.model;
 
-import java.util.Date;
-
 public class Student {
 
 	private String nid; 

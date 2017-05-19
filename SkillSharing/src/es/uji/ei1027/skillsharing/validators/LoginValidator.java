@@ -3,7 +3,6 @@ package es.uji.ei1027.skillsharing.validators;
 import java.util.List;
 
 import org.jasypt.util.password.BasicPasswordEncryptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
@@ -21,7 +20,6 @@ public class LoginValidator implements ValidatorLogin {
 	boolean enUso = false;
 	
 	
-	@Autowired
 	public void setLoginDAO(AdminDAO adminDao, StudentDAO studentDao) {
 		adminsList = adminDao.getAdmins();
 		studentsList = studentDao.getStudents();
@@ -30,7 +28,7 @@ public class LoginValidator implements ValidatorLogin {
 	
 	@Override
 	public boolean supports(Class<?> cls) {
-		return Admin.class.equals(cls);
+		return Login.class.isAssignableFrom(cls);
 	}
 
 	@Override

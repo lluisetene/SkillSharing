@@ -2,7 +2,6 @@ package es.uji.ei1027.skillsharing.validators;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 
 import es.uji.ei1027.skillsharing.dao.AdminDAO;
@@ -14,7 +13,6 @@ public class AdminValidator implements Validator {
 	boolean enUso = false;
 	
 	
-	@Autowired
 	public void setAdminDAO(AdminDAO adminDao) {
 		adminsList = adminDao.getAdmins();
 	}

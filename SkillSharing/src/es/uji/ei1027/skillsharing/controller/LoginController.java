@@ -62,9 +62,9 @@ public class LoginController {
 			
 			if ( adminList.get(i).getUsername().equals(login.getUsername()) ) {
 				
-				session.setAttribute("login", adminList.get(i));
+				session.setAttribute("adminLogin", adminList.get(i));
 				
-				return "redirect:loginAdministrador";
+				return "redirect:index.jsp";
 				
 			}
 		
@@ -74,9 +74,9 @@ public class LoginController {
 			
 			if ( studentList.get(i).getUsername().equals(login.getUsername()) ) {
 				
-				session.setAttribute("login", studentList.get(i));
+				session.setAttribute("studentLogin", studentList.get(i));
 				
-				return "redirect:loginStudent";
+				return "redirect:index.jsp";
 				
 			}
 			

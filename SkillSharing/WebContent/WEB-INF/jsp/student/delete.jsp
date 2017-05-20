@@ -1,23 +1,20 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
-	
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-
-		<meta charset="UTF-8" />
 		
-		<title>Delete Student</title>
+		<title>Estudiante</title>
+		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
 	</head>
 
 	<body>
     
-    	<h2>Delete Student</h2>
+    	<h2>Eliminar Estudiante</h2>
     
     	<form:form method="post" modelAttribute="student">
         
@@ -70,7 +67,7 @@
 	            <tr>
 	            
 	                <td><select id = "offerHours" name = "offerHours" style="display:none">
-						<option value="20:00" selected="selected">20 hours (default)</option>
+						<option value="20:00" selected="selected">20 horas (por defecto)</option>
 						<option value="01:00">01:00</option>
 						<option value="02:00">02:00</option>
 						<option value="03:00">03:00</option>
@@ -89,7 +86,7 @@
 	            
 	            
 	                <td><select id = "demandHours" name = "demandHours" style="display:none">
-						<option value="00:00" selected="selected">00 hours (default)</option>
+						<option value="00:00" selected="selected">00 horas (por defecto)</option>
 						<option value="01:00">01:00</option>
 						<option value="02:00">02:00</option>
 						<option value="03:00">03:00</option>
@@ -108,19 +105,19 @@
 	            
 	
 	                <td><select id="banned" name="banned" style="display:none">
-						<option value="false" selected="selected">false</option>
-						<option value="true">true</option>
+						<option value="falso" selected="selected">falso</option>
+						<option value="verdadero">verdadero</option>
 					</select></td>
 	            
 	            </tr>
 	        
 	        </table>
 	        
-	        ¿Seguro que desea borrar al estudiante con nid ${student.nid}?
+	        ¿Seguro que desea borrar al estudiante ${student.name}; DNI:${student.nid}?
 	        <br><br>
 	        
-	        <input type = "submit" name = "submit" value = "Accept"/>
-	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/list.html'" name = "cancel" value = "Cancel">
+	        <input type = "submit" name = "submit" value = "Aceptar"/>
+	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/list.html'" name = "cancel" value = "Cancelar">
 	   
     	</form:form>
     

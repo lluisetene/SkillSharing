@@ -13,13 +13,13 @@
 
 	<body>
     
-    	<h2>Authentication</h2>
+    	<h2>Autenticacion</h2>
     	
     		<form:form method="post" modelAttribute="login" action="${pageContext.request.contextPath}/login.html">
     		
         	<p>
         
-        	    <form:label path="username">Nom d'usuari:</form:label>
+        	    <form:label path="username">Nombre usuario</form:label>
     	        <form:input path="username" />
 	            <form:errors path="username" cssClass="error" />
             
@@ -27,14 +27,14 @@
         
         	<p>
         
-            	<form:label path="password">Contrasenya:</form:label>
+            	<form:label path="password">Contraseña</form:label>
             	<form:password path="password" />
             	<form:errors path="password" cssClass="error" />
             
         	</p>
                 
         	<input type="submit" value="Log in" />
-        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/index.jsp'" name = "cancel" value = "Cancel">
+        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/index.jsp'" name = "cancel" value = "Cancelar">
         
     	</form:form>
     	

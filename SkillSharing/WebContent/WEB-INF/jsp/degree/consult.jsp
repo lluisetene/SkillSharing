@@ -1,17 +1,14 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
-		<meta charset="UTF-8" />
-
-		<title>Consult Degree</title>
+		<title>Grado</title>
 
 		<style>
 			
@@ -27,7 +24,7 @@
 	
 	<body>
 	
-    	<h2>Consult Degree</h2>
+    	<h2>Consultar Grado</h2>
     
     	<form:form method="post" modelAttribute="degree">
         
@@ -35,7 +32,7 @@
 	        
 	        	<tr>
 	        	
-	                <td><form:label style = "font-size:16px" path="idDegree">IdDegree</form:label></td>
+	                <td><form:label style = "font-size:16px" path="idDegree">IdCarrera</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idDegree" /></td>
 	                <td><form:errors path = "idDegree" cssClass = "error" /></td>
 	            
@@ -43,8 +40,8 @@
 
         	</table>
         
-        	<input type = "submit" name = "submit" value = "Accept">
-        	<input type = "button" name = "cancel" value = "Cancel" onclick = "location='http://localhost:8080/SkillSharing/degree/main.html'"/>
+        	<input type = "submit" name = "submit" value = "Aceptar">
+        	<input type = "button" name = "cancel" value = "Cancelar" onclick = "location='http://localhost:8080/SkillSharing/degree/main.html'"/>
    			
    			<br>
    			<br>
@@ -53,9 +50,9 @@
    			
 	   		 	<tr>
 	   		 	
-		            <th>IdDegree</th>
-		            <th>Name</th>
-		            <th>NID</th>
+		            <th>IdCarrera</th>
+		            <th>Nombre</th>
+		            <th>DNI</th>
 		        
 		        </tr>
 		        

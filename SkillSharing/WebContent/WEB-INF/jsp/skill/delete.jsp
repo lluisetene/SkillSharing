@@ -1,23 +1,20 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
-	
+		
+		<title>Habilidad</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
-		<meta charset="UTF-8" />
-		
-		<title>Delete Skill</title>
 
 	</head>
 
 	<body>
     
-    	<h2>Delete Skill</h2>
+    	<h2>Eliminar Habilidad</h2>
     
     	<form:form method="post" modelAttribute="skill">
         
@@ -59,11 +56,11 @@
 	        
 	        </table>
 	        
-	        ¿Seguro que desea borrar la habilidad con id ${skill.idSkill}?
+	        ¿Seguro que desea borrar la habilidad ${skill.name} (id ${skill.idSkill})?
 	        <br><br>
 	        
-	        <input type = "submit" name = "submit" value = "Accept">
-	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/skill/list.html'" name = "cancel" value = "Cancel">
+	        <input type = "submit" name = "submit" value = "Aceptar">
+	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/skill/list.html'" name = "cancel" value = "Cancelar">
 	   
     	</form:form>
     

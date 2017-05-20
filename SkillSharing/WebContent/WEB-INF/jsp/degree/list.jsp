@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 	
-		<title>Degrees</title>
+		<title>Grado</title>
 
 		<style>
 		
@@ -26,15 +26,15 @@
 	
 	<body>
     
-    	<h1>List Degrees</h1>
+    	<h1>Lista Grados</h1>
      
     	<table>
     	
 	        <tr>
 	        
-	            <th>IdDegree</th>
-	            <th>Name</th>
-	            <th>NID</th>
+	            <th>IDGrado</th>
+	            <th>Nombre</th>
+	            <th>DNI</th>
 	            
 	        </tr>
 	        
@@ -45,8 +45,8 @@
 	                <td>${degree.idDegree}</td>
 	                <td>${degree.name}</td>
 	                <td>${degree.nid}</td>
-	                <td><a href="update/${degree.idDegree}.html">Update</a>
-               		<td><a href="delete/${degree.idDegree}.html">Delete</a>
+	                <td><a href="update/${degree.idDegree}.html">Modificar</a>
+               		<td><a href="delete/${degree.idDegree}.html">Eliminar</a>
 	           
 	            </tr>
 	        
@@ -56,7 +56,7 @@
     
     	<br>
     
-    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/degree/main.html'" name = "cancel" value = "Cancel">
+    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/degree/main.html'" name = "cancel" value = "Cancelar">
     
 	</body>
 	

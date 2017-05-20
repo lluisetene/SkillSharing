@@ -1,23 +1,20 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
-	
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-
-		<meta charset="UTF-8" />
 		
-		<title>Delete Offer</title>
+		<title>Oferta</title>
+		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
 	</head>
 
 	<body>
     
-    	<h2>Delete Offer</h2>
+    	<h2>Eliminar Oferta</h2>
     
     	<form:form method="post" modelAttribute="offer">
 		       
@@ -73,11 +70,11 @@
 	            
 	        </table>
 	        
-	        	¿Seguro que desea borrar la oferta con id ${offer.idOffer}?
+	        	¿Seguro que desea borrar la oferta ${offer.name} (id ${offer.idOffer})?
 	        	<br><br>
 	        
-	        	<input type = "submit" name = "submit" value = "Accept">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/offer/list.html'" name = "cancel" value = "Cancel">
+	        	<input type = "submit" name = "submit" value = "Aceptar">
+	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/offer/list.html'" name = "cancel" value = "Cancelar">
 	    
 	    </form:form>
 	    	

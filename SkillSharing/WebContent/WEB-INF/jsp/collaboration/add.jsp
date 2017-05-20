@@ -1,25 +1,23 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!-- <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %> PONER CUANDO TENGAMOS ETIQUETAS QUE AÑADIR--> 
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 	
 	<head>
 
-	<title>Add Collaboration</title>
-	
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/calendar.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
+		<title>Colaboracion</title>
+		
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/calendar.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
 	</head>
 
 	<body>
     
-    	<h2>New Collaboration</h2>
+    	<h2>Añadir Colaboracion</h2>
     	
 	    <form:form method="post" modelAttribute="collaboration">
 		       
@@ -27,7 +25,7 @@
 			
 	        	<tr>
 	        	
-	                <td><form:label path = "idCollaboration">IdCollaboration</form:label></td>
+	                <td><form:label path = "idCollaboration">IdColaboracion</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idCollaboration" /></td>
 	                <td><form:errors path = "idCollaboration" cssClass = "error" /></td>
 	                
@@ -35,7 +33,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="idOffer">IdOffer</form:label></td>
+	                <td><form:label path="idOffer">IdOferta</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idOffer" /></td>
 	                <td><form:errors path = "idOffer" cssClass = "error" /></td>
 	                
@@ -43,7 +41,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="idDemand">IdDemand</form:label></td>
+	                <td><form:label path="idDemand">IdDemanda</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idDemand" /></td>
 	                <td><form:errors path = "idDemand" cssClass = "error" /></td>
 	                
@@ -51,14 +49,14 @@
 	            
 	            <tr>
 	            
-	  	            <td><form:label path="beginningDate">BeginningDate</form:label></td>
+	  	            <td><form:label path="beginningDate">Fecha inicio</form:label></td>
 	                <td><form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/><td>
 	                <td><form:errors path="beginningDate" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="endingDate">EndingDate</form:label></td>
+	                <td><form:label path="endingDate">Fecha fin</form:label></td>
 	                <td><form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" /><td>
 	                <td><form:errors path="endingDate" cssClass="error" /></td>
 	                
@@ -66,9 +64,9 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="hours">Hours</form:label></td>
+	                <td><form:label path="hours">Horas</form:label></td>
 					<td><select id = "hours" name = "hours">
-						<option value="10:00" selected="selected">10 hours (default)</option>
+						<option value="10:00" selected="selected">10 horas (por defecto)</option>
 						<option value="01:00">01:00</option>
 						<option value="02:00">02:00</option>
 						<option value="03:00">03:00</option>
@@ -85,9 +83,9 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="rate">Rate</form:label></td>
+	                <td><form:label path="rate">Valoracion</form:label></td>
 	              	<td><select id = "rate" name = "rate">
-		               <option value= "5" selected="selected">5 (default)</option>
+		               <option value= "5" selected="selected">5 (por defecto)</option>
 		               <option value="0">0</option>
 		               <option value="1">1</option>
 		               <option value="2">2</option>
@@ -104,8 +102,8 @@
 	        
 	        </table>
 	        
-	        	<input type = "submit" name = "submit" value = "Accept">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/main.html'" name = "cancel" value = "Cancel">
+	        	<input type = "submit" name = "submit" value = "Aceptar">
+	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/main.html'" name = "cancel" value = "Cancelar">
 	    
 	    </form:form>
 	    

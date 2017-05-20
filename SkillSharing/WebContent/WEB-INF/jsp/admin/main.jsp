@@ -1,32 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
+<html lang="es-ES">
 
 	<head>
 	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 		
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-		<title>Log in</title>
+		<title>Gestion Administradores</title>
 
 	</head>
 
 	<body>
 	
-		<h1>Available operations</h1>
+		<h1>Operaciones disponibles</h1>
 	
 		<ul>
 		
-			<li><a href = "add.html">Add</a></li>
-			<li><a href = "consult.html">Consult</a></li>
-			<li><a href = "list.html">List</a></li>	
+			<li><a href = "add.html">Añadir</a></li>
+			<li><a href = "consult.html">Consultar</a></li>
+			<li><a href = "list.html">Listar</a></li>	
 		
 		</ul>
 
-	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/index.jsp'" name = "cancel" value = "<< Tables">
+	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/index.jsp'" name = "cancel" value = "<< Tablas">
 
 	</body>
 

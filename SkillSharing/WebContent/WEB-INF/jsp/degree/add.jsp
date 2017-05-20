@@ -1,23 +1,20 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
-		<meta charset="UTF-8" />
-
-		<title>Add Degree</title>
+		<title>Grado</title>
 
 	</head>
 
 	<body>
     
-    	<h2>New Degree</h2>
+    	<h2>Nuevo Grado</h2>
     	
 	    <form:form method="post" modelAttribute="degree">
 		       
@@ -25,7 +22,7 @@
 			
 	        	<tr>
 	        	
-	                <td><form:label path="idDegree">IdDegree</form:label></td>
+	                <td><form:label path="idDegree">IDCarrera</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idDegree" /></td>
 	                <td><form:errors path = "idDegree" cssClass = "error" /></td>
 	                	                
@@ -33,7 +30,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="name">Name</form:label></td>
+	                <td><form:label path="name">Nombre</form:label></td>
 	                <td><form:input type = "text" maxlength = "100" path="name" /></td>
 	                <td><form:errors path = "name" cssClass = "error" /></td>
 	                
@@ -41,7 +38,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="nid">NID</form:label></td>
+	                <td><form:label path="nid">DNI</form:label></td>
 	                <td><form:input type = "text" maxlength = "9" path="nid" /></td>
 	                <td><form:errors path = "nid" cssClass = "error" /></td>
 	                
@@ -49,8 +46,8 @@
 	        
 	        </table>
 	        
-	        	<input type = "submit" name = "submit" value = "Accept">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/degree/main.html'" name = "cancel" value = "Cancel">
+	        	<input type = "submit" name = "submit" value = "Aceptar">
+	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/degree/main.html'" name = "cancel" value = "Cancelar">
 	    
 	    </form:form>
 	    	

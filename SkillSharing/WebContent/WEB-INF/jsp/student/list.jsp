@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 	
-		<title>Students</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
+	
+		<title>Estudiante</title>
 
 		<style>
 		
@@ -25,21 +26,21 @@
 	
 	<body>
     
-    	<h1>List Students</h1>
+    	<h1>Lista Estudiante</h1>
      
     	<table>
     	
 	        <tr>
 	        
-	            <th>NID</th>
-	            <th>Name</th>
-	            <th>UserName</th>
-	            <th>Password</th>
-	            <th>Email</th>
-	            <th>Course</th>
-	            <th>offerHours</th>
-	            <th>demandHours</th>
-	            <th>banned</th>
+	            <th>DNI</th>
+	            <th>Nombre</th>
+	            <th>Nombre usuario</th>
+	            <th>Contraseña</th>
+	            <th>Correo</th>
+	            <th>Curso</th>
+	            <th>Horas Ofertadas</th>
+	            <th>Horas Demandadas</th>
+	            <th>Baneado</th>
 	            
 	        </tr>
 	        
@@ -56,8 +57,8 @@
 	                <td>${student.offerHours}</td>
 	           		<td>${student.demandHours}</td>
 	           		<td>${student.banned}</td>
-	           		<td><a href="update/${student.nid}.html">Update</a>
-               		<td><a href="delete/${student.nid}.html">Delete</a>
+	           		<td><a href="update/${student.nid}.html">Modificar</a>
+               		<td><a href="delete/${student.nid}.html">Eliminar</a>
 	           
 	            </tr>
 	        
@@ -67,7 +68,7 @@
     
     	<br>
     
-    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/main.html'" name = "cancel" value = "Cancel">
+    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/main.html'" name = "cancel" value = "Cancelar">
     
 	</body>
 	

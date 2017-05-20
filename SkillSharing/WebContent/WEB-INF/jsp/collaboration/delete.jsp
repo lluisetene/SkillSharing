@@ -1,23 +1,20 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
-		<meta charset="UTF-8" />
-		
-		<title>Delete Collaboration</title>
+		<title>Colaboracion</title>
 
 	</head>
 
 	<body>
     
-    	<h2>Delete Collaboration</h2>
+    	<h2>Eliminar Colaboracion</h2>
     
     	<form:form method="post" modelAttribute="collaboration">
 		       
@@ -85,7 +82,7 @@
 	            
 	              
 	              	<td><select id = "rate" name = "rate" style="display:none">
-		               <option value= "5" selected="selected">5 (default)</option>
+		               <option value= "5" selected="selected">${collaboration.rate}</option>
 		               <option value="0">0</option>
 		               <option value="1">1</option>
 		               <option value="2">2</option>
@@ -102,11 +99,12 @@
 	        
 	        </table>
 	        
-	        	¿Seguro que desea borrar la colaboracion con id ${collaboration.idCollaboration}?
+	        	¿Seguro que desea borrar la colaboracion con id ${collaboration.idCollaboration} entre la idOferta ${collaboration.idOffer}
+	        	y la idDemanda ${collaboration.idDemand}?
 	        	<br><br>
 	        
-	        	<input type = "submit" name = "submit" value = "Accept">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/list.html'" name = "cancel" value = "Cancel">
+	        	<input type = "submit" name = "submit" value = "Aceptar">
+	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/list.html'" name = "cancel" value = "Cancelar">
 	    
 	    </form:form>
 	    	

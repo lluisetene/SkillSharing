@@ -1,9 +1,11 @@
 <%@ tag description="Estructura d'una pàgina normal" pageEncoding="UTF-8"%>
 <%@ attribute name="title" required="false"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html>
-<html lang="en">
+
+<html lang="es-ES">
+
 	<head>
+	
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>${title}</title>
@@ -18,13 +20,13 @@
 	
 	<body>
     <header class="container page-header"><h1>Skill Sharing</h1></header>
-    <div class="userlogin"><t:logininfo /></div>
+    <t:logininfo />
     <div class="container">
     <jsp:doBody/>
     </div>
     <footer>
     <hr>
-    <p class="text-muted">EI1027 - Disseny i Implementacio de Sistemes d'Informacio</p>
+    <p class="text-muted">&#169; 2017 Skill Sharing. All Rights Reserved</p>
     </footer>
 </body>
 </html>

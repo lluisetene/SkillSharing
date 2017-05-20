@@ -1,23 +1,20 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
-
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-
-		<meta charset="UTF-8" />
 		
-		<title>Update Skill</title>
+		<title>Habilidad</title>
+		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
 	</head>
 
 	<body>
     
-    	<h2>Change Skill</h2>
+    	<h2>Modificar Habilidad</h2>
     
     	<form:form method="post" modelAttribute="skill">
         
@@ -25,7 +22,7 @@
 	        	
 	        	<tr>
 	                
-	                <td><form:label path="idSkill">IdSkill</form:label></td>
+	                <td><form:label path="idSkill">IdHabilidad</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idSkill" disabled = "true"/></td>
 	                <td><form:errors path = "idSkill" cssClass = "error" /></td>
 	            
@@ -33,7 +30,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="name">name</form:label></td>
+	                <td><form:label path="name">Nombre</form:label></td>
 	                <td><form:input type = "text" maxlength = "50" path="name" /></td>
 	                <td><form:errors path = "name" cssClass = "error" /></td>
 	            
@@ -41,7 +38,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="level">level</form:label></td>
+	                <td><form:label path="level">Nivel</form:label></td>
 					<td><select id="level" name="level">
 						<option value="medio" selected="selected">medio</option>
 						<option value="alto">alto</option>
@@ -52,15 +49,15 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="description">description</form:label></td>
+	                <td><form:label path="description">descripcion</form:label></td>
 	                <td><form:input type = "text" maxlength = "300" path="description" /></td>
 	            
 	            </tr>
 	        
 	        </table>
 	        
-	        <input type = "submit" name = "submit" value = "Accept" onclick = "document.getElementById('idSkill').disabled=false;">
-	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/skill/list.html'" name = "cancel" value = "Cancel">
+	        <input type = "submit" name = "submit" value = "Aceptar" onclick = "document.getElementById('idSkill').disabled=false;">
+	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/skill/list.html'" name = "cancel" value = "Cancelar">
 	   
     	</form:form>
     

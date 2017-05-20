@@ -1,18 +1,14 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
-
-		<meta charset="UTF-8" />
-
-		<title>Admin</title>
+		<title>Gestión Administradores</title>
 
 		<style>
 			
@@ -29,7 +25,7 @@
 	
 	<body>
 	
-    	<h2>Consult Admin</h2>
+    	<h2>Consultar Administrador</h2>
     
     	<form:form method="post" modelAttribute="admin">
         
@@ -37,7 +33,7 @@
 	        
 	        	<tr>
 	        	
-	                <td><form:label style = "font-size:16px" path="username">Username</form:label></td>
+	                <td><form:label style = "font-size:16px" path="username">Nombre usuario</form:label></td>
 	                <td><form:input type = "text" maxlength = "9" path="username" /></td>
 	                <td><form:errors path="username" cssClass="error" /></td>
 	            
@@ -45,8 +41,8 @@
 
         	</table>
         
-        	<input type = "submit" name = "submit" value = "Accept">
-        	<input type = "button" name = "cancel" value = "Cancel" onclick = "location='http://localhost:8080/SkillSharing/admin/main.html'"/>
+        	<input type = "submit" name = "submit" value = "Aceptar">
+        	<input type = "button" name = "cancel" value = "Cancelar" onclick = "location='http://localhost:8080/SkillSharing/admin/main.html'"/>
    			
    			<br>
    			<br>
@@ -55,10 +51,10 @@
     	
 		        <tr>
 		        
-		        	<th>Name</th>
-		        	<th>Mail</th>
-		            <th>UserName</th>
-		            <th>Password</th>
+		        	<th>Nombre</th>
+		        	<th>Correo</th>
+		            <th>Nombre usuario</th>
+		            <th>Contraseña</th>
 		            
 		        </tr>
 		        

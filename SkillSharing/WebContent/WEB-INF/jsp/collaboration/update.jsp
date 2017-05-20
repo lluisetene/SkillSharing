@@ -1,13 +1,12 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 
-		<title>Update Collaboration</title>
+		<title>Colaboracion</title>
 		
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="/resources/demos/style.css">
@@ -18,7 +17,7 @@
 
 	<body>
     
-    	<h2>Change Collaboration</h2>
+    	<h2>Modificar Colaboracion</h2>
     
     	<form:form method="post" modelAttribute="collaboration">
         
@@ -26,7 +25,7 @@
 			
 	        	<tr>
 	        	
-	                <td><form:label path = "idCollaboration">IdCollaboration</form:label></td>
+	                <td><form:label path = "idCollaboration">IdColaboracion</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idCollaboration" disabled = "true"/></td>
 	                <td><form:errors path = "idCollaboration" cssClass = "error" /></td>
 	                
@@ -34,7 +33,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="idOffer">IdOffer</form:label></td>
+	                <td><form:label path="idOffer">IdOferta</form:label></td>
 	             	<td><form:input type = "text" maxlength = "5" path="idOffer" disabled = "true"/></td>
 	                <td><form:errors path = "idOffer" cssClass = "error" /></td>
 	                
@@ -42,7 +41,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="idDemand">IdDemand</form:label></td>
+	                <td><form:label path="idDemand">IdDemanda</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idDemand" disabled = "true"/></td>
 	                <td><form:errors path = "idDemand" cssClass = "error" /></td>
 	                
@@ -50,14 +49,14 @@
 	            
 	            <tr>
 	            
-	  	            <td><form:label path="beginningDate">BeginningDate</form:label></td>
+	  	            <td><form:label path="beginningDate">Fecha inicio</form:label></td>
 	                <td><form:input type="text" path="beginningDate" name="datepicker" id="from" size="10" /><td>
 	                <td><form:errors path="beginningDate" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="endingDate">EndingDate</form:label></td>
+	                <td><form:label path="endingDate">Fecha fin</form:label></td>
 	                <td><form:input type="text" path="endingDate" name="datepicker" id="to" size="10"/><td>
 	                <td><form:errors path="endingDate" cssClass="error" /></td>
 	                
@@ -65,7 +64,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="hours">Hours</form:label></td>
+	                <td><form:label path="hours">Horas</form:label></td>
 					<td><select id = "hours" name = "hours" disabled>
 						<option value="${collaboration.hours}">${collaboration.hours}</option>
 	
@@ -76,7 +75,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="rate">Rate</form:label></td>
+	                <td><form:label path="rate">Valoracion</form:label></td>
 	              	<td><select id = "rate" name = "rate" disabled>
 		               <option value= "${collaboration.rate}">${collaboration.rate}</option>
 
@@ -85,13 +84,13 @@
 	            </tr>
 	       
 	        </table>
-	        <input type = "submit" name = "submit" value = "Accept" onclick = "document.getElementById('idCollaboration').disabled=false, 
+	        <input type = "submit" name = "submit" value = "Aceptar" onclick = "document.getElementById('idCollaboration').disabled=false, 
 	        																   document.getElementById('idOffer').disabled=false,
 	        																   document.getElementById('idDemand').disabled=false,
 	        																   document.getElementById('hours').disabled=false,
 	        																   document.getElementById('rate').disabled=false;">
 	        																  
-	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/list.html'" name = "cancel" value = "Cancel">
+	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/list.html'" name = "cancel" value = "Cancelar">
 	   
     	</form:form>
     	

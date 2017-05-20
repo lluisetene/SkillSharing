@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 	
-		<title>Admins</title>
+		<title>Gestión Administradores</title>
 
 		<style>
 		
@@ -24,16 +24,16 @@
 	
 	<body>
     
-    	<h1>List Admins</h1>
+    	<h1>Lista Administradores</h1>
      
     	<table>
     	
 	        <tr>
 	        
-	        	<th>Name</th>
-	        	<th>Mail</th>
-	            <th>UserName</th>
-	            <th>Password</th>
+	        	<th>Nombre</th>
+	        	<th>Correo</th>
+	            <th>Nombre usuario</th>
+	            <th>Contraseña</th>
 	            
 	        </tr>
 	        
@@ -45,8 +45,8 @@
 	          		<td>${admin.mail}</td>
 	                <td>${admin.username}</td>
 	           		<td>${admin.password}</td>
-	           		<td><a href="update/${admin.username}.html">Update</a>
-               		<td><a href="delete/${admin.username}.html">Delete</a>
+	           		<td><a href="update/${admin.username}.html">Modificar</a>
+               		<td><a href="delete/${admin.username}.html">Eliminar</a>
 	           
 	            </tr>
 	        
@@ -56,7 +56,7 @@
     
     	<br>
     
-    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/admin/main.html'" name = "cancel" value = "Cancel">
+    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/admin/main.html'" name = "cancel" value = "Cancelar">
     
 	</body>
 	

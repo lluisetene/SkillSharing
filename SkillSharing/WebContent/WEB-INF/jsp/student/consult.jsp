@@ -1,18 +1,16 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
-
+		
+		<title>Estudiante</title>
+		
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
-
-		<meta charset="UTF-8" />
-
-		<title>Consult Student</title>
+	</head>
 
 		<style>
 			
@@ -29,7 +27,7 @@
 	
 	<body>
 	
-    	<h2>Consult Student</h2>
+    	<h2>Consultar Estudiante</h2>
     
     	<form:form method="post" modelAttribute="student">
         
@@ -55,15 +53,15 @@
     	
 		        <tr>
 		        
-		            <th>NID</th>
-		            <th>Name</th>
-		            <th>UserName</th>
-		            <th>Password</th>
-		            <th>Email</th>
-		            <th>Course</th>
-		            <th>offerHours</th>
-		            <th>demandHours</th>
-		            <th>banned</th>
+		            <th>DNI</th>
+		            <th>Nombre</th>
+		            <th>Nombre usuario</th>
+		            <th>Contraseña</th>
+		            <th>Correo</th>
+		            <th>Curso</th>
+		            <th>Horas Ofertadas</th>
+		            <th>Horas Demandadas</th>
+		            <th>Baneado</th>
 		            
 		        </tr>
 		        

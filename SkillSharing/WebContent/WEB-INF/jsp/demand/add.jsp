@@ -1,13 +1,12 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 		
-		<title>Add Demand</title>
+		<title>Demanda</title>
 		
 		
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -18,7 +17,7 @@
 
 	<body>
     
-    	<h2>New Demand</h2>
+    	<h2>Nueva Demanda</h2>
     	
 	    <form:form method="post" modelAttribute="demand">
 		       
@@ -26,56 +25,56 @@
 	        	
 	        	<tr>
 	                
-	                <td><form:label path="idDemand">IdDemand</form:label></td>
+	                <td><form:label path="idDemand">IdDemanda</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idDemand" /></td>
 	            	<td><form:errors path="idDemand" cssClass="error"/></td>
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="nid">NID</form:label></td>
+	                <td><form:label path="nid">DNI</form:label></td>
 	                <td><form:input type = "text" maxlength = "9" path="nid" /></td>
 	            	<td><form:errors path="nid" cssClass="error"/></td>
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="name">Name</form:label></td>
+	                <td><form:label path="name">Nombre</form:label></td>
 	                <td><form:input type = "text" maxlength = "100" path="name" /></td>
 	            	<td><form:errors path="name" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	                
-	                <td><form:label path="idSkill">IdSkill</form:label></td>
+	                <td><form:label path="idSkill">IdHabilidad</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idSkill" /></td>
 	            	<td><form:errors path="idSkill" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	                
-	                <td><form:label path="description">Description</form:label></td>
+	                <td><form:label path="description">Descripcion</form:label></td>
 	                <td><form:input type = "text" maxlength = "300" path="description" /></td>
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="beginningDate">BeginningDate</form:label></td>
+	                <td><form:label path="beginningDate">Fecha inicio</form:label></td>
 	                <td><form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/><td>
 	                <td><form:errors path="beginningDate" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	            
-	                <td><form:label path="endingDate">EndingDate</form:label></td>
+	                <td><form:label path="endingDate">Fecha fin</form:label></td>
 	                <td><form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" /><td>
 	                <td><form:errors path="endingDate" cssClass="error" /></td>
 	            </tr>
 	            
 	        </table>
 	        
-	        	<input type = "submit" name = "submit" value = "Accept">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/demand/main.html'" name = "cancel" value = "Cancel">
+	        	<input type = "submit" name = "submit" value = "Aceptar">
+	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/demand/main.html'" name = "cancel" value = "Cancelar">
 	    
 	    </form:form>
 	    

@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 	
-		<title>Demand</title>
+		<title>Demanda</title>
 
 		<style>
 		
@@ -26,19 +26,19 @@
 	
 	<body>
     
-    	<h1>List Demands</h1>
+    	<h1>Lista Demandas</h1>
      
     	<table>
     	
 	        <tr>
 	        
-	            <th>IdDemand</th>
-	            <th>NID</th>
-	            <th>Name</th>
-	            <th>IdSkill</th>
-	            <th>Description</th>
-	            <th>BeginningDate</th>
-	            <th>EndingDate</th>
+	            <th>IdDemanda</th>
+	            <th>DNI</th>
+	            <th>Nombre</th>
+	            <th>IdHabilidad</th>
+	            <th>Descripcion</th>
+	            <th>Fecha inicio</th>
+	            <th>Fecha fin</th>
 	            
 	        </tr>
 	        
@@ -53,8 +53,8 @@
 	                <td>${demand.description}</td>
 	                <td>${demand.beginningDate}</td>
 	                <td>${demand.endingDate}</td>
-	                <td><a href="update/${demand.idDemand}.html">Update</a>
-               		<td><a href="delete/${demand.idDemand}.html">Delete</a>
+	                <td><a href="update/${demand.idDemand}.html">Modificar</a>
+               		<td><a href="delete/${demand.idDemand}.html">Eliminar</a>
 	           
 	            </tr>
 	        

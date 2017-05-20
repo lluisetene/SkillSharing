@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 	
-		<title>Collaborations</title>
+		<title>Colaboracion</title>
 
 		<style>
 		
@@ -26,19 +26,19 @@
 	
 	<body>
     
-    	<h1>List Collaborations</h1>
+    	<h1>Lista Colaboraciones</h1>
      
     	<table>
     	
 	        <tr>
 	        
-	            <th>IdCollaboration</th>
-	            <th>IdOffer</th>
-	            <th>IdDemand</th>
-	            <th>BeginningDate</th>
-	            <th>EndingDate</th>
-	            <th>Hours</th>
-	            <th>Rate</th>
+	            <th>IdColaboracion</th>
+	            <th>IdOferta</th>
+	            <th>IdDemanda</th>
+	            <th>Fecha inicio</th>
+	            <th>Fecha fin</th>
+	            <th>Horas</th>
+	            <th>Valoracion</th>
 	            
 	        </tr>
 	        
@@ -53,8 +53,8 @@
 	                <td>${collaboration.endingDate}</td>
 	                <td>${collaboration.hours}</td>
 	                <td>${collaboration.rate}</td>
-	                <td><a href="update/${collaboration.idCollaboration}.html">Update</a>
-               		<td><a href="delete/${collaboration.idCollaboration}.html">Delete</a>
+	                <td><a href="update/${collaboration.idCollaboration}.html">Modificar</a>
+               		<td><a href="delete/${collaboration.idCollaboration}.html">Eliminar</a>
 	           
 	            </tr>
 	        
@@ -64,7 +64,7 @@
     
     	<br>
     
-    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/main.html'" name = "cancel" value = "Cancel">
+    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/collaboration/main.html'" name = "cancel" value = "Cancelar">
     
 	</body>
 	

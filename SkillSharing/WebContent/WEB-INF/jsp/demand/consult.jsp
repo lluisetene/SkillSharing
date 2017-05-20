@@ -1,17 +1,14 @@
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
 
-<html>
+<html lang="es-ES">
 
 	<head>
 
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 
-		<meta charset="UTF-8" />
-
-		<title>Consult Demand</title>
+		<title>Demanda</title>
 
 		<style>
 			
@@ -27,7 +24,7 @@
 	
 	<body>
 	
-    	<h2>Consult Demand</h2>
+    	<h2>Consultar Demandas</h2>
     
     	<form:form method="post" modelAttribute="demand">
         
@@ -35,7 +32,7 @@
 	        
 	        	<tr>
 	        	
-	                <td><form:label style = "font-size:16px" path="idDemand">IdDemand</form:label></td>
+	                <td><form:label style = "font-size:16px" path="idDemand">IdDemanda</form:label></td>
 	                <td><form:input type = "text" maxlength = "5" path="idDemand" /></td>
 	                <td><form:errors path = "idDemand" cssClass = "error" /></td>
 	            
@@ -43,8 +40,8 @@
 
         	</table>
         
-        	<input type = "submit" name = "submit" value = "Accept">
-        	<input type = "button" name = "cancel" value = "Cancel" onclick = "location='http://localhost:8080/SkillSharing/demand/main.html'"/>
+        	<input type = "submit" name = "submit" value = "Aceptar">
+        	<input type = "button" name = "cancel" value = "Cancelar" onclick = "location='http://localhost:8080/SkillSharing/demand/main.html'"/>
    			
    			<br>
    			<br>
@@ -53,13 +50,13 @@
    			
 	   		 	<tr>
 	   		 	
-		            <th>IdDemand</th>
-		            <th>NID</th>
-		            <th>Name</th>
-		            <th>IdSkill</th>
-		            <th>Description</th>
-		            <th>BeginningDate</th>
-		            <th>EndingDate</th>
+		            <th>IdDemanda</th>
+		            <th>DNI</th>
+		            <th>Nombre</th>
+		            <th>IdHabilidad</th>
+		            <th>Descripcion</th>
+		            <th>Fecha inicio</th>
+		            <th>Fecha fin</th>
 		        
 		        </tr>
 		        

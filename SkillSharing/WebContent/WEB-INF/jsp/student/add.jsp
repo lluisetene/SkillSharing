@@ -117,8 +117,8 @@
 	            
 	                <td><form:label path="banned">Baneado</form:label></td>
 					<td><select id="banned" name="banned">
-						<option value="falso" selected="selected">falso</option>
-						<option value="verdadero">verdadero</option>
+						<option value="false" selected="selected">falso</option>
+						<option value="true">verdadero</option>
 					</select></td>
 	            
 	            </tr>

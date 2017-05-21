@@ -1,18 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>  
 
 
-<html lang="es-ES">
-
-	<head>
-	
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-		
-		<title>Gestion Ofertas</title>
-
-	</head>
-
-	<body>
+<t:paginaBasica title="Ofertas">
 	
 		<h1>Operaciones disponibles</h1>
 	
@@ -29,3 +20,5 @@
 	</body>
 
 </html>
+
+</t:paginaBasica>

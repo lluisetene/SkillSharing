@@ -1,20 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-
-<html lang="es-ES">
-
-	<head>
-		
-		<title>Oferta</title>
+<t:paginaBasica title="Oferta">
 	
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/calendar.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-	</head>
-	<body>
-    
+	<jsp:body>
+	
     	<h2>Nueva Oferta</h2>
     	
 	    <form:form method="post" modelAttribute="offer">
@@ -107,7 +98,7 @@
 		  });
 		
 		</script>
-	</body>
+		
+		</jsp:body>
 	
-	
-</html>
+</t:paginaBasica>

@@ -4,7 +4,8 @@
 
 
 <c:choose>
-<c:when test='${adminLogin == null && studentLogin == null}'>
+
+	<c:when test='${adminLogin == null && studentLogin == null}'>
 
 		<a href="${pageContext.request.contextPath}/login.html">Conectar</a>
 	
@@ -24,4 +25,4 @@
 		
 	</c:when>
 	
-	</c:choose>
+</c:choose>

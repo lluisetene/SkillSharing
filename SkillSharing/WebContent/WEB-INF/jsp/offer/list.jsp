@@ -1,33 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<html lang="es-ES">
+<t:paginaBasica title="Oferta">
 
-	<head>
+	<jsp:body>
 	
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-	
-		<title>Oferta</title>
-
-		<style>
-		
-			table, th, td {
-  
-	  			border-spacing: 10px 5px;
-	  			font-size:12px;
-
-			}
-	
-		</style>
-		
-	</head>
-	
-	<body>
-    
     	<h1>Lista Ofertas</h1>
      
-    	<table>
+    	<table class="table table-bordered table-hover table-striped">
     	
 	        <tr>
 	        
@@ -61,10 +43,8 @@
 	            
   	  	</table>
     
-    	<br>
-    
-    	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/offer/main.html'" name = "cancel" value = "Cancelar">
-    
-	</body>
+    	<input type = "button" onclick = "location='${pageContext.request.contextPath}/offer/main.html'" name = "cancel" value = "Cancelar">
+    	
+    </jsp:body>
 	
-</html>
+</t:paginaBasica>

@@ -7,11 +7,11 @@
     </div>
 
 	<!--  BARRA SUPERIOR/ENLACES -->
-      <ul class="nav navbar-top-links navbar-right">
+      <ul class="nav navbar-top-links navbar-right" style="margin-top:25px">
           <li class="dropdown">
-          <li><a href = "${pageContext.request.contextPath}/index.jsp">Página Principal</a>
-		  <li><a href = "${pageContext.request.contextPath}/offer/list.html">Ofertas</a></li>
-		  <li><a href = "${pageContext.request.contextPath}/demand/list.html">Demandas</a></li>
+          <li><a href ="${pageContext.request.contextPath}/index.jsp"><b>Página Principal</b></a>
+		  <li><a href = "${pageContext.request.contextPath}/offer/list.html"><b>Ofertas</b></a></li>
+		  <li><a href = "${pageContext.request.contextPath}/demand/list.html"><b>Demandas</b></a></li>
                  
 	      <!-- LOGIN -->
 	      <li class="dropdown">

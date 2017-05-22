@@ -31,11 +31,11 @@
 
         	</p>
         	
-        	<p>¿No estás registrado? Registrate <a href="${pageContext.request.contextPath}/registrarse.html">aquí</a></p>
+        	<p>¿No estás registrado? Registrate <a href="${pageContext.request.contextPath}/student/registrarse.html">aquí</a></p>
         	
         	<input type="submit" value="Log in" />
 
-        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/index.jsp'" name = "cancel" value = "Cancelar">
+        	<input type = "button" onclick = "location='${pageContext.request.contextPath}/index.jsp'" name = "cancel" value = "Cancelar">
         
     </form:form>
     

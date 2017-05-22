@@ -100,16 +100,16 @@ public class StudentController {
 	}
 	
 	//----------- añadir ------------------
-	@RequestMapping("/add")
+	@RequestMapping("/registrarse")
 	public String addStudent(Model model) {
 		
 		model.addAttribute("student", new Student());
 		
-		return"student/add";
+		return"student/registrarse";
 		
 	}
 	
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@RequestMapping(value="/registrarse", method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("student") Student student, BindingResult bindingResult) {
 		
 		StudentValidator studentValidator = new StudentValidator();
@@ -120,7 +120,7 @@ public class StudentController {
 		
 		if (bindingResult.hasErrors())
 
-			return "student/add";
+			return "student/registrarse";
 		
 		studentDao.addStudent(student);
 		

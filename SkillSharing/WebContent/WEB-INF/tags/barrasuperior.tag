@@ -23,7 +23,7 @@
 	          <!--  /ICONO  -->
 	          
 	          <ul class="dropdown-menu dropdown-user">
-	              <li><a href="${pageContext.request.contextPath}/login.html"><i class="fa fa-sign-out fa-fw"></i> Login</a>
+	              <li><a href="${pageContext.request.contextPath}/login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
 	          </ul>
 	      </li>
       <!--  /LOGIN  -->

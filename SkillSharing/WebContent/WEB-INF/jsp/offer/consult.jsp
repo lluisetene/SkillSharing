@@ -1,34 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
+<t:paginaBasica title="Oferta">
 
-<html lang="es-ES">
-
-	<head>
-		
-		<title>Oferta</title>
-		
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-
+	<jsp:body>
+	
 		<style>
 			
-			table, th, td {
-	    		
-	  			border-spacing: 10px 5px;
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
 	
-			}
+			<style>
+				
+				table, th, td {
+		    		
+		  			border-spacing: 10px 5px;
 		
+				}
+				
 		</style>
-
-	</head>
-	
-	<body>
 	
     	<h2>Consultar Oferta</h2>
     
     	<form:form method="post" modelAttribute="offer">
         
-        	<table>
+        	<table border=0 class="table table-bordered table-hover table-striped">
 	        
 	        	<tr>
 	        	
@@ -46,7 +43,7 @@
    			<br>
    			<br>
    			
-   			<table>
+   			<table class="table table-bordered table-hover table-striped">
    			
 	   		 	<tr>
 	   		 	
@@ -79,6 +76,6 @@
    			
     	</form:form>
     
-	</body>
-	
-</html>
+	</jsp:body>
+
+</t:paginaBasica>

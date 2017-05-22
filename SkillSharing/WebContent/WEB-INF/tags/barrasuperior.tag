@@ -3,7 +3,7 @@
    
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background-color:white;">
     <div class="navbar-header">
-        <img src="imagenes/Skill_Sharing_Logo.png" width="500" height="100"/><a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp"></a>
+    	<a href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/imagenes/Skill_Sharing_Logo.png" width="500" height="100"></a> 
     </div>
 
 	<!--  BARRA SUPERIOR/ENLACES -->
@@ -23,7 +23,7 @@
 	          <!--  /ICONO  -->
 	          
 	          <ul class="dropdown-menu dropdown-user">
-	              <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Login</a>
+	              <li><a href="${pageContext.request.contextPath}/login.html"><i class="fa fa-sign-out fa-fw"></i> Login</a>
 	          </ul>
 	      </li>
       <!--  /LOGIN  -->
@@ -32,18 +32,18 @@
 </nav>
 
 <!-- jQuery -->
-<script src="vendor/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="vendor/metisMenu/metisMenu.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/metisMenu/metisMenu.min.js"></script>
 
 <!-- Morris Charts JavaScript -->
-<script src="vendor/raphael/raphael.min.js"></script>
-<script src="vendor/morrisjs/morris.min.js"></script>
-<script src="data/morris-data.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/raphael/raphael.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/morrisjs/morris.min.js"></script>
+<script src="${pageContext.request.contextPath}/data/morris-data.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="dist/js/sb-admin-2.js"></script>
+<script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>

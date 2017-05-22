@@ -5,6 +5,8 @@
 
 <t:paginaBasica title="Ofertas">
 	
+	<jsp:body>
+	
 		<h1>Operaciones disponibles</h1>
 	
 		<ul>
@@ -15,10 +17,8 @@
 		
 		</ul>
 
-	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/index.jsp'" name = "cancel" value = "<< Tablas">
+		<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/index.jsp'" name = "cancel" value = "<< Tablas">
 
-	</body>
-
-</html>
+	</jsp:body>
 
 </t:paginaBasica>

@@ -55,7 +55,6 @@
 			
 	   	<jsp:doBody/>
 	   
-	   	<t:barrainferior/>
 	    
 	</body>
 	

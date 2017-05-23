@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.skillsharing.model.Skill;
@@ -25,6 +26,18 @@ private JdbcTemplate jdbcTemplate;
 		
 	}
 	
+	public SkillDAO(){
+		
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setUrl("jdbc:postgresql://db-aules.uji.es/ei102716ent");
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUsername("ei102716ent");
+		dataSource.setPassword("ei102716ent");
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		
+	}
+	
+	
 	private static final class SkillMapper implements RowMapper<Skill> {
 		
 		public Skill mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -39,6 +52,7 @@ private JdbcTemplate jdbcTemplate;
 			return skill;
 			
 		}
+		
 		
 	}
 	

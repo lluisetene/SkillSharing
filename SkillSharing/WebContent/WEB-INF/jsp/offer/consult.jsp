@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
@@ -25,7 +25,7 @@
     
     	<form:form method="post" modelAttribute="offer">
         
-        	<table border=0 class="table table-bordered table-hover table-striped">
+        	<table style="border:0px solid black" class="table table-bordered table-hover table-striped">
 	        
 	        	<tr>
 	        	

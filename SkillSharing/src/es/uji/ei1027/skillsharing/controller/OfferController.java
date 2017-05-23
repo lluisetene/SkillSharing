@@ -65,7 +65,7 @@ public class OfferController {
 	//----------- listado ------------------
 	@RequestMapping("/list")
 	public String listOffers(Model model) {
-		
+	
 		model.addAttribute("offers", offerDao.getOffers());
 		
 		return "offer/list";

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
@@ -40,7 +40,7 @@
 	            <tr>
 	            
 	                <td><form:label path="name">Nombre</form:label></td>
-	                <td><form:input type = "text" maxlength = "100" path="name" /></td>
+	                <td><form:input type = "text" maxlength = "100" path="name"/></td>
 	            	<td><form:errors path="name" cssClass="error" /></td>
 	            </tr>
 	            

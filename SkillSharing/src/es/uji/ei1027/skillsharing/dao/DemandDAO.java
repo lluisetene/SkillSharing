@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.skillsharing.model.Demand;
@@ -22,6 +23,18 @@ public class DemandDAO {
 	public void setDataSource(DataSource dataSource) {
 		
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		
+	}
+	
+	public DemandDAO(){
+		
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setUrl("jdbc:postgresql://db-aules.uji.es/ei102716ent");
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUsername("ei102716ent");
+		dataSource.setPassword("ei102716ent");
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		
 		
 	}
 	
@@ -48,7 +61,7 @@ public class DemandDAO {
 	
 	public List<Demand> getDemands() {
 		
-		return this.jdbcTemplate.query("select * from demand order by iddemand", new DemandMapper());
+		return this.jdbcTemplate.query("select * from demand order by iddemand DESC", new DemandMapper());
 	
 	}
 	

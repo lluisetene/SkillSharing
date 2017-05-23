@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
@@ -57,20 +57,20 @@
 	            <tr>
 	            
 	               
-	                <td><form:input type="date" path="beginningDate" name="datepicker" id="datepickerbeginning" size="10" readOnly="true" style="display:none"/><td>
+	                <td><form:input type="text" path="beginningDate" name="datepicker" id="datepickerbeginning" size="10" readOnly="true" style="display:none"/><td>
 	                <td><form:errors path="beginningDate" cssClass="error" /></td>
 	            </tr>
 	            
 	            <tr>
 	            
 	            
-	                <td><form:input type="date" path="endingDate" name="datepicker" id="datepickerending" size="10" readOnly="true" style="display:none"/><td>
+	                <td><form:input type="text" path="endingDate" name="datepicker" id="datepickerending" size="10" readOnly="true" style="display:none"/><td>
 	                <td><form:errors path="endingDate" cssClass="error" /></td>
 	            </tr>
 	            
 	        </table>
 	        
-	       	 	Â¿Seguro que desea borrar la demanda ${demand.name} (id ${demand.idDemand})?
+	       	 	¿Seguro que desea borrar la demanda ${demand.name} (id ${demand.idDemand})?
 	        	<br><br>
 	        
 	        	<input type = "submit" name = "submit" value = "Aceptar" >

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
@@ -18,7 +18,7 @@
 	
 		<ul>
 		
-			<li><a href = "add.html">AÃ±adir</a></li>
+			<li><a href = "add.html">Añadir</a></li>
 			<li><a href = "consult.html">Consultar</a></li>
 			<li><a href = "list.html">Listar</a></li>	
 		

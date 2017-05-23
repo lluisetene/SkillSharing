@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
@@ -10,7 +10,7 @@
 
 		<meta charset="UTF-8" />
 		
-		<title>GestiÃ³n Administradores</title>
+		<title>Gestión Administradores</title>
 
 	</head>
 
@@ -48,7 +48,7 @@
 	            
 	            <tr>
 	            
-	                <td><form:label path="password">ContraseÃ±a</form:label></td>
+	                <td><form:label path="password">Contraseña</form:label></td>
 	                <td><form:input type = "password" maxlength = "30" path="password" /></td>
 	                <td><form:errors path="password" cssClass="error" /></td>
 	                

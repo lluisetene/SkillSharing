@@ -82,9 +82,11 @@ public class StudentValidator implements Validator {
 				if ( studentsList.get(i).getMail().toLowerCase().equals(student.getMail().toLowerCase() )) {
 					errors.rejectValue("mail", "required", "Este Mail ya está en uso");
 					break;
+					
 				}
 		}
-				
+	
+	
 	}
 
 	@Override

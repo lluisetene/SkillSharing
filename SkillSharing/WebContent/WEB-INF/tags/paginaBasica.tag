@@ -52,10 +52,12 @@
 			<div class="login"><t:logininfo /></div>
 			
 		</t:barrasuperior>
+		
+		
 			
 	   	<jsp:doBody/>
 	   
-	    
+	   
 	</body>
-	
+	 
 </html>

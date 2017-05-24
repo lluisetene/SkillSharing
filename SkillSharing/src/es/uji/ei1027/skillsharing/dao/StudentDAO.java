@@ -22,7 +22,7 @@ public class StudentDAO {
 	
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
-		
+
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 		
 	}

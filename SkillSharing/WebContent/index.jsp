@@ -21,7 +21,7 @@
 	        <div id="page-wrapper">
 	        
 	        <!-- Primera fila -->
-	            <div class="row" style="background-image:url(imagenes/Comparte.png); margin-left: -50px; margin-right:-50px">
+	            <div class="row" style="background-image:url(imagenes/Comparte.png); width=100%; margin-left: -32px; margin-right:-30px">
 	                <div class="col-lg-12" align="center" style="top:100">
 	                	
 	  					<h1 style="color:#FFFFFF"><b>COMPARTE TUS HABILIDADES</b></h1>

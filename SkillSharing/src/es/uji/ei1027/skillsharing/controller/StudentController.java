@@ -119,7 +119,7 @@ public class StudentController {
 		studentValidator.validateAdd(student, bindingResult);
 		
 		if (bindingResult.hasErrors())
-
+		
 			return "student/registrarse";
 		
 		studentDao.addStudent(student);

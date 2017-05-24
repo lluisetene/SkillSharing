@@ -1,4 +1,8 @@
-.error {
-	color: red;
-	font-size: 80% 
+@CHARSET "ISO-8859-1";
+
+.error{
+	
+	color:red;
+	font-size:09px;
+	
 }

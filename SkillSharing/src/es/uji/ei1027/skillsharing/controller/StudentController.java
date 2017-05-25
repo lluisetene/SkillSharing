@@ -121,7 +121,7 @@ public class StudentController {
 		if (bindingResult.hasErrors())
 		
 			return "student/registrarse";
-		
+	
 		studentDao.addStudent(student);
 		
 		return "redirect:main.html";

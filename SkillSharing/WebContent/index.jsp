@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>  
 
 <%@ page import = "es.uji.ei1027.skillsharing.dao.OfferDAO" %>
@@ -14,14 +14,15 @@
 <t:paginaBasica title="Skill Sharing">
 
 	<jsp:body>
-
 	
 	    <div id="wrapper">
 	    
 	        <div id="page-wrapper">
 	        
 	        <!-- Primera fila -->
+	        
 	            <div class="row" style="background-image:url(imagenes/Comparte.png); width=100%; margin-left: -32px; margin-right:-30px">
+	            
 	                <div class="col-lg-12" align="center" style="top:100">
 	                	
 	  					<h1 style="color:#FFFFFF"><b>COMPARTE TUS HABILIDADES</b></h1>

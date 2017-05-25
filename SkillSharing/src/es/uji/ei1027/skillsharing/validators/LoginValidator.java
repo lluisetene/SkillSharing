@@ -36,23 +36,28 @@ public class LoginValidator implements ValidatorLogin {
 		Login user = (Login) obj;
 		
 		//---------- USERNAME -----------//
-		if ( user.getUsername().trim().equals("") )
+		if ( user.getUsername().trim().equals("") ){
+			System.out.println("Entra sin datos");
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < adminsList.size(); i++ )
+		}else {
+			System.out.println("Entra con algun username");
+			for ( int i = 0; i < adminsList.size(); i++ ){
+				System.out.println("Recorre lista admins");
 				if ( adminsList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
+					System.out.println("Coincide con el username del admin");
 					enUso = true;
 					break;
 				}
-			
+			}
 			if ( !enUso ) {
+				System.out.println("Sigue sin estar en uso");
 				for ( int i = 0; i < studentsList.size(); i++ )
 					if ( studentsList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
 						enUso = true; 
 						break;
 					}
 			}
-			
+			System.out.println(enUso);
 			if ( !enUso ) 
 				errors.rejectValue("username", "required", "El Username introducido no existe");
 			

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>  
 
@@ -9,17 +9,6 @@
 
 <style>
 
-.errorMessages {
-    display: none;
-    list-style-type: disc;
-    margin: 0 10px 15px 10px;
-    padding: 8px 35px 8px 30px;
-    color: #B94A48;
-    background-color: #F2DEDE;
-    border: 2px solid #EED3D7;
-    border-radius: 4px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-}
 .bordesRedondeados{
 
 -khtml-border-radius: 20px;
@@ -50,7 +39,7 @@ border-radius: 20px;
 			<div class="panel-body" style="padding-top:35">
 	            <div class="col-lg-6">
 					<p><img src="${pageContext.request.contextPath}/imagenes/Registrarse.png" width="550" height="375" style="padding-left:100px; padding-bottom:25px"></p>
-					<p class = "rotarTexto" style="margin-top:-8%; margin-left:30%; color: 073763; font-size:32px"><i>Â¡Gracias por unirte!</i></p>
+					<p class = "rotarTexto" style="margin-top:-8%; margin-left:30%; color: 073763; font-size:32px"><i>¡Gracias por unirte!</i></p>
 				</div>
 				<div class="col-lg-4 bordesRedondeados" style="background-color:cccccc; width:43%;margin-left:75">
 					<h2 style="color:073763" align="center"><b><i>Registrarse en Skill Sharing</i></b></h2>
@@ -91,7 +80,7 @@ border-radius: 20px;
 				            
 				            <tr>
 				            
-				                <td><form:label style= "color:black" path="password">ContraseÃ±a</form:label></td>
+				                <td><form:label style= "color:black" path="password">Contraseña</form:label></td>
 				                <td><form:input type = "password" maxlength = "30" path="password" style="width:100%; border-style:solid"/><br><form:errors path="password" cssClass="error" /></td>
 				                
 				                
@@ -143,16 +132,16 @@ border-radius: 20px;
 	            
 	
 				                <td><select id="banned" name="banned" style="display:none">
-									<option value="falso" selected="selected">falso</option>
-									<option value="verdadero">verdadero</option>
+									<option value="false" selected="selected">falso</option>
+									<option value="true">verdadero</option>
 								</select></td>
 	            
 	            			</tr>
 		        
 				        </table>
 				    
-				    	<input class="btn"  style="font-weight:bold; background-color:white; border: 1px solid; color:black; margin-left:30%; width:100px; height:35px" type = "submit" name = "submit" value = "Registrarse">
-				        <input class = "btn" style="font-weight:bold; background-color:white; border: 1px solid; color:black; margin-left:2%;width:100px; height:35px" type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/main.html'" name = "cancel" value = "Cancelar">
+				    	<input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:105px; height:35px" type = "submit" name = "submit" value = "Registrarse">
+				        <input class = "btn" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:2%;width:105px; height:35px" type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/main.html'" name = "cancel" value = "Cancelar">
 				    
 				    </form:form>
 				    

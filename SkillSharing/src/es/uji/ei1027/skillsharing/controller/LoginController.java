@@ -39,23 +39,23 @@ public class LoginController {
 	public String login(Model model) {
 		
 		model.addAttribute("login", new Login());
-		
+	
 		return "login";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String checkLogin(@ModelAttribute("login") Login login, BindingResult bindingResult, HttpSession session) {
-		
+	
 		LoginValidator loginValidator = new LoginValidator();
 		
 		loginValidator.setLoginDAO(adminDao, studentDao);
 		
 		loginValidator.validateLogin(login, bindingResult);
 		
-		if ( bindingResult.hasErrors() )
-			
-			return "login";
+		if ( bindingResult.hasErrors() ){
 		
+			return "login";
+		}
 		List<Admin> adminList = adminDao.getAdmins();
 		
 		for ( int i = 0; i < adminList.size(); i++ )

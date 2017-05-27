@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
 
 <head>
 
@@ -44,7 +44,7 @@ border-radius: 20px;
    							
    							<tr>
    							
-   								<td><form:password cssClass="form-control" style="display:inline;margin-left:14%; width:250px; border:2px solid black" path="password" placeholder="ContraseÃ±a"/><br><form:errors style="padding-left:50px" path="password" cssClass="error" /></td>
+   								<td><form:password cssClass="form-control" style="display:inline;margin-left:14%; width:250px; border:2px solid black" path="password" placeholder="Contraseña"/><br><form:errors style="padding-left:50px" path="password" cssClass="error" /></td>
    							
    							</tr>
    							
@@ -56,7 +56,7 @@ border-radius: 20px;
 				        <input class = "btn" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:2%;width:100px; height:35px" type = "button" onclick = "location='${pageContext.request.contextPath}/index.jsp'" name = "cancel" value = "Cancelar">
    					
    					
-   					<p style="font-size:10px; padding-left:25%; padding-top:10%">Â¿No estÃ¡s registrado? <b>Registrate <a href = "${pageContext.request.contextPath}/student/registrarse.html">aquÃ­</a></b></p>
+   					<p style="font-size:10px; padding-left:25%; padding-top:10%">¿No estás registrado? <b>Registrate <a href = "${pageContext.request.contextPath}/student/registrarse.html">aquí</a></b></p>
    					
    					</form:form>
    		
@@ -68,5 +68,5 @@ border-radius: 20px;
 
 </t:paginaBasica>
 
-<t:barrainferior>
-</t:barrainferior>
+
+<t:barrainferior/>

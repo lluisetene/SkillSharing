@@ -17,7 +17,8 @@ public class LoginValidator implements ValidatorLogin {
 	private List<Student> studentsList;
 	private List<Admin> adminsList;
 	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-	boolean enUso = false;
+	boolean admin = false; 
+	boolean student = false;
 	
 	
 	public void setLoginDAO(AdminDAO adminDao, StudentDAO studentDao) {
@@ -34,61 +35,59 @@ public class LoginValidator implements ValidatorLogin {
 	@Override
 	public void validateLogin(Object obj, Errors errors) {
 		Login user = (Login) obj;
+		Student estudiante = new Student();
+		Admin administrador = new Admin();
 		
 		//---------- USERNAME -----------//
-		if ( user.getUsername().trim().equals("") ){
-			System.out.println("Entra sin datos");
+		if ( user.getUsername().trim().equals("") )
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
-		}else {
-			System.out.println("Entra con algun username");
+		else {
 			for ( int i = 0; i < adminsList.size(); i++ ){
-				System.out.println("Recorre lista admins");
 				if ( adminsList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
-					System.out.println("Coincide con el username del admin");
-					enUso = true;
+					administrador = adminsList.get(i);
+					admin = true;
 					break;
 				}
 			}
-			if ( !enUso ) {
-				System.out.println("Sigue sin estar en uso");
+			if ( admin == false ) {
 				for ( int i = 0; i < studentsList.size(); i++ )
 					if ( studentsList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
-						enUso = true; 
+						estudiante = studentsList.get(i);
+						student = true; 
 						break;
 					}
 			}
-			System.out.println(enUso);
-			if ( !enUso ) 
+			if ( admin == false && student == false ) 
 				errors.rejectValue("username", "required", "El Username introducido no existe");
 			
-			enUso = false;
-			
+			else {
+				boolean passCorrecta = false;
+				//----------- PASSWORD ----------//
+				if (user.getPassword().trim().equals(""))
+					errors.rejectValue("password", "required", "Este campo es obligatorio");
+				else {
+					if ( admin == true ) {
+						if ( passwordEncryptor.checkPassword(user.getPassword(), administrador.getPassword()) )
+							passCorrecta = true;
+					} else {
+						if ( student == true )
+							if ( passwordEncryptor.checkPassword(user.getPassword(), estudiante.getPassword()) )
+								passCorrecta = true;
+					}
+					
+					if ( passCorrecta == false ) 
+						errors.rejectValue("password", "required", "Contraseña incorrecta");
+					else
+						passCorrecta = false;
+				}
+				
+			}
 		}
 		
-		
-		//----------- PASSWORD ----------//
-		if (user.getPassword().trim().equals(""))
-			errors.rejectValue("password", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < adminsList.size(); i++ )
-				if ( passwordEncryptor.checkPassword(user.getPassword(), adminsList.get(i).getPassword()) ) {
-					enUso = true;
-					break;
-				}
-			
-						
-			if ( !enUso )
-				for ( int j = 0; j < studentsList.size(); j++ )
-					if ( passwordEncryptor.checkPassword(user.getPassword(), studentsList.get(j).getPassword()) ) {
-						enUso = true;
-						break;
-					}
-			
-				if ( !enUso ) 
-					errors.rejectValue("password", "required", "Contraseña incorrecta");
-				
-				enUso = false;
-			}
-
+		if ( student == true )
+			if ( estudiante.getBanned() == true )
+				errors.rejectValue("banned", "required", "Usuario baneado");
 	}
+		
+		
 }

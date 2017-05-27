@@ -47,14 +47,8 @@
 	
 	<body>
 	
-		<t:barrasuperior>
+		<t:barrasuperior/>
 		
-			<div class="login"><t:logininfo /></div>
-			
-		</t:barrasuperior>
-		
-		
-			
 	   	<jsp:doBody/>
 	   
 	   

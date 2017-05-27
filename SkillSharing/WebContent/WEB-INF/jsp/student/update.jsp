@@ -1,22 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 
-<html lang="es-ES">
-
-	<head>
-		
-		<title>Estudiante</title>
-		
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-
-	</head>
-
-	</head>
-
-	<body>
-    
-    	<h2>Modificar Estudiante</h2>
+<t:paginaBasica title="Configuracion Perfil"/>
     
     	<form:form method="post" modelAttribute="student">
         
@@ -120,11 +107,7 @@
 	        
 	        </table>
 	        
-	        <input type = "submit" name = "submit" value = "Aceptar" onclick = "document.getElementById('nid').disabled=false;"/>
-	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/list.html'" name = "cancel" value = "Cancelar">
+	       	<input type = "submit" name = "submit" value = "Aceptar" onclick = "document.getElementById('nid').disabled=false;"/>
+	        <input type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
 	   
     	</form:form>
-    
-	</body>
-
-</html>

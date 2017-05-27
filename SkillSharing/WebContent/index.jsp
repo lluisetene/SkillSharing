@@ -242,5 +242,4 @@
 	                           </div>
 	              </div>
 	              <!-- Tercera fila -->
-	     <t:barrainferior>
-	    </t:barrainferior>
+	     <t:barrainferior/>

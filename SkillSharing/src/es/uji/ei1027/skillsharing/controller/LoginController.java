@@ -56,6 +56,7 @@ public class LoginController {
 		
 			return "login";
 		}
+		
 		List<Admin> adminList = adminDao.getAdmins();
 		
 		for ( int i = 0; i < adminList.size(); i++ )
@@ -64,7 +65,7 @@ public class LoginController {
 				
 				session.setAttribute("adminLogin", adminList.get(i));
 				
-				return "redirect:index.jsp";
+				return "redirect:admin/main.html";
 				
 			}
 		
@@ -76,7 +77,7 @@ public class LoginController {
 				
 				session.setAttribute("studentLogin", studentList.get(i));
 				
-				return "redirect:index.jsp";
+				return "redirect:student/main.html";
 				
 			}
 			

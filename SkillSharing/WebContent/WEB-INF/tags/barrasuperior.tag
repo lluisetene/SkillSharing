@@ -1,5 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="adminLogin" scope="request" value="${session.getAttribute('adminLogin')}" />
+<c:set var="studentLogin" scope="request" value='${session.getAttribute("studentLogin")}'/>
    
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background-color:white;">
     <div class="navbar-header">
@@ -16,20 +18,53 @@
 	      <!-- LOGIN -->
 	      <li class="dropdown">
 	      
-	      		<!--  ICONO  -->
-	          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	              <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-	          </a>
-	          <!--  /ICONO  -->
-	          
-	          <ul class="dropdown-menu dropdown-user">
-	              <li><a href="${pageContext.request.contextPath}/login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
-	          </ul>
+	      <c:choose>
+	      
+				<c:when test='${adminLogin == null && studentLogin == null}'>
+		          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		              <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+		          </a>
+		          <ul class="dropdown-menu dropdown-user">
+		              <li><a href="${pageContext.request.contextPath}/login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+		          </ul>
+				</c:when>
+				
+				<c:when test="${adminLogin != null}"> 
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		              <i class="fa fa-user fa-fw"></i>${adminLogin.username}<i class="fa fa-caret-down"></i>
+		          	</a>
+	  		        <ul class="dropdown-menu dropdown-user">
+	  		          <li><a href="${pageContext.request.contextPath}/admin/main.html"><i class="fa fa-home fa-fw"></i>Mi Página</a>
+		              <li><a href="${pageContext.request.contextPath}/admin/update.jsp"><i class="fa fa-gear fa-fw"></i>Configurar Perfil</a>
+		              <li><a href="${pageContext.request.contextPath}/logout.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+		          	</ul>
+				</c:when>
+				
+				<c:when test="${studentLogin != null}"> 
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		              <i class="fa fa-user fa-fw"></i>${studentLogin.username}<i class="fa fa-caret-down"></i>
+		          	</a>
+	  		        <ul class="dropdown-menu dropdown-user">
+	  		          <li><a href="${pageContext.request.contextPath}/student/main.html"><i class="fa fa-home fa-fw"></i>Mi Página</a>
+		              <li><a href="${pageContext.request.contextPath}/student/update/${studentLogin.nid}.html"><i class="fa fa-gear fa-fw"></i>Configurar Perfil</a>
+		              <li><a href="${pageContext.request.contextPath}/logout.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+		          	</ul>
+				</c:when>
+			
+			</c:choose>
+		
 	      </li>
-      <!--  /LOGIN  -->
-
+	      <!-- /LOGIN -->
+	      
       </ul>
+      
+      
+      
 </nav>
+		
+	      
+	      
+	      
 
 <!-- jQuery -->
 <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>

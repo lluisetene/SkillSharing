@@ -123,7 +123,7 @@ public class Student {
 	@Override
 	public String toString() {
 		
-		return "Demand [nid = " + nid + ", name = " + name +", username = " + username + ", password = " + password + ", mail = " + mail + ", course = " + course+ ", offerHours = " + offerHours + ", demandHours = " + demandHours + ", banned = " + banned + "]";
+		return "nid = " + nid + ", name = " + name +", username = " + username + ", password = " + password + ", mail = " + mail + ", course = " + course+ ", offerHours = " + offerHours + ", demandHours = " + demandHours + ", banned = " + banned;
 	
 	}
 	

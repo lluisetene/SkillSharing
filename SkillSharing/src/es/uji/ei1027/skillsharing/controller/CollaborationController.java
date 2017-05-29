@@ -91,7 +91,7 @@ public class CollaborationController {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
-		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
 		
 		collaborationValidator.validateConsult(collaboration, bindingResult);
 		
@@ -121,7 +121,7 @@ public class CollaborationController {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
-		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
 		
 		collaborationValidator.validateAdd(collaboration, bindingResult);
 		
@@ -154,7 +154,7 @@ public class CollaborationController {
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
-		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao);
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
 		
 		collaborationValidator.validateUpdate(collaboration, bindingResult);
 		

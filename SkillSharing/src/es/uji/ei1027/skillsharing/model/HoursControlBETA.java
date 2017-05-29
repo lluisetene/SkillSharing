@@ -22,6 +22,7 @@ public class HoursControlBETA {
 		
 	}
 	
+	
 	public void addHours(String hours){
 		
 		String NIDOfferer = offerDao.getOffer(collaboration.getIdOffer()).getNid();

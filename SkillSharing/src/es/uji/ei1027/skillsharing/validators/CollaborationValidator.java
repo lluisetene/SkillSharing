@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
+import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Offer;
@@ -16,13 +17,15 @@ public class CollaborationValidator implements Validator {
 	private List<Collaboration> collaborationsList;
 	private List<Offer> offersList;
 	private List<Demand> demandsList;
+	private StudentDAO studentDao;
 	boolean encontrado = false;
 	
-	public void setCollaborationDAO(CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao) {
+	public void setCollaborationDAO(CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao, StudentDAO studentDao) {
 	
 		collaborationsList = collaborationDao.getCollaborations();
 		offersList = offerDao.getOffers();
 		demandsList = demandDao.getDemands();
+		this.studentDao = studentDao;
 	}
 	
 	@Override
@@ -77,6 +80,13 @@ public class CollaborationValidator implements Validator {
 	
 			errors.rejectValue("idCollaboration", "required", "La oferta y la demanda no tienen la misma habilidad");
 		
+		//----------Control de horas--------------------//
+		if (Integer.parseInt(studentDao.getStudent(NIDdemand).getOfferHours()) - Integer.parseInt(studentDao.getStudent(NIDdemand).getDemandHours()) < 20){
+			
+			errors.rejectValue("idDemand", "required", "El NID " + studentDao.getStudent(NIDdemand) + "no tiene saldo");
+			
+		}
+	
 		
 		// ------ IDCOLLABORATION -------- //
 		if ( collaboration.getIdCollaboration() .trim().equals("") )

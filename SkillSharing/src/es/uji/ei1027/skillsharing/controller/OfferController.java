@@ -2,6 +2,8 @@ package es.uji.ei1027.skillsharing.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -65,12 +67,32 @@ public class OfferController {
 	//----------- listado ------------------
 	@RequestMapping("/list")
 	public String listOffers(Model model) {
-	
-		model.addAttribute("offers", offerDao.getOffers());
 		
+		model.addAttribute("offers", offerDao.getOffersWithNameSkill());
+		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("offer", new Offer());
+
 		return "offer/list";
-		
+
 	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.POST)
+	public String processListSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
+	
+		model.addAttribute("offers", offerDao.getOffersWithNameSkill());
+		model.addAttribute("skills", skillDao.getSkills());
+		
+		if (offer.getIdSkill().equals("Todas")){
+
+			model.addAttribute("offers", offerDao.getOffersWithNameSkill());
+		}else{
+		
+			model.addAttribute("offers", offerDao.getOffers2(offer.getIdSkill()));
+		}
+		return "offer/list";
+	
+	}
+
 	
 	//----------- búsqueda unitaria ------------------
 	@RequestMapping("/consult")
@@ -101,6 +123,10 @@ public class OfferController {
 		return "offer/consult";
 	
 	}
+	
+	
+	
+	
 	
 	//----------- añadir ------------------
 	@RequestMapping("/add")

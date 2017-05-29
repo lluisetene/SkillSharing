@@ -37,9 +37,9 @@ border-radius: 20px;
 		
         <div class="row" style="background-color:eeeeee;margin-right:0px; height:76.3%">
 			<div class="panel-body" style="padding-top:35">
-	            <div class="col-lg-6">
-					<p><img src="${pageContext.request.contextPath}/imagenes/Registrarse.png" width="550" height="375" style="padding-left:100px; padding-bottom:25px"></p>
-					<p class = "rotarTexto" style="margin-top:-8%; margin-left:30%; color: 073763; font-size:32px"><i>¡Gracias por unirte!</i></p>
+	            <div class="col-lg-6" style="margin-top:-40">
+					<p><img src="${pageContext.request.contextPath}/imagenes/Registrarse.png" width="550" height="425" style="padding-left:100px; padding-bottom:25px"></p>
+					<p class = "rotarTexto" style="margin-top:-10%; margin-left:30%; color: 073763; font-size:32px"><i>¡Gracias por unirte!</i></p>
 				</div>
 				<div class="col-lg-4 bordesRedondeados" style="background-color:cccccc; width:43%;margin-left:75">
 					<h2 style="color:073763" align="center"><b><i>Registrarse en Skill Sharing</i></b></h2>
@@ -141,7 +141,7 @@ border-radius: 20px;
 				        </table>
 				    
 				    	<input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:105px; height:35px" type = "submit" name = "submit" value = "Registrarse">
-				        <input class = "btn" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:2%;width:105px; height:35px" type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/main.html'" name = "cancel" value = "Cancelar">
+				        <input class = "btn" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:2%;width:105px; height:35px" type = "button" onclick = "location='${pageContext.request.contextPath}/index.jsp'" name = "cancel" value = "Cancelar">
 				    
 				    </form:form>
 				    

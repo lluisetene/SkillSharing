@@ -13,6 +13,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Skill;
 
 @Repository
 public class OfferDAO {
@@ -47,7 +48,7 @@ public class OfferDAO {
 			offer.setIdOffer(rs.getString("idoffer"));
 			offer.setNid(rs.getString("nid"));
 			offer.setName(rs.getString("name"));
-			offer.setIdSkill(rs.getString("idskill"));
+			offer.setIdSkill(rs.getString(4) + "/" + rs.getString(5) + "/" + rs.getString(6));
 			offer.setDescription(rs.getString("description"));
 			offer.setBeginningDate(rs.getDate("beginningdate"));
 			offer.setEndingDate(rs.getDate("endingdate"));
@@ -59,8 +60,8 @@ public class OfferDAO {
 	}
 	
 	public List<Offer> getOffers() {
-	
-		return this.jdbcTemplate.query("select * from offer order by idoffer DESC", new OfferMapper());
+										
+		return this.jdbcTemplate.query("SELECT * from offer WHERE endingdate >= CURRENT_DATE order by idoffer DESC;", new OfferMapper());
 	
 	}
 	
@@ -85,6 +86,18 @@ public class OfferDAO {
 	public void addOffer(Offer offer) {
 	
 		this.jdbcTemplate.update("insert into offer(idoffer, nid, name, idskill, description, beginningdate, endingdate) values(?, ?, ?, ?, ?, ?, ?)", offer.getIdOffer(), offer.getNid(), offer.getName(), offer.getIdSkill(), offer.getDescription(), offer.getBeginningDate(), offer.getEndingDate());
+	
+	}
+	
+	public List<Offer> getOffersWithNameSkill() {
+		
+		return this.jdbcTemplate.query("select off.idoffer, off.nid, off.name,skill.idSkill, skill.name, skill.level, off.description, off.beginningdate, off.endingdate from offer AS off JOIN skill ON off.idskill = skill.idskill WHERE endingdate >= CURRENT_DATE order by idoffer DESC;", new OfferMapper());
+	
+	}
+	
+	public List<Offer> getOffers2(String idSkill) {
+		
+		return this.jdbcTemplate.query("select off.idoffer, off.nid, off.name,skill.idSkill, skill.name, skill.level, off.description, off.beginningdate, off.endingdate from offer AS off JOIN skill ON off.idskill = skill.idskill WHERE skill.idSkill = ? AND endingdate >= CURRENT_DATE order by idoffer DESC;", new Object[] {idSkill}, new OfferMapper());
 	
 	}
 

@@ -10,26 +10,31 @@
 
 	<!--  BARRA SUPERIOR/ENLACES -->
       <ul class="nav navbar-top-links navbar-right" style="margin-top:25px">
-          <li class="dropdown">
-          <li><a href ="${pageContext.request.contextPath}/index.jsp"><b>Página Principal</b></a>
-		  <li><a href = "${pageContext.request.contextPath}/offer/list.html"><b>Ofertas</b></a></li>
-		  <li><a href = "${pageContext.request.contextPath}/demand/list.html"><b>Demandas</b></a></li>
-                 
-	      <!-- LOGIN -->
-	      <li class="dropdown">
+         
 	      
 	      <c:choose>
 	      
 				<c:when test='${adminLogin == null && studentLogin == null}'>
-		          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-		              <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
-		          </a>
+				 <li class="dropdown">
+		         <li><a href ="${pageContext.request.contextPath}/index.jsp"><b>Página Principal</b></a>
+				 <li><a href = "${pageContext.request.contextPath}/offer/list.html"><b>Ofertas</b></a></li>
+				 <li><a href = "${pageContext.request.contextPath}/demand/list.html"><b>Demandas</b></a></li>
+		                 
+			     <!-- LOGIN -->
+			     <li class="dropdown">
+		         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		             <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+		         </a>
 		          <ul class="dropdown-menu dropdown-user">
 		              <li><a href="${pageContext.request.contextPath}/login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
 		          </ul>
 				</c:when>
 				
 				<c:when test="${adminLogin != null}"> 
+					<li class="dropdown">
+		        	<li><a href ="${pageContext.request.contextPath}/index.jsp"><b>Página Principal</b></a>
+					 <!-- LOGIN -->
+			    <li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 		              <i class="fa fa-user fa-fw"></i>${adminLogin.username}<i class="fa fa-caret-down"></i>
 		          	</a>
@@ -41,6 +46,13 @@
 				</c:when>
 				
 				<c:when test="${studentLogin != null}"> 
+				<li class="dropdown">
+		        <li><a href ="${pageContext.request.contextPath}/index.jsp"><b>Página Principal</b></a>
+				<li><a href = "${pageContext.request.contextPath}/offer/list.html"><b>Ofertas</b></a></li>
+				<li><a href = "${pageContext.request.contextPath}/demand/list.html"><b>Demandas</b></a></li>
+                 
+			    <!-- LOGIN -->
+			    <li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 		              <i class="fa fa-user fa-fw"></i>${studentLogin.username}<i class="fa fa-caret-down"></i>
 		          	</a>

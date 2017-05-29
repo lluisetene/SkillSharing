@@ -105,7 +105,7 @@
 															
 															out.println("<tr>"); 
 												            out.println("<td>" + listaOffers.get(i).getName() + "</td>");
-												            out.println("<td>" + skillDao.getSkill(listaOffers.get(i).getIdSkill()).getName() + "</td>");
+												            out.println("<td>" + skillDao.getSkill(listaOffers.get(i).getIdSkill().split("/")[0]).getName() + "</td>");
 												            out.println("<td>" + listaOffers.get(i).getBeginningDate() + "</td>"); 
 												            out.println("<td>" + listaOffers.get(i).getEndingDate() + "</td>");
 												            out.println("</tr>");
@@ -114,7 +114,7 @@
 															
 															out.println("<tr style=background-color:597eaa>"); 
 												            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getName() + "</FONT></td>");
-												            out.println("<td><FONT COLOR=white>" + skillDao.getSkill(listaOffers.get(i).getIdSkill()).getName() + "</FONT></td>");
+												            out.println("<td><FONT COLOR=white>" + skillDao.getSkill(listaOffers.get(i).getIdSkill().split("/")[0]).getName() + "</FONT></td>");
 												            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getBeginningDate() + "</FONT></td>");
 												            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getEndingDate() + "</FONT></td>");
 															out.println("</tr>");
@@ -129,7 +129,7 @@
 														if (i % 2 == 0){
 													
 															out.println("<tr>"); 
-												            out.println("<td HEIGHT=35>" + "</td>");
+												            out.println("<td HEIGHT=39>" + "</td>");
 												            out.println("<td>"+"</td>");
 												            out.println("<td>"+"</td>"); 
 												            out.println("<td>"+"</td>");
@@ -138,7 +138,7 @@
 														}else{
 														
 															out.println("<tr style=background-color:597eaa>"); 
-												            out.println("<td HEIGHT=35>" + "</td>");
+												            out.println("<td HEIGHT=39>" + "</td>");
 												            out.println("<td>"+"</td>");
 												            out.println("<td>"+"</td>"); 
 												            out.println("<td>"+"</td>");
@@ -242,4 +242,5 @@
 	                           </div>
 	              </div>
 	              <!-- Tercera fila -->
-	     <t:barrainferior/>
+	     <t:barrainferior>
+	    </t:barrainferior>

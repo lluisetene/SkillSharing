@@ -1,81 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
+<head>
+
+	<style>
+	
+		.bordesRedondeados{
+	
+			-khtml-border-radius: 20px;
+			-moz-border-radius: 20px;
+			-webkit-border-radius: 20px;
+			border-radius: 20px;
+	
+		}
+	
+	</style>
+
+</head>
+
 <t:paginaBasica title="Oferta">
-
-	<jsp:body>
-	
-		<style>
-			
-			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-	
-			<style>
-				
-				table, th, td {
-		    		
-		  			border-spacing: 10px 5px;
-		
-				}
-				
-		</style>
-	
-    	<h2>Consultar Oferta</h2>
-    
-    	<form:form method="post" modelAttribute="offer">
-        
-        	<table style="border:0px solid black" class="table table-bordered table-hover table-striped">
-	        
-	        	<tr>
-	        	
-	                <td><form:label style = "font-size:16px" path="idOffer">IdOferta</form:label></td>
-	                <td><form:input type = "text" maxlength = "5" path="idOffer" /></td>
-	                <td><form:errors path = "idOffer" cssClass = "error" /></td>
-	            
-	            </tr>
-
-        	</table>
-        
-        	<input type = "submit" name = "submit" value = "Aceptar">
-        	<input type = "button" name = "cancel" value = "Cancelar" onclick = "location='http://localhost:8080/SkillSharing/offer/main.html'"/>
-   			
-   			<br>
-   			<br>
-   			
-   			<table class="table table-bordered table-hover table-striped">
-   			
-	   		 	<tr>
-	   		 	
-		            <th>IdOferta</th>
-		            <th>DNI</th>
-		            <th>Nombre</th>
-		            <th>IdHabilidad</th>
-		            <th>Descripcion</th>
-		            <th>Fecha inicio</th>
-		            <th>Fecha fin</th>
-		        
-		        </tr>
-		        
-		        <tr>
-		        
-		            <td>${offerResponse.idOffer}</td>
-		            <td>${offerResponse.nid}</td>
-		            <td>${offerResponse.name}</td>
-		            <td>${offerResponse.idSkill}</td>
-		            <td>${offerResponse.description}</td>
-		            <td>${offerResponse.beginningDate}</td>
-		            <td>${offerResponse.endingDate}</td>
-		           	<td><a href="update/${offer.idOffer}.html">Modificar</a>
-               		<td><a href="delete/${offer.idOffer}.html">Eliminar</a>
-		            
-		            
-		        </tr> 
-   			
-   			</table> 
-   			
-    	</form:form>
-    
-	</jsp:body>
-
 </t:paginaBasica>
+	<body>
+	
+		<div class = "panel-body bordesRedondeados" style="height:76.3%; padding-top:0px;background-color:eeeeee">
+		
+			<div style = "padding-bottom:5px; display:inline-block;width:55%;background-color:eeeeee"><h1 style="padding-left:200px; color:black"><i><b>Ofertas Disponibles</b></i></h1></div>
+			<div style = "border:2px solid black; display:inline-block;width:43%;background-color:597eaa">
+			
+				<h4 style="color:black; padding-left:10px; padding-right:100px; display:inline-block">Habilidad</h4>
+				
+				<form:form method="post" modelAttribute="offer">
+				
+					<a href="${idSkill}.html"><i class = "glyphicon glyphicon-search" style = "color:black"></i></a>
+				
+					<select style="width:325px" id="idSkill" name="idSkill">
+					
+						<c:forEach items="${skills}" var="skill">
+		
+								<option value="${skill.name}">${skill.name}</option>
+							
+							
+					</c:forEach>
+					</select>
+			
+				</form:form>
+			</div>
+		
+			<div class = "pre-scrollable panel-body" style = "max-height: 400px;border:2px solid black; background-color:597eaa">
+		
+			        <c:forEach items="${offers}" var="offer">
+			      
+			      		<div style = "padding:8px;border:2px solid black; background-color:white">
+			      		
+				      		 <div class = "panel-body" style = "width:37%; display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-book" style="color:black"><b> ${offer.name} </b></i></div>	
+				             <div class = "panel-body" style = "width:25%;display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-bookmark" style="color:black"><b> ${offer.idSkill} </b></i></div>
+				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"><b> ${offer.beginningDate} </b></i></div>
+				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"><b> ${offer.endingDate} </b></i></div>
+							 <div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar"></div>
+							 <div class = "panel-body" style = "display:inline-block"><button type="button" class="btn" style = "background-color:white; border: 2px solid; height:35px"><span class="glyphicon glyphicon-chevron-down"></span></button></div>
+			      		</div>
+			      		<div style = "padding:5px;background-color:597eaa"></div>
+  
+			        </c:forEach>  
+  	  	
+  	  		</div>
+  	  	
+  	  	</div>
+    	
+    <body>
+	
+
+<t:barrainferior>
+</t:barrainferior>

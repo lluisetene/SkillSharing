@@ -20,7 +20,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
-
+import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
 
 
@@ -69,11 +69,31 @@ public class DemandController {
 	@RequestMapping("/list")
 	public String listDemands(Model model) {
 		
-		model.addAttribute("demands", demandDao.getDemands());
-		
+		model.addAttribute("demands", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("demand", new Demand());
+
 		return "demand/list";
-		
+
 	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.POST)
+	public String processListSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+	
+		model.addAttribute("demands", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("skills", skillDao.getSkills());
+		
+		if (demand.getIdSkill().equals("Todas")){
+
+			model.addAttribute("demand", demandDao.getDemandsWithNameSkill());
+		}else{
+		
+			model.addAttribute("demands", demandDao.getDemands2(demand.getIdSkill()));
+		}
+		return "demand/list";
+	
+	}
+
 	
 	//----------- búsqueda unitaria ------------------
 	@RequestMapping("/consult")

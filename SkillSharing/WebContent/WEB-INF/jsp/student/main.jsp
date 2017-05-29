@@ -152,8 +152,6 @@
 
 					    
 							         <%
-							         	//HABILIDADES
-							         	SkillDAO skillDao = new SkillDAO();
 							      
 							         	// ÚLTIMAS OFERTAS
 							         	OfferDAO offerDao = new OfferDAO();
@@ -182,7 +180,7 @@
 												
 												out.println("<tr>"); 
 									            out.println("<td>" + listaOffers.get(i).getName() + "</td>");
-									            out.println("<td>" + skillDao.getSkill(listaOffers.get(i).getIdSkill().split("/")[0]).getName() + "</td>");
+									            out.println("<td>" + listaOffers.get(i).getIdSkill().split("/")[1] + "</td>");
 									            out.println("<td>" + listaOffers.get(i).getBeginningDate() + "</td>"); 
 									            out.println("<td>" + listaOffers.get(i).getEndingDate() + "</td>");
 									            out.println("<td><a href='update/${student.nid}.html'>Modificar</a></td>");
@@ -193,7 +191,7 @@
 												
 												out.println("<tr style=background-color:597eaa>"); 
 									            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getName() + "</FONT></td>");
-									            out.println("<td><FONT COLOR=white>" + skillDao.getSkill(listaOffers.get(i).getIdSkill().split("/")[0]).getName() + "</FONT></td>");
+									            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getIdSkill().split("/")[1] + "</FONT></td>");
 									            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getBeginningDate() + "</FONT></td>");
 									            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getEndingDate() + "</FONT></td>");
 									            out.println("<td><a style='color:white' href='update/${student.nid}.html'>Modificar</a></td>");
@@ -273,7 +271,7 @@
 															
 															out.println("<tr>"); 
 												            out.println("<td>" + listaDemandas.get(i).getName() + "</td>");
-												            out.println("<td>" + skillDao.getSkill(listaDemandas.get(i).getIdSkill()).getName() + "</td>");
+												            out.println("<td>" + listaDemandas.get(i).getIdSkill().split("/")[1] + "</td>");
 												            out.println("<td>" + listaDemandas.get(i).getBeginningDate() + "</td>"); 
 												            out.println("<td>" + listaDemandas.get(i).getEndingDate() + "</td>");
 												            out.println("<td><a href='update/${student.nid}.html'>Modificar</a></td>");
@@ -284,7 +282,7 @@
 															
 															out.println("<tr style=background-color:597eaa>"); 
 												            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getName() + "</FONT></td>");
-												            out.println("<td><FONT COLOR=white>" + skillDao.getSkill(listaDemandas.get(i).getIdSkill()).getName() + "</FONT></td>");
+												            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getIdSkill().split("/")[1] + "</FONT></td>");
 												            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getBeginningDate() + "</FONT></td>");
 												            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getEndingDate() + "</FONT></td>");
 												            out.println("<td><a style='color:white' href='update/${student.nid}.html'>Modificar</a></td>");

@@ -74,7 +74,7 @@
 	        </table>
 	        
 	        	<input type = "submit" name = "submit" value = "Aceptar">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/demand/main.html'" name = "cancel" value = "Cancelar">
+	        	<input type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
 	    
 	    </form:form>
 	    

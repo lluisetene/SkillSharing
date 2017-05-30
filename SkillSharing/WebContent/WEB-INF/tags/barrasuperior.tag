@@ -36,7 +36,7 @@
 					 <!-- LOGIN -->
 			    <li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-		              <i class="fa fa-user fa-fw"></i>${adminLogin.username}<i class="fa fa-caret-down"></i>
+		              <i class="fa fa-user fa-fw"></i><b>${adminLogin.username}</b><i class="fa fa-caret-down"></i>
 		          	</a>
 	  		        <ul class="dropdown-menu dropdown-user">
 	  		          <li><a href="${pageContext.request.contextPath}/admin/main.html"><i class="fa fa-home fa-fw"></i>Mi Página</a>
@@ -54,18 +54,18 @@
 			    <!-- LOGIN -->
 			    <li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-		              <i class="fa fa-user fa-fw"></i>${studentLogin.username}<i class="fa fa-caret-down"></i>
+		              <i class="fa fa-user fa-fw"></i><b>${studentLogin.username}</b><i class="fa fa-caret-down"></i>
 		          	</a>
 	  		        <ul class="dropdown-menu dropdown-user">
 	  		          <li><a href="${pageContext.request.contextPath}/student/main.html"><i class="fa fa-home fa-fw"></i>Mi Página</a>
 		              <li><a href="${pageContext.request.contextPath}/student/update/${studentLogin.nid}.html"><i class="fa fa-gear fa-fw"></i>Configurar Perfil</a>
 		              <li><a href="${pageContext.request.contextPath}/logout.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 		          	</ul>
+		      	</li>
 				</c:when>
 			
 			</c:choose>
 		
-	      </li>
 	      <!-- /LOGIN -->
 	      
       </ul>
@@ -73,24 +73,3 @@
       
       
 </nav>
-		
-	      
-	      
-	      
-
-<!-- jQuery -->
-<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="${pageContext.request.contextPath}/vendor/metisMenu/metisMenu.min.js"></script>
-
-<!-- Morris Charts JavaScript -->
-<script src="${pageContext.request.contextPath}/vendor/raphael/raphael.min.js"></script>
-<script src="${pageContext.request.contextPath}/vendor/morrisjs/morris.min.js"></script>
-<script src="${pageContext.request.contextPath}/data/morris-data.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>

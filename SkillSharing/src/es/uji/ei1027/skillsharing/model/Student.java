@@ -1,5 +1,7 @@
 package es.uji.ei1027.skillsharing.model;
 
+import java.util.List;
+
 public class Student {
 
 	private String nid; 
@@ -11,6 +13,7 @@ public class Student {
 	private String offerHours;
 	private String demandHours;
 	private boolean banned;
+	private List<Collaboration> collaborationsList;
 
 	public String getNid() {
 		
@@ -117,6 +120,17 @@ public class Student {
 	public void setBanned(boolean banned) {
 		
 		this.banned = banned;
+		
+	}
+	
+	public List<Collaboration> getCollaborationsList() {
+		
+		return collaborationsList;
+	}
+	
+	public void setCollaborationsList(List<Collaboration> collaborationsList) {
+		
+		this.collaborationsList = collaborationsList;
 		
 	}
 	

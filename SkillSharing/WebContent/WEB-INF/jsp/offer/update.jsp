@@ -79,7 +79,7 @@
 	        																	   document.getElementById('idSkill').disabled=false,
 	        																	   document.getElementById('description').disabled=false;">
 	        														
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/offer/list.html'" name = "cancel" value = "Cancelar">
+	        	<input type = "button" onClick="location='${pageContext.request.contextPath}/offer/list.html'" name = "cancel" value = "Cancelar">
 	    
 	    </form:form>
 	    

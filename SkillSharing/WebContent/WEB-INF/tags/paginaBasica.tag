@@ -10,8 +10,8 @@
 		<title>${title}</title>
 
 		<!-- Bootstrap -->
-		<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		
 		<!-- Estilos propios -->
 		<link href="${pageContext.request.contextPath}/css/errors.css" rel="stylesheet">
@@ -52,6 +52,25 @@
 	   	<jsp:doBody/>
 	   
 	   
+	  	<!-- jQuery -->
+		<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+		
+		<!-- Bootstrap Core JavaScript -->
+		<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
+		
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="${pageContext.request.contextPath}/vendor/metisMenu/metisMenu.min.js"></script>
+		
+		<!-- Morris Charts JavaScript -->
+		<script src="${pageContext.request.contextPath}/vendor/raphael/raphael.min.js"></script>
+		<script src="${pageContext.request.contextPath}/vendor/morrisjs/morris.min.js"></script>
+		<script src="${pageContext.request.contextPath}/data/morris-data.js"></script>
+		
+		<!-- Custom Theme JavaScript -->
+		<script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>
+	   
 	</body>
 	 
 </html>
+
+

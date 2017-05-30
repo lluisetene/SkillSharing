@@ -63,7 +63,7 @@
 	            
 	        </table>
 	        	<input type = "submit" name = "submit" value = "Aceptar">
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/offer/main.html'" name = "cancel" value = "Cancelar">
+	        	<input type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
 	    </form:form>
 	    
 		<script src="https://code.jquery.com/jquery-3.2.1.js"></script>

@@ -153,7 +153,7 @@ public class StudentController {
 		
 		 studentDao.updateStudent(student);
 		 
-		 return "redirect:main.html"; 
+		 return "redirect:../list.html"; 
 		 
 	  }
 

@@ -164,7 +164,7 @@
 										         
 										         	// ÚLTIMAS DEMANDAS
 										         	DemandDAO demandDao = new DemandDAO();
-										         	List<Demand> listaDemandas = demandDao.getDemands();
+										         	List<Demand> listaDemandas = demandDao.getDemandsWithNameSkill();
 										         	int demandasLlenadas = 0;
 										         	
 										         	out.println("<thead>"); 
@@ -194,7 +194,7 @@
 															
 															out.println("<tr style=background-color:597eaa>"); 
 												            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getName() + "</FONT></td>");
-												            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getIdSkill().split("/")[1] + "</FONT></td>");
+												            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getIdSkill().split("/")[1] + "</FONT></td>");
 												            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getBeginningDate() + "</FONT></td>");
 												            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getEndingDate() + "</FONT></td>");
 															out.println("</tr>");

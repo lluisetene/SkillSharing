@@ -52,7 +52,7 @@
 	            <tr>
 	            
 	                <td><form:label path="course">Curso</form:label></td>
-	                <td><form:input type = "number" maxlength = "1" name = "course" min = "1" max = "4" value = "1" placeholder="º" path="course" /></td>
+	                <td><form:input type = "number" maxlength = "1" name = "course" min = "1" max = "4" value = "${student.course}" placeholder="º" path="course" /></td>
 	                <td><form:errors path="course" cssClass="error" /></td>
 	                
 	            </tr>
@@ -99,8 +99,8 @@
 	            
 	                <td><form:label path="banned">Baneado</form:label></td>
 	                <td><select id="banned" name="banned">
-						<option value="falso" selected="selected">falso</option>
-						<option value="verdadero">verdadero</option>
+						<option value="false" selected="selected">falso</option>
+						<option value="true">verdadero</option>
 					</select></td>
 	            
 	            </tr>

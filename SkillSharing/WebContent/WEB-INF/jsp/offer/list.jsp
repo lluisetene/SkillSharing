@@ -26,7 +26,7 @@ $(document).ready(function(){
 .panel {
     padding: 70px;
     display: none;
- padding-top:10; padding-left:40
+ 	padding-top:10; padding-left:40
 }
 
 .bordesRedondeados{

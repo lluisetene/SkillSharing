@@ -58,7 +58,7 @@ private JdbcTemplate jdbcTemplate;
 	
 	public List<Skill> getSkills() {
 		
-		return this.jdbcTemplate.query("select * from skill order by idSkill", new SkillMapper());
+		return this.jdbcTemplate.query("select * from skill order by name ASC", new SkillMapper());
 	
 	}
 	

@@ -64,7 +64,7 @@ public class StudentDAO {
 	
 	public List<Student> getStudents() {
 		
-		return this.jdbcTemplate.query("select * from student", new StudentMapper());
+		return this.jdbcTemplate.query("select * from student order by nid ASC;", new StudentMapper());
 	
 	}
 	

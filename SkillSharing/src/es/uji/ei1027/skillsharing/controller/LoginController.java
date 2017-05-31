@@ -59,16 +59,16 @@ public class LoginController {
 		
 		List<Admin> adminList = adminDao.getAdmins();
 		
-		for ( int i = 0; i < adminList.size(); i++ )
+		for ( int i = 0; i < adminList.size(); i++ ){
 			
-			if ( adminList.get(i).getUsername().equals(login.getUsername()) ) {
+			if ( adminList.get(i).getUsername().toLowerCase().equals(login.getUsername().toLowerCase()) ) {
 				
 				session.setAttribute("adminLogin", adminList.get(i));
 				
 				return "redirect:admin/main.html";
 				
 			}
-		
+		}
 		List<Student> studentList = studentDao.getStudents();
 		
 		for ( int i = 0; i < studentList.size(); i++ )

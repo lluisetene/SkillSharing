@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.skillsharing.dao.AdminDAO;
+import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DegreeDAO;
+import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.OfferDAO;
+import es.uji.ei1027.skillsharing.dao.SkillDAO;
+import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Admin;
 import es.uji.ei1027.skillsharing.validators.AdminValidator;
 
@@ -18,16 +24,36 @@ import es.uji.ei1027.skillsharing.validators.AdminValidator;
 public class AdminController {
 	
 	private AdminDAO adminDao;
+	private DegreeDAO degreeDao;
+	private SkillDAO skillDao;
+	private CollaborationDAO collaborationDao;
+	private DemandDAO demandDao;
+	private OfferDAO offerDao;
+	private StudentDAO studentDao;
 
 	
 	@Autowired
-	public void setAdminDao(AdminDAO adminDao) {
+	public void setAdminDao(AdminDAO adminDao, DegreeDAO degreeDao, SkillDAO skillDao, CollaborationDAO collaborationDao, DemandDAO demandDao, OfferDAO offerDao, StudentDAO studentDao) {
 		this.adminDao = adminDao;
+		this.degreeDao = degreeDao;
+		this.skillDao = skillDao;
+		this.collaborationDao = collaborationDao;
+		this.demandDao = demandDao;
+		this.offerDao = offerDao;
+		this.studentDao = studentDao;
 	}
 	
 	//-------------------------------------------
 	@RequestMapping("/main")
 	public String mainUserLogin(Model model) {
+		
+		model.addAttribute("admins", adminDao.getAdmins());
+		model.addAttribute("degrees", degreeDao.getDegrees());
+		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("collaborations", collaborationDao.getCollaborations());
+		model.addAttribute("demands", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("offers", offerDao.getOffersWithNameSkill());
+		model.addAttribute("students", studentDao.getStudents());
 		
 		return "admin/main";
 	}

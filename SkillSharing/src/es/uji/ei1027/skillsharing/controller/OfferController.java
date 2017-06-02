@@ -2,8 +2,6 @@ package es.uji.ei1027.skillsharing.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -134,7 +132,7 @@ public class OfferController {
 		
 		model.addAttribute("offer", new Offer());
 		
-		return"offer/add";
+		return "offer/add";
 		
 	}
 	
@@ -152,6 +150,8 @@ public class OfferController {
 			return "offer/add";
 		
 		offerDao.addOffer(offer);
+		
+		studentDao.getStudent(offer.getNid()).setOferta(offer);
 		
 		return "redirect:main.html";
 		

@@ -20,7 +20,6 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
-import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
 
 
@@ -149,6 +148,8 @@ public class DemandController {
 			return "demand/add";
 		
 		demandDao.addDemand(demand);
+		
+		studentDao.getStudent(demand.getNid()).setDemanda(demand);
 		
 		return "redirect:main.html";
 		

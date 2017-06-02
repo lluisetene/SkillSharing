@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Student {
@@ -14,6 +15,8 @@ public class Student {
 	private String demandHours;
 	private boolean banned;
 	private List<Collaboration> collaborationsList;
+	private List<Offer> listaOfertas = new LinkedList<>();
+	private List<Demand> listaDemandas = new LinkedList<>();
 
 	public String getNid() {
 		
@@ -131,6 +134,30 @@ public class Student {
 	public void setCollaborationsList(List<Collaboration> collaborationsList) {
 		
 		this.collaborationsList = collaborationsList;
+		
+	}
+	
+	public List<Offer> getOfertas() {
+		
+		return listaOfertas;
+		
+	}
+	
+	public void setOferta(Offer offer) {
+		
+		listaOfertas.add(offer);
+		
+	}
+	
+	public List<Demand> getDemandas() {
+		
+		return listaDemandas;
+		
+	}
+	
+	public void setDemanda(Demand demand) {
+		
+		listaDemandas.add(demand);
 		
 	}
 	

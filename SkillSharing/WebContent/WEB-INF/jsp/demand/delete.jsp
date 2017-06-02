@@ -73,8 +73,8 @@
 	       	 	¿Seguro que desea borrar la demanda ${demand.name} (id ${demand.idDemand})?
 	        	<br><br>
 	        
-	        	<input type = "submit" name = "submit" value = "Aceptar" >
-	        	<input type = "button" onclick = "location='http://localhost:8080/SkillSharing/demand/list.html'" name = "cancel" value = "Cancelar">
+	       	<input type = "submit" name = "submit" onClick="location='${pageContext.request.contextPath}/student/main.html'" value = "Aceptar"/>
+	        <input type = "submit" name = "submit" onClick="location='${pageContext.request.contextPath}/student/main.html'" value = "Cancelar">
 	    
 	    </form:form>
 	    	

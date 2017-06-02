@@ -116,8 +116,8 @@
 	        ¿Seguro que desea borrar al estudiante ${student.name}; DNI:${student.nid}?
 	        <br><br>
 	        
-	        <input type = "submit" name = "submit" value = "Aceptar"/>
-	        <input type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/list.html'" name = "cancel" value = "Cancelar">
+	        <input type = "submit" name = "submit" onClick="location='${pageContext.request.contextPath}/student/main.html'" value = "Aceptar"/>
+	        <input type = "submit" name = "submit" onClick="location='${pageContext.request.contextPath}/student/main.html'" value = "Cancelar">
 	   
     	</form:form>
     

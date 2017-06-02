@@ -55,6 +55,10 @@ public class StudentController {
 	@RequestMapping("/main")
 	public String mainStudents(Model model) {
 		
+		model.addAttribute("demands", demandDao.getDemands());
+		model.addAttribute("offers", offerDao.getOffers());
+		model.addAttribute("collaborations", collaborationDao.getCollaborations());
+		
 		return "student/main";
 		
 	}

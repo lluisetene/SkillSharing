@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import = "es.uji.ei1027.skillsharing.model.Student" %>
 <%@ page import = "es.uji.ei1027.skillsharing.model.Demand" %>
 <%@ page import = "es.uji.ei1027.skillsharing.model.Offer" %>
 <%@ page import = "es.uji.ei1027.skillsharing.model.Collaboration" %>
-<%@ page import = "es.uji.ei1027.skillsharing.dao.DemandDAO" %>
-<%@ page import = "es.uji.ei1027.skillsharing.dao.OfferDAO" %>
-<%@ page import = "es.uji.ei1027.skillsharing.dao.CollaborationDAO" %>
-<%@ page import = "es.uji.ei1027.skillsharing.dao.SkillDAO" %>
 <%@ page import = "javax.servlet.http.HttpSession" %>
 <%@ page import = "java.util.List"%> 
 
@@ -25,6 +22,8 @@
         
         horas = student.getDemandHours().split(":");
         int horasDemandas = Integer.parseInt(horas[0]);
+        
+        Offer oferta = new Offer();
         %>
 
 
@@ -116,97 +115,56 @@
 		<!----------------------------------------------------------------------------------------------->
 		
 		<!-- TABLAS -->
+		
+		<c:set var="nid" value="<%= student.getNid() %>"/>
+		
         <div class="col-lg-8" style="background-color:597eaa; border-radius:10px 10px 10px 10px;">
                 <div class="panel-body" style="background-color:597eaa">
                 
                 <!-- TABLA OFERTAS -->
-                    <div class="col-lg-12" style="background-color:ffffff; border-radius:10px 10px 10px 10px;">
+                    <div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
                         <div class="table-responsive">
                         	 <div class="col-xs-4 text-left">
-                            	<div class="huge">Ofertas Creadas</div>
+                            	<div class="huge">Mis Ofertas</div>
                         	</div>
                         	<div class="col-xs-8 text-right">
-                           	 	<div class="huge">Crear Oferta
-                           	 	 	<button type="button" class="btn btn-info btn-circle btn-lg" onClick="location='${pageContext.request.contextPath}/offer/add.html'"><i class="fa fa-check"></i></button>
+                           	 	<div class="huge">Añadir
+                           	 	 	<button style = "border:none" type="button" onClick="location='${pageContext.request.contextPath}/offer/add.html'"><span style = "color: black; background-color:eeeeee" class="fa fa-plus-circle"></span></button>
                            	 	</div>
                         	</div>
-                            <table style="border:2px solid black" class="table table-bordered table-hover table-striped" style="border-style:outset">
- 
-				         <%
-				         	//HABILIDADES
-				         	SkillDAO skillDao = new SkillDAO();
-				      
-				         	// ÚLTIMAS OFERTAS
-				         	OfferDAO offerDao = new OfferDAO();
-				         	List<Offer> listaOffers = offerDao.getOffers();
-				         	int ofertasLlenadas = 0;
-				         	
-				         	out.println("<thead>"); 
-				         	out.println("<tr style = background-color:cccccc>");	
-				         	out.println("<th>" + "Nombre" + "</th>");
-				         	out.println("<th>" + "Habilidad" + "</th>");
-				         	out.println("<th>" + "Fecha Inicio" + "</th>");
-				         	out.println("<th>" + "Fecha Final" + "</th>");
-				         	out.println("<th></th>");
-				         	out.println("<th></th>");
-				         	out.println("</tr>");
-				         	out.println("</thead>");
-				         	out.println("<tbody>");
-				         	
-				         	int contador = 0;
-							for (int i=0;i<listaOffers.size();i++){
+                        	
+                        	<div style = "overflow-y:scroll;height:280;margin-top:10px;border:2px solid black">
+	                            <table style="border:2px solid black" class="table table-bordered table-hover table-striped" style="border-style:outset">
+	 
+					         
+					         	<tr style = "color:black; background-color:cccccc;font-size:12px">
+										
+									<th>Nombre</th>
+									<th>Habilidad</th>
+									<th>Fecha Inicio</th>
+									<th>Fecha Fin</th>
+									<th></th>
+									<th></th>
 								
-								if ( listaOffers.get(i).getNid().equals(student.getNid()) )
-									
-									if (i % 2 == 0){
-										
-										contador++;
-										
-										out.println("<tr>"); 
-							            out.println("<td>" + listaOffers.get(i).getName() + "</td>");
-							            out.println("<td>" + skillDao.getSkill(listaOffers.get(i).getIdSkill()).getName() + "</td>");
-							            out.println("<td>" + listaOffers.get(i).getBeginningDate() + "</td>"); 
-							            out.println("<td>" + listaOffers.get(i).getEndingDate() + "</td>");
-							            out.println("<td><a href='update/${student.nid}.html'>Modificar</a></td>");
-							            out.println("<td><a href='delete/${student.nid}.html'>Eliminar</a>");
-							            out.println("</tr>");
-									
-									}else{
-										
-										out.println("<tr style=background-color:597eaa>"); 
-							            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getName() + "</FONT></td>");
-							            out.println("<td><FONT COLOR=white>" + skillDao.getSkill(listaOffers.get(i).getIdSkill()).getName() + "</FONT></td>");
-							            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getBeginningDate() + "</FONT></td>");
-							            out.println("<td><FONT COLOR=white>" + listaOffers.get(i).getEndingDate() + "</FONT></td>");
-							            out.println("<td><a style='color:white' href='update/${student.nid}.html'>Modificar</a></td>");
-							            out.println("<td><a style='color:white' href='delete/${student.nid}.html'>Eliminar</a>");
-										out.println("</tr>");
-										
-									}
-								
-									
-								}
-							
-								if ( contador == 0 ) {
-									
-									out.println("<tr style=background-color:597eaa>"); 
-						            out.println("<td></td>");
-						            out.println("<td></td>");
-						            out.println("<td></td>");
-						            out.println("<td></td>");
-						            out.println("<td></td>");
-						            out.println("<td></td>");
-									out.println("</tr>");
-									
-									 
-								
-							}
-							
-							
-
-						%>
-				       </tbody>
-				     </table>
+								</tr>	
+								<c:forEach items="${offers}" var="offer">
+									<c:choose>
+		         						<c:when test="${offer.nid == nid}">
+		          						 	<tr>
+							          		<td>${offer.name}</td>
+							                <td>${offer.getIdSkill().split("/")[1]}</td>
+							           		<td>${offer.beginningDate}</td>
+							           		<td>${offer.endingDate}</td>
+							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" onClick="location='${pageContext.request.contextPath}/offer/update/${offer.idOffer}.html'" type = "submit" name = "submit"></button></td>
+						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" onClick="location='${pageContext.request.contextPath}/offer/delete/${offer.idOffer}.html'" type = "submit" name = "submit"></button></td>
+			           						</tr>
+		           						</c:when>
+	           						</c:choose>
+	       
+	       						</c:forEach> 
+	
+					     	</table>
+					     </div>
                                  
                   	</div>
                   </div>
@@ -219,89 +177,47 @@
 				<!---------------------------------------------------------------------------------------->
 				                                         
                   <!-- TABLA DEMANDAS -->            
-                  <div class="col-lg-12" style="background-color:ffffff; border-radius:10px 10px 10px 10px;">
+                  <div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
                     <div class="table-responsive">
                     	<div class="col-xs-5 text-left">
-                        	<div class="huge">Demandas Creadas</div>
+                        	<div class="huge">Mis Demandas</div>
                     	</div>
                     	<div class="col-xs-7 text-right">
-                       	 	<div class="huge">Crear Demanda
-                       	 	<button type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-check"></i></button>
+                       	 	<div class="huge">Añadir
+                       	 		<button style = "border:none" type="button" onClick="location='${pageContext.request.contextPath}/demand/add.html'"><span style = "color: black; background-color:eeeeee" class="fa fa-plus-circle"></span></button>
                        	 	</div>
                     	</div>
                     	
-                        <table style="border:2px solid black" class="table table-bordered table-hover table-striped" style="border-style:outset">
-
-    						<%
-       
-				         	// ÚLTIMAS DEMANDAS
-				         	DemandDAO demandDao = new DemandDAO();
-				         	List<Demand> listaDemandas = demandDao.getDemands();
-				         	
-				         	out.println("<thead>"); 
-				         	out.println("<tr style = background-color:cccccc>");	
-				         	out.println("<th>" + "Nombre" + "</th>");
-				         	out.println("<th>" + "Habilidad" + "</th>");
-				         	out.println("<th>" + "Fecha Inicio" + "</th>");
-				         	out.println("<th>" + "Fecha Final" + "</th>");
-				         	out.println("<th></th>");
-				         	out.println("<th></th>");
-				         	out.println("</tr>");
-				         	out.println("</thead>");
-				         	out.println("<tbody>");
-				         	
-				         	contador = 0;
-							for (int i=0;i<listaDemandas.size();i++){
-								
-								if ( listaDemandas.get(i).getNid().equals(student.getNid()) )
+                    	<div style = "overflow-y:scroll;height:280;margin-top:10px;border:2px solid black">
+	                       <table style="border:2px solid black; overflow-y:scroll;" class="table table-bordered table-hover table-striped" style="border-style:outset">
+	
+	   						<tr style = "color:black; background-color:cccccc;font-size:12px">
 									
-									if (i % 2 == 0){
-										
-										contador++;
-										
-										out.println("<tr>"); 
-							            out.println("<td>" + listaDemandas.get(i).getName() + "</td>");
-							            out.println("<td>" + skillDao.getSkill(listaDemandas.get(i).getIdSkill()).getName() + "</td>");
-							            out.println("<td>" + listaDemandas.get(i).getBeginningDate() + "</td>"); 
-							            out.println("<td>" + listaDemandas.get(i).getEndingDate() + "</td>");
-							            out.println("<td><a href='update/${student.nid}.html'>Modificar</a></td>");
-							            out.println("<td><a href='delete/${student.nid}.html'>Eliminar</a>");
-							            out.println("</tr>");
-									
-									}else{
-										
-										out.println("<tr style=background-color:597eaa>"); 
-							            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getName() + "</FONT></td>");
-							            out.println("<td><FONT COLOR=white>" + skillDao.getSkill(listaDemandas.get(i).getIdSkill()).getName() + "</FONT></td>");
-							            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getBeginningDate() + "</FONT></td>");
-							            out.println("<td><FONT COLOR=white>" + listaDemandas.get(i).getEndingDate() + "</FONT></td>");
-							            out.println("<td><a style='color:white' href='update/${student.nid}.html'>Modificar</a></td>");
-							            out.println("<td><a style='color:white' href='delete/${student.nid}.html'>Eliminar</a>");
-										out.println("</tr>");
-										
-									}
-									
-								
-								 
-							}
+								<th>Nombre</th>
+								<th>Habilidad</th>
+								<th>Fecha Inicio</th>
+								<th>Fecha Fin</th>
+								<th></th>
+								<th></th>
 							
-							if ( contador == 0 ) {
-								
-								out.println("<tr style=background-color:597eaa>"); 
-					            out.println("<td></td>");
-					            out.println("<td></td>");
-					            out.println("<td></td>");
-					            out.println("<td></td>");
-					            out.println("<td></td>");
-					            out.println("<td></td>");
-								out.println("</tr>");
-								
-							}
-							
-
-						%>
-				       </tbody>
-				     </table>
+							</tr>	
+							<c:forEach items="${demands}" var="demand">
+	        					<c:choose>
+	        						<c:when test="${demand.nid == nid}">
+		         						<tr>
+						          		<td>${demand.name}</td>
+						                <td>${demand.getIdSkill().split("/")[1]}</td>
+						           		<td>${demand.beginningDate}</td>
+						           		<td>${demand.endingDate}</td>
+						           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" onClick="location='${pageContext.request.contextPath}/demand/update/${demand.idDemand}.html'" type = "submit" name = "submit"></button></td>
+					               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" onClick="location='${pageContext.request.contextPath}/demand/delete/${demand.idDemand}.html'" type = "submit" name = "submit"></button></td>
+		          						</tr>
+	      							</c:when>
+	      						</c:choose>
+	      					</c:forEach> 
+	
+							</table>
+						</div>
                                  
                 	 </div>
                 	</div>   
@@ -313,45 +229,41 @@
 				<!---------------------------------------------------------------------------------------->
                               
                   <!-- TABLA COLABORACIONES -->        
-                  <div class="col-lg-12" style="background-color:ffffff; border-radius:10px 10px 10px 10px;">
+                  <div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
                         <div class="table-responsive">
                         	 <div class="col-xs-6 text-left">
-                            	<div class="huge">Colaboraciones Creadas</div>
+                            	<div class="huge">Mis Colaboraciones</div>
                         	</div>
                             <table style="border:2px solid black" class="table table-bordered table-hover table-striped" style="border-style:outset">
-                            
-                            <%
-                            
-                            CollaborationDAO collaborationDao = new CollaborationDAO();
-                            /* List<Collaboration> listaColaboraciones = collaborationDao.getCollaborations(); */
-                            
- 							out.println("<thead>"); 
-				         	out.println("<tr style = background-color:cccccc>");	
-				         	out.println("<th>" + "Nombre" + "</th>");
-				         	out.println("<th>" + "Habilidad" + "</th>");
-				         	out.println("<th>" + "Fecha Inicio" + "</th>");
-				         	out.println("<th>" + "Fecha Final" + "</th>");
-				         	out.println("<th>" + "Estado" + "</th>");
-				         	out.println("<th></th>");
-				         	out.println("</tr>");
-				         	out.println("</thead>");
-				         	out.println("<tbody>");
-				         	
-				         	
-							out.println("<tr style=background-color:597eaa>"); 
-				            out.println("<td></td>");
-				            out.println("<td></td>");
-				            out.println("<td></td>");
-				            out.println("<td></td>");
-				            out.println("<td><i class='fa fa-lock fa-2x' style='color:ffffff;'></i></td>");
-				            out.println("<td></td>");
-							out.println("</tr>");				         	
+                            	
+                            	<tr style = "color:black; background-color:cccccc;font-size:12px">
+									
+									<th>Nombre</th>
+									<th>Habilidad</th>
+									<th>Fecha Inicio</th>
+									<th>Fecha Fin</th>
+									<th></th>
+									<th></th>
 							
-				         	
-				         	 %>
+								</tr>	
+								
+								<c:forEach items="${collaborations}" var="collaboration">
+		        					<c:choose>
+		        						<c:when test="${demand.nid == nid}">
+			         						<tr>
+							          		<td>${demand.name}</td>
+							                <td>${demand.getIdSkill().split("/")[1]}</td>
+							           		<td>${demand.beginningDate}</td>
+							           		<td>${demand.endingDate}</td>
+							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" onClick="location='${pageContext.request.contextPath}/demand/update/${demand.idDemand}'" type = "submit" name = "submit"></button></td>
+						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" onClick="location='${pageContext.request.contextPath}/student/main.html'"type = "submit" name = "submit"></button></td>
+			          						</tr>
+		      							</c:when>
+		      						</c:choose>
+		      					</c:forEach> 
+                            	
 				      
-				       </tbody>
-				     </table>
+				     		</table>
                                  
                   	</div>
                   </div>

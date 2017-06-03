@@ -46,7 +46,7 @@
 	        
 	        </table>
 	        
-	         ¿Seguro que desea borrar el grado de {degree.name} (id ${degree.idDegree})?
+	         ¿Seguro que desea borrar el grado de ${degree.name} (id ${degree.idDegree})?
 	        <br><br>
 	        
 	        <input type = "submit" name = "submit" value = "Accept">

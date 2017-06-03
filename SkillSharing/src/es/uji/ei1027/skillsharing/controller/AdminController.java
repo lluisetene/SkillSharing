@@ -1,5 +1,8 @@
 package es.uji.ei1027.skillsharing.controller;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,12 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Admin;
+import es.uji.ei1027.skillsharing.model.Collaboration;
+import es.uji.ei1027.skillsharing.model.Degree;
+import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Skill;
+import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.AdminValidator;
 
 @Controller
@@ -46,17 +55,158 @@ public class AdminController {
 	//-------------------------------------------
 	@RequestMapping("/main")
 	public String mainUserLogin(Model model) {
-		
-		model.addAttribute("admins", adminDao.getAdmins());
-		model.addAttribute("degrees", degreeDao.getDegrees());
-		model.addAttribute("skills", skillDao.getSkills());
-		model.addAttribute("collaborations", collaborationDao.getCollaborations());
-		model.addAttribute("demands", demandDao.getDemandsWithNameSkill());
-		model.addAttribute("offers", offerDao.getOffersWithNameSkill());
-		model.addAttribute("students", studentDao.getStudents());
+
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("studentsList", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("adminsList", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("skillsList", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("degreesList", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("offersList", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("demandsList", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
 		
 		return "admin/main";
 	}
+	
+	@RequestMapping(value="/main", method=RequestMethod.POST)
+	public String processListSubmit(@ModelAttribute("studentsSelect") Student student, @ModelAttribute("adminsSelect") Admin admin,  @ModelAttribute("skillsSelect") Skill skill, @ModelAttribute("degreesSelect") Degree degree, @ModelAttribute("offersSelect") Offer offer, @ModelAttribute("demandsSelect") Demand demand, @ModelAttribute("collaborationsSelect") Collaboration collaboration, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("studentsList", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("adminsList", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("skillsList", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("degreesList", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("offersList", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("demandsList", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
+		
+		if (student.getNid() != null){
+	
+			if (student.getNid().toUpperCase().equals("Todas".toUpperCase())){
+				
+				model.addAttribute("studentsSelect", studentDao.getStudents());
+				model.addAttribute("studentsList", studentDao.getStudents());
+				
+			}else{	
+				
+				model.addAttribute("studentsSelect", studentDao.getStudents());
+				List<Student> estudiantes = new LinkedList<Student>();
+				estudiantes.add(studentDao.getStudent(student.getNid()));
+				model.addAttribute("studentsList", estudiantes);
+			}
+		}
+		
+		if (admin.getUsername() != null){
+		
+			if(admin.getUsername().toUpperCase().equals("Todas".toUpperCase())){
+		
+				model.addAttribute("adminsSelect", adminDao.getAdmins());
+				model.addAttribute("adminsList", adminDao.getAdmins());
+	
+			}else{
+				
+				model.addAttribute("adminsSelect", adminDao.getAdmins());
+				List<Admin> admins = new LinkedList<Admin>();
+				admins.add(adminDao.getAdmin(admin.getUsername()));
+				model.addAttribute("adminsList", admins);
+			
+			}
+		}
+		
+		if (skill.getIdSkill() != null){
+			if(skill.getIdSkill().toUpperCase().equals("Todas".toUpperCase())){
+		
+				model.addAttribute("skillsSelect",skillDao.getSkills());
+				model.addAttribute("skillsList", skillDao.getSkills());
+	
+			}else{
+				
+				model.addAttribute("skillsSelect", skillDao.getSkills());
+				List<Skill> skills = new LinkedList<Skill>();
+				skills.add(skillDao.getSkill(skill.getIdSkill()));
+				model.addAttribute("skillsList", skills);
+			
+			}
+		}
+		
+		if (degree.getIdDegree()!= null){
+			
+			if(degree.getIdDegree().toUpperCase().equals("Todas".toUpperCase())){
+		
+				model.addAttribute("degreesSelect", degreeDao.getDegrees());
+				model.addAttribute("degreesList", degreeDao.getDegrees());
+	
+			}else{
+				
+				model.addAttribute("degreesSelect", degreeDao.getDegrees());
+				List<Degree> degrees = new LinkedList<Degree>();
+				degrees.add(degreeDao.getDegree(degree.getIdDegree()));
+				model.addAttribute("degreesList", degrees);
+			
+			}
+		}
+		
+		if (offer.getIdOffer()!= null){
+			
+		
+			if(offer.getIdOffer().toUpperCase().equals("Todas".toUpperCase())){
+		
+				model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+				model.addAttribute("offersList", offerDao.getOffersWithNameSkill());
+	
+			}else{
+			
+				model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+				model.addAttribute("offersList", offerDao.getOffers2(offer.getIdOffer().split("/")[0]));
+			
+			}
+		}
+		
+		if (demand.getIdDemand()!= null){
+			if(demand.getIdDemand().toUpperCase().equals("Todas".toUpperCase())){
+		
+				model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+				model.addAttribute("demandsList", demandDao.getDemandsWithNameSkill());
+	
+			}else{
+				
+				model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+				model.addAttribute("demandsList", demandDao.getDemands2(demand.getIdDemand().split("/")[0]));
+			
+			}
+		}
+		
+		if(collaboration.getRate() != 0.0){
+			
+			if (collaboration.getRate() == -1){
+			
+				model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+				model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
+	
+			}else{
+				
+				model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+				model.addAttribute("collaborationsList", collaborationDao.getCollaborations(collaboration.getRate()));
+			
+			}
+		
+		}
+		return "admin/main";
+	
+	}
+
 	
 	//------------ listado ----------------------------
 	@RequestMapping("/list")

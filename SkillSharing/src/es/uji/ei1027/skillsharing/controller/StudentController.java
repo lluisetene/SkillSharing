@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.skillsharing.dao.AdminDAO;
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DegreeDAO;
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
+import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.StudentValidator;
@@ -30,14 +33,20 @@ public class StudentController {
 	private CollaborationDAO collaborationDao;
 	private OfferDAO offerDao;
 	private DemandDAO demandDao;
+	private AdminDAO adminDao;
+	private SkillDAO skillDao;
+	private DegreeDAO degreeDao;
 	
 	
 	@Autowired
-	public void setStudentDato(StudentDAO studentDao, CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao) {
+	public void setStudentDato(StudentDAO studentDao, CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao, AdminDAO adminDao, SkillDAO skillDao, DegreeDAO degreeDao) {
 		this.studentDao = studentDao;
 		this.collaborationDao = collaborationDao;
 		this.offerDao = offerDao;
 		this.demandDao = demandDao;
+		this.adminDao = adminDao;
+		this.skillDao = skillDao;
+		this.degreeDao = degreeDao;
 	}
 	
 	//Método para convertir el formato String a Date en el formulario
@@ -133,17 +142,33 @@ public class StudentController {
 	}
 	
 	//----------- actualización ------------------
-	@RequestMapping(value="/update/{nid}", method = RequestMethod.GET)
+	@RequestMapping(value="/updateByAdmin/{nid}", method = RequestMethod.GET)
 	public String processUpdateSubmit(Model model, @PathVariable String nid) {
 		
 		model.addAttribute("student", studentDao.getStudent(nid));
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
-		return "student/update"; 
+		return "student/updateByAdmin"; 
 		
 	}
 	
-	@RequestMapping(value="/update/{nid}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult) {
+	@RequestMapping(value="/updateByAdmin/{nid}", method = RequestMethod.POST) 
+	public String processUpdateSubmit(@PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("student", studentDao.getStudent(nid));
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		StudentValidator studentValidator = new StudentValidator();
 		
@@ -153,11 +178,11 @@ public class StudentController {
 		
 		if (bindingResult.hasErrors()) 
 			
-			 return "student/update";
+			 return "student/updateByAdmin";
 		
 		 studentDao.updateStudent(student);
-		 
-		 return "redirect:../list.html"; 
+
+		 return "redirect:../../admin/main.html"; 
 		 
 	  }
 

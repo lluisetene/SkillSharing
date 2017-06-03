@@ -75,5 +75,12 @@ public class CollaborationDAO {
 		this.jdbcTemplate.update("insert into collaboration(idcollaboration, idoffer, iddemand, beginningdate, endingdate, hours, rate) values(?, ?, ?, ?, ?, ?, ?)", collaboration.getIdCollaboration(), collaboration.getIdOffer(), collaboration.getIdDemand(), collaboration.getBeginningDate(), collaboration.getEndingDate(), collaboration.getHours(), collaboration.getRate());
 	
 	}
+	
+	public List<Collaboration> getCollaborations(float rate) {
+		
+		return this.jdbcTemplate.query("select * from collaboration WHERE rate = ?", new Object[] {rate}, new CollaborationMapper());
+	
+	}
+	
 		
 }

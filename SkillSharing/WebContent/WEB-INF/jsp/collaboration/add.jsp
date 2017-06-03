@@ -86,7 +86,6 @@
 	                <td><form:label path="rate">Valoracion</form:label></td>
 	              	<td><select id = "rate" name = "rate">
 		               <option value= "5" selected="selected">5 (por defecto)</option>
-		               <option value="0">0</option>
 		               <option value="1">1</option>
 		               <option value="2">2</option>
 		               <option value="3">3</option>

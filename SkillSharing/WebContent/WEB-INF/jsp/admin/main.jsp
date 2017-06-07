@@ -266,7 +266,7 @@
 							                <td>${student.password}</td>
 							           		<td>${student.banned}</td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/student/updateByAdmin/${student.nid}.html'"></button></td>
-						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/student/delete/${student.nid}.html'"></button></td>
+						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/student/deleteByAdmin/${student.nid}.html'"></button></td>
 							           
 	            						</tr>
 	        

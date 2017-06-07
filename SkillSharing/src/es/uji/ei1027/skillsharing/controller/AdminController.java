@@ -27,6 +27,7 @@ import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.AdminValidator;
+import es.uji.ei1027.skillsharing.validators.StudentValidator;
 
 @Controller
 @RequestMapping("/admin")
@@ -249,13 +250,28 @@ public class AdminController {
 	@RequestMapping("/add")
 	public String addUserLogin(Model model) {
 		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("admin", new Admin());
 		
 		return "admin/add";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("admin") Admin admin, BindingResult bindingResult) {
+	public String processAddSubmit(@ModelAttribute("admin") Admin admin, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		AdminValidator adminValidator = new AdminValidator();
 		
@@ -278,6 +294,13 @@ public class AdminController {
 	@RequestMapping(value="/update/{username}", method = RequestMethod.GET)
 	public String processUpdateSubmit(Model model, @PathVariable String username) {
 		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("admin", adminDao.getAdmin(username));
 		
 		return "admin/update"; 
@@ -285,7 +308,21 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/update/{username}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable String username, @ModelAttribute("admin") Admin admin, BindingResult bindingResult) {
+	public String processUpdateSubmit(@PathVariable String username, @ModelAttribute("admin") Admin admin, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		
+		AdminValidator adminValidator = new AdminValidator();
+		
+		adminValidator.setAdminDAO(adminDao);
+		
+		adminValidator.validateUpdate(admin, bindingResult);
 		
 		if (bindingResult.hasErrors()) 
 			
@@ -293,20 +330,48 @@ public class AdminController {
 		
 		 adminDao.updateAdmin(admin);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../main.html"; 
 		 
 	  }
 	
 	
 	//---------------- eliminación ---------------
-	@RequestMapping(value="/delete/{username}")
-	public String processDeleteSubmit(@PathVariable String username) {
-			
-		adminDao.deleteAdmin(username);
+	@RequestMapping(value="/delete/{username}", method = RequestMethod.GET)
+	public String processDeleteSubmit(Model model, @PathVariable String username) {
 		
-		return "redirect:../list.html";
-	
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("admin", adminDao.getAdmin(username));
+		
+		return  "admin/delete"; 
+		
 	}
+	
+	@RequestMapping(value="/delete/{username}", method = RequestMethod.POST) 
+	public String processDeleteSubmit(@PathVariable String username, @ModelAttribute("admin") Admin admin, BindingResult bindingResult, Model model) {
+
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		
+		if (bindingResult.hasErrors()) {
+			
+			return  "admin/delete"; 
+		}
+		adminDao.deleteAdmin(admin.getUsername());
+		
+		 return "redirect:../main.html"; 
+		 
+	  }
 	
 	
 	

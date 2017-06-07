@@ -78,9 +78,34 @@ public class AdminValidator implements Validator {
 
 	@Override
 	public void validateUpdate(Object obj, Errors errors) {
-		// TODO Auto-generated method stub
+Admin user = (Admin) obj;
 		
+		//------ NAME -------//
+		if ( user.getName().trim().equals("") )
+			errors.rejectValue("name", "required", "Este campo es obligatorio");
+		else if ( user.getName().length() < 5 )
+			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+		
+		
+		// ------ MAIL ----- //
+		if( user.getMail().trim().equals("") )
+			errors.rejectValue("mail", "required", "Este campo es obligatorio");
+	
+		
+		//-------- USERNAME --------//
+		if (user.getUsername().trim().equals(""))
+			errors.rejectValue("username", "required", "Este campo es obligatorio");
+			
+			
+		
+		//---------- PASSWORD -----------//
+		if ( user.getPassword().trim().equals("") )
+			errors.rejectValue("password", "required", "Este campo es obligatorio");
+		else if ( user.getPassword().length() < 6 )
+			errors.rejectValue("password",  "required", "La password debe tener más de 6 caracteres");
 	}
+		
+	
 
 
 	@Override

@@ -189,31 +189,46 @@ public class StudentController {
 
 	
 	//----------- eliminación ------------------
-	@RequestMapping(value="/delete/{nid}", method = RequestMethod.GET)
+	@RequestMapping(value="/deleteByAdmin/{nid}", method = RequestMethod.GET)
 	public String processDeleteSubmit(Model model, @PathVariable String nid) {
 		
 		model.addAttribute("student", studentDao.getStudent(nid));
-		
-		return "student/delete"; 
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+	
+		return  "student/deleteByAdmin"; 
 		
 	}
 	
-	@RequestMapping(value="/delete/{nid}", method = RequestMethod.POST) 
-	public String processDeleteSubmit(@PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult) {
-	
+	@RequestMapping(value="/deleteByAdmin/{nid}", method = RequestMethod.POST) 
+	public String processDeleteSubmit(@PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult, Model model) {
+
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		
 		StudentValidator studentValidator = new StudentValidator();
 		
 		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
 		
 		studentValidator.validateDelete(student, bindingResult);
 		
-		if (bindingResult.hasErrors()) 
-			
-			 return "student/delete";
 		
+		if (bindingResult.hasErrors()) {
+			
+			return  "student/deleteByAdmin"; 
+		}
 		 studentDao.deleteStudent(nid);
-		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../admin/main.html"; 
 		 
 	  }
 	

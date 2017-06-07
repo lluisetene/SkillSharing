@@ -11,7 +11,7 @@
 
 <html lang="es-ES">
 
-	<t:paginaBasica title="Modificar usuario"/>
+	<t:paginaBasica title="Eliminar usuario"/>
 
 		 <%
 	        Admin admin = new Admin();
@@ -217,13 +217,14 @@
     
     				<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:100%; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
    						
-    					<h1 style = "color:black;margin:0; padding-left:20px">Modificar Usuario</h1>
+    					<h1 style = "color:black;margin:0; padding-left:20px">Eliminar Usuario</h1>
     					
     					<div style = "height:2px; width:40%; background-color:black"></div>
     
-				    	<form:form method="post" style = "padding-top:10; padding-left:25" modelAttribute="student">
+				    	
+        					<form:form method="post" style = "padding-top:10; padding-left:25" modelAttribute="student">
 				      
-					         <table>
+					        <table>
 							
 					        	<tr style = "height:50px">
 					        	
@@ -276,7 +277,7 @@
 					            <tr style = "height:50px">
 					            
 					                <td><form:label path="offerHours">Horas Ofertadas</form:label></td>
-					                <td><select style = "width: 65%;border:1px solid black;  color:black" Class="form-control" id = "offerHours" name = "offerHours" >
+					                <td><select style = "width: 65%;border:1px solid black; background-color:eeeeee; color:black" Class="form-control" id = "offerHours" name = "offerHours" disabled>
 										<option value="20:00" selected="selected">20 horas (por defecto)</option>
 										<option value="01:00">01:00</option>
 										<option value="02:00">02:00</option>
@@ -291,7 +292,7 @@
 									</select></td>
 									
 									<td><form:label path="demandHours" style = "padding-right: 50px">Horas Demandadas</form:label></td>
-					                <td><select style = "border:1px solid black; color:black;"  Class="form-control" id = "demandHours" name = "demandHours" >
+					                <td><select style = "border:1px solid black; color:black;background-color:eeeeee;"  Class="form-control" id = "demandHours" name = "demandHours" disabled>
 										<option value="00:00" selected="selected">00 horas (por defecto)</option>
 										<option value="01:00">01:00</option>
 										<option value="02:00">02:00</option>
@@ -310,7 +311,7 @@
 					             <tr style = "height:50px">
 					            
 					                <td><form:label path="banned">Baneado</form:label></td>
-					                <td><select style = "width:40%;border:1px solid black; color:black; " Class="form-control" id="banned" name="banned"> 
+					                <td><select style = "width:40%;border:1px solid black; color:black; background-color:eeeeee;" Class="form-control" id="banned" name="banned" disabled> 
 										<option value="false" selected="selected">falso</option>
 										<option value="true">verdadero</option>
 									</select></td>
@@ -319,33 +320,37 @@
 					        
 					        </table>
 					        <div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-					       	<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('nid').disabled=false,
-																																																											       		document.getElementById('username').disabled=false,
-																																																											       		document.getElementById('name').disabled=false,
-																																																											       		document.getElementById('password').disabled=false,
-																																																											       		document.getElementById('course').disabled=false,
-																																																											       		document.getElementById('mail').disabled=false;"/>
+					       	<input type = "button" style=  "font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" data-toggle="modal" data-target="#myModal" class = "btn" value = "Aceptar"  onclick = "document.getElementById('nid').disabled=false,
+																																																																						       		document.getElementById('username').disabled=false,
+																																																																						       		document.getElementById('name').disabled=false,
+																																																																						       		document.getElementById('password').disabled=false,
+																																																																						       		document.getElementById('course').disabled=false,
+																																																																						       		document.getElementById('mail').disabled=false,
+																																																																						       		document.getElementById('offerHours').disabled=false,
+																																																																						       		document.getElementById('demandHours').disabled=false,
+																																																																						       		document.getElementById('banned').disabled=false;"/>
 					        <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
-					   <!-- Modal -->
+					   
+											    <!-- Modal -->
 							  <div class="modal fade" id="myModal" role="dialog">
 							    <div class="modal-dialog">
 							    
-							      <!-- Modal content-->
-							      <div class="modal-content">
-							        <div class="modal-header">
-							          <button type="button" class="close" data-dismiss="modal">&times;</button>
-							          <h4 style = "color:black" class="modal-title">Modificar Usuario</h4>
-							        </div>
-							        <div class="modal-body">
-							          <p><i>¿Seguro que desea modificar a este usuario?</i></p>
-							        </div>
-							        <div  class="modal-footer" style = "background-color:eeeeee">
-							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">
-							        </div>
-							      </div>
-							      
-							    </div>
-							  </div>
+						      <!-- Modal content-->
+						      <div class="modal-content">
+						        <div class="modal-header">
+						          <button type="button" class="close" data-dismiss="modal">&times;</button>
+						          <h4 style = "color:black" class="modal-title">Eliminar Usuario</h4>
+						        </div>
+						        <div class="modal-body">
+						          <p><i>¿Seguro que desea borrar este usuario?</i></p>
+						        </div>
+						        <div  class="modal-footer" style = "background-color:eeeeee">
+						          <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">
+						        </div>
+						      </div>
+						      
+						    </div>
+						  </div>
 					   
 					   
 		    			</form:form>
@@ -354,7 +359,8 @@
 		
 			</div>
 			
+			
+	 
+	  
 
-	  
-	  
 <t:barrainferior/>

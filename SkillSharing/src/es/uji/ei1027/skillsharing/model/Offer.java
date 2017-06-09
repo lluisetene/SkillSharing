@@ -99,7 +99,7 @@ public class Offer {
 	@Override
 	public String toString() {
 		
-		return "Offer [idOffer = " + idOffer + ", nid = " + nid +", name = " + name + ", idSkill = " + idSkill + ", description = " + description + ", beginningDate = " + beginningDate + ", endingDate = " + endingDate + "]";
+		return "idOffer = " + idOffer + ", nid = " + nid +", name = " + name + ", idSkill = " + idSkill + ", description = " + description + ", beginningDate = " + beginningDate + ", endingDate = " + endingDate;
 	
 	}
 	

@@ -99,7 +99,7 @@ public class Demand {
 	@Override
 	public String toString() {
 		
-		return "Demand [idDemand = " + idDemand + ", nid = " + nid +", name = " + name + ", idSkill = " + idSkill + ", description = " + description + ", beginningDate = " + beginningDate + ", endingDate = " + endingDate + "]";
+		return "idDemand = " + idDemand + ", nid = " + nid +", name = " + name + ", idSkill = " + idSkill + ", description = " + description + ", beginningDate = " + beginningDate + ", endingDate = " + endingDate;
 	
 	}
 	

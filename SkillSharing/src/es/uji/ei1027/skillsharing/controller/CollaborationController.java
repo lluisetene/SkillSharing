@@ -123,7 +123,7 @@ public class CollaborationController {
 		
 		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
 		
-		collaborationValidator.validateAdd(collaboration, bindingResult);
+//		collaborationValidator.validateAdd(collaboration, bindingResult);
 		
 		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 		

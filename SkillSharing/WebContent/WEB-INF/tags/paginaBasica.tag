@@ -15,6 +15,7 @@
 		
 		<!-- Estilos propios -->
 		<link href="${pageContext.request.contextPath}/css/errors.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/css/estrellas.css" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="/resources/demos/style.css">

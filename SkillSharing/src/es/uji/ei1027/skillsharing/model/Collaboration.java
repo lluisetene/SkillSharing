@@ -99,7 +99,7 @@ public class Collaboration {
 	@Override
 	public String toString() {
 		
-		return "Collaboration [idCollaboration = " + idCollaboration + ", IdOffer = " + idOffer + ", idDemand = " + idDemand + ", beginningDate = " + beginningDate + ", endingDate = " + endingDate + ", hours = " + hours + ", rate = " + rate + "]";
+		return "idCollaboration = " + idCollaboration + ", IdOffer = " + idOffer + ", idDemand = " + idDemand + ", beginningDate = " + beginningDate + ", endingDate = " + endingDate + ", hours = " + hours + ", rate = " + rate;
 	
 	}
 	

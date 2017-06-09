@@ -13,6 +13,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
+import es.uji.ei1027.skillsharing.model.Collaboration;
+import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.model.Student;
 
 @Repository
@@ -20,6 +24,7 @@ public class StudentDAO {
 
 	private JdbcTemplate jdbcTemplate;
 	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+	private Statistics estadisticas = new Statistics();
 	
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -91,5 +96,16 @@ public class StudentDAO {
 		this.jdbcTemplate.update("insert into student(nid, name, username, password, mail, course, offerhours, demandhours, banned) values(?, ?, ?, ?, ?, ?, ?, ?, ?)", student.getNid(), student.getName(), student.getUsername(), passwordEncryptor.encryptPassword(student.getPassword()), student.getMail(), student.getCourse(), student.getOfferHours(), student.getDemandHours(), student.getBanned());
 	
 	}
+	
+	public Statistics getEstadisticas() {
+		
+		return estadisticas;
+		
+	}
+	
+	public void setDatos(List<Offer> ofertas, List<Demand> demandas, List<Collaboration> colaboraciones) {
+		estadisticas.setDatos(ofertas, demandas, colaboraciones);
+	}
+	
 		
 }

@@ -151,8 +151,6 @@ public class OfferController {
 		
 		offerDao.addOffer(offer);
 		
-		studentDao.getStudent(offer.getNid()).setOferta(offer);
-		
 		return "redirect:main.html";
 		
 	}

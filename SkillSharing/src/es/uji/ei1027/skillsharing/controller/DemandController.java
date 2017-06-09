@@ -149,8 +149,6 @@ public class DemandController {
 		
 		demandDao.addDemand(demand);
 		
-		studentDao.getStudent(demand.getNid()).setDemanda(demand);
-		
 		return "redirect:main.html";
 		
 	}

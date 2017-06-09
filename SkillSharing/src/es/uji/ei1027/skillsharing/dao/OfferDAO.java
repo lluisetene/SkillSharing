@@ -13,7 +13,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.skillsharing.model.Offer;
-import es.uji.ei1027.skillsharing.model.Skill;
 
 @Repository
 public class OfferDAO {

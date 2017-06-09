@@ -22,6 +22,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.StudentValidator;
 
@@ -36,7 +37,7 @@ public class StudentController {
 	private AdminDAO adminDao;
 	private SkillDAO skillDao;
 	private DegreeDAO degreeDao;
-	
+	private Statistics estadisticas;
 	
 	@Autowired
 	public void setStudentDato(StudentDAO studentDao, CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao, AdminDAO adminDao, SkillDAO skillDao, DegreeDAO degreeDao) {
@@ -64,9 +65,10 @@ public class StudentController {
 	@RequestMapping("/main")
 	public String mainStudents(Model model) {
 		
-		model.addAttribute("demands", demandDao.getDemands());
-		model.addAttribute("offers", offerDao.getOffers());
-		model.addAttribute("collaborations", collaborationDao.getCollaborations());
+		estadisticas = studentDao.getEstadisticas();
+		estadisticas.setDatos(offerDao.getOffers(), demandDao.getDemands(), collaborationDao.getCollaborations());
+		
+		model.addAttribute("statistics", estadisticas);
 		
 		return "student/main";
 		
@@ -137,7 +139,7 @@ public class StudentController {
 	
 		studentDao.addStudent(student);
 		
-		return "redirect:main.html";
+		return "student/main";
 		
 	}
 	

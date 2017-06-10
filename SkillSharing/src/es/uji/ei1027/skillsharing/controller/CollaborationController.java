@@ -22,6 +22,7 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.HoursControlBETA;
+import es.uji.ei1027.skillsharing.model.NotificarColaboraciones;
 import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 
 @Controller
@@ -133,6 +134,15 @@ public class CollaborationController {
 		
 		collaborationDao.addCollaboration(collaboration);
 		controlHoras.addHours(collaboration.getHours());
+		
+		NotificarColaboraciones notificacion = new NotificarColaboraciones();
+		String ofertante = studentDao.getStudent(offerDao.getOffer(collaboration.getIdOffer()).getNid()).getMail();
+		String demandante = studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid()).getMail();
+		String nombreOferta = offerDao.getOffer(collaboration.getIdOffer()).getName();
+		String nombreDemanda = demandDao.getDemand(collaboration.getIdDemand()).getName();
+//		notificacion.notificarColaboracion(ofertante, demandante);
+		notificacion.notificarColaboracion("al286327@uji.es", "al259362@uji.es", collaboration, nombreOferta, nombreDemanda);
+
 		
 		return "redirect:main.html";
 		

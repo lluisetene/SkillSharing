@@ -27,7 +27,6 @@ import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.AdminValidator;
-import es.uji.ei1027.skillsharing.validators.StudentValidator;
 
 @Controller
 @RequestMapping("/admin")

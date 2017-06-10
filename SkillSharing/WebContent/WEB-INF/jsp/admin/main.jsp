@@ -251,7 +251,7 @@
 									
 										<th>DNI</th>
 										<th>Nombre Usuario</th>
-										<th>Contraseña</th>
+										<th>Nombre y Apellidos</th>
 										<th>Baneado</th>
 										<th></th>
 										<th></th>
@@ -263,7 +263,7 @@
 	          
 							          		<td>${student.nid}</td>
 							          		<td>${student.username}</td>
-							                <td>${student.password}</td>
+							                <td>${student.name}</td>
 							           		<td>${student.banned}</td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/student/updateByAdmin/${student.nid}.html'"></button></td>
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/student/deleteByAdmin/${student.nid}.html'"></button></td>
@@ -318,7 +318,7 @@
 									<tr style = "color:black; background-color:cccccc;font-size:12px">
 									
 										<th>Nombre Usuario</th>
-										<th>Contraseña</th>
+										<th>Nombre y Apellidos</th>
 										<th>Correo</th>
 										<th></th>
 										<th></th>
@@ -329,7 +329,7 @@
 	           						 	<tr>
 	          
 							          		<td>${admin.username}</td>
-							                <td>${admin.password}</td>
+							                <td>${admin.name}</td>
 							           		<td>${admin.mail}</td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/update/${admin.username}.html'"></button></td>
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/delete/${admin.username}.html'"></button></td>

@@ -2,6 +2,9 @@ package es.uji.ei1027.skillsharing.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -125,7 +128,7 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value="/registrarse", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("student") Student student, BindingResult bindingResult) {
+	public String processAddSubmit(@ModelAttribute("student") Student student, BindingResult bindingResult, HttpSession session) {
 		
 		StudentValidator studentValidator = new StudentValidator();
 		
@@ -139,7 +142,19 @@ public class StudentController {
 	
 		studentDao.addStudent(student);
 		
-		return "student/main";
+		List<Student> studentList = studentDao.getStudents();
+		
+		for ( int i = 0; i < studentList.size(); i++ )
+			
+			if ( studentList.get(i).getUsername().equals(student.getUsername()) ) {
+				
+				session.setAttribute("studentLogin", studentList.get(i));
+				
+				return "redirect:main.html";
+				
+			}
+			
+		return "redirect:main.html";
 		
 	}
 	

@@ -1,5 +1,7 @@
 package es.uji.ei1027.skillsharing.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.skillsharing.dao.AdminDAO;
+import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DegreeDAO;
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
+import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.validators.SkillValidator;
 
@@ -22,12 +28,20 @@ public class SkillController {
 	private SkillDAO skillDao;
 	private OfferDAO offerDao;
 	private DemandDAO demandDao;
+	private StudentDAO studentDao;
+	private DegreeDAO degreeDao;
+	private AdminDAO adminDao;
+	private CollaborationDAO collaborationDao;
 	
 	@Autowired
-	public void setSkillDao(SkillDAO skillDao, OfferDAO offerDao, DemandDAO demandDao) {
+	public void setSkillDao(SkillDAO skillDao, OfferDAO offerDao, DemandDAO demandDao, StudentDAO studentDao, DegreeDAO degreeDao, AdminDAO adminDao, CollaborationDAO collaborationDao) {
 		this.skillDao = skillDao;
 		this.offerDao = offerDao;
 		this.demandDao = demandDao;
+		this.studentDao = studentDao;
+		this.degreeDao = degreeDao;
+		this.adminDao = adminDao;
+		this.collaborationDao = collaborationDao;
 		
 	}
 	
@@ -84,14 +98,47 @@ public class SkillController {
 	@RequestMapping("/add")
 	public String addSkill(Model model) {
 		
-		model.addAttribute("skill", new Skill());
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		
+		//Esto deberia ir en el modelo pero de momento se queda aqui por las pruebas
+		//IdSkill automática
+		
+		List<Skill> skills= skillDao.getSkills();
+		Skill skill = new Skill();
+		String idSkill;
+		
+		if (skills.isEmpty()){
+			
+			idSkill = "1";
+			
+		}else{
+		
+			idSkill = String.valueOf(Integer.parseInt(skills.get(0).getIdSkill()) + 1);
+			skill.setIdSkill(idSkill);
+		}
+		model.addAttribute("skill", skill);
+		//----------------------------------------
 		
 		return"skill/add";
 		
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
+	public String processAddSubmit(@ModelAttribute("skill") Skill skill, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		SkillValidator skillValidator = new SkillValidator();
 		
@@ -105,7 +152,7 @@ public class SkillController {
 			
 		skillDao.addSkill(skill);
 		
-		return "redirect:main.html";
+		 return "redirect:../admin/main.html";
 		
 	}
 	

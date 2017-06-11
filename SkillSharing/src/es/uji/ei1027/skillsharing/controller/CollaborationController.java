@@ -140,8 +140,7 @@ public class CollaborationController {
 		String demandante = studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid()).getMail();
 		String nombreOferta = offerDao.getOffer(collaboration.getIdOffer()).getName();
 		String nombreDemanda = demandDao.getDemand(collaboration.getIdDemand()).getName();
-//		notificacion.notificarColaboracion(ofertante, demandante);
-		notificacion.notificarColaboracion("al286327@uji.es", "al259362@uji.es", collaboration, nombreOferta, nombreDemanda);
+		notificacion.notificarColaboracion(ofertante, demandante, collaboration, nombreOferta, nombreDemanda);
 
 		
 		return "redirect:main.html";

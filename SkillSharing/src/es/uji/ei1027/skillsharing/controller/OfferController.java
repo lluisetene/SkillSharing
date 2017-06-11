@@ -20,6 +20,7 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.OfferValidator;
 
 @Controller
@@ -31,6 +32,7 @@ public class OfferController {
 	private CollaborationDAO collaborationDao;
 	private SkillDAO skillDao;
 	private OfferValidator offerValidator;
+	private Statistics estadisticas;
 	
 	@Autowired
 	public void setOfferDao(OfferDAO offerDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao) {
@@ -131,6 +133,9 @@ public class OfferController {
 	public String addOffer(Model model) {
 		
 		model.addAttribute("offer", new Offer());
+		model.addAttribute("skills", skillDao.getSkills());
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		return "offer/add";
 		

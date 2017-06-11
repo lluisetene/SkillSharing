@@ -1,75 +1,145 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="studentLogin" scope="request" value='${session.getAttribute("studentLogin")}'/>
+
+<html>
+
+<head>
+
+	<style>
+	
+		tr {
+		
+			height:50px;
+		
+		}
+	
+	</style>
+
+</head>
 
 <t:paginaBasica title="Oferta"/>
-		
-		
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/calendar.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/errors.css">
-    
-   	<h2>Nueva Oferta</h2>
+<t:paginaBasicaStudent/>
+	
+	<div class="col-lg-8" style="background-color:073763; border-radius:10px 10px 10px 10px; margin-top:-350px">
+    	<div class="panel-body" style="background-color:073763">
+			<div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
+            	<div class="table-responsive">
+					<h1 style = "color:black; margin:0; padding-left:40px; padding-top:10px	">Añadir Oferta</h1>
+    				<div style = "height:2px; width:40%; background-color:black"></div>
+                    
+                  
+	
    	
-    <form:form method="post" modelAttribute="offer">
+    <form:form method="post" style = "padding-top:10; padding-left:25" modelAttribute="offer">
 	       
 		<table>
         	
         	<tr>
-                
-                <td><form:label path="idOffer">IdOferta</form:label></td>
-                <td><form:input type = "text" maxlength = "5" path="idOffer" /></td>
-            	<td><form:errors path="idOffer" cssClass="error"/></td>
+                <td>
+                	<form:label path="idOffer">IdOferta</form:label>
+                	<%-- <form:input type = "text" maxlength = "5" path="idOffer" readonly = "true" disabled = "true"/> --%>
+                	<form:input type = "text" maxlength = "5" path="idOffer" />
+                </td>
             </tr>
             
             <tr>
-            
-                <td><form:label path="nid">DNI</form:label></td>
-                <td><form:input type = "text" maxlength = "9" path="nid" /></td>
-            	<td><form:errors path="nid" cssClass="error"/></td>
-            </tr>
-            
-            <tr>
-            
-                <td><form:label path="name">Nombre</form:label></td>
-                <td><form:input type = "text" maxlength = "100" path="name" /></td>
+                <td>
+                	<form:label path="name">Nombre de la Oferta</form:label>
+                	<form:input type = "text" style="width:485px" maxlength = "100" path="name" />
+                </td>
             	<td><form:errors path="name" cssClass="error" /></td>
             </tr>
             
             <tr>
-                
-                <td><form:label path="idSkill">IdHabilidad</form:label></td>
-                <td><form:input type = "text" maxlength = "5" path="idSkill" /></td>
-            	<td><form:errors path="idSkill" cssClass="error" /></td>
+                <td>
+                <form:label path="idSkill">Habilidad</form:label>
+         		<select style = "width:200px; border:1px solid black; color:black; background-color:white;">
+					<option value="---">---</option>	
+					<c:forEach items="${skills}" var="skill">
+						<option value="${skill.getIdSkill()}" selected="selected">${skill.getName()}</option>
+					</c:forEach>
+					</select>
+            
+                <b style="padding-left:237px">Nivel</b>
+				<select style = "width:80px; border:1px solid black; color:black; background-color:white;">
+					<option value="medium" selected="selected">Medio</option>
+					<option value="high">Alto</option>
+					<option value="low">Bajo</option>
+				</select>
+				</td>
             </tr>
             
             <tr>
-                
-                <td><form:label path="description">Descripcion</form:label></td>
-                <td><form:input type = "text" maxlength = "300" path="description" /></td>
+                <td><form:label path="description">Descripcion<FONT SIZE=2>(máximo 300 caracteres)</FONT></form:label></td>
             </tr>
             
             <tr>
+                <td><textarea maxlength="300" rows="4" cols="68" name="description"></textarea>
+            </td>
             
-  	            <td><form:label path="beginningDate">Fecha inicio</form:label></td>
-                <td><form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/><td>
+            <tr>
+  	            <td>
+  	            	<form:label path="beginningDate">Fecha inicio</form:label>
+                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/>
+                <td>
                 <td><form:errors path="beginningDate" cssClass="error" /></td>
             </tr>
             
             <tr>
-            
-                <td><form:label path="endingDate">Fecha fin</form:label></td>
-                <td><form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" /><td>
+                <td>
+                	<form:label path="endingDate">Fecha fin</form:label>
+                	<form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" />
+                <td>
                 <td><form:errors path="endingDate" cssClass="error" /></td>
-                
+            </tr>
+            
+            <tr>
+                <td><form:input type = "hidden" maxlength = "9" path="nid" value='${studentLogin.getNid()}' readonly = "true" disabled = "true"/></td>
+            	<td><form:errors path="nid" cssClass="error"/></td>
             </tr>
             
         </table>
-        	<input type = "submit" name = "submit" value = "Aceptar">
-        	<input type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
+        
+        <div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
+		<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onClick = "document.getElementById('idOffer').disabled=false, 
+	        																	   																																							document.getElementById('nid').disabled=false;">
+        <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
+        
+        
+        <!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+	    	<div class="modal-dialog">
+	    
+		      	<!-- Modal content-->
+		      	<div class="modal-content">
+		        	<div class="modal-header">
+		          		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          		<h4 style = "color:black" class="modal-title">Añadir Oferta</h4>
+		        	</div>
+		        	<div class="modal-body">
+		          		<p><i>¿Seguro que desea Añadir esta oferta?</i></p>
+		        	</div>
+		        	<div  class="modal-footer" style = "background-color:eeeeee">
+		         		<input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">
+		        	</div>
+		      	</div>
+	      
+	    	</div>
+	  </div>
+       	
+       	
+       	
     </form:form>
+    </div>
+    </div>
+    </div>
+    </div>
     
+</html>
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script> 

@@ -44,13 +44,13 @@ public class DegreeDAO {
 	
 	public List<Degree> getDegrees() {
 		
-		return this.jdbcTemplate.query("select * from degree order by iddegree", new DegreeMapper());
+		return this.jdbcTemplate.query("select * from degree order by idDegree DESC;", new DegreeMapper());
 		
 	}
 	
-	public Degree getDegree(String idDegree) {
+	public List<Degree> getDegreeList(String name) {
 		
-		return this.jdbcTemplate.queryForObject("select * from degree where iddegree = ?", new Object[] {idDegree}, new DegreeMapper());
+		return this.jdbcTemplate.query("select * from degree where name = ?", new Object[] {name}, new DegreeMapper());
 	
 	}
 	
@@ -69,6 +69,19 @@ public class DegreeDAO {
 	public void addDegree(Degree degree) {
 		
 		this.jdbcTemplate.update("insert into degree(iddegree, name, nid) values(?, ?, ?)", degree.getIdDegree(), degree.getName(), degree.getNid());
+	
+	}
+	
+	public List<Degree> getDistinctDegree(){
+		
+		return this.jdbcTemplate.query("SELECT count(iddegree) AS iddegree, name, count(nid) AS nid FROM degree GROUP BY name;",   new DegreeMapper());
+
+		
+	}
+	
+	public Degree getDegree(String idDegree) {
+		
+		return this.jdbcTemplate.queryForObject("select * from degree where idDegree = ?", new Object[] {idDegree}, new DegreeMapper());
 	
 	}
 	

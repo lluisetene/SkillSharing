@@ -48,8 +48,9 @@ public class DegreeValidator implements Validator {
 			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < degreesList.size(); i++ )
-				if ( degreesList.get(i).getName().toLowerCase().equals(degree.getName().toLowerCase()) )  {
-					errors.rejectValue("name", "required", "Este Name ya está en uso");
+				if ( degreesList.get(i).getName().toLowerCase().equals(degree.getName().toLowerCase()) &&
+						degree.getNid().trim().toLowerCase().equals(degreesList.get(i).getNid().trim().toLowerCase()))  {
+					errors.rejectValue("name", "required", "Este grado ya contiene al estudiante");
 					break;
 				}
 		}
@@ -113,15 +114,18 @@ public class DegreeValidator implements Validator {
 		// -------- NAME ----- //
 		if ( degree.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( degree.getName().length() < 5 )
+		else if ( degree.getName().length() < 5 ){
 			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
-		else {
+		}else{
+			
 			for ( int i = 0; i < degreesList.size(); i++ )
-				if ( degreesList.get(i).getName().toLowerCase().equals(degree.getName().toLowerCase()) )  {
-					errors.rejectValue("name", "required", "Este Name ya está en uso");
+				if ( degreesList.get(i).getName().toLowerCase().equals(degree.getName().toLowerCase()) &&
+						degree.getNid().trim().toLowerCase().equals(degreesList.get(i).getNid().trim().toLowerCase()))  {
+					errors.rejectValue("name", "required", "Este grado ya contiene al estudiante");
 					break;
 				}
 		}
+		
 		
 		// -------- NID -------- //
 		if ( degree.getNid().trim().equals("") )
@@ -129,6 +133,7 @@ public class DegreeValidator implements Validator {
 		else if ( degree.getNid().length() != 9 )
 			errors.rejectValue("nid", "required", "Tamaño incorrecto");
 		else{	
+	
 			for (int i = 0; i < studentList.size(); i++){
 				
 				if (degree.getNid().equals(studentList.get(i).getNid())){

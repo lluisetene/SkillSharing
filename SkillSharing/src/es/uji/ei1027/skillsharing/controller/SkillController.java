@@ -116,6 +116,7 @@ public class SkillController {
 		if (skills.isEmpty()){
 			
 			idSkill = "1";
+			skill.setIdSkill(idSkill);
 			
 		}else{
 		
@@ -160,6 +161,13 @@ public class SkillController {
 	@RequestMapping(value="/update/{idSkill}", method = RequestMethod.GET)
 	public String processUpdateSubmit(Model model, @PathVariable String idSkill) {
 		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("skill", skillDao.getSkill(idSkill));
 		
 		return "skill/update"; 
@@ -167,7 +175,15 @@ public class SkillController {
 	}
 	
 	@RequestMapping(value="/update/{idSkill}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
+	public String processUpdateSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		SkillValidator skillValidator = new SkillValidator();
 		
@@ -182,7 +198,7 @@ public class SkillController {
 		
 		 skillDao.updateSkill(skill);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../admin/main.html";
 		 
 	  }
 	
@@ -190,6 +206,13 @@ public class SkillController {
 	@RequestMapping(value="/delete/{idSkill}", method = RequestMethod.GET)
 	public String processDeleteSubmit(Model model, @PathVariable String idSkill) {
 		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("skill", skillDao.getSkill(idSkill));
 		
 		return "skill/delete"; 
@@ -197,7 +220,15 @@ public class SkillController {
 	}
 	
 	@RequestMapping(value="/delete/{idSkill}", method = RequestMethod.POST) 
-	public String processDeleteSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
+	public String processDeleteSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		SkillValidator skillValidator = new SkillValidator();
 		
@@ -212,7 +243,7 @@ public class SkillController {
 		
 		 skillDao.deleteSkill(idSkill);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../admin/main.html";
 		 
 	  }
 	

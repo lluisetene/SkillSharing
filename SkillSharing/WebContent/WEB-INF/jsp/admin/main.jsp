@@ -263,7 +263,7 @@
 	          
 							          		<td>${student.nid}</td>
 							          		<td>${student.username}</td>
-							                <td>${student.name}</td>
+							                <td><div style = "width: 225;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;">${student.name}</div></td>
 							           		<td>${student.banned}</td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/student/updateByAdmin/${student.nid}.html'"></button></td>
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/student/deleteByAdmin/${student.nid}.html'"></button></td>
@@ -329,7 +329,7 @@
 	           						 	<tr>
 	          
 							          		<td>${admin.username}</td>
-							                <td>${admin.name}</td>
+							                <td><div style = "width: 225;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;">${admin.name}</div></td>
 							           		<td>${admin.mail}</td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/update/${admin.username}.html'"></button></td>
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/delete/${admin.username}.html'"></button></td>
@@ -391,7 +391,7 @@
 	          
 	           						 	<tr>
 	          
-							          		<td>${skill.name}</td>
+							          		<td><div style = "width: 150;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;">${skill.name}</div></td>
 							                <td>${skill.level}</td>
 							           		<td><div style = "width: 550;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;">${skill.description}</div></td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/skill/update/${skill.idSkill}.html'"></button></td>
@@ -418,13 +418,13 @@
 									<td style = "font-size:25px; padding-left:50px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
 									<td style = "padding-left:10px;color:black">
 									
-										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idDegree" name="idDegree">
+										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="name" name="name">
 					
 											<option value="Todas" >Todas</option>	
 											
 											<c:forEach items="${degreesSelect}" var="degree">
 							
-												<option value="${degree.idDegree}">${degree.name}</option>
+												<option value="${degree.name}">${degree.name}</option>
 					
 											</c:forEach>
 											
@@ -445,6 +445,7 @@
 									<tr style = "color:black; background-color:cccccc;font-size:12px">
 									
 										<th>Nombre</th>
+										<th>DNI Estudiante</th>
 										<th></th>
 										<th></th>
 									
@@ -454,6 +455,7 @@
 	           						 	<tr>
 	          
 							          		<td>${degree.name}</td>
+							          		<td>${degree.nid}</td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/degree/update/${degree.idDegree}.html'"></button></td>
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/degree/delete/${degree.idDegree}.html'"></button></td>
 							           

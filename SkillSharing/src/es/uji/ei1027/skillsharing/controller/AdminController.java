@@ -62,7 +62,7 @@ public class AdminController {
 		model.addAttribute("adminsList", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
 		model.addAttribute("skillsList", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("degreesSelect", degreeDao.getDistinctDegree());
 		model.addAttribute("degreesList", degreeDao.getDegrees());
 		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
 		model.addAttribute("offersList", offerDao.getOffersWithNameSkill());
@@ -83,7 +83,7 @@ public class AdminController {
 		model.addAttribute("adminsList", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
 		model.addAttribute("skillsList", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("degreesSelect", degreeDao.getDistinctDegree());
 		model.addAttribute("degreesList", degreeDao.getDegrees());
 		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
 		model.addAttribute("offersList", offerDao.getOffersWithNameSkill());
@@ -141,19 +141,17 @@ public class AdminController {
 			}
 		}
 		
-		if (degree.getIdDegree()!= null){
+		if (degree.getName()!= null){
 			
-			if(degree.getIdDegree().toUpperCase().equals("Todas".toUpperCase())){
+			if(degree.getName().toUpperCase().equals("Todas".toUpperCase())){
 		
-				model.addAttribute("degreesSelect", degreeDao.getDegrees());
+				model.addAttribute("degreesSelect", degreeDao.getDistinctDegree());
 				model.addAttribute("degreesList", degreeDao.getDegrees());
 	
 			}else{
 				
-				model.addAttribute("degreesSelect", degreeDao.getDegrees());
-				List<Degree> degrees = new LinkedList<Degree>();
-				degrees.add(degreeDao.getDegree(degree.getIdDegree()));
-				model.addAttribute("degreesList", degrees);
+				model.addAttribute("degreesSelect", degreeDao.getDistinctDegree());
+				model.addAttribute("degreesList", degreeDao.getDegreeList(degree.getName()));
 			
 			}
 		}

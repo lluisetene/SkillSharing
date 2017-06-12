@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.skillsharing.dao.AdminDAO;
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DegreeDAO;
+import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
@@ -27,6 +30,9 @@ import es.uji.ei1027.skillsharing.validators.OfferValidator;
 @RequestMapping("/offer")
 public class OfferController {
 	
+	private DemandDAO demandDao;
+	private AdminDAO adminDao;
+	private DegreeDAO degreeDao;
 	private OfferDAO offerDao;
 	private StudentDAO studentDao;
 	private CollaborationDAO collaborationDao;
@@ -35,11 +41,14 @@ public class OfferController {
 	private Statistics estadisticas;
 	
 	@Autowired
-	public void setOfferDao(OfferDAO offerDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao) {
+	public void setOfferDao(OfferDAO offerDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao, DemandDAO demandDao, AdminDAO adminDao, DegreeDAO degreeDao) {
 		this.offerDao = offerDao;
 		this.studentDao = studentDao;
 		this.collaborationDao = collaborationDao;
 		this.skillDao = skillDao;
+		this.demandDao = demandDao;
+		this.adminDao = adminDao;
+		this.degreeDao = degreeDao;
 	}
 	
 	
@@ -192,6 +201,51 @@ public class OfferController {
 		 return "redirect:../list.html"; 
 		 
 	  }
+	  
+	  //----------- actualización admin -----------------//
+	@RequestMapping(value="/updateByAdmin/{idOffer}", method = RequestMethod.GET)
+	public String processUpdateByAdminSubmit(Model model, @PathVariable String idOffer) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("offer", offerDao.getOfferWithNameSkill(idOffer));
+		model.addAttribute("Skill", offerDao.getOfferWithNameSkill(idOffer).getIdSkill());
+		return "offer/updateByAdmin"; 
+		
+	}
+	
+	@RequestMapping(value="/updateByAdmin/{idOffer}", method = RequestMethod.POST) 
+	public String processUpdateByAdminSubmit(@PathVariable String idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("Skill", offerDao.getOfferWithNameSkill(idOffer).getIdSkill());
+		
+		offerValidator = new OfferValidator();
+		
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
+		
+		offerValidator.validateUpdate(offer, bindingResult);
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "offer/updateByAdmin";
+		
+		 offerDao.updateOffer(offer);
+		 
+		 return "redirect: ../../admin/main.html";
+		 
+	  }
 	
 	//----------- eliminación ------------------
 	@RequestMapping(value="/delete/{idOffer}", method = RequestMethod.GET)
@@ -222,6 +276,50 @@ public class OfferController {
 		 offerDao.deleteOffer(idOffer);
 		 
 		 return "redirect:../list.html"; 
+		 
+	  }
+	  
+	  //----------- eliminación admin------------------
+	@RequestMapping(value="/deleteByAdmin/{idOffer}", method = RequestMethod.GET)
+	public String processdeleteByAdminSubmit(Model model, @PathVariable String idOffer) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("offer", offerDao.getOfferWithNameSkill(idOffer));
+		model.addAttribute("Skill", offerDao.getOfferWithNameSkill(idOffer).getIdSkill());
+		return "offer/deleteByAdmin"; 
+		
+	}
+	
+	@RequestMapping(value="/deleteByAdmin/{idOffer}", method = RequestMethod.POST) 
+	public String processDeleteByAdminSubmit(@PathVariable String idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("Skill", offerDao.getOfferWithNameSkill(idOffer).getIdSkill());
+	
+		offerValidator = new OfferValidator();
+		
+		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
+		
+		offerValidator.validateDelete(offer, bindingResult);
+		
+		if (bindingResult.hasErrors()) {
+			 return "offer/deleteByAdmin";
+		}
+		 offerDao.deleteOffer(idOffer);
+		 
+		 return "redirect: ../../admin/main.html";
 		 
 	  }
 	

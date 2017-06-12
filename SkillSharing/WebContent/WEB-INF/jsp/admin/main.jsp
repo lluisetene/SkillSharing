@@ -519,8 +519,8 @@
 							                <td>${offer.getIdSkill().split("/")[1]}</td>
 							           		<td>${offer.beginningDate}</td>
 							           		<td>${offer.endingDate}</td>
-							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/offer/update/${offer.idOffer}.html'"></button></td>
-						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/offer/delete/${offer.idOffer}.html'"></button></td>
+							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/offer/updateByAdmin/${offer.idOffer}.html'"></button></td>
+						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/offer/deleteByAdmin/${offer.idOffer}.html'"></button></td>
 							           
 	            						</tr>
 	        

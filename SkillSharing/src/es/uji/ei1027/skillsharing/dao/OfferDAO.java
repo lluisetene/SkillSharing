@@ -99,5 +99,11 @@ public class OfferDAO {
 		return this.jdbcTemplate.query("select off.idoffer, off.nid, off.name,skill.idSkill, skill.name, skill.level, off.description, off.beginningdate, off.endingdate from offer AS off JOIN skill ON off.idskill = skill.idskill WHERE skill.idSkill = ? AND endingdate >= CURRENT_DATE order by idoffer DESC;", new Object[] {idSkill}, new OfferMapper());
 	
 	}
+	
+	public Offer getOfferWithNameSkill(String idoffer) {
+
+		return this.jdbcTemplate.queryForObject("select off.idoffer, off.nid, off.name,skill.idSkill, skill.name, skill.level, off.description, off.beginningdate, off.endingdate from offer AS off JOIN skill ON off.idskill = skill.idskill WHERE idOffer = ? AND endingdate >= CURRENT_DATE order by idoffer DESC;", new Object[] {idoffer}, new OfferMapper());
+	
+	}
 
 }

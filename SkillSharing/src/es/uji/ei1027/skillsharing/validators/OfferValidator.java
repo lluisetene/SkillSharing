@@ -37,7 +37,6 @@ public class OfferValidator implements Validator {
 	public void validateAdd(Object obj, Errors errors) {
 		Offer offer = (Offer) obj;
 		
-		
 		// ------- IDOFFER ------ /
 		if ( offer.getIdOffer() .trim().equals("") )
 			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");

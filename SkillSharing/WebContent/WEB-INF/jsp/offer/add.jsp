@@ -3,8 +3,6 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="studentLogin" scope="request" value='${session.getAttribute("studentLogin")}'/>
-
 <html>
 
 <head>
@@ -41,34 +39,26 @@
         	<tr>
                 <td>
                 	<form:label path="idOffer">IdOferta</form:label>
-                	<%-- <form:input type = "text" maxlength = "5" path="idOffer" readonly = "true" disabled = "true"/> --%>
-                	<form:input type = "text" maxlength = "5" path="idOffer" />
+                	<form:input type = "text" maxlength = "5" path="idOffer" readonly = "true" disabled = "true"/>
                 </td>
             </tr>
             
             <tr>
                 <td>
                 	<form:label path="name">Nombre de la Oferta</form:label>
-                	<form:input type = "text" style="width:485px" maxlength = "100" path="name" />
-                </td>
-            	<td><form:errors path="name" cssClass="error" /></td>
+                	<form:input type = "text" style="width:485px" maxlength = "100" path="name"  />
+            		<form:errors path="name" cssClass="error" />
+            	</td>
             </tr>
             
             <tr>
                 <td>
                 <form:label path="idSkill">Habilidad</form:label>
-         		<select style = "width:200px; border:1px solid black; color:black; background-color:white;">
+         		<select style = "width:563px; border:1px solid black; background-color:white;" id = "idSkill" name = "idSkill">
 					<option value="---">---</option>	
 					<c:forEach items="${skills}" var="skill">
-						<option value="${skill.getIdSkill()}" selected="selected">${skill.getName()}</option>
+						<option value="${skill.getIdSkill()}">${skill.getName()} (${skill.getLevel()})</option>
 					</c:forEach>
-					</select>
-            
-                <b style="padding-left:237px">Nivel</b>
-				<select style = "width:80px; border:1px solid black; color:black; background-color:white;">
-					<option value="medium" selected="selected">Medio</option>
-					<option value="high">Alto</option>
-					<option value="low">Bajo</option>
 				</select>
 				</td>
             </tr>
@@ -83,18 +73,17 @@
             
             <tr>
   	            <td>
-  	            	<form:label path="beginningDate">Fecha inicio</form:label>
-                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/>
+  	            	<form:label path="beginningDate" style="padding-left:150px">Fecha inicio</form:label>
+                	<form:label path="endingDate" style="padding-left:150px">Fecha fin</form:label>
                 <td>
-                <td><form:errors path="beginningDate" cssClass="error" /></td>
             </tr>
             
             <tr>
-                <td>
-                	<form:label path="endingDate">Fecha fin</form:label>
+                <td style="padding-left:140px">
+                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/>
+                	<b style="padding-left:100px"></b>
                 	<form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" />
                 <td>
-                <td><form:errors path="endingDate" cssClass="error" /></td>
             </tr>
             
             <tr>
@@ -140,7 +129,8 @@
     </div>
     
 </html>
-	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script> 
 	$(document).ready(function() {

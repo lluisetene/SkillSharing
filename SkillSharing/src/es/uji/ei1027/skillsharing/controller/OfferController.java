@@ -134,6 +134,7 @@ public class OfferController {
 		
 		model.addAttribute("offer", new Offer());
 		model.addAttribute("skills", skillDao.getSkills());
+		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
 		
@@ -165,6 +166,9 @@ public class OfferController {
 	public String processUpdateSubmit(Model model, @PathVariable String idOffer) {
 		
 		model.addAttribute("offer", offerDao.getOffer(idOffer));
+
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		return "offer/update"; 
 		
@@ -194,6 +198,9 @@ public class OfferController {
 	public String processDeleteSubmit(Model model, @PathVariable String idOffer) {
 		
 		model.addAttribute("offer", offerDao.getOffer(idOffer));
+
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		return "offer/delete"; 
 		

@@ -132,10 +132,10 @@
                   <!-- TABLA COLABORACIONES -->        
                   <div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
                         <div class="table-responsive">
-                        	 <div class="col-xs-6 text-left">
+                        	 <div class="col-xs-7 text-left">
                             	<div class="huge">Mis Colaboraciones</div>
                         	</div>
-   	                    	<div class="col-xs-6 text-right">
+   	                    	<div class="col-xs-5 text-right">
                        	 		<div class="huge">Añadir
                        	 			<button style = "border:none" type="button" onClick="location='${pageContext.request.contextPath}/collaboration/add.html'"><span style = "color: black; background-color:eeeeee" class="fa fa-plus-circle"></span></button>
                        	 		</div>

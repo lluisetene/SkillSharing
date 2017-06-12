@@ -27,7 +27,7 @@
 			<div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
             	<div class="table-responsive">
 					<h1 style = "color:black; margin:0; padding-left:40px; padding-top:10px	">Modificar Oferta</h1>
-    				<div style = "height:2px; width:40%; background-color:black"></div>    
+    				<div style = "height:2px; width:48%; background-color:black"></div>    
     	
 	    <form:form method="post" style = "padding-top:10; padding-left:25" modelAttribute="offer">
 		       

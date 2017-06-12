@@ -20,6 +20,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
 
 
@@ -31,6 +32,7 @@ public class DemandController {
 	private StudentDAO studentDao;
 	private CollaborationDAO collaborationDao;
 	private SkillDAO skillDao;
+	private Statistics estadisticas;
 	
 	
 	@Autowired
@@ -129,6 +131,10 @@ public class DemandController {
 	public String addDemand(Model model) {
 		
 		model.addAttribute("demand", new Demand());
+		model.addAttribute("skills", skillDao.getSkills());
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		return"demand/add";
 		
@@ -149,7 +155,7 @@ public class DemandController {
 		
 		demandDao.addDemand(demand);
 		
-		return "redirect:main.html";
+		return "redirect:../student/main.html";
 		
 	}
 	
@@ -158,6 +164,9 @@ public class DemandController {
 	public String processUpdateSubmit(Model model, @PathVariable String idDemand) {
 		
 		model.addAttribute("demand", demandDao.getDemand(idDemand));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		return "demand/update"; 
 		
@@ -178,7 +187,7 @@ public class DemandController {
 		
 		 demandDao.updateDemand(demand);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../student/main.html"; 
 		 
 	  }
 	
@@ -187,6 +196,9 @@ public class DemandController {
 	public String processDeleteSubmit(Model model, @PathVariable String idDemand) {
 		
 		model.addAttribute("demand", demandDao.getDemand(idDemand));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		return "demand/delete"; 
 		
@@ -207,7 +219,7 @@ public class DemandController {
 		
 		 demandDao.deleteDemand(idDemand);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../student/main.html"; 
 		 
 	  }
 	

@@ -166,7 +166,7 @@ public class OfferController {
 		
 		offerDao.addOffer(offer);
 		
-		return "redirect:main.html";
+		return "redirect:../student/main.html";
 		
 	}
 	
@@ -198,7 +198,7 @@ public class OfferController {
 		
 		 offerDao.updateOffer(offer);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../student/main.html"; 
 		 
 	  }
 	  
@@ -275,7 +275,7 @@ public class OfferController {
 		
 		 offerDao.deleteOffer(idOffer);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../student/main.html"; 
 		 
 	  }
 	  

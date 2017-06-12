@@ -68,7 +68,7 @@
             </tr>
             
             <tr>
-                <td><textarea maxlength="300" rows="4" cols="68" name="description"></textarea>
+                <td><textarea maxlength="300" rows="4" cols="68" style="resize:none;" name="description"></textarea>
             </td>
             
             <tr>

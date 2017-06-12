@@ -23,6 +23,7 @@ import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.HoursControlBETA;
 import es.uji.ei1027.skillsharing.model.NotificarColaboraciones;
+import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 
 @Controller
@@ -33,6 +34,7 @@ public class CollaborationController {
 	private OfferDAO offerDao;
 	private DemandDAO demandDao;
 	private StudentDAO studentDao;
+	private Statistics estadisticas;
 	
 	@Autowired
 	public void setCollaborationDao(CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao, StudentDAO studentDao) {
@@ -112,6 +114,11 @@ public class CollaborationController {
 	public String addCollaboration(Model model) {
 		
 		model.addAttribute("collaboration", new Collaboration());
+		model.addAttribute("offers", offerDao.getOffers());
+		model.addAttribute("demands", demandDao.getDemands());
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		return"collaboration/add";
 		
@@ -124,7 +131,7 @@ public class CollaborationController {
 		
 		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
 		
-//		collaborationValidator.validateAdd(collaboration, bindingResult);
+		collaborationValidator.validateAdd(collaboration, bindingResult);
 		
 		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 		
@@ -143,7 +150,7 @@ public class CollaborationController {
 		notificacion.notificarColaboracion(ofertante, demandante, collaboration, nombreOferta, nombreDemanda);
 
 		
-		return "redirect:main.html";
+		return "redirect:../student/main.html";
 		
 	}
 	
@@ -153,6 +160,9 @@ public class CollaborationController {
 	public String processUpdateSubmit(Model model, @PathVariable String idCollaboration){
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 	
 		return "collaboration/update"; 
 		
@@ -171,11 +181,9 @@ public class CollaborationController {
 			
 			 return "collaboration/update";
 		
-		
-		 
 		 collaborationDao.updateCollaboration(collaboration);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../student/main.html"; 
 		 
 	  }
 	
@@ -184,6 +192,9 @@ public class CollaborationController {
 	public String processDeleteSubmit(Model model, @PathVariable String idCollaboration) {
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		return "collaboration/delete"; 
 		
@@ -202,7 +213,7 @@ public class CollaborationController {
 		
 		 collaborationDao.deleteCollaboration(idCollaboration);
 		 
-		 return "redirect:../list.html"; 
+		 return "redirect:../../student/main.html";
 		 
 	  }
 	

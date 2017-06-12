@@ -26,7 +26,7 @@
     	<div class="panel-body" style="background-color:073763">
 			<div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
             	<div class="table-responsive">
-					<h1 style = "color:black; margin:0; padding-left:40px; padding-top:10px	">Añadir Colaboración</h1>
+					<h1 style = "color:black; margin:0; padding-left:40px; padding-top:10px	">Modificar Colaboración</h1>
     				<div style = "height:2px; width:50%; background-color:black"></div>
                     
                   
@@ -47,24 +47,14 @@
             <tr>
                 <td>
 	                <form:label path="idOffer">Nombre de la Oferta</form:label><b style="padding-left:27px"></b>
-	         		<select style = "width:563px; border:1px solid black; background-color:white;" id = "idOffer" name = "idOffer">
-						<option value="---">---</option>	
-						<c:forEach items="${offers}" var="offer">
-							<option value="${offer.getIdOffer()}">${offer.getName()}</option>
-						</c:forEach>
-					</select>
+	         		<form:input style = "width:563px; border:1px solid black; background-color:white;" id = "idOffer" name = "idOffer" path="idOffer" disabled="true" />
 				</td>
             </tr>
             
             <tr>
                 <td>
 	                <form:label path="idDemand">Nombre de la Demanda</form:label>
-	         		<select style = "width:563px; border:1px solid black; background-color:white;" id = "idDemand" name = "idDemand">
-						<option value="---">---</option>	
-						<c:forEach items="${demands}" var="demand">
-							<option value="${demand.getIdDemand()}">${demand.getName()}</option>
-						</c:forEach>
-					</select>
+	         		<form:input style = "width:563px; border:1px solid black; background-color:white;" id = "idDemand" name = "idDemand" path="idDemand" disabled="true" />
 				</td>
             </tr>
             
@@ -75,40 +65,14 @@
                		
                		<b style="padding-left:108px"></b>
                		
-					<select style = "width:80px; border:1px solid black; background-color:white;" disabled id = "hours" name = "hours">
-						<option value="05:00" selected="selected">---</option>
-						<option value="01:00">01:00</option>
-						<option value="02:00">02:00</option>
-						<option value="03:00">03:00</option>
-						<option value="04:00">04:00</option>
-						<option value="06:00">06:00</option>
-						<option value="07:00">07:00</option>
-						<option value="08:00">08:00</option>
-						<option value="09:00">09:00</option>
-						<option value="10:00">10:00</option>
-					</select>
+					<form:input style = "width:80px; border:1px solid black; background-color:white;" disabled id = "hours" name = "hours" path="hours" disabled="true" />
 					
 				<b style="padding-left:336px"></b>
 					
                 <form:label path="rate">Puntuación</form:label>
-              		<select style = "width:50px; border:1px solid black; background-color:white;" disabled id = "rate" name = "rate">
-		               <option value="5" selected="selected">---</option>
-		               <option value="1">1</option>
-		               <option value="2">2</option>
-		               <option value="3">3</option>
-		               <option value="4">4</option>
-		               <option value="6">6</option>
-		               <option value="7">7</option>
-		               <option value="8">8</option>
-		               <option value="9">9</option>
-		               <option value="10">10</option>
-               		</select>
+              		<form:input style = "width:50px; border:1px solid black; background-color:white;" disabled id = "rate" name = "rate" path="rate" disabled="true" />
 				</td>
             </tr>
-            
-
-            
-            
             
             <tr>
   	            <td>

@@ -34,8 +34,8 @@
                            	 	</div>
                         	</div>
                         	
-                        	<div style = "overflow-y:scroll;height:280;margin-top:10px;border:2px solid black">
-	                            <table style="border:2px solid black" class="table table-bordered table-hover table-striped" style="border-style:outset">
+                        	<div style = "overflow-y:scroll;height:280;margin-top:10px;border:2px solid black; margin-bottom:15px;">
+	                            <table style="overflow-y:scroll;" class="table table-bordered table-hover table-striped" style="border-style:outset">
 	 
 						         	<tr style = "color:black; background-color:cccccc;font-size:12px">
 											
@@ -88,9 +88,8 @@
                        	 	</div>
                     	</div>
                     	
-                    	<div style = "overflow-y:scroll;height:280;margin-top:10px;border:2px solid black">
-	                       <table style="border:2px solid black; overflow-y:scroll;" class="table table-bordered table-hover table-striped" style="border-style:outset">
-	
+                    	<div style = "overflow-y:scroll;height:280;margin-top:10px;border:2px solid black; margin-bottom:15px">
+	                       <table style="overflow-y:scroll;" class="table table-bordered table-hover table-striped" style="border-style:outset">
 	
 		   						<tr style = "color:black; background-color:cccccc;font-size:12px">
 		   						
@@ -140,44 +139,45 @@
                        	 			<button style = "border:none" type="button" onClick="location='${pageContext.request.contextPath}/collaboration/add.html'"><span style = "color: black; background-color:eeeeee" class="fa fa-plus-circle"></span></button>
                        	 		</div>
                     		</div>
-                    		
-                            <table style="border:2px solid black" class="table table-bordered table-hover table-striped" style="border-style:outset">
-                            	
-                            	<tr style = "color:black; background-color:cccccc;font-size:12px">
+                    		<div style = "overflow-y:scroll;height:280;margin-top:10px;border:2px solid black; margin-bottom:15px">
+	                            <table style="overflow-y:scroll;" class="table table-bordered table-hover table-striped" style="border-style:outset">
+	                            	
+	                            	<tr style = "color:black; background-color:cccccc;font-size:12px">
+										
+										<th>IdColaboracion</th>
+										<th>IdOferta</th>
+										<th>IdDemanda</th>
+										<th>Fecha Inicio</th>
+										<th>Fecha Fin</th>
+										<th>Horas</th>
+										<th>Valoración</th>
+										<th>Estado</th>
+										<th></th>
+										<th></th>
+								
+									</tr>	
 									
-									<th>IdColaboracion</th>
-									<th>IdOferta</th>
-									<th>IdDemanda</th>
-									<th>Fecha Inicio</th>
-									<th>Fecha Fin</th>
-									<th>Horas</th>
-									<th>Valoración</th>
-									<th>Estado</th>
-									<th></th>
-									<th></th>
-							
-								</tr>	
-								
-								<c:forEach items="${statistics.getColaboracionesEstudiante(nid)}" var="collaboration">
-								
-	         						<tr>
-					          		<td>${collaboration.idCollaboration}</td>
-					                <td>${collaboration.idOffer}</td>
-					           		<td>${collaboration.idDemand}</td>
-					           		<td>${collaboration.beginningDate}</td>
-					           		<td>${collaboration.endingDate}</td>
-					           		<td>${collaboration.hours}</td>
-					           		<td>${collaboration.rate}</td>
-					           		<td></td>
-					           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
-						            <td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
-				               		
-	          						</tr>
-	          						
-		      					</c:forEach> 
-                            	
-				      
-				     		</table>
+									<c:forEach items="${statistics.getColaboracionesEstudiante(nid)}" var="collaboration">
+									
+		         						<tr>
+						          		<td>${collaboration.idCollaboration}</td>
+						                <td>${collaboration.idOffer}</td>
+						           		<td>${collaboration.idDemand}</td>
+						           		<td>${collaboration.beginningDate}</td>
+						           		<td>${collaboration.endingDate}</td>
+						           		<td>${collaboration.hours}</td>
+						           		<td>${collaboration.rate}</td>
+						           		<td></td>
+						           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
+							            <td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
+					               		
+		          						</tr>
+		          						
+			      					</c:forEach> 
+	                            	
+					      
+					     		</table>
+					     	</div>
 					                                 		
                   	</div>
                   	<div class="col-xs-4"></div>

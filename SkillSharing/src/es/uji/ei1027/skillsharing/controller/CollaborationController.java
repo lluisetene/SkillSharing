@@ -127,6 +127,8 @@ public class CollaborationController {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
 		
+		System.out.println(collaboration);
+		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
 		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);

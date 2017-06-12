@@ -158,7 +158,40 @@ public class StudentController {
 		
 	}
 	
-	//----------- actualización ------------------
+	@RequestMapping(value="/update/{nid}", method = RequestMethod.GET)
+	public String updateStudent(Model model, @PathVariable String nid) {
+		
+		model.addAttribute("student", studentDao.getStudent(nid));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
+		
+		return "student/update";
+		
+	}
+	
+	@RequestMapping(value="/update/{nid}", method=RequestMethod.POST)
+	public String processUpdateSubmit(@ModelAttribute("student") Student student, BindingResult bindingResult, HttpSession session) {
+		
+		StudentValidator studentValidator = new StudentValidator();
+		
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
+		
+		studentValidator.validateUpdate(student, bindingResult);
+		
+		if (bindingResult.hasErrors())
+		
+			return "student/update";
+	
+		studentDao.addStudent(student);
+		
+		return "redirect:main.html";
+		
+	}
+	
+	
+	
+	//----------- actualización de administrador ------------------
 	@RequestMapping(value="/updateByAdmin/{nid}", method = RequestMethod.GET)
 	public String processUpdateSubmit(Model model, @PathVariable String nid) {
 		

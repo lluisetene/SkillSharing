@@ -76,33 +76,15 @@
                		<b style="padding-left:108px"></b>
                		
 					<select style = "width:80px; border:1px solid black; background-color:white;" disabled id = "hours" name = "hours">
-						<option value="05:00" selected="selected">---</option>
-						<option value="01:00">01:00</option>
-						<option value="02:00">02:00</option>
-						<option value="03:00">03:00</option>
-						<option value="04:00">04:00</option>
-						<option value="06:00">06:00</option>
-						<option value="07:00">07:00</option>
-						<option value="08:00">08:00</option>
-						<option value="09:00">09:00</option>
-						<option value="10:00">10:00</option>
+						<option value="null" selected="selected">---</option>
 					</select>
 					
 				<b style="padding-left:336px"></b>
 					
                 <form:label path="rate">Puntuación</form:label>
               		<select style = "width:50px; border:1px solid black; background-color:white;" disabled id = "rate" name = "rate">
-		               <option value="5.0" selected="selected">---</option>
-		               <option value="1.0">1</option>
-		               <option value="2.0">2</option>
-		               <option value="3.0">3</option>
-		               <option value="4.0">4</option>
-		               <option value="6.0">6</option>
-		               <option value="7.0">7</option>
-		               <option value="8.0">8</option>
-		               <option value="9.0">9</option>
-		               <option value="10.0">10</option>
-               		</select>
+		               <option value="null" selected="selected">---</option>
+		    		</select>
 				</td>
             </tr>
             
@@ -129,8 +111,7 @@
         </table>
         
         <div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-		<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onClick = "document.getElementById('idCollaboration').disabled=false, 
-	        																	   																																							document.getElementById('idCollaboration').disabled=false;">
+		<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onClick = "document.getElementById('idCollaboration').disabled=false;">
         <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
         
         

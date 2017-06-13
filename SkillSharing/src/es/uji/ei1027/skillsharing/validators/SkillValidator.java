@@ -119,8 +119,8 @@ public class SkillValidator implements Validator {
 		
 		//---------- IDSKILL ----------//
 		for (int i = 0; i < offerList.size(); i++){
-			
-			if (skill.getIdSkill().trim().toLowerCase().equals(offerList.get(i).getIdSkill())){
+	
+			if (skill.getIdSkill().trim().toLowerCase().equals(offerList.get(i).getIdSkill().split("/")[0])){
 				
 				errors.rejectValue("idSkill", "required", "No se puede borrar, elimina primero las ofertas que tengan esta habilidad");
 				break;
@@ -130,7 +130,7 @@ public class SkillValidator implements Validator {
 		
 		for (int i = 0; i < demandList.size(); i++){
 			
-			if (skill.getIdSkill().trim().toLowerCase().equals(demandList.get(i).getIdSkill())){
+			if (skill.getIdSkill().trim().toLowerCase().equals(demandList.get(i).getIdSkill().split("/")[0])){
 				
 				errors.rejectValue("idSkill", "required", "No se puede borrar, elimina primero las demandas que tengan esta habilidad");
 				break;

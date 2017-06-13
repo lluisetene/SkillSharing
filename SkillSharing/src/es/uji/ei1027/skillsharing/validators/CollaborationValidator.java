@@ -71,17 +71,19 @@ public class CollaborationValidator implements Validator {
 		}
 			
 		}
+		System.out.println("idSkillOffer: " + idSkillOffer);
+		System.out.println("idSkillDemand: " + idSkillDemand);
 		
 		if ((NIDoferta != null && NIDdemand != null) && NIDoferta.equals(NIDdemand)){
 			
 			errors.rejectValue("idCollaboration", "required", "No puedes crear una colaboración en el que la oferta y la demanda sea del mismo estudiante");
 			
-		}else if((idSkillOffer != null && idSkillDemand != null) && idSkillOffer.equals(idSkillDemand) == false)
+		}else if((idSkillOffer != null && idSkillDemand != null) && idSkillOffer.split("/")[0].equals(idSkillDemand.split("/")[0]) == false)
 	
 			errors.rejectValue("idCollaboration", "required", "La oferta y la demanda no tienen la misma habilidad");
 		
 		//----------Control de horas--------------------//
-		if (Integer.parseInt(studentDao.getStudent(NIDdemand).getOfferHours().split(":")[0]) - Integer.parseInt(studentDao.getStudent(NIDdemand).getDemandHours().split(":")[0]) < 20){
+		if (Integer.parseInt(studentDao.getStudent(NIDdemand).getDemandHours().split(":")[0]) - Integer.parseInt(studentDao.getStudent(NIDdemand).getOfferHours().split(":")[0]) > 20){
 			
 			errors.rejectValue("idDemand", "required", "El NID " + studentDao.getStudent(NIDdemand) + "no tiene saldo");
 			

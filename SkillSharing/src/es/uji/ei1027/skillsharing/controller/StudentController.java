@@ -171,10 +171,15 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value="/update/{nid}", method=RequestMethod.POST)
-	public String processUpdateSubmit(@ModelAttribute("student") Student student, BindingResult bindingResult, HttpSession session) {
+	public String processUpdateSubmit(Model model, @PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult) {
+		
+		model.addAttribute("student", studentDao.getStudent(nid));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		StudentValidator studentValidator = new StudentValidator();
-		
+
 		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
 		
 		studentValidator.validateUpdate(student, bindingResult);
@@ -182,10 +187,10 @@ public class StudentController {
 		if (bindingResult.hasErrors())
 		
 			return "student/update";
-	
-		studentDao.addStudent(student);
 		
-		return "redirect:main.html";
+		studentDao.updateStudent(student);
+
+		return "student/main";
 		
 	}
 	

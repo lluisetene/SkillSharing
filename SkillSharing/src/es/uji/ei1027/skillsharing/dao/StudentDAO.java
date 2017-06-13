@@ -81,10 +81,12 @@ public class StudentDAO {
 	
 	public void updateStudent(Student student) {
 	
+		System.out.println("dao: " + student);
+		
 		this.jdbcTemplate.update("update student set name = ?, username = ?, password = ?, mail = ?, course = ?, offerhours = ?, demandhours = ?, banned = ? where nid = ?", student.getName(), student.getUsername(), student.getPassword(), student.getMail(), student.getCourse(), student.getOfferHours(), student.getDemandHours(), student.getBanned(), student.getNid());
 	
 	}
-	
+
 	public void deleteStudent(String nid) {
 	
 		this.jdbcTemplate.update("delete from student where nid = ?", nid);

@@ -127,16 +127,17 @@ public class CollaborationController {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
 		
-		System.out.println(collaboration);
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
 		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
 		
 		collaborationValidator.validateAdd(collaboration, bindingResult);
-		
+
 		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
+
 		
+		System.out.println(bindingResult);
 		if (bindingResult.hasErrors())
 			
 			return "collaboration/add";
@@ -150,7 +151,8 @@ public class CollaborationController {
 		String nombreOferta = offerDao.getOffer(collaboration.getIdOffer()).getName();
 		String nombreDemanda = demandDao.getDemand(collaboration.getIdDemand()).getName();
 		notificacion.notificarColaboracion(ofertante, demandante, collaboration, nombreOferta, nombreDemanda);
-
+		
+		System.out.println("4");
 		
 		return "redirect:../student/main.html";
 		

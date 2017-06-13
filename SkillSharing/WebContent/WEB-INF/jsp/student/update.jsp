@@ -85,11 +85,11 @@
 		            <tr>
 		            
 		                <td><form:label path="offerHours">Horas Ofertadas</form:label></td>
-		                <td><form:input style = "width: 65%;border:1px solid black;  color:black" Class="form-control" type = "text" id = "offerHours" name = "offerHours" path="offerHours" disabled = "true" /></td>
+		                <td><form:input style = "width: 65%;border:1px solid black;  color:black" Class="form-control" type = "text" id = "offerHours" name = "offerHours" path="offerHours" disabled = "true" readonly="true"/></td>
 		                <td><form:errors path="offerHours" cssClass="error" /></td>
 						
 						<td><form:label path="demandHours" style = "padding-right: 50px">Horas Demandadas</form:label></td>
-		                <td><form:input style = "border:1px solid black; color:black;"  Class="form-control" id = "demandHours" name = "demandHours" path="demandHours" disabled = "true" /></td>
+		                <td><form:input style = "border:1px solid black; color:black;"  Class="form-control" id = "demandHours" name = "demandHours" path="demandHours" disabled = "true" readonly="true"/></td>
 		                <td><form:errors path="demandHours" cssClass="error" /></td>
 		          
 		            </tr>
@@ -108,7 +108,10 @@
 																																																								       		document.getElementById('name').disabled=false,
 																																																								       		document.getElementById('password').disabled=false,
 																																																								       		document.getElementById('course').disabled=false,
-																																																								       		document.getElementById('mail').disabled=false;"/>
+																																																								       		document.getElementById('offerHours').disabled=false,
+																																																								       		document.getElementById('demandHours').disabled=false,
+																																																								       		document.getElementById('mail').disabled=false
+																																																								       		document.getElementById('banned').disabled=false;"/>
 		        <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
 		   <!-- Modal -->
 				  <div class="modal fade" id="myModal" role="dialog">

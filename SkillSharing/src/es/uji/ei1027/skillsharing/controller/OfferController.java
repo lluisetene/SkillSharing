@@ -166,6 +166,8 @@ public class OfferController {
 		
 		offerDao.addOffer(offer);
 		
+		System.out.println(offer);
+		
 		return "redirect:../student/main.html";
 		
 	}

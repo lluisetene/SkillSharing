@@ -2,8 +2,19 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 
 <c:set var="studentLogin" scope="request" value='${session.getAttribute("studentLogin")}'/>
+
+
+<%
+   Date dNow = new Date();
+   SimpleDateFormat ft = new SimpleDateFormat ("yyyy/MM/dd");
+   String currentDate = ft.format(dNow);
+%>
+
+<c:set var="fechaActual" value=<%=currentDate %>/>
 
 <t:paginaBasica title="Página Personal"/>
 
@@ -167,7 +178,6 @@
 						           		<td>${collaboration.endingDate}</td>
 						           		<td>${collaboration.hours}</td>
 						           		<td>${collaboration.rate}</td>
-						           		<td></td>
 						           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
 							            <td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
 					               		

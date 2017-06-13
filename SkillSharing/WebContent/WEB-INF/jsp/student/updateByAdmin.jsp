@@ -230,7 +230,6 @@
 					                <td style = "padding-right: 150px"><form:label path="nid">DNI</form:label></td>
 					                <td style = "width:36%"><form:input style = "border:1px solid black; color:black" cssClass="form-control" type = "text" maxlength = "9" path="nid" readonly = "true" disabled = "true"/><form:errors path="nid" cssClass="error" /></td>
 					                
-					                
 					            </tr>
 					            
 					            <tr style = "height:50px">

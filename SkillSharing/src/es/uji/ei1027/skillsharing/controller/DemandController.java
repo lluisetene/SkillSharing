@@ -2,6 +2,7 @@ package es.uji.ei1027.skillsharing.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -23,6 +24,7 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
 
@@ -139,11 +141,27 @@ public class DemandController {
 	@RequestMapping("/add")
 	public String addDemand(Model model) {
 		
-		model.addAttribute("demand", new Demand());
 		model.addAttribute("skills", skillDao.getSkills());
 		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
+		
+		List<Demand> demands= demandDao.getDemands();
+		Demand demand = new Demand();
+		String idDemand;
+		
+		if (demands.isEmpty()){
+			
+			idDemand = "1";
+			demand.setIdDemand(idDemand);
+			
+		}else{
+		
+			idDemand = String.valueOf(Integer.parseInt(demands.get(0).getIdDemand()) + 1);
+			demand.setIdDemand(idDemand);
+		}
+		
+		model.addAttribute("demand", demand);
 		
 		return"demand/add";
 		

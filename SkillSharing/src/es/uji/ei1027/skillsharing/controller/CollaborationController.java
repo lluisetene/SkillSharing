@@ -1,7 +1,7 @@
 package es.uji.ei1027.skillsharing.controller;
 
 import java.util.Date;
-
+import java.util.List;
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,10 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
+import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.HoursControlBETA;
 import es.uji.ei1027.skillsharing.model.NotificarColaboraciones;
+import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 
@@ -122,12 +124,28 @@ public class CollaborationController {
 	@RequestMapping("/add")
 	public String addCollaboration(Model model) {
 		
-		model.addAttribute("collaboration", new Collaboration());
 		model.addAttribute("offers", offerDao.getOffers());
 		model.addAttribute("demands", demandDao.getDemands());
 		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
+		
+		List<Collaboration> collaborations= collaborationDao.getCollaborations();
+		Collaboration collaboration = new Collaboration();
+		String idCollaboration;
+		
+		if (collaborations.isEmpty()){
+			
+			idCollaboration = "1";
+			collaboration.setIdCollaboration(idCollaboration);
+			
+		}else{
+		
+			idCollaboration = String.valueOf(Integer.parseInt(collaborations.get(0).getIdCollaboration()) + 1);
+			collaboration.setIdCollaboration(idCollaboration);
+		}
+		
+		model.addAttribute("collaboration", collaboration);
 		
 		return"collaboration/add";
 		

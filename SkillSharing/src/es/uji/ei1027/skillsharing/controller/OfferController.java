@@ -2,6 +2,7 @@ package es.uji.ei1027.skillsharing.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -23,6 +24,7 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Offer;
+import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.OfferValidator;
 
@@ -141,12 +143,28 @@ public class OfferController {
 	@RequestMapping("/add")
 	public String addOffer(Model model) {
 		
-		model.addAttribute("offer", new Offer());
+		
 		model.addAttribute("skills", skillDao.getSkills());
 		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
 		
+		List<Offer> offers= offerDao.getOffers();
+		Offer offer = new Offer();
+		String idOffer;
+		
+		if (offers.isEmpty()){
+			
+			idOffer = "1";
+			offer.setIdOffer(idOffer);
+			
+		}else{
+		
+			idOffer = String.valueOf(Integer.parseInt(offers.get(0).getIdOffer()) + 1);
+			offer.setIdOffer(idOffer);
+		}
+		
+		model.addAttribute("offer", offer);
 		return "offer/add";
 		
 	}

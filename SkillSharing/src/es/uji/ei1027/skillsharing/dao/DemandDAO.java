@@ -61,7 +61,7 @@ public class DemandDAO {
 	
 	public List<Demand> getDemands() {
 		
-		return this.jdbcTemplate.query("SELECT * from demand WHERE endingdate >= CURRENT_DATE order by iddemand DESC;", new DemandMapper());
+		return this.jdbcTemplate.query("SELECT * from demand order by iddemand DESC;", new DemandMapper());
 	
 	}
 	

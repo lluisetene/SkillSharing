@@ -60,7 +60,7 @@ public class OfferDAO {
 	
 	public List<Offer> getOffers() {
 										
-		return this.jdbcTemplate.query("SELECT * from offer WHERE endingdate >= CURRENT_DATE order by idoffer DESC;", new OfferMapper());
+		return this.jdbcTemplate.query("SELECT * from offer order by idoffer DESC;", new OfferMapper());
 	
 	}
 	

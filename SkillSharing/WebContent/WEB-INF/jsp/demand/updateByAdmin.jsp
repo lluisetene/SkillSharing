@@ -4,14 +4,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import = "es.uji.ei1027.skillsharing.model.Admin" %>
 <%@ page import = "javax.servlet.http.HttpSession" %>
- <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <html lang="es-ES">
 
-	<t:paginaBasica title="Modificar usuario"/>
+	<t:paginaBasica title="Modificar Demanda"/>
 
 		 <%
 	        Admin admin = new Admin();
@@ -42,10 +42,49 @@
         %>
 	
 		<head>
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script> 
+		$(document).ready(function() {
+			$("#from").datepicker({
+				changeMonth:true,
+				changeYear:true,
+				showOn: "button",
+	            buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+	            buttonImageOnly: true,
+	            dateFormat:"dd/mm/yy",
+	            minDate:0,
+				onClose: function todate(selectedDate) {
+					$("#to").datepicker("option", "minDate", selectedDate);
+				}
+			}).datepicker("setDate", new Date());
+			$("#to").datepicker({				
+				changeMonth:true,
+				changeYear:true,
+				showOn: "button",
+	            buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+	            buttonImageOnly: true,
+	            dateFormat:"dd/mm/yy",
+	            minDate:0,
+				onClose: function fromdate(selectedDate) {
+				$("#from").datepicker("option", "maxDate", selectedDate);
+				}
+			}).datepicker("setDate", new Date());
+		
+		  });
+		
+		</script>
+	    
 	
 			<style>
+			
+			.ui-datepicker-trigger{
 	
+				height:25px;
 				
+			}
+
 				th,tr,td{
 				
 					color:black;
@@ -213,119 +252,92 @@
 					
 				</div>
 				
-				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:100%; margin-bottom:15px">
+				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:110%; margin-bottom:240px">
     
     				<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:100%; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
    						
-    					<h1 style = "color:black;margin:0; padding-left:20px">Modificar Usuario</h1>
+    					<h1 style = "color:black;margin:0; padding-left:20px">Modificar Demanda</h1>
     					
     					<div style = "height:2px; width:40%; background-color:black"></div>
     
-				    	<form:form method="post" style = "padding-top:10; padding-left:25" modelAttribute="student">
+				    	<form:form method="post" style = "padding-top:10; padding-left:25" modelAttribute="demand">
 				      
-					         <table>
-							
+							<table>
+		        	
 					        	<tr style = "height:50px">
-					        	
-					                <td style = "padding-right: 150px"><form:label path="nid">DNI</form:label></td>
-					                <td style = "width:36%"><form:input style = "border:1px solid black; color:black" cssClass="form-control" type = "text" maxlength = "9" path="nid" readonly = "true" disabled = "true"/><form:errors path="nid" cssClass="error" /></td>
 					                
-					                
+					                <td style = "width:225px"><form:label path="idDemand">IdDemanda</form:label></td>
+					                <td><form:input cssClass="form-control" style = "color:black;width:75px;border:1px solid black" type = "text" maxlength = "5" path="idDemand" disabled = "true" readonly = "true"/><form:errors path="idDemand" cssClass="error"/></td>
+					            	
+					            </tr>
+					            
+					            <tr style = "height:50px">
+					            
+					                <td><form:label path="nid">DNI</form:label></td>
+					                <td><form:input cssClass="form-control" style = "color:black;width:150px;border:1px solid black" type = "text" maxlength = "9" path="nid" /><form:errors path="nid" cssClass="error"/></td>
+					        
 					            </tr>
 					            
 					            <tr style = "height:50px">
 					            
 					                <td><form:label path="name">Nombre</form:label></td>
-					                <td><form:input  cssClass="form-control" type = "text" maxlength = "50" path="name" style = "width:150%;border:1px solid black; color:black" readonly = "true" disabled = "true"/></td>
-					                <td><form:errors path="name" cssClass="error" /></td>
-					                
+					                <td><form:input cssClass="form-control" style = "color:black;width:675px;border:1px solid black" type = "text" maxlength = "100" path="name" /><form:errors path="name" cssClass="error" /></td>
+					  
 					            </tr>
 					            
 					            <tr style = "height:50px">
-					            
-					                <td><form:label path="username">Nombre usuario</form:label></td>
-					                <td><form:input  cssClass="form-control" type = "text" maxlength = "30" path="username" style = "width:100%;border:1px solid black; color:black" readonly = "true" disabled = "true"/></td>
-					                <td><form:errors path="username" cssClass="error" /></td>
 					                
-					            </tr>
-					            
-					            <tr style = "height:50px">
-					            
-					                <td><form:label path="password">Contraseña</form:label></td>
-					                <td><form:input style = "border:1px solid black; color:black" cssClass="form-control" type = "password" maxlength = "30" path="password" readonly = "true" disabled = "true"/></td>
-					                <td><form:errors path="password" cssClass="error" /></td>
-					                
-					            </tr>
-					            
-					            <tr style = "height:50px">
-					            
-					                <td><form:label path="mail">Correo</form:label></td>
-					                <td><form:input cssClass="form-control" type = "email" maxlength = "30" path="mail" style = "width:100%;border:1px solid black; color:black" readonly = "true" disabled = "true"/></td>
-					                <td><form:errors path="mail" cssClass="error" /></td>
-					                
-					            </tr>
-					            
-					            <tr style = "height:50px"> 
-					            
-					                <td><form:label path="course">Curso</form:label></td>
-					                <td><form:input style = "width:25%; border:1px solid black; color:black" cssClass="form-control" type = "number" maxlength = "1" name = "course" min = "1" max = "4" value = "${student.course}" placeholder="º" path="course" readonly = "true" disabled = "true"/></td>
-					                <td><form:errors path="course" cssClass="error" /></td>
-					                
-					            </tr>
-					            
-					            <tr style = "height:50px">
-					            
-					                <td><form:label path="offerHours">Horas Ofertadas</form:label></td>
-					                <td><select style = "width: 65%;border:1px solid black;  color:black" Class="form-control" id = "offerHours" name = "offerHours" >
-										<option value="20:00" selected="selected">20 horas (por defecto)</option>
-										<option value="01:00">01:00</option>
-										<option value="02:00">02:00</option>
-										<option value="03:00">03:00</option>
-										<option value="04:00">04:00</option>
-										<option value="05:00">05:00</option>
-										<option value="06:00">06:00</option>
-										<option value="07:00">07:00</option>
-										<option value="08:00">08:00</option>
-										<option value="09:00">09:00</option>
-										<option value="10:00">10:00</option>
-									</select></td>
-									
-									<td><form:label path="demandHours" style = "padding-right: 50px">Horas Demandadas</form:label></td>
-					                <td><select style = "border:1px solid black; color:black;"  Class="form-control" id = "demandHours" name = "demandHours" >
-										<option value="00:00" selected="selected">00 horas (por defecto)</option>
-										<option value="01:00">01:00</option>
-										<option value="02:00">02:00</option>
-										<option value="03:00">03:00</option>
-										<option value="04:00">04:00</option>
-										<option value="05:00">05:00</option>
-										<option value="06:00">06:00</option>
-										<option value="07:00">07:00</option>
-										<option value="08:00">08:00</option>
-										<option value="09:00">09:00</option>
-										<option value="10:00">10:00</option>
-									</select></td>
-					          
+					                <td><form:label path="idSkill">Habilidad</form:label></td>
+					                <td style = "width:150px"><select Class="form-control" style = "color:black;width:250px; border:1px solid black" id="idSkill" name="idSkill">
+										
+										<option value = "${Skill.split('/')[0]}">(Seleccionada) ${Skill.split('/')[1]}  (${Skill.split('/')[2]}) </option>
+										
+										<c:forEach items="${skillsSelect}" var="skill">
+							
+											<option value="${skill.idSkill}">${skill.name} (${skill.level})</option>
+					
+										</c:forEach>											
+
+										</select>		
 					            </tr>
 					            
 					             <tr style = "height:50px">
+				            
+				                	<td colspan="2"><form:label path="description">Descripción <h6 style = "display:inline-block">(300 Caracteres)</h6></form:label></td>
+				                
+				            	</tr>
+				            
+				           		<tr>
+				            
+				            		<td colspan="4"><form:textarea  style = "resize:none; border:1px solid black; color:black" maxlength = "300" rows = "5" cols = "59" cssClass = "form-control" path="description" />
+				            	
+				            	
+				            	</tr>
+				            	
+				            	</table>
+				            	<table>
 					            
-					                <td><form:label path="banned">Baneado</form:label></td>
-					                <td><select style = "width:40%;border:1px solid black; color:black; " Class="form-control" id="banned" name="banned"> 
-										<option value="false" selected="selected">falso</option>
-										<option value="true">verdadero</option>
-									</select></td>
-					            
-					            </tr>
-					        
-					        </table>
-					        <div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-					       	<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('nid').disabled=false,
-																																																											       		document.getElementById('username').disabled=false,
-																																																											       		document.getElementById('name').disabled=false,
-																																																											       		document.getElementById('password').disabled=false,
-																																																											       		document.getElementById('course').disabled=false,
-																																																											       		document.getElementById('mail').disabled=false;"/>
-					        <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
+						            <tr style = "height:100px">
+						            
+						                <td style = "width:200px"><form:label path="beginningDate">Fecha inicio</form:label></td>
+						                <td><form:input cssClass="form-control" style = "background-color:white;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="beginningDate" name="datepicker" id = "from"  size="10" readonly="true"/><form:errors path="beginningDate" cssClass="error" /></td>
+						        
+						          		<td style = "padding-left:200px;width:400px"><form:label path="endingDate">Fecha fin</form:label></td>
+					               		<td><form:input cssClass="form-control" style = "background-color:white;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="endingDate" name="datepicker" id="to" size="10" readonly="true"/><form:errors path="endingDate" cssClass="error" /><td>
+						          		
+						            </tr>
+						            
+					          		
+					          
+		       					</table>
+		       			
+		       
+		       			
+	    
+				<div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
+				<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal"/>
+	       
+	               <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
 					   <!-- Modal -->
 							  <div class="modal fade" id="myModal" role="dialog">
 							    <div class="modal-dialog">
@@ -334,13 +346,13 @@
 							      <div class="modal-content">
 							        <div class="modal-header">
 							          <button type="button" class="close" data-dismiss="modal">&times;</button>
-							          <h4 style = "color:black" class="modal-title">Modificar Usuario</h4>
+							          <h4 style = "color:black" class="modal-title">Modificar Demanda</h4>
 							        </div>
 							        <div class="modal-body">
-							          <p><i>¿Seguro que desea modificar a este usuario?</i></p>
+							          <p><i>¿Seguro que desea Modificar esta Demanda?</i></p>
 							        </div>
 							        <div  class="modal-footer" style = "background-color:eeeeee">
-							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">
+							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar" onclick = "document.getElementById('idDemand').disabled=false;">
 							        </div>
 							      </div>
 							      
@@ -353,8 +365,5 @@
 		    		</div>
 		
 			</div>
-			
 
-	  
-	  
 <t:barrainferior/>

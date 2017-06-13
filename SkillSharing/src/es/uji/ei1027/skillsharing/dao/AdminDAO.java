@@ -71,7 +71,7 @@ public class AdminDAO  {
 	
 	public void updateAdmin(Admin admin) {
 	
-		this.jdbcTemplate.update("update admin set name = ?, mail = ?, password = ? where username = ?", admin.getName(), admin.getMail(), passwordEncryptor.encryptPassword(admin.getPassword()), admin.getUsername());
+		this.jdbcTemplate.update("update admin set name = ?, mail = ?, password = ? where username = ?", admin.getName(), admin.getMail(), admin.getPassword(), admin.getUsername());
 	
 	}
 	

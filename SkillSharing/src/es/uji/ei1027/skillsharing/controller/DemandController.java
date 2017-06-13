@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.skillsharing.dao.AdminDAO;
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
+import es.uji.ei1027.skillsharing.dao.DegreeDAO;
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
+import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
@@ -29,6 +32,9 @@ import es.uji.ei1027.skillsharing.validators.DemandValidator;
 public class DemandController {
 
 	private DemandDAO demandDao;
+	private AdminDAO adminDao;
+	private DegreeDAO degreeDao;
+	private OfferDAO offerDao;
 	private StudentDAO studentDao;
 	private CollaborationDAO collaborationDao;
 	private SkillDAO skillDao;
@@ -36,12 +42,15 @@ public class DemandController {
 	
 	
 	@Autowired
-	public void setDemandDao(DemandDAO demandDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao) {
+	public void setDemandDao(DemandDAO demandDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao, OfferDAO offerDao, AdminDAO adminDao, DegreeDAO degreeDao) {
 		
+		this.offerDao = offerDao;
 		this.demandDao = demandDao;
 		this.studentDao = studentDao;
 		this.collaborationDao = collaborationDao;
 		this.skillDao = skillDao;
+		this.degreeDao = degreeDao;
+		this.adminDao = adminDao;
 		
 	}
 	
@@ -190,6 +199,51 @@ public class DemandController {
 		 return "redirect:../../student/main.html"; 
 		 
 	  }
+	  
+	   //----------- actualización admin -----------------//
+		@RequestMapping(value="/updateByAdmin/{idDemand}", method = RequestMethod.GET)
+		public String processUpdateByAdminSubmit(Model model, @PathVariable String idDemand) {
+			
+			model.addAttribute("studentsSelect", studentDao.getStudents());
+			model.addAttribute("adminsSelect", adminDao.getAdmins());
+			model.addAttribute("skillsSelect", skillDao.getSkills());
+			model.addAttribute("degreesSelect", degreeDao.getDegrees());
+			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+			model.addAttribute("demand", demandDao.getDemandWithNameSkill(idDemand));
+			model.addAttribute("Skill", demandDao.getDemandWithNameSkill(idDemand).getIdSkill());
+			return "demand/updateByAdmin"; 
+			
+		}
+		
+		@RequestMapping(value="/updateByAdmin/{idDemand}", method = RequestMethod.POST) 
+		public String processUpdateByAdminSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+			
+			model.addAttribute("studentsSelect", studentDao.getStudents());
+			model.addAttribute("adminsSelect", adminDao.getAdmins());
+			model.addAttribute("skillsSelect", skillDao.getSkills());
+			model.addAttribute("degreesSelect", degreeDao.getDegrees());
+			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+			model.addAttribute("Skill", demandDao.getDemandWithNameSkill(idDemand).getIdSkill());
+			
+			DemandValidator demandValidator = new DemandValidator();
+			
+			demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
+			
+			demandValidator.validateUpdate(demand, bindingResult);
+			
+			if (bindingResult.hasErrors()) {
+		
+				 return "demand/updateByAdmin";
+			}
+			 demandDao.updateDemand(demand);
+			 
+			 return "redirect: ../../admin/main.html";
+			 
+		  }
 	
 	//----------- eliminación ------------------
 	@RequestMapping(value="/delete/{idDemand}", method = RequestMethod.GET)
@@ -222,5 +276,49 @@ public class DemandController {
 		 return "redirect:../../student/main.html"; 
 		 
 	  }
+	  
+	   //----------- eliminación admin------------------
+		@RequestMapping(value="/deleteByAdmin/{idDemand}", method = RequestMethod.GET)
+		public String processdeleteByAdminSubmit(Model model, @PathVariable String idDemand) {
+			
+			model.addAttribute("studentsSelect", studentDao.getStudents());
+			model.addAttribute("adminsSelect", adminDao.getAdmins());
+			model.addAttribute("skillsSelect", skillDao.getSkills());
+			model.addAttribute("degreesSelect", degreeDao.getDegrees());
+			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+			model.addAttribute("demand", demandDao.getDemandWithNameSkill(idDemand));
+			model.addAttribute("Skill", demandDao.getDemandWithNameSkill(idDemand).getIdSkill());
+			return "demand/deleteByAdmin"; 
+			
+		}
+		
+		@RequestMapping(value="/deleteByAdmin/{idDemand}", method = RequestMethod.POST) 
+		public String processDeleteByAdminSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+			
+			model.addAttribute("studentsSelect", studentDao.getStudents());
+			model.addAttribute("adminsSelect", adminDao.getAdmins());
+			model.addAttribute("skillsSelect", skillDao.getSkills());
+			model.addAttribute("degreesSelect", degreeDao.getDegrees());
+			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+			model.addAttribute("Skill", demandDao.getDemandWithNameSkill(idDemand).getIdSkill());
+		
+			DemandValidator demandValidator = new DemandValidator();
+			
+			demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
+			
+			demandValidator.validateDelete(demand, bindingResult);
+			
+			if (bindingResult.hasErrors()) {
+				 return "demand/deleteByAdmin";
+			}
+			 demandDao.deleteDemand(idDemand);
+			 
+			 return "redirect: ../../admin/main.html";
+			 
+		  }
 	
 }

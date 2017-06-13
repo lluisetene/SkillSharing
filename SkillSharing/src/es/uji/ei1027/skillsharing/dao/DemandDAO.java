@@ -100,5 +100,10 @@ public class DemandDAO {
 		return this.jdbcTemplate.query("select dem.iddemand, dem.nid, dem.name,skill.idSkill, skill.name, skill.level, dem.description, dem.beginningdate, dem.endingdate from demand AS dem JOIN skill ON dem.idskill = skill.idskill WHERE skill.idSkill = ? AND endingdate >= CURRENT_DATE order by iddemand DESC;", new Object[] {idSkill}, new DemandMapper());
 	
 	}
+	public Demand getDemandWithNameSkill(String iddemand) {
+
+		return this.jdbcTemplate.queryForObject("select dem.iddemand, dem.nid, dem.name,skill.idSkill, skill.name, skill.level, dem.description, dem.beginningdate, dem.endingdate from demand AS dem JOIN skill ON dem.idskill = skill.idskill WHERE idDemand = ? AND endingdate >= CURRENT_DATE order by iddemand DESC;", new Object[] {iddemand}, new DemandMapper());
+	
+	}
 	
 }

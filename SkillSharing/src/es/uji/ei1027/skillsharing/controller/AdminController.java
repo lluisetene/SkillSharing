@@ -3,6 +3,8 @@ package es.uji.ei1027.skillsharing.controller;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -205,6 +207,50 @@ public class AdminController {
 	
 	}
 
+	//----------------- configurar perfil -----------------
+	@RequestMapping(value="/configurarPerfil/{username}", method = RequestMethod.GET)
+	public String processConfigurarPerfilSubmit(Model model, @PathVariable String username) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("admin", adminDao.getAdmin(username));
+		
+		return "admin/configurarPerfil"; 
+		
+	}
+	
+	@RequestMapping(value="/configurarPerfil/{username}", method = RequestMethod.POST) 
+	public String processConfigurarPerfilSubmit(@PathVariable String username, @ModelAttribute("admin") Admin admin, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegrees());
+		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
+		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		
+		AdminValidator adminValidator = new AdminValidator();
+		
+		adminValidator.setAdminDAO(adminDao);
+		
+		adminValidator.validateUpdate(admin, bindingResult);
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "admin/update";
+		
+		 adminDao.updateAdmin(admin);
+		 
+		 return "redirect:../main.html"; 
+		 
+	  }
+
 	
 	//------------ listado ----------------------------
 	@RequestMapping("/list")
@@ -369,6 +415,17 @@ public class AdminController {
 		 return "redirect:../main.html"; 
 		 
 	  }
+	
+	//---------------- eliminación ---------------
+	@RequestMapping(value="/deleteDesdePerfil/{username}", method = RequestMethod.GET)
+	public String processDeleteDesdePerfilSubmit(Model model, @PathVariable String username, HttpSession session) {
+
+		adminDao.deleteAdmin(username);
+		session.invalidate();
+		
+		return "redirect:../../index.jsp"; 
+		
+	}
 	
 	
 	

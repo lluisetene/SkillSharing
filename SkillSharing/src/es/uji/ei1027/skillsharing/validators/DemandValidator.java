@@ -10,6 +10,7 @@ import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.model.Student;
 
@@ -109,7 +110,7 @@ public class DemandValidator implements Validator {
 		Demand demand = (Demand) obj;
 		
 		
-		// ------- IDDEMAND ------ /
+		// ------- IDOFFER ------ /
 		if ( demand.getIdDemand().trim().equals("") )
 			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
 		
@@ -122,7 +123,7 @@ public class DemandValidator implements Validator {
 			
 			if (!encontrado)
 				
-				errors.rejectValue("idDemand", "required", "Este IdDemand no existe");
+				errors.rejectValue("idDemand", "required", "Este IDDemand no existe");
 			
 			
 		}
@@ -158,14 +159,15 @@ public class DemandValidator implements Validator {
 				break;
 			}
 		
+		
 		// ------- IDSKILL ------ /
 		if ( demand.getIdSkill() .trim().equals("") )
 			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		else if ( demand.getIdSkill() .trim().length() > 5 )
 			errors.rejectValue("idSkill", "required", "El IDSkill debe tener más de 5 caracteres");
 		else {
-			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getIdSkill().toLowerCase().equals(demand.getIdSkill().toLowerCase()) )  {
+			for ( int i = 0; i < skillsList.size(); i++ )
+				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(demand.getIdSkill().toLowerCase()) )  {
 					encontrado = true;
 					break;
 				}
@@ -184,7 +186,7 @@ public class DemandValidator implements Validator {
 		
 		for(int i = 0; i < collaborationsList.size(); i++){
 			
-			if (collaborationsList.get(i).getIdDemand().equals(demand.getIdDemand().trim().toLowerCase())){
+			if (collaborationsList.get(i).getIdDemand().trim().toLowerCase().equals(demand.getIdDemand().trim().toLowerCase())){
 				
 				errors.rejectValue("idDemand", "required", "No se puede borrar, elimina primero las colaboraciones que tengan esta demanda");
 				

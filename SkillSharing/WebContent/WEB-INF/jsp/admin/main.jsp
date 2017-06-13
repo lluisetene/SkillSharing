@@ -583,8 +583,8 @@
 							                <td>${demand.getIdSkill().split("/")[1]}</td>
 							           		<td>${demand.beginningDate}</td>
 							           		<td>${demand.endingDate}</td>
-							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/demand/update/${demand.idDemand}.html'"></button></td>
-						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/demand/delete/${demand.idDemand}.html'"></button></td>
+							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/demand/updateByAdmin/${demand.idDemand}.html'"></button></td>
+						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/demand/deleteByAdmin/${demand.idDemand}.html'"></button></td>
 							           
 	            						</tr>
 	        
@@ -649,8 +649,8 @@
 							           		<td>${collaboration.endingDate}</td>
 							           		<td>${collaboration.hours}</td>
 							           		<td>${collaboration.rate}</td>
-							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
-						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
+							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/updateByAdmin/${collaboration.idCollaboration}.html'"></button></td>
+						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/deleteByAdmin/${collaboration.idCollaboration}.html'"></button></td>
 							           
 	            						</tr>
 	        

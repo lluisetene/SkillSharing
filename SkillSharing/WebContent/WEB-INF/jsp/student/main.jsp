@@ -14,7 +14,7 @@
    String currentDate = ft.format(dNow);
 %>
 
-<c:set var="fechaActual" value=<%=currentDate %>/>
+<c:set var="fechaActual" value="<%=currentDate %>"/>
 
 <t:paginaBasica title="Página Personal"/>
 

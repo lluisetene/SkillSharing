@@ -40,7 +40,7 @@
 		          	</a>
 	  		        <ul class="dropdown-menu dropdown-user">
 	  		          <li><a href="${pageContext.request.contextPath}/admin/main.html"><i class="fa fa-home fa-fw"></i>Mi Página</a>
-		              <li><a href="${pageContext.request.contextPath}/admin/update.jsp"><i class="fa fa-gear fa-fw"></i>Configurar Perfil</a>
+		              <li><a href="${pageContext.request.contextPath}/admin/configurarPerfil/${adminLogin.username}.html"><i class="fa fa-gear fa-fw"></i>Configurar Perfil</a>
 		              <li><a href="${pageContext.request.contextPath}/logout.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 		          	</ul>
 				</c:when>

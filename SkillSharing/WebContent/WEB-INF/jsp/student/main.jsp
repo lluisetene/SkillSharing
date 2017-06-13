@@ -182,7 +182,7 @@
 													<i class="fa fa-lock" style="color:black"></i>
 												</c:when>
 												<c:otherwise>
-													<button style = "width:10;text-align:center" class="btn fa fa-check-circle" type = "submit" onClick ="location='http:${pageContext.request.contextPath}/collaboration/valoration/${collaboration.idCollaboration}.html'"/></button>
+													<button style = "width:100%;text-align:center" class="btn fa fa-check-circle" type = "submit" onClick ="location='http:${pageContext.request.contextPath}/collaboration/valoration/${collaboration.idCollaboration}.html'"/></button>
 												</c:otherwise>
 											</c:choose>
 						           		</td>

@@ -145,8 +145,6 @@ public class CollaborationController {
 
 		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 
-		
-		System.out.println(bindingResult);
 		if (bindingResult.hasErrors())
 			
 			return "collaboration/add";
@@ -161,8 +159,6 @@ public class CollaborationController {
 		String nombreDemanda = demandDao.getDemand(collaboration.getIdDemand()).getName();
 		notificacion.notificarColaboracion(ofertante, demandante, collaboration, nombreOferta, nombreDemanda);
 		
-		System.out.println("4");
-		
 		return "redirect:../student/main.html";
 		
 	}
@@ -171,6 +167,8 @@ public class CollaborationController {
 	public String valoration(Model model, @PathVariable String idCollaboration) {
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
+		model.addAttribute("offerName", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
+		model.addAttribute("demandName", demandDao.getDemand(collaborationDao.getCollaboration(idCollaboration).getIdDemand()));
 		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
@@ -180,7 +178,10 @@ public class CollaborationController {
 	}
 	
 	@RequestMapping(value="/valoration/{idCollaboration}", method = RequestMethod.POST) 
-	public String processValorationSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
+	public String processValorationSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("offerName", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
+		model.addAttribute("demandName", demandDao.getDemand(collaborationDao.getCollaboration(idCollaboration).getIdDemand()));
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		

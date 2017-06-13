@@ -9,7 +9,7 @@
 
 	<t:paginaBasica title="Eliminar Oferta"/>
 
-		 <%
+		<%
 	        Admin admin = new Admin();
 	        HttpSession sesion = request.getSession();
 	        admin = (Admin)sesion.getAttribute("adminLogin");
@@ -28,10 +28,15 @@
 	        	nombre = nombreApellidos[0];
 				apellidos = nombreApellidos[1];
 	        	
-	        }else{
+	        }else if (nombreApellidos.length == 3){
 	        	
 	        	nombre = nombreApellidos[0];
 				apellidos = nombreApellidos[1] + " " + nombreApellidos[2];
+	        	
+	        }else{
+	        	
+	        	nombre = nombreApellidos[0] + " " + nombreApellidos[1];
+				apellidos = nombreApellidos[2] + " " + nombreApellidos[3];
 	        	
 	        }
 	        

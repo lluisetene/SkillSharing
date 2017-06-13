@@ -40,8 +40,7 @@
                 <td>
                 	<form:label path="idCollaboration">IdColaboración</form:label>
                 	<b style="padding-left:59px"></b>
-                	<%-- <form:input type = "text" maxlength = "5" path="idCollaboration" readonly = "true" disabled = "true"/> --%>
-                	<form:input type = "text" maxlength = "5" path="idCollaboration" />
+                	<form:input type = "text" maxlength = "5" path="idCollaboration" readonly = "true" disabled = "true"/>
                 </td>
             </tr>
             
@@ -76,12 +75,12 @@
                		
                		<b style="padding-left:108px"></b>
                		
-					<form:input style = "width:80px; border:1px solid black; background-color:white;" id = "hours" name = "hours" path="hours" value="10:00" readonly = "true" disabled = "true" />
+					<form:input style = "width:80px; border:1px solid black;" id = "hours" name = "hours" path="hours" value="10:00" readonly = "true" disabled = "true" />
 					
 				<b style="padding-left:336px"></b> 
 					
                 <form:label path="rate">Puntuación</form:label>
-              		<form:input style = "width:50px; border:1px solid black; background-color:white;" id = "rate" name = "rate" path="rate" value="5.0" readonly = "true" disabled = "true" />
+              		<form:input style = "width:50px; border:1px solid black;" id = "rate" name = "rate" path="rate" value="5.0" readonly = "true" disabled = "true" />
 				</td>
             </tr>
             
@@ -98,9 +97,9 @@
             
             <tr>
                 <td style="padding-left:140px">
-                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/>
+                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" disabled="true"/>
                 	<b style="padding-left:100px"></b>
-                	<form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" />
+                	<form:input type="text" path="endingDate" name="endingdate" id="to" size="10" disabled="true" />
                 <td>
             </tr>
 
@@ -110,7 +109,9 @@
         <div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
 		<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onClick = "document.getElementById('idCollaboration').disabled=false,
 																																																												document.getElementById('hours').disabled=false,
-																																																												document.getElementById('rate').disabled=false;">
+																																																												document.getElementById('rate').disabled=false,
+																																																												document.getElementById('beginningdate').disabled=false,
+																																																												document.getElementById('endingdate').disabled=false;">
         <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
         
         

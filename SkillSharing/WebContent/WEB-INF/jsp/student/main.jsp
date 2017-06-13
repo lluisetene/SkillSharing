@@ -10,11 +10,10 @@
 
 <%
    Date dNow = new Date();
-   SimpleDateFormat ft = new SimpleDateFormat ("yyyy/MM/dd");
+   SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
    String currentDate = ft.format(dNow);
 %>
-
-<c:set var="fechaActual" value="<%=currentDate %>"/>
+<c:set var="fechaActual" value="<%= currentDate %>"/>
 
 <t:paginaBasica title="Página Personal"/>
 
@@ -27,7 +26,7 @@
             
 			<t:paginaBasicaStudent/>
             
-		
+
 		<!-- TABLAS -->
 		
         <div class="col-lg-8" style="background-color:073763; border-radius:10px 10px 10px 10px; margin-top:-350px">
@@ -60,10 +59,9 @@
 									</tr>
 										
 									<c:forEach items="${statistics.getOfertasEstudiante(nid)}" var="offer">
-									
 	          						 	<tr>
 						          		<td>${offer.name}</td>
-						                <td>${offer.getIdSkill().split("/")[1]}</td>
+						                <td>${skills.getSkill(offer.getIdSkill().split("/")[0]).getName()}</td>
 						           		<td>${offer.beginningDate}</td>
 						           		<td>${offer.endingDate}</td>
 						           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" onClick="location='${pageContext.request.contextPath}/offer/update/${offer.idOffer}.html'" type = "submit" name = "submit"></button></td>
@@ -116,7 +114,7 @@
 								
 	         						<tr>
 					          		<td>${demand.name}</td>
-					                <td>${demand.getIdSkill().split("/")[1]}</td>
+					                <td>${skills.getSkill(demand.getIdSkill().split("/")[0]).getName()}</td>
 					           		<td>${demand.beginningDate}</td>
 					           		<td>${demand.endingDate}</td>
 					           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" onClick="location='${pageContext.request.contextPath}/demand/update/${demand.idDemand}.html'" type = "submit" name = "submit"></button></td>
@@ -162,7 +160,7 @@
 										<th>Fecha Fin</th>
 										<th>Horas</th>
 										<th>Valoración</th>
-										<th>Estado</th>
+										<th>Puntuar</th>
 										<th></th>
 										<th></th>
 								
@@ -178,6 +176,16 @@
 						           		<td>${collaboration.endingDate}</td>
 						           		<td>${collaboration.hours}</td>
 						           		<td>${collaboration.rate}</td>
+						           		<td>
+											<c:choose>
+												<c:when test="${collaboration.colaboracionCaducada() == true }">
+													<i class="fa fa-lock" style="color:black"></i>
+												</c:when>
+												<c:otherwise>
+													<button style = "width:10;text-align:center" class="btn fa fa-check-circle" type = "submit" onClick ="location='http:${pageContext.request.contextPath}/collaboration/valoration/${collaboration.idCollaboration}.html'"/></button>
+												</c:otherwise>
+											</c:choose>
+						           		</td>
 						           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
 							            <td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
 					               		
@@ -201,3 +209,4 @@
             </div>
        </div>
 </div>
+<t:barrainferior/>

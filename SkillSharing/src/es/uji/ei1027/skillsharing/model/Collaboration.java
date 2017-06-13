@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Collaboration {
@@ -94,6 +95,21 @@ public class Collaboration {
 		
 		this.rate = rate;
 		
+	}
+	
+	public boolean colaboracionCaducada() {
+		
+	   Date date = new Date();
+	   SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+	   String fechaDeHoy[] = ft.format(date).split("-");
+	   String finalColaboracion[] = ft.format(endingDate).split("-");
+	   
+	   if ( Integer.parseInt(finalColaboracion[0]) <= Integer.parseInt(fechaDeHoy[0]) ) 
+		   if ( Integer.parseInt(finalColaboracion[1]) <= Integer.parseInt(fechaDeHoy[1]) ) 
+			   if ( Integer.parseInt(finalColaboracion[2]) <= Integer.parseInt(fechaDeHoy[2]) )
+				   return false;
+	   return true;
+	  
 	}
 
 	@Override

@@ -97,8 +97,7 @@
 																																																												document.getElementById('idOffer').disabled=false,
 																																																												document.getElementById('idDemand').disabled=false,
 																																																												document.getElementById('hours').disabled=false,
-																																																												document.getElementById('rate').disabled=false,
-																																																												document.getElementById('beginningdate').disabled=false;">
+																																																												document.getElementById('rate').disabled=false;">
         <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
         
         

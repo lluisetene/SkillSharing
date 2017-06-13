@@ -167,6 +167,39 @@ public class CollaborationController {
 		
 	}
 	
+	@RequestMapping(value="/valoration/{idCollaboration}", method = RequestMethod.GET)
+	public String valoration(Model model, @PathVariable String idCollaboration) {
+		
+		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
+		
+		return "collaboration/valoration";
+		
+	}
+	
+	@RequestMapping(value="/valoration/{idCollaboration}", method = RequestMethod.POST) 
+	public String processValorationSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
+		
+		CollaborationValidator collaborationValidator = new CollaborationValidator();
+		
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
+		
+		collaborationValidator.validateUpdate(collaboration, bindingResult);
+		
+		if (bindingResult.hasErrors()) 
+			
+			 return "collaboration/valoration";
+		
+		 collaborationDao.updateCollaboration(collaboration);
+		 
+		 return "redirect:../../student/main.html"; 
+		
+	}
+	
+	
+	
 	
 	//----------- actualización ------------------
 	@RequestMapping(value="/update/{idCollaboration}", method = RequestMethod.GET)

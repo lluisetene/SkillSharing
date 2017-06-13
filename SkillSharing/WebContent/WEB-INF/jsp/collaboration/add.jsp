@@ -75,12 +75,12 @@
                		
                		<b style="padding-left:108px"></b>
                		
-					<form:input style = "width:80px; border:1px solid black;" id = "hours" name = "hours" path="hours" value="10:00" readonly = "true" disabled = "true" />
+					<form:input style = "width:80px;" id = "hours" name = "hours" path="hours" value="10:00" readonly = "true" disabled = "true" />
 					
 				<b style="padding-left:336px"></b> 
 					
                 <form:label path="rate">Puntuación</form:label>
-              		<form:input style = "width:50px; border:1px solid black;" id = "rate" name = "rate" path="rate" value="5.0" readonly = "true" disabled = "true" />
+              		<form:input style = "width:50px;" id = "rate" name = "rate" path="rate" value="5.0" readonly = "true" disabled = "true" />
 				</td>
             </tr>
             
@@ -97,9 +97,9 @@
             
             <tr>
                 <td style="padding-left:140px">
-                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" disabled="true"/>
+                	<form:input style="border:1px solid black; background-color:white" type="text" path="beginningDate" name="beginningdate" id="from" size="10" disabled="true"/>
                 	<b style="padding-left:100px"></b>
-                	<form:input type="text" path="endingDate" name="endingdate" id="to" size="10" disabled="true" />
+                	<form:input style="border:1px solid black; background-color:white" type="text" path="endingDate" name="endingdate" id="to" size="10" disabled="true" />
                 <td>
             </tr>
 

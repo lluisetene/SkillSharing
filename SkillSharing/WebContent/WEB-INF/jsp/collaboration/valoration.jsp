@@ -26,8 +26,8 @@
     	<div class="panel-body" style="background-color:073763">
 			<div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
             	<div class="table-responsive">
-					<h1 style = "color:black; margin:0; padding-left:40px; padding-top:10px	">Modificar Colaboración</h1>
-    				<div style = "height:2px; width:50%; background-color:black"></div>
+					<h1 style = "color:black; margin:0; padding-left:40px; padding-top:10px	">Valorar Colaboración</h1>
+    				<div style = "height:2px; width:55%; background-color:black"></div>
                     
                   
 	
@@ -47,14 +47,14 @@
             <tr>
                 <td>
 	                <form:label path="idOffer">Nombre de la Oferta</form:label><b style="padding-left:27px"></b>
-	         		<form:input style = "width:563px; border:1px solid black; background-color:white;" id = "idOffer" name = "idOffer" path="idOffer" disabled="true" />
+	         		<form:input style = "width:563px" id = "idOffer" name = "idOffer" path="idOffer" disabled="true" readonly="true"/>
 				</td>
             </tr>
             
             <tr>
                 <td>
 	                <form:label path="idDemand">Nombre de la Demanda</form:label>
-	         		<form:input style = "width:563px; border:1px solid black; background-color:white;" id = "idDemand" name = "idDemand" path="idDemand" disabled="true" />
+	         		<form:input style = "width:563px;" id = "idDemand" name = "idDemand" path="idDemand" disabled="true" readonly="true"/>
 				</td>
             </tr>
             
@@ -65,7 +65,7 @@
                		
                		<b style="padding-left:108px"></b>
                		
-              		<select style = "width:15%; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours">
+					<select style = "width:100px; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours">
 						<option value="---" selected="selected">---</option>
 						<option value="00:00">00:00</option>
 						<option value="01:00">01:00</option>
@@ -80,13 +80,10 @@
 						<option value="10:00">10:00</option>
 					</select>
 					
-					<form:input style = "width:80px; border:1px solid black; background-color:white;" id = "hours" name = "hours" path="hours" disabled="true" />
+				<b style="padding-left:336px"></b>
 					
-					<b style="padding-left:336px"></b>
-					
-                	<form:label path="rate">Puntuación</form:label>
-					
-					<select style = "width:15%; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate">
+                <form:label path="rate">Puntuación</form:label>
+					<select style = "width:50px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate">
 						<option value="---" selected="selected">---</option>
 						<option value="0">0</option>
 						<option value="1">1</option>
@@ -99,8 +96,7 @@
 						<option value="8">8</option>
 						<option value="9">9</option>
 						<option value="10">10</option>
-					</select>
-              		
+					</select>              		
 				</td>
             </tr>
             
@@ -113,7 +109,7 @@
             
             <tr>
                 <td style="padding-left:140px">
-                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/>
+                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true" />
                 	<b style="padding-left:100px"></b>
                 	<form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" />
                 <td>
@@ -121,13 +117,13 @@
 
             
         </table>
-	        <input type = "submit" name = "submit" value = "Aceptar" onclick = "document.getElementById('idCollaboration').disabled=false, 
-	        																   document.getElementById('idOffer').disabled=false,
-	        																   document.getElementById('idDemand').disabled=false,
-	        																   document.getElementById('hours').disabled=false,
-	        																   document.getElementById('rate').disabled=false;">
-	        																  
-	         <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
+        
+	    <div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
+		<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onClick = "document.getElementById('idCollaboration').disabled=false,
+																																																												document.getElementById('idOffer').disabled=false,
+																																																												document.getElementById('idDemand').disabled=false,
+																																																												document.getElementById('beginningdate').disabled=false;">
+        <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
         
         
         <!-- Modal -->
@@ -141,7 +137,7 @@
 		          		<h4 style = "color:black" class="modal-title">Modificar Colaboración</h4>
 		        	</div>
 		        	<div class="modal-body">
-		          		<p><i>¿Seguro que desea Modificar esta colaboración?</i></p>
+		          		<p><i>¿La valoración indicada es la correcta?</i></p>
 		        	</div>
 		        	<div  class="modal-footer" style = "background-color:eeeeee">
 		         		<input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">
@@ -156,36 +152,3 @@
     	</div>
     	</div>
     	</div>
-    	
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script> 
-	$(document).ready(function() {
-		$("#from").datepicker({
-			changeMonth:true,
-			changeYear:true,
-			showOn: "button",
-	           buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-	           buttonImageOnly: true,
-	           dateFormat:"dd/mm/yy",
-	           minDate:0,
-			onClose: function todate(selectedDate) {
-				$("#to").datepicker("option", "minDate", selectedDate);
-			}
-		}).datepicker("setDate", new Date());
-		$("#to").datepicker({				
-			changeMonth:true,
-			changeYear:true,
-			showOn: "button",
-	           buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-	           buttonImageOnly: true,
-	           dateFormat:"dd/mm/yy",
-	           minDate:0,
-			onClose: function fromdate(selectedDate) {
-			$("#from").datepicker("option", "maxDate", selectedDate);
-			}
-		}).datepicker("setDate", new Date());
-	
-	  });
-</script>
-<t:barrainferior/>

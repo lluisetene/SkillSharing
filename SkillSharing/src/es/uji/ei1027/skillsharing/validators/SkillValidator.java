@@ -52,7 +52,7 @@ public class SkillValidator implements Validator {
 		if ( skill.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( skill.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		else{
 			
 			for ( int i = 0; i < skillsList.size(); i++ ){
@@ -99,12 +99,12 @@ public class SkillValidator implements Validator {
 		if ( skill.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( skill.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		
 		for ( int i = 0; i < skillsList.size(); i++ )
 			if ( skillsList.get(i).getName().toLowerCase().equals(skill.getName().toLowerCase()) && skillsList.get(i).getIdSkill().equals(skill.getIdSkill()) == false) {
-				errors.rejectValue("name", "required", "Este name ya está en uso");
+				errors.rejectValue("name", "required", "Este nombre ya está en uso");
 				break;
 			}
 			

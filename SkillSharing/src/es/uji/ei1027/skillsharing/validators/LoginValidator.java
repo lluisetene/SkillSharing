@@ -58,7 +58,7 @@ public class LoginValidator implements ValidatorLogin {
 					}
 			}
 			if ( admin == false && student == false ) 
-				errors.rejectValue("username", "required", "El Username introducido no existe");
+				errors.rejectValue("username", "required", "El nombre de usuario introducido no existe");
 			
 			else {
 				boolean passCorrecta = false;

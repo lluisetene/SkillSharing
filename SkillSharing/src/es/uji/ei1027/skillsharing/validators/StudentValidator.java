@@ -38,7 +38,7 @@ public class StudentValidator implements Validator {
 		if ( student.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( student.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		
 		// -------- NID -------- //
@@ -58,11 +58,11 @@ public class StudentValidator implements Validator {
 		if ( student.getUsername().trim().equals("") )
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
 		else if ( student.getUsername().length() < 3 )
-			errors.rejectValue("username", "required", "El Username debe tener más de 3 caracteres");
+			errors.rejectValue("username", "required", "El nombre de usuario debe tener más de 3 caracteres");
 		else {
 			for ( int i = 0; i < studentsList.size(); i++ )
 				if ( studentsList.get(i).getUsername().toLowerCase().equals(student.getUsername().toLowerCase()) ) {
-					errors.rejectValue("username", "required", "Este Username ya está en uso");
+					errors.rejectValue("username", "required", "Este nombre de usuario ya está en uso");
 					break;
 				}
 			}
@@ -72,7 +72,7 @@ public class StudentValidator implements Validator {
 		if ( student.getPassword().trim().equals("") )
 			errors.rejectValue("password", "required", "Este campo es obligatorio");
 		else if ( student.getPassword().length() < 6 )
-			errors.rejectValue("password",  "required", "La password debe tener más de 6 caracteres");
+			errors.rejectValue("password",  "required", "La contraseña debe tener más de 6 caracteres");
 		
 		// ------ MAIL ----- //
 		if( student.getMail().trim().equals("") )
@@ -80,7 +80,7 @@ public class StudentValidator implements Validator {
 		else {
 			for ( int i = 0; i < studentsList.size(); i++ )
 				if ( studentsList.get(i).getMail().toLowerCase().equals(student.getMail().toLowerCase() )) {
-					errors.rejectValue("mail", "required", "Este Mail ya está en uso");
+					errors.rejectValue("mail", "required", "Este mail ya está en uso");
 					break;
 					
 				}
@@ -97,7 +97,7 @@ public class StudentValidator implements Validator {
 		if ( student.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( student.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		
 		// -------- NID -------- //
@@ -110,12 +110,12 @@ public class StudentValidator implements Validator {
 		if ( student.getUsername().trim().equals("") )
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
 		else if ( student.getUsername().length() < 3 )
-			errors.rejectValue("username", "required", "El Username debe tener más de 3 caracteres");
+			errors.rejectValue("username", "required", "El nombre de usuario debe tener más de 3 caracteres");
 		
 
 		for ( int i = 0; i < studentsList.size(); i++ )
 			if ( studentsList.get(i).getUsername().toLowerCase().equals(student.getUsername().toLowerCase()) && studentsList.get(i).getNid().equals(student.getNid()) == false) {
-				errors.rejectValue("username", "required", "Este Username ya está en uso");
+				errors.rejectValue("username", "required", "Este nombre de usuario ya está en uso");
 				break;
 			}
 		
@@ -125,7 +125,7 @@ public class StudentValidator implements Validator {
 		if ( student.getPassword().trim().equals("") )
 			errors.rejectValue("password", "required", "Este campo es obligatorio");
 		else if ( student.getPassword().length() < 6 )
-			errors.rejectValue("password",  "required", "La password debe tener más de 6 caracteres");
+			errors.rejectValue("password",  "required", "La contraseña debe tener más de 6 caracteres");
 		
 		// ------ MAIL ----- //
 		if( student.getMail().trim().equals("") )

@@ -73,7 +73,7 @@ public class DemandValidator implements Validator {
 		if ( demand.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( demand.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < demandsList.size(); i++ )
 				if ( demandsList.get(i).getName().toLowerCase().equals(demand.getName().toLowerCase()) ) {
@@ -81,7 +81,7 @@ public class DemandValidator implements Validator {
 					break;
 				}
 			if ( encontrado )
-				errors.rejectValue("name", "required", "El Name introducido ya está en uso");
+				errors.rejectValue("name", "required", "El nombre introducido ya está en uso");
 			encontrado = false;
 				
 		}
@@ -151,11 +151,11 @@ public class DemandValidator implements Validator {
 		if ( demand.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( demand.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		for ( int i = 0; i < demandsList.size(); i++ )
 			if ( demandsList.get(i).getName().toLowerCase().equals(demand.getName().toLowerCase()) && demandsList.get(i).getIdDemand().equals(demand.getIdDemand()) == false) {
-				errors.rejectValue("name", "required", "Este name ya está en uso");
+				errors.rejectValue("name", "required", "Este nombre ya está en uso");
 				break;
 			}
 		

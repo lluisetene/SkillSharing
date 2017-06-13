@@ -32,7 +32,7 @@ public class AdminValidator implements Validator {
 		if ( user.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( user.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		
 		// ------ MAIL ----- //
@@ -46,7 +46,7 @@ public class AdminValidator implements Validator {
 				}
 			
 			if ( enUso ) {
-				errors.rejectValue("mail", "required", "Este Mail ya está en uso");
+				errors.rejectValue("mail", "required", "Este mail ya está en uso");
 				enUso = false;
 			}
 		}
@@ -63,7 +63,7 @@ public class AdminValidator implements Validator {
 			
 			
 			if ( enUso ) { 
-				errors.rejectValue("username", "required", "Este Username ya está en uso");
+				errors.rejectValue("username", "required", "Este nombre de usuario ya está en uso");
 				enUso = false;
 			}
 		}
@@ -72,7 +72,7 @@ public class AdminValidator implements Validator {
 		if ( user.getPassword().trim().equals("") )
 			errors.rejectValue("password", "required", "Este campo es obligatorio");
 		else if ( user.getPassword().length() < 6 )
-			errors.rejectValue("password",  "required", "La password debe tener más de 6 caracteres");
+			errors.rejectValue("password",  "required", "La contraseña debe tener más de 6 caracteres");
 	}
 
 
@@ -84,7 +84,7 @@ Admin user = (Admin) obj;
 		if ( user.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( user.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		
 		// ------ MAIL ----- //
@@ -102,7 +102,7 @@ Admin user = (Admin) obj;
 		if ( user.getPassword().trim().equals("") )
 			errors.rejectValue("password", "required", "Este campo es obligatorio");
 		else if ( user.getPassword().length() < 6 )
-			errors.rejectValue("password",  "required", "La password debe tener más de 6 caracteres");
+			errors.rejectValue("password",  "required", "La contraseña debe tener más de 6 caracteres");
 	}
 		
 	
@@ -123,7 +123,7 @@ Admin user = (Admin) obj;
 			
 			
 			if ( enUso ) {
-				errors.rejectValue("username", "required", "El Username introducido no existe");
+				errors.rejectValue("username", "required", "El nombre de usuario introducido no existe");
 				enUso = false;
 			}
 		}
@@ -144,7 +144,7 @@ Admin user = (Admin) obj;
 				}
 			
 			if ( !enUso ) {
-				errors.rejectValue("username", "required", "El Username introducido no existe");
+				errors.rejectValue("username", "required", "El nombre de usuario introducido no existe");
 				enUso = false;
 			}
 		}

@@ -71,7 +71,7 @@ public class OfferValidator implements Validator {
 		if ( offer.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( offer.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < offersList.size(); i++ )
 				if ( offersList.get(i).getName().toLowerCase().equals(offer.getName().toLowerCase()) ) {
@@ -79,7 +79,7 @@ public class OfferValidator implements Validator {
 					break;
 				}
 			if ( encontrado )
-				errors.rejectValue("name", "required", "El Name introducido ya está en uso");
+				errors.rejectValue("name", "required", "El nombre introducido ya está en uso");
 			encontrado = false;
 				
 		}
@@ -149,7 +149,7 @@ public class OfferValidator implements Validator {
 		if ( offer.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( offer.getName().length() < 5 )
-			errors.rejectValue("name", "required", "El Name debe tener más de 5 caracteres");
+			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		for ( int i = 0; i < offersList.size(); i++ )
 			if ( offersList.get(i).getName().toLowerCase().equals(offer.getName().toLowerCase()) && offersList.get(i).getIdOffer().equals(offer.getIdOffer()) == false) {

@@ -85,12 +85,24 @@ Admin user = (Admin) obj;
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
 		else if ( user.getName().length() < 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
-		
-		
+	
 		// ------ MAIL ----- //
 		if( user.getMail().trim().equals("") )
 			errors.rejectValue("mail", "required", "Este campo es obligatorio");
-	
+		
+		for (int i = 0; i < adminsList.size(); i++){
+			
+			if (adminsList.get(i).getMail().trim().toLowerCase().equals(user.getMail().trim().toLowerCase())){
+				
+				if (!adminsList.get(i).getUsername().trim().toLowerCase().equals(user.getUsername().trim().toLowerCase())){
+					
+					errors.rejectValue("mail", "required", "Este email ya está en uso");
+					
+				}
+				
+			}
+			
+		}
 		
 		//-------- USERNAME --------//
 		if (user.getUsername().trim().equals(""))

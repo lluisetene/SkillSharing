@@ -71,7 +71,7 @@ public class StudentController {
 		model.addAttribute("skills", skillDao);
 		
 		estadisticas = studentDao.getEstadisticas();
-		estadisticas.setDatos(offerDao.getOffers(), demandDao.getDemands(), collaborationDao.getCollaborations());
+		estadisticas.setDatos(offerDao.getOffersWithNameSkill(), demandDao.getDemandsWithNameSkill(), collaborationDao.getCollaborations());
 		
 		model.addAttribute("statistics", estadisticas);
 		

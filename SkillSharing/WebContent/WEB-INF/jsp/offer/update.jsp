@@ -51,7 +51,7 @@
 	            <tr>
 	                <td>
 	               		<form:label path="idSkill">Habilidad</form:label>
-	         			<form:input style = "widt:337px; border:1px solid black; color:black" type = "text" maxlength = "30" path="idSkill" disabled="true" readonly="true"/><form:errors path="idSkill" cssClass="error" />
+	         			<form:input style = "widt:337px; border:1px solid black; color:black" type = "text" maxlength = "30" path="idSkill" disabled="true" readonly="true" value = "${offer.idSkill.split('/')[1]}"/><form:errors path="idSkill" cssClass="error" />
 					</td>
 	            </tr>
 	            

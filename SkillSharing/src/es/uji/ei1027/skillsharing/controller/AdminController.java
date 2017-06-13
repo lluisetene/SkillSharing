@@ -73,6 +73,8 @@ public class AdminController {
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
 		
+		
+		
 		return "admin/main";
 	}
 	

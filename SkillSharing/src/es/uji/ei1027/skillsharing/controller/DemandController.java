@@ -172,7 +172,7 @@ public class DemandController {
 	@RequestMapping(value="/update/{idDemand}", method = RequestMethod.GET)
 	public String processUpdateSubmit(Model model, @PathVariable String idDemand) {
 		
-		model.addAttribute("demand", demandDao.getDemand(idDemand));
+		model.addAttribute("demand", demandDao.getDemandWithNameSkill(idDemand));
 		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);

@@ -130,7 +130,20 @@ public class StudentValidator implements Validator {
 		// ------ MAIL ----- //
 		if( student.getMail().trim().equals("") )
 			errors.rejectValue("mail", "required", "Este campo es obligatorio");
+		
+		for (int i = 0; i < studentsList.size(); i++){
+			
+			if (studentsList.get(i).getMail().trim().toLowerCase().equals(student.getMail().trim().toLowerCase())){
+				
+				if (!studentsList.get(i).getNid().trim().toLowerCase().equals(student.getNid().trim().toLowerCase())){
 					
+					errors.rejectValue("mail", "required", "Este email ya está en uso");
+					
+				}
+				
+			}
+			
+		}	
 	}
 
 	@Override

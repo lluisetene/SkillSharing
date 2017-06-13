@@ -176,7 +176,7 @@ public class OfferController {
 	@RequestMapping(value="/update/{idOffer}", method = RequestMethod.GET)
 	public String processUpdateSubmit(Model model, @PathVariable String idOffer) {
 		
-		model.addAttribute("offer", offerDao.getOffer(idOffer));
+		model.addAttribute("offer", offerDao.getOfferWithNameSkill(idOffer));
 
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);

@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import = "es.uji.ei1027.skillsharing.model.Admin" %>
 <%@ page import = "javax.servlet.http.HttpSession" %>
+<c:set var="adminLogin" scope="request" value="${session.getAttribute('adminLogin')}" />
 
 <html lang="es-ES">
 
@@ -325,17 +326,29 @@
 									
 									</tr>	
 									<c:forEach items="${adminsList}" var="admin">
-	          
-	           						 	<tr>
-	          
-							          		<td>${admin.username}</td>
-							                <td><div style = "width: 225;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;">${admin.name}</div></td>
-							           		<td>${admin.mail}</td>
-							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/update/${admin.username}.html'"></button></td>
-						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/delete/${admin.username}.html'"></button></td>
-							           
-	            						</tr>
-	        
+							
+										<c:choose>
+		          							
+		          							<c:when test="${adminLogin.username != admin.username}">
+				
+			           						 	<tr>
+			          
+									          		<td>${admin.username}</td>
+									                <td><div style = "width: 225;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;">${admin.name}</div></td>
+									           		<td>${admin.mail}</td>
+									           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/update/${admin.username}.html'"></button></td>
+								               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/delete/${admin.username}.html'"></button></td>
+									           
+			            						</tr>
+			            					</c:when>
+			            					<c:when test="${adminLogin.username == admin.username}">
+			            						<td>${admin.username}</td>
+								                <td><div style = "width: 225;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;">${admin.name}</div></td>
+								           		<td>${admin.mail}</td>
+								           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/update/${admin.username}.html'" disabled></button></td>
+								               	<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/admin/delete/${admin.username}.html'" disabled></button></td>
+			            					</c:when>
+		        						</c:choose>
 	        						</c:forEach>  
 	
 								</table>

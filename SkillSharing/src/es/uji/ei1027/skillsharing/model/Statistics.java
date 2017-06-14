@@ -153,44 +153,50 @@ public class Statistics {
 		if ( listaColaboraciones.isEmpty() ) 
 			return 0;
 		
-		if ( diccOfertas.containsKey(nid) && diccDemandas.containsKey(nid) ) {
+		if ( diccOfertas.containsKey(nid) ) {
 			List<Offer> misOfertas = diccOfertas.get(nid);
-			List<Demand> misDemandas = diccDemandas.get(nid);
-			
-			for ( int i = 0; i < listaColaboraciones.size(); i++ ) {
+			for ( int i = 0; i < listaColaboraciones.size(); i++ )
 				for ( int j = 0; j < misOfertas.size(); j++ )
 					if ( listaColaboraciones.get(i).getIdOffer().equals(misOfertas.get(j).getIdOffer()) ) {
 						valoraciones += listaColaboraciones.get(i).getRate();
 						contador++;
 						break;
 					}
+		}
+		
+		if ( diccDemandas.containsKey(nid) ) {
+			List<Demand> misDemandas = diccDemandas.get(nid);
+			for ( int i = 0; i < listaColaboraciones.size(); i++ )
 				for ( int k = 0; k < misDemandas.size(); k++ )
 					if ( listaColaboraciones.get(i).getIdDemand().equals(misDemandas.get(k).getIdDemand()) ) {
 						valoraciones += listaColaboraciones.get(i).getRate();
 						contador++;
 						break;
 					}
-			}
-			
-			if ( contador != 0)
-				media = valoraciones/contador;
 		}
+			
+		if ( contador != 0)
+			media = valoraciones/contador;
 		
 		return media;
 	}
 	
+	
 	public List<Collaboration> getColaboracionesEstudiante(String nid) {
+		
 		List<Collaboration> colaboracionesEstudiante = new LinkedList<>();
 	
-		if ( diccOfertas.containsKey(nid) && diccDemandas.containsKey(nid) ) {
-			
+		if ( diccOfertas.containsKey(nid) )
 			for ( int i = 0; i < listaColaboraciones.size(); i++ ) {
 				for ( int j = 0; j < diccOfertas.get(nid).size(); j++ )
 					if ( listaColaboraciones.get(i).getIdOffer().equals(diccOfertas.get(nid).get(j).getIdOffer()) ) {
 						colaboracionesEstudiante.add(listaColaboraciones.get(i));
 						break;
 					}
-				
+			}
+		
+		if ( diccDemandas.containsKey(nid) )
+			for ( int i = 0; i < listaColaboraciones.size(); i++ ) {
 				for ( int k = 0; k < diccDemandas.get(nid).size(); k++ )
 					if ( listaColaboraciones.get(i).getIdDemand().equals(diccDemandas.get(nid).get(k).getIdDemand()) ) {
 						colaboracionesEstudiante.add(listaColaboraciones.get(i));
@@ -198,8 +204,6 @@ public class Statistics {
 					}
 			}
 			
-		}
-		
 		return colaboracionesEstudiante;
 		
 	}

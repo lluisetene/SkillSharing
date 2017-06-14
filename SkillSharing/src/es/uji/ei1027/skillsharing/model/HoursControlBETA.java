@@ -25,6 +25,8 @@ public class HoursControlBETA {
 	
 	public void addHours(String hours){
 		
+		System.out.println("addHours: " + hours);
+		
 		String NIDOfferer = offerDao.getOffer(collaboration.getIdOffer()).getNid();
 		String NIDDemandant = demandDao.getDemand(collaboration.getIdDemand()).getNid();
 		List<Student> studentsCollaboration = studentDao.getStudents();
@@ -64,6 +66,8 @@ public class HoursControlBETA {
 	}
 	
 	public void removeHours(String hours){
+		
+		System.out.println("removeHours: " + hours);
 		
 		String NIDOfferer = offerDao.getOffer(collaboration.getIdOffer()).getNid();
 		String NIDDemandant = demandDao.getDemand(collaboration.getIdDemand()).getNid();

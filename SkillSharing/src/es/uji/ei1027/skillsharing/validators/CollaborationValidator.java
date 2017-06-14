@@ -71,8 +71,6 @@ public class CollaborationValidator implements Validator {
 		}
 			
 		}
-		System.out.println("idSkillOffer: " + idSkillOffer);
-		System.out.println("idSkillDemand: " + idSkillDemand);
 		
 		if ((NIDoferta != null && NIDdemand != null) && NIDoferta.equals(NIDdemand)){
 			

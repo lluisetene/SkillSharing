@@ -1,7 +1,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="studentLogin" scope="request" value='${session.getAttribute("studentLogin")}'/>
+<c:set var="studentLogin" scope="request" value='${session.getAttribute("student")}'/>
 <c:set var="nid" value='${studentLogin.getNid()}'/>
 
 <div class="panel-body" style="background-color:073763; border-radius:10px 10px 10px 10px;">
@@ -16,7 +16,7 @@
    		<b style="color:black"><FONT SIZE=4>Horas Demandas: ${studentLogin.getDemandHours()}</FONT></b>
    	</div>
          
-         	<div class="panel-body" style="width:22%;display:inline-block; background-color:eeeeee; margin-left:16%; height:60px; border-radius:10px 10px 10px 10px;">
+    <div class="panel-body" style="width:22%;display:inline-block; background-color:eeeeee; margin-left:16%; height:60px; border-radius:10px 10px 10px 10px;">
    		<i class="fa fa-clock-o fa-2x" style="color:black"></i>
    		<b style="color:black"><FONT SIZE=4>Saldo Disponible: ${studentLogin.getHorasRestantes()}</FONT></b>
    	</div>

@@ -19,14 +19,14 @@
 
 </head>
 
-<t:paginaBasica title="Colaboración"/>
+<t:paginaBasica title="Colaboracion"/>
 <t:paginaBasicaStudent/>
 	
 	<div class="col-lg-8" style="background-color:073763; border-radius:10px 10px 10px 10px; margin-top:-350px">
     	<div class="panel-body" style="background-color:073763">
 			<div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
             	<div class="table-responsive">
-					<h1 style = "color:black; margin:0; padding-left:40px; padding-top:10px	">Modificar Colaboración</h1>
+					<h1 style = "color:black; margin:0; padding-left:40px; padding-top:10px	">Modificar Colaboracion</h1>
     				<div style = "height:2px; width:55%; background-color:black"></div>
                     
                   
@@ -38,7 +38,7 @@
         	
         	<tr>
                 <td>
-                	<form:label path="idCollaboration">IdColaboración</form:label>
+                	<form:label path="idCollaboration">IdColaboracion</form:label>
                 	<b style="padding-left:59px"></b>
                 	<form:input type = "text" maxlength = "5" path="idCollaboration" readonly = "true" disabled = "true"/>
                 </td>
@@ -61,7 +61,7 @@
                         
             <tr>
                <td>
-               	<form:label path="hours">Duración</form:label>
+               	<form:label path="hours">Duracion</form:label>
                		
                		<b style="padding-left:108px"></b>
                		
@@ -69,7 +69,7 @@
 					
 				<b style="padding-left:336px"></b>
 					
-                <form:label path="rate">Puntuación</form:label>
+                <form:label path="rate">Puntuacion</form:label>
               		<form:input style = "width:50px;" id = "rate" name = "rate" path="rate" disabled="true" readonly="true"/>
 				</td>
             </tr>
@@ -109,10 +109,10 @@
 		      	<div class="modal-content">
 		        	<div class="modal-header">
 		          		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		          		<h4 style = "color:black" class="modal-title">Modificar Colaboración</h4>
+		          		<h4 style = "color:black" class="modal-title">Modificar Colaboracion</h4>
 		        	</div>
 		        	<div class="modal-body">
-		          		<p><i>¿Seguro que desea Modificar esta colaboración?</i></p>
+		          		<p><i>Seguro que desea Modificar esta colaboracion?</i></p>
 		        	</div>
 		        	<div  class="modal-footer" style = "background-color:eeeeee">
 		         		<input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">

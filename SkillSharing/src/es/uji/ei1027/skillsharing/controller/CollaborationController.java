@@ -24,10 +24,8 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Collaboration;
-import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.HoursControlBETA;
 import es.uji.ei1027.skillsharing.model.NotificarColaboraciones;
-import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.CollaborationValidator;
 
@@ -163,9 +161,10 @@ public class CollaborationController {
 
 		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 
-		if (bindingResult.hasErrors())
-			
+		if (bindingResult.hasErrors()) 
+
 			return "collaboration/add";
+		
 		
 		collaborationDao.addCollaboration(collaboration);
 		controlHoras.addHours(collaboration.getHours());
@@ -225,6 +224,8 @@ public class CollaborationController {
 	public String processUpdateSubmit(Model model, @PathVariable String idCollaboration){
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
+		model.addAttribute("offer", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
+		model.addAttribute("demand", demandDao.getDemand(collaborationDao.getCollaboration(idCollaboration).getIdDemand()));
 		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
@@ -234,7 +235,14 @@ public class CollaborationController {
 	}
 	
 	@RequestMapping(value="/update/{idCollaboration}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
+	public String processUpdateSubmit(Model model, @PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
+		
+		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
+		model.addAttribute("offer", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
+		model.addAttribute("demand", demandDao.getDemand(collaborationDao.getCollaboration(idCollaboration).getIdDemand()));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
@@ -242,9 +250,10 @@ public class CollaborationController {
 		
 		collaborationValidator.validateUpdate(collaboration, bindingResult);
 		
-		if (bindingResult.hasErrors()) 
-			
+		if (bindingResult.hasErrors()) {
+			System.out.println(bindingResult);
 			 return "collaboration/update";
+		}
 		
 		 collaborationDao.updateCollaboration(collaboration);
 		 

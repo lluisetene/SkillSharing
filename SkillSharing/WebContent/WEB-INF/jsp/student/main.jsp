@@ -8,13 +8,6 @@
 <c:set var="studentLogin" scope="request" value='${session.getAttribute("studentLogin")}'/>
 
 
-<%
-   Date dNow = new Date();
-   SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-   String currentDate = ft.format(dNow);
-%>
-<c:set var="fechaActual" value="<%= currentDate %>"/>
-
 <t:paginaBasica title="Página Personal"/>
 
 	<c:set var="nid" value='${studentLogin.getNid()}'/>
@@ -167,7 +160,7 @@
 									</tr>	
 									
 									<c:forEach items="${statistics.getColaboracionesEstudiante(nid)}" var="collaboration">
-									
+
 		         						<tr>
 						          		<td>${collaboration.idCollaboration}</td>
 						                <td>${collaboration.idOffer}</td>

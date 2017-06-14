@@ -150,7 +150,7 @@ public class StudentController {
 			
 			if ( studentList.get(i).getUsername().equals(student.getUsername()) ) {
 				
-				session.setAttribute("studentLogin", studentList.get(i));
+				session.setAttribute("student", studentList.get(i));
 				
 				return "redirect:main.html";
 				

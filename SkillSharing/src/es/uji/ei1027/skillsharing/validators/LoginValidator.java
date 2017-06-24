@@ -37,6 +37,7 @@ public class LoginValidator implements ValidatorLogin {
 		Login user = (Login) obj;
 		Student estudiante = new Student();
 		Admin administrador = new Admin();
+		boolean passCorrecta = false;
 		
 		//---------- USERNAME -----------//
 		if ( user.getUsername().trim().equals("") )
@@ -53,6 +54,7 @@ public class LoginValidator implements ValidatorLogin {
 				for ( int i = 0; i < studentsList.size(); i++ )
 					if ( studentsList.get(i).getUsername().toLowerCase().equals(user.getUsername().toLowerCase()) ) {
 						estudiante = studentsList.get(i);
+						
 						student = true; 
 						break;
 					}
@@ -61,32 +63,33 @@ public class LoginValidator implements ValidatorLogin {
 				errors.rejectValue("username", "required", "El nombre de usuario introducido no existe");
 			
 			else {
-				boolean passCorrecta = false;
-				//----------- PASSWORD ----------//
-				if (user.getPassword().trim().equals(""))
-					errors.rejectValue("password", "required", "Este campo es obligatorio");
-				else {
-					if ( admin == true ) {
-						if ( passwordEncryptor.checkPassword(user.getPassword(), administrador.getPassword()) )
-							passCorrecta = true;
-					} else {
-						if ( student == true )
-							if ( passwordEncryptor.checkPassword(user.getPassword(), estudiante.getPassword()) )
-								passCorrecta = true;
-					}
-					
-					if ( passCorrecta == false ) 
-						errors.rejectValue("password", "required", "Contraseña incorrecta");
-					else
-						passCorrecta = false;
-				}
-				
+				passCorrecta = false;
 			}
 		}
+			//----------- PASSWORD ----------//
+			if (user.getPassword().trim().equals(""))
+				errors.rejectValue("password", "required", "Este campo es obligatorio");
+			else {
+				if ( admin == true ) {
+					if ( passwordEncryptor.checkPassword(user.getPassword(), administrador.getPassword()) )
+						passCorrecta = true;
+				} else {
+					if ( student == true )
+						if ( passwordEncryptor.checkPassword(user.getPassword(), estudiante.getPassword()) )
+							passCorrecta = true;
+				}
+				
+				if ( passCorrecta == false ) 
+					errors.rejectValue("password", "required", "Contraseña incorrecta");
+				else
+					passCorrecta = false;
+			}
+			
 		
+	
 		if ( student == true )
 			if ( estudiante.getBanned() == true )
-				errors.rejectValue("banned", "required", "Usuario baneado");
+				errors.rejectValue("username", "required", "Este usuario está baneado");
 	}
 		
 		

@@ -42,7 +42,7 @@ public class Statistics {
 		} else {
 			boolean noEncontrado = true;
 			for ( int i = 0; i < diccOfertas.get(nid).size(); i++ )
-				if ( diccOfertas.get(nid).get(i).getIdOffer().equals(offer.getIdOffer()) ) {
+				if ( diccOfertas.get(nid).get(i).getIdOffer() == offer.getIdOffer()) {
 					noEncontrado = false;
 					break;
 				}
@@ -97,7 +97,7 @@ public class Statistics {
 		} else {
 			boolean noEncontrado = true;
 			for ( int i = 0; i < diccDemandas.get(nid).size(); i++ )
-				if ( diccDemandas.get(nid).get(i).getIdDemand().equals(demand.getIdDemand()) ) {
+				if ( diccDemandas.get(nid).get(i).getIdDemand() == demand.getIdDemand()) {
 					noEncontrado = false;
 					break;
 				}
@@ -157,7 +157,7 @@ public class Statistics {
 			List<Offer> misOfertas = diccOfertas.get(nid);
 			for ( int i = 0; i < listaColaboraciones.size(); i++ )
 				for ( int j = 0; j < misOfertas.size(); j++ )
-					if ( listaColaboraciones.get(i).getIdOffer().equals(misOfertas.get(j).getIdOffer()) ) {
+					if ( listaColaboraciones.get(i).getIdOffer() == misOfertas.get(j).getIdOffer()) {
 						valoraciones += listaColaboraciones.get(i).getRate();
 						contador++;
 						break;
@@ -168,7 +168,7 @@ public class Statistics {
 			List<Demand> misDemandas = diccDemandas.get(nid);
 			for ( int i = 0; i < listaColaboraciones.size(); i++ )
 				for ( int k = 0; k < misDemandas.size(); k++ )
-					if ( listaColaboraciones.get(i).getIdDemand().equals(misDemandas.get(k).getIdDemand()) ) {
+					if ( listaColaboraciones.get(i).getIdDemand() == misDemandas.get(k).getIdDemand()) {
 						valoraciones += listaColaboraciones.get(i).getRate();
 						contador++;
 						break;
@@ -189,7 +189,7 @@ public class Statistics {
 		if ( diccOfertas.containsKey(nid) )
 			for ( int i = 0; i < listaColaboraciones.size(); i++ ) {
 				for ( int j = 0; j < diccOfertas.get(nid).size(); j++ )
-					if ( listaColaboraciones.get(i).getIdOffer().equals(diccOfertas.get(nid).get(j).getIdOffer()) ) {
+					if ( listaColaboraciones.get(i).getIdOffer() == diccOfertas.get(nid).get(j).getIdOffer()) {
 						colaboracionesEstudiante.add(listaColaboraciones.get(i));
 						break;
 					}
@@ -198,7 +198,7 @@ public class Statistics {
 		if ( diccDemandas.containsKey(nid) )
 			for ( int i = 0; i < listaColaboraciones.size(); i++ ) {
 				for ( int k = 0; k < diccDemandas.get(nid).size(); k++ )
-					if ( listaColaboraciones.get(i).getIdDemand().equals(diccDemandas.get(nid).get(k).getIdDemand()) ) {
+					if ( listaColaboraciones.get(i).getIdDemand() == diccDemandas.get(nid).get(k).getIdDemand()) {
 						colaboracionesEstudiante.add(listaColaboraciones.get(i));
 						break;
 					}

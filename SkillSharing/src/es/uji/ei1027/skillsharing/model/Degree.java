@@ -2,17 +2,17 @@ package es.uji.ei1027.skillsharing.model;
 
 public class Degree {
 
-	private String idDegree;
+	private int idDegree;
 	private String name;
 	private String nid;
 	
-	public String getIdDegree() {
+	public int getIdDegree() {
 		
 		return idDegree;
 		
 	}
 
-	public void setIdDegree(String idDegree) {
+	public void setIdDegree(int idDegree) {
 		
 		this.idDegree = idDegree;
 		

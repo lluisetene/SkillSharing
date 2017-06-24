@@ -44,10 +44,10 @@ public class OfferDAO {
 			
 			Offer offer = new Offer();
 			
-			offer.setIdOffer(rs.getString("idoffer"));
+			offer.setIdOffer(rs.getInt("idoffer"));
 			offer.setNid(rs.getString("nid"));
 			offer.setName(rs.getString("name"));
-			offer.setIdSkill(rs.getString(4) + "/" + rs.getString(5) + "/" + rs.getString(6));
+			offer.setIdSkill(rs.getInt("idskill"));
 			offer.setDescription(rs.getString("description"));
 			offer.setBeginningDate(rs.getDate("beginningdate"));
 			offer.setEndingDate(rs.getDate("endingdate"));
@@ -60,11 +60,17 @@ public class OfferDAO {
 	
 	public List<Offer> getOffers() {
 										
-		return this.jdbcTemplate.query("SELECT * from offer order by idoffer DESC;", new OfferMapper());
+		return this.jdbcTemplate.query("SELECT * from offer WHERE endingdate >= CURRENT_DATE order by idOffer DESC;", new OfferMapper());
 	
 	}
 	
-	public Offer getOffer(String idOffer) {
+	public List<Offer> getOffers(String name) {
+		
+		return this.jdbcTemplate.query("SELECT off.idoffer, off.nid, off.name, off.idskill, off.description, off.beginningDate, off.endingDate FROM offer AS off JOIN Skill ON off.idskill = skill.idskill WHERE skill.name = ? AND endingdate >= CURRENT_DATE;",new Object[]{name}, new OfferMapper());
+	
+	}
+	
+	public Offer getOffer(int idOffer) {
 	
 		return this.jdbcTemplate.queryForObject("select * from offer where idOffer = ?", new Object[] {idOffer}, new OfferMapper());
 	
@@ -72,11 +78,11 @@ public class OfferDAO {
 	
 	public void updateOffer(Offer offer) {
 
-		this.jdbcTemplate.update("update offer set nid = ?, name = ?, idskill = ?, description = ?, beginningdate = ?, endingdate = ? where idoffer = ?", offer.getNid(), offer.getName(), offer.getIdSkill(), offer.getDescription(), offer.getBeginningDate(), offer.getEndingDate(), offer.getIdOffer());
+		this.jdbcTemplate.update("update offer set nid = ?, name = ?, idskill = ?, description = ?, beginningdate = ?, endingdate = ? where idoffer = ?", offer.getNid(), offer.getName(), offer.getIdSkill(), offer.getDescription(), offer.getBeginningDateBD(), offer.getEndingDateBD(), offer.getIdOffer());
 	
 	}
 	
-	public void deleteOffer(String idOffer) {
+	public void deleteOffer(int idOffer) {
 	
 		this.jdbcTemplate.update("delete from offer where idOffer = ?", idOffer);
 	
@@ -84,25 +90,7 @@ public class OfferDAO {
 	
 	public void addOffer(Offer offer) {
 	
-		this.jdbcTemplate.update("insert into offer(idoffer, nid, name, idskill, description, beginningdate, endingdate) values(?, ?, ?, ?, ?, ?, ?)", offer.getIdOffer(), offer.getNid(), offer.getName(), offer.getIdSkill(), offer.getDescription(), offer.getBeginningDate(), offer.getEndingDate());
-	
-	}
-	
-	public List<Offer> getOffersWithNameSkill() {
-		
-		return this.jdbcTemplate.query("select off.idoffer, off.nid, off.name,skill.idSkill, skill.name, skill.level, off.description, off.beginningdate, off.endingdate from offer AS off JOIN skill ON off.idskill = skill.idskill WHERE endingdate >= CURRENT_DATE order by idoffer DESC;", new OfferMapper());
-	
-	}
-	
-	public List<Offer> getOffers2(String idSkill) {
-		
-		return this.jdbcTemplate.query("select off.idoffer, off.nid, off.name,skill.idSkill, skill.name, skill.level, off.description, off.beginningdate, off.endingdate from offer AS off JOIN skill ON off.idskill = skill.idskill WHERE skill.idSkill = ? AND endingdate >= CURRENT_DATE order by idoffer DESC;", new Object[] {idSkill}, new OfferMapper());
-	
-	}
-	
-	public Offer getOfferWithNameSkill(String idoffer) {
-
-		return this.jdbcTemplate.queryForObject("select off.idoffer, off.nid, off.name,skill.idSkill, skill.name, skill.level, off.description, off.beginningdate, off.endingdate from offer AS off JOIN skill ON off.idskill = skill.idskill WHERE idOffer = ? AND endingdate >= CURRENT_DATE order by idoffer DESC;", new Object[] {idoffer}, new OfferMapper());
+		this.jdbcTemplate.update("insert into offer(idoffer, nid, name, idskill, description, beginningdate, endingdate) values(?, ?, ?, ?, ?, ?, ?)", offer.getIdOffer(), offer.getNid(), offer.getName(), offer.getIdSkill(), offer.getDescription(), offer.getBeginningDateBD(), offer.getEndingDateBD());
 	
 	}
 

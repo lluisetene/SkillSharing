@@ -1,24 +1,25 @@
 package es.uji.ei1027.skillsharing.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Offer {
 
-	private String idOffer;
+	private int idOffer;
 	private String nid;
 	private String name;
-	private String idSkill;
+	private int idSkill;
 	private String description;
 	private Date beginningDate;
 	private Date endingDate;
 	
-	public String getIdOffer() {
+	public int getIdOffer() {
 		
 		return idOffer;
 		
 	}
 
-	public void setIdOffer(String idOffer) {
+	public void setIdOffer(int idOffer) {
 		
 		this.idOffer = idOffer;
 		
@@ -48,13 +49,13 @@ public class Offer {
 		
 	}
 
-	public String getIdSkill() {
+	public int getIdSkill() {
 		
 		return idSkill;
 		
 	}
 
-	public void setIdSkill(String idSkill) {
+	public void setIdSkill(int idSkill) {
 		
 		this.idSkill = idSkill;
 		
@@ -71,8 +72,16 @@ public class Offer {
 		this.description = description;
 		
 	}
-
-	public Date getBeginningDate() {
+	//Este lo convertimos para mostrarlo bien durante su uso y de vuelta a la BD usamos el otro
+	public String getBeginningDate(){
+		
+		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		
+		return formateador.format(beginningDate);
+		
+	}
+	//Es necesario porque en la base de datos se guarda como DATE
+	public Date getBeginningDateBD(){
 		
 		return beginningDate;
 		
@@ -84,7 +93,16 @@ public class Offer {
 		
 	}
 
-	public Date getEndingDate() {
+	
+	public String getEndingDate(){
+		
+		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		
+		return formateador.format(endingDate);
+		
+	}
+	
+	public Date getEndingDateBD(){
 		
 		return endingDate;
 		

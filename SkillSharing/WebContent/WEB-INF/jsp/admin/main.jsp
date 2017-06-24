@@ -3,6 +3,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import = "es.uji.ei1027.skillsharing.model.Admin" %>
+<%@ page import = "es.uji.ei1027.skillsharing.dao.SkillDAO" %>
 <%@ page import = "javax.servlet.http.HttpSession" %>
 <c:set var="adminLogin" scope="request" value="${session.getAttribute('adminLogin')}" />
 
@@ -374,9 +375,9 @@
 
 										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idSkill" name="idSkill">
 					
-											<option value="Todas" >Todas</option>	
+											<option value= 0 >Todas</option>	
 											
-											<c:forEach items="${skillsSelect}" var="skill">
+											<c:forEach items="${skillsDistinctSelect}" var="skill">
 							
 												<option value="${skill.idSkill}">${skill.name}</option>
 					
@@ -436,21 +437,19 @@
 									<td style = "font-size:25px; padding-left:50px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
 									<td style = "padding-left:10px;color:black">
 									
-										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="name" name="name">
+										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idDegree" name="idDegree">
 					
-											<option value="Todas" >Todas</option>	
+											<option value= 0 >Todas</option>	
 											
 											<c:forEach items="${degreesSelect}" var="degree">
 							
-												<option value="${degree.name}">${degree.name}</option>
+												<option value="${degree.idDegree}">${degree.name}</option>
 					
 											</c:forEach>
 											
 										</select>
 									</form:form>
-									
-									<td style = "font-size:20px; padding-left:235px;color:black"><b>Añadir</b></td>
-									<td style = "font-size:30px; padding-left:10px;color:black"><button style = "background-color:eeeeee;  border:none" onclick = "location='http:${pageContext.request.contextPath}/degree/add.html'"><span style = "color: black; background-color:eeeeee" class="fa fa-plus-circle"></span></button></td>
+								
 								
 								</tr>
 							
@@ -463,7 +462,7 @@
 									<tr style = "color:black; background-color:cccccc;font-size:12px">
 									
 										<th>Nombre</th>
-										<th>DNI Estudiante</th>
+										<th></th>
 										<th></th>
 										<th></th>
 									
@@ -473,7 +472,8 @@
 	           						 	<tr>
 	          
 							          		<td>${degree.name}</td>
-							          		<td>${degree.nid}</td>
+							          		
+							          		<td style = "width:10;text-align:center"><button class="btn fa fa-eye" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/degree/list/${degree.idDegree}.html'"></button></td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/degree/update/${degree.idDegree}.html'"></button></td>
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/degree/delete/${degree.idDegree}.html'"></button></td>
 							           
@@ -499,9 +499,9 @@
 
 										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idOffer" name="idOffer">
 					
-											<option value="Todas" >Todas</option>	
+											<option value= 0 >Todas</option>	
 											
-											<c:forEach items="${skillsSelect}" var="skill">
+											<c:forEach items="${skillsDistinctSelect}" var="skill">
 							
 												<option value="${skill.idSkill}">${skill.name}</option>
 					
@@ -523,27 +523,44 @@
 									
 										<th>Nombre</th>
 										<th>Habilidad</th>
+										<th>Nivel</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Fin</th>
 										<th></th>
 										<th></th>
 									
 									</tr>	
+									
 									<c:forEach items="${offersList}" var="offer">
-	          
 	           						 	<tr>
-	          
+	          								<c:set var="skillOffer" scope="request" value="${offer.getIdSkill()}" />
+							          		
 							          		<td>${offer.name}</td>
-							                <td>${offer.getIdSkill().split("/")[1]}</td>
-							           		<td>${offer.beginningDate}</td>
-							           		<td>${offer.endingDate}</td>
+							          		
+							          		<c:forEach items="${skillsSelect}" var="skill">
+							          			
+							          			<c:choose>
+							          					
+							          					<c:when test = "${skill.idSkill == skillOffer }">
+							          				
+											          		<td>${skill.getName()}</td>
+											           		<td>${skill.getLevel()}</td>
+							           					
+							           					</c:when>
+							           			
+							           			</c:choose>
+							           		
+							           		</c:forEach>
+							           		
+							           		<td style = "width:11%">${offer.beginningDate}</td>
+							           		<td style = "width:11%">${offer.endingDate}</td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/offer/updateByAdmin/${offer.idOffer}.html'"></button></td>
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/offer/deleteByAdmin/${offer.idOffer}.html'"></button></td>
 							           
 	            						</tr>
 	        
 	        						</c:forEach>
-								
+	        						 
 
 								</table>
 								
@@ -556,25 +573,26 @@
 							<table>
 							
 								<tr>
-								<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="demand">
+								<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="offer">
 									<td style = "font-size:30px;color:black">Demandas</td>
-									<td style = "font-size:15px; padding-top:10px; padding-left:107px;color:black">Habilidad</td>
+									<td style = "font-size:15px; padding-top:10px; padding-left:110px;color:black">Habilidad</td>
 									<td style = "font-size:25px; padding-left:30px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
 									<td style = "padding-left:10px;color:black">
-									
-									<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idDemand" name="idDemand">
-										<option value="Todas" >Todas</option>	
-										
-										<c:forEach items="${skillsSelect}" var="skill">
-						
-											<option value="${skill.idSkill}">${skill.name}</option>
-				
-										</c:forEach>
-										
-									</select>
+
+										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idDemand" name="idDemand">
+					
+											<option value= 0 >Todas</option>	
+											
+											<c:forEach items="${skillsDistinctSelect}" var="skill">
+							
+												<option value="${skill.idSkill}">${skill.name}</option>
+					
+											</c:forEach>
+											
+										</select>									
 									
 									</td>
-								</form:form>	
+								</form:form>
 								</tr>
 							
 							</table>
@@ -587,26 +605,44 @@
 									
 										<th>Nombre</th>
 										<th>Habilidad</th>
+										<th>Nivel</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Fin</th>
 										<th></th>
 										<th></th>
 									
 									</tr>	
+									
 									<c:forEach items="${demandsList}" var="demand">
-	          
 	           						 	<tr>
-	          
+	          								<c:set var="skillDemand" scope="request" value="${demand.getIdSkill()}" />
+							          		
 							          		<td>${demand.name}</td>
-							                <td>${demand.getIdSkill().split("/")[1]}</td>
-							           		<td>${demand.beginningDate}</td>
-							           		<td>${demand.endingDate}</td>
+							          		
+							          		<c:forEach items="${skillsSelect}" var="skill">
+							          			
+							          			<c:choose>
+							          					
+							          					<c:when test = "${skill.idSkill == skillDemand }">
+							          				
+											          		<td>${skill.getName()}</td>
+											           		<td>${skill.getLevel()}</td>
+							           					
+							           					</c:when>
+							           			
+							           			</c:choose>
+							           		
+							           		</c:forEach>
+							           		
+							           		<td style = "width:11%">${demand.beginningDate}</td>
+							           		<td style = "width:11%">${demand.endingDate}</td>
 							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/demand/updateByAdmin/${demand.idDemand}.html'"></button></td>
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/demand/deleteByAdmin/${demand.idDemand}.html'"></button></td>
 							           
 	            						</tr>
 	        
-	        						</c:forEach> 
+	        						</c:forEach>
+	        						 
 
 								</table>
 								
@@ -627,9 +663,9 @@
 									
 									<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="rate" name="rate">
 										
-											<option value="-1" >Todas</option>	
+											<option value= 0 >Todas</option>	
 											
-											<c:forEach items="${collaborationsSelect}" var="collaboration">
+											<c:forEach items="${collaborationsDistinctSelect}" var="collaboration">
 							
 												<option value="${collaboration.rate}">${collaboration.rate}</option>
 					
@@ -649,11 +685,11 @@
 								
 									<tr style = "color:black; background-color:cccccc;font-size:12px">
 									
-										<th>Id Colaboración</th>
 										<th>Fecha Inicio</th>
-										<th>Fecha Fin</th>
+										<th>Fecha Fin &nbsp;<i class="fa fa-info-circle" style = "font-size:17px;" title = "Se muestran las colaboraciones con fecha final >= al més actual"></i></th>
 										<th>Horas</th>
 										<th>Puntuación</th>
+										<th>Estado</th>
 										<th></th>
 										<th></th>
 									
@@ -662,12 +698,42 @@
 	          
 	           						 	<tr>
 	          
-							          		<td>${collaboration.idCollaboration}</td>
 							                <td>${collaboration.beginningDate}</td>
-							           		<td>${collaboration.endingDate}</td>
+							           		<td>${collaboration.endingDate}</td>	
 							           		<td>${collaboration.hours}</td>
-							           		<td>${collaboration.rate}</td>
-							           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/updateByAdmin/${collaboration.idCollaboration}.html'"></button></td>
+							           		
+							           		<c:choose>
+							           		
+							           			<c:when test = "${collaboration.rate != 0.0}">
+							           			
+							           				<td style = "width:5%">${collaboration.rate}</td>
+							           			
+							           			</c:when>
+							           			<c:otherwise>
+							           			
+							           				<td></td>
+							           			
+							           			</c:otherwise>
+
+							           		</c:choose>
+							           		
+							           		<c:choose>
+							           		
+							           			<c:when test = "${(collaboration.hours == null || collaboration.hours == '') || (collaboration.rate == 0)}">
+							           			
+							           				<td style = " width:1%;text-align:center"><i class="fa fa-unlock-alt" style = "font-size:25px" ></i></td>
+							           				<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/updateByAdmin/${collaboration.idCollaboration}.html'"></button></td>
+							           			
+							           			</c:when>
+							           			<c:otherwise>
+							           			
+							           				<td style = " width:1%;text-align:center"><i class="fa fa-lock" style = "font-size:25px" ></i></td>
+							           				<td style = "width:10;text-align:center"><button disabled class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/updateByAdmin/${collaboration.idCollaboration}.html'"></button></td>
+							           			
+							           			</c:otherwise>
+							           		
+							           		</c:choose>
+							           		
 						               		<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/deleteByAdmin/${collaboration.idCollaboration}.html'"></button></td>
 							           
 	            						</tr>

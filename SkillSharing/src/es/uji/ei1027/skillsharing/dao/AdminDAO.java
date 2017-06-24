@@ -71,8 +71,16 @@ public class AdminDAO  {
 	
 	public void updateAdmin(Admin admin) {
 	
-		this.jdbcTemplate.update("update admin set name = ?, mail = ?, password = ? where username = ?", admin.getName(), admin.getMail(), admin.getPassword(), admin.getUsername());
-	
+		if(admin.getPassword().toLowerCase().equals(getAdmin(admin.getUsername()).getPassword().toLowerCase())){
+		
+			this.jdbcTemplate.update("update admin set name = ?, mail = ?, password = ? where username = ?", admin.getName(), admin.getMail(), admin.getPassword(), admin.getUsername());
+		
+		}else{
+			
+			this.jdbcTemplate.update("update admin set name = ?, mail = ?, password = ? where username = ?", admin.getName(), admin.getMail(), passwordEncryptor.encryptPassword(admin.getPassword()), admin.getUsername());
+			
+		}
+			
 	}
 	
 	public void deleteAdmin(String admin) {

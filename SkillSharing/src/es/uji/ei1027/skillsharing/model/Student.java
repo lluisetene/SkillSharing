@@ -1,5 +1,7 @@
 package es.uji.ei1027.skillsharing.model;
 
+import org.jasypt.util.text.BasicTextEncryptor;
+
 public class Student {
 
 	private String nid; 
@@ -51,13 +53,12 @@ public class Student {
 
 	public String getPassword() {
 		
-		return password;
-		
+		return this.password;
 	}
 
 	public void setPassword(String password) {
-		
-		this.password = password;
+			
+			this.password = password;
 		
 	}
 

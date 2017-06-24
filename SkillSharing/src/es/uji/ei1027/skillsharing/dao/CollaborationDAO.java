@@ -32,9 +32,9 @@ public class CollaborationDAO {
 			
 			Collaboration collaboration = new Collaboration();
 			
-			collaboration.setIdCollaboration(rs.getString("idcollaboration"));
-			collaboration.setIdOffer(rs.getString("idoffer"));
-			collaboration.setIdDemand(rs.getString("iddemand"));
+			collaboration.setIdCollaboration(rs.getInt("idcollaboration"));
+			collaboration.setIdOffer(rs.getInt("idoffer"));
+			collaboration.setIdDemand(rs.getInt("iddemand"));
 			collaboration.setBeginningDate(rs.getDate("beginningDate"));
 			collaboration.setEndingDate(rs.getDate("endingDate"));
 			collaboration.setHours(rs.getString("hours"));
@@ -48,11 +48,17 @@ public class CollaborationDAO {
 	
 	public List<Collaboration> getCollaborations() {
 		
-		return this.jdbcTemplate.query("select * from collaboration", new CollaborationMapper());
+		return this.jdbcTemplate.query(" SELECT * FROM COLLABORATION WHERE EXTRACT(MONTH FROM endingdate) >= EXTRACT(MONTH FROM CURRENT_DATE) order by idCollaboration;", new CollaborationMapper());
 	
 	}
 	
-	public Collaboration getCollaboration(String idCollaboration) {
+	public List<Collaboration> getCollaborationsDistinctRate() {
+		
+		return this.jdbcTemplate.query(" SELECT distinct on (rate) idcollaboration, idoffer, iddemand, beginningdate, endingdate, hours, rate FROM COLLABORATION WHERE EXTRACT(MONTH FROM endingdate) >= EXTRACT(MONTH FROM CURRENT_DATE) AND rate != '0.0' order by rate, idcollaboration;", new CollaborationMapper());
+	
+	}
+	
+	public Collaboration getCollaboration(int idCollaboration) {
 		
 		return this.jdbcTemplate.queryForObject("select * from collaboration where idcollaboration = ?", new Object[] {idCollaboration}, new CollaborationMapper());
 	
@@ -60,11 +66,11 @@ public class CollaborationDAO {
 	
 	public void updateCollaboration(Collaboration collaboration) {
 		
-		this.jdbcTemplate.update("update collaboration set idoffer = ?, iddemand = ?, beginningdate = ?, endingdate = ?, hours = ?, rate = ? where idcollaboration = ?", collaboration.getIdOffer(), collaboration.getIdDemand(), collaboration.getBeginningDate(), collaboration.getEndingDate(), collaboration.getHours(), collaboration.getRate(), collaboration.getIdCollaboration());
+		this.jdbcTemplate.update("update collaboration set idoffer = ?, iddemand = ?, beginningdate = ?, endingdate = ?, hours = ?, rate = ? where idcollaboration = ?", collaboration.getIdOffer(), collaboration.getIdDemand(), collaboration.getBeginningDateBD(), collaboration.getEndingDateBD(), collaboration.getHours(), collaboration.getRate(), collaboration.getIdCollaboration());
 	
 	}
 	
-	public void deleteCollaboration(String idCollaboration) {
+	public void deleteCollaboration(int idCollaboration) {
 	
 		this.jdbcTemplate.update("delete from collaboration where idcollaboration = ?", idCollaboration);
 	
@@ -72,13 +78,13 @@ public class CollaborationDAO {
 	
 	public void addCollaboration(Collaboration collaboration) {
 	
-		this.jdbcTemplate.update("insert into collaboration(idcollaboration, idoffer, iddemand, beginningdate, endingdate, hours, rate) values(?, ?, ?, ?, ?, ?, ?)", collaboration.getIdCollaboration(), collaboration.getIdOffer(), collaboration.getIdDemand(), collaboration.getBeginningDate(), collaboration.getEndingDate(), collaboration.getHours(), collaboration.getRate());
+		this.jdbcTemplate.update("insert into collaboration(idcollaboration, idoffer, iddemand, beginningdate, endingdate, hours, rate) values(?, ?, ?, ?, ?, ?, ?)", collaboration.getIdCollaboration(), collaboration.getIdOffer(), collaboration.getIdDemand(), collaboration.getBeginningDateBD(), collaboration.getEndingDateBD(), collaboration.getHours(), collaboration.getRate());
 	
 	}
 	
 	public List<Collaboration> getCollaborations(float rate) {
 		
-		return this.jdbcTemplate.query("select * from collaboration WHERE rate = ?", new Object[] {rate}, new CollaborationMapper());
+		return this.jdbcTemplate.query("select * from collaboration WHERE EXTRACT(MONTH FROM endingdate) >= EXTRACT(MONTH FROM CURRENT_DATE) and rate = ?", new Object[] {rate}, new CollaborationMapper());
 	
 	}
 	

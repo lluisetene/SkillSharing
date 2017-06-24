@@ -54,7 +54,7 @@
 									<c:forEach items="${statistics.getOfertasEstudiante(nid)}" var="offer">
 	          						 	<tr>
 						          		<td>${offer.name}</td>
-						                <td>${skills.getSkill(offer.getIdSkill().split("/")[0]).getName()}</td>
+						                <td>${skills.getSkill(offer.getIdSkill()).getName()}</td>
 						           		<td>${offer.beginningDate}</td>
 						           		<td>${offer.endingDate}</td>
 						           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" onClick="location='${pageContext.request.contextPath}/offer/update/${offer.idOffer}.html'" type = "submit" name = "submit"></button></td>
@@ -107,7 +107,7 @@
 								
 	         						<tr>
 					          		<td>${demand.name}</td>
-					                <td>${skills.getSkill(demand.getIdSkill().split("/")[0]).getName()}</td>
+					                <td>${skills.getSkill(demand.getIdSkill()).getName()}</td>
 					           		<td>${demand.beginningDate}</td>
 					           		<td>${demand.endingDate}</td>
 					           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" onClick="location='${pageContext.request.contextPath}/demand/update/${demand.idDemand}.html'" type = "submit" name = "submit"></button></td>

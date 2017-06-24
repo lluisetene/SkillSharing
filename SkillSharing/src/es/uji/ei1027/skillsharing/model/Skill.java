@@ -2,18 +2,18 @@ package es.uji.ei1027.skillsharing.model;
 
 public class Skill {
 	
-	private String idSkill;
+	private int idSkill;
 	private String name;
 	private String level;
 	private String description;
 
-	public String getIdSkill() {
+	public int getIdSkill() {
 		
 		return idSkill;
 		
 	}
 
-	public void setIdSkill(String idSkill) {
+	public void setIdSkill(int idSkill) {
 		
 		this.idSkill = idSkill;
 		

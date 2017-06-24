@@ -71,7 +71,7 @@ public class StudentController {
 		model.addAttribute("skills", skillDao);
 		
 		estadisticas = studentDao.getEstadisticas();
-		estadisticas.setDatos(offerDao.getOffersWithNameSkill(), demandDao.getDemandsWithNameSkill(), collaborationDao.getCollaborations());
+		estadisticas.setDatos(offerDao.getOffers(), demandDao.getDemands(), collaborationDao.getCollaborations());
 		
 		model.addAttribute("statistics", estadisticas);
 		
@@ -105,7 +105,7 @@ public class StudentController {
 		
 		StudentValidator studentValidator = new StudentValidator();
 		
-		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao, adminDao);
 		
 		studentValidator.validateConsult(student, bindingResult);
 		
@@ -134,7 +134,7 @@ public class StudentController {
 		
 		StudentValidator studentValidator = new StudentValidator();
 		
-		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao, adminDao);
 		
 		studentValidator.validateAdd(student, bindingResult);
 		
@@ -148,15 +148,15 @@ public class StudentController {
 		
 		for ( int i = 0; i < studentList.size(); i++ )
 			
-			if ( studentList.get(i).getUsername().equals(student.getUsername()) ) {
+			if ( studentList.get(i).getNid().equals(student.getNid()) ) {
 				
-				session.setAttribute("student", studentList.get(i));
+				session.setAttribute("studentLogin", studentList.get(i));
 				
 				return "redirect:main.html";
 				
 			}
-			
-		return "redirect:main.html";
+		
+		return "redirect:index.jsp";
 		
 	}
 	
@@ -182,7 +182,7 @@ public class StudentController {
 		
 		StudentValidator studentValidator = new StudentValidator();
 
-		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao, adminDao);
 		
 		studentValidator.validateUpdate(student, bindingResult);
 		
@@ -206,9 +206,9 @@ public class StudentController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		return "student/updateByAdmin"; 
@@ -222,14 +222,14 @@ public class StudentController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		StudentValidator studentValidator = new StudentValidator();
 		
-		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao, adminDao);
 		
 		studentValidator.validateUpdate(student, bindingResult);
 		
@@ -253,9 +253,9 @@ public class StudentController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 	
 		return  "student/deleteByAdmin"; 
@@ -268,14 +268,14 @@ public class StudentController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		StudentValidator studentValidator = new StudentValidator();
 		
-		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao);
+		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao, adminDao);
 		
 		studentValidator.validateDelete(student, bindingResult);
 		

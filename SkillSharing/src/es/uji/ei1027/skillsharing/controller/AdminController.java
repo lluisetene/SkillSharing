@@ -63,16 +63,18 @@ public class AdminController {
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("adminsList", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
 		model.addAttribute("skillsList", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDistinctDegree());
-		model.addAttribute("degreesList", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("offersList", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
-		model.addAttribute("demandsList", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("degreesList", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("offersList", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
+		model.addAttribute("demandsList", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("collaborationsDistinctSelect", collaborationDao.getCollaborationsDistinctRate());
 		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
-		
+		model.addAttribute("skillDao", skillDao);
 		
 		
 		return "admin/main";
@@ -87,13 +89,15 @@ public class AdminController {
 		model.addAttribute("adminsList", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
 		model.addAttribute("skillsList", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDistinctDegree());
-		model.addAttribute("degreesList", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("offersList", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
-		model.addAttribute("demandsList", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("degreesList", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("offersList", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
+		model.addAttribute("demandsList", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+		model.addAttribute("collaborationsDistinctSelect", collaborationDao.getCollaborationsDistinctRate());
 		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
 		
 		if (student.getNid() != null){
@@ -129,82 +133,98 @@ public class AdminController {
 			}
 		}
 		
-		if (skill.getIdSkill() != null){
-			if(skill.getIdSkill().toUpperCase().equals("Todas".toUpperCase())){
-		
-				model.addAttribute("skillsSelect",skillDao.getSkills());
-				model.addAttribute("skillsList", skillDao.getSkills());
+		if(skill.getIdSkill() == 0){
 	
-			}else{
-				
-				model.addAttribute("skillsSelect", skillDao.getSkills());
-				List<Skill> skills = new LinkedList<Skill>();
-				skills.add(skillDao.getSkill(skill.getIdSkill()));
-				model.addAttribute("skillsList", skills);
+			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
+			model.addAttribute("skillsSelect",skillDao.getSkills());
+			model.addAttribute("skillsList", skillDao.getSkills());
+
+		}else{
 			
-			}
+			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
+			model.addAttribute("skillsSelect", skillDao.getSkills());
+			Skill skill2 = skillDao.getSkill(skill.getIdSkill());
+			model.addAttribute("skillsList", skillDao.getSkills(skill2.getName()));
+		
 		}
 		
-		if (degree.getName()!= null){
 			
-			if(degree.getName().toUpperCase().equals("Todas".toUpperCase())){
-		
-				model.addAttribute("degreesSelect", degreeDao.getDistinctDegree());
-				model.addAttribute("degreesList", degreeDao.getDegrees());
+		if(degree.getIdDegree() == 0){
 	
-			}else{
-				
-				model.addAttribute("degreesSelect", degreeDao.getDistinctDegree());
-				model.addAttribute("degreesList", degreeDao.getDegreeList(degree.getName()));
-			
-			}
-		}
-		
-		if (offer.getIdOffer()!= null){
-			
-		
-			if(offer.getIdOffer().toUpperCase().equals("Todas".toUpperCase())){
-		
-				model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-				model.addAttribute("offersList", offerDao.getOffersWithNameSkill());
+			model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+			model.addAttribute("degreesList", degreeDao.getDegreesDistinctName());
+
+		}else{
 	
-			}else{
-			
-				model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-				model.addAttribute("offersList", offerDao.getOffers2(offer.getIdOffer().split("/")[0]));
-			
-			}
-		}
-		
-		if (demand.getIdDemand()!= null){
-			if(demand.getIdDemand().toUpperCase().equals("Todas".toUpperCase())){
-		
-				model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
-				model.addAttribute("demandsList", demandDao.getDemandsWithNameSkill());
-	
-			}else{
-				
-				model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
-				model.addAttribute("demandsList", demandDao.getDemands2(demand.getIdDemand().split("/")[0]));
-			
-			}
-		}
-		
-		if(collaboration.getRate() != 0.0){
-			
-			if (collaboration.getRate() == -1){
-			
-				model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
-				model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
-	
-			}else{
-				
-				model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
-				model.addAttribute("collaborationsList", collaborationDao.getCollaborations(collaboration.getRate()));
-			
-			}
+			List<Degree> degreesList = new LinkedList<Degree>();
+			degreesList.add(degreeDao.getDegree(degree.getIdDegree()));
+			model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+			model.addAttribute("degreesList", degreesList);
 		
 		}
+	
+		
+
+			
+		
+		if(offer.getIdOffer() == 0){
+			
+			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
+			model.addAttribute("offersSelect", offerDao.getOffers());
+			model.addAttribute("offersList", offerDao.getOffers());
+
+		}else{
+
+			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
+			model.addAttribute("offersSelect", offerDao.getOffers());
+			
+			/*Es offer.getIdOffer y no offer.geIDSkill porque la id que cojo en el select idSkill ya la tiene
+			la tabla skill y si le pongo la misma me busca en los 2 a al vez.*/
+
+			List<Offer> offersList = offerDao.getOffers(skillDao.getSkill(offer.getIdOffer()).getName());
+			
+			model.addAttribute("offersList", offersList);
+		
+		}
+
+	
+		if(demand.getIdDemand() == 0){
+			
+			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
+			model.addAttribute("demandsList", demandDao.getDemands());
+
+		}else{
+
+			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
+			
+			/*Es demand.getIdDemand y no offer.geIdSkill porque la id que cojo en el select idSkill ya la tiene
+			la tabla skill y si le pongo la misma me busca en los 2 a al vez.*/
+
+			List<Demand> demandsList = demandDao.getDemands(skillDao.getSkill(demand.getIdDemand()).getName());
+			
+			model.addAttribute("demandsList", demandsList);
+		
+		}
+		
+		
+
+			
+		if (collaboration.getRate() == 0){
+			
+			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+			model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
+			model.addAttribute("collaborationDistinctSelect", collaborationDao.getCollaborationsDistinctRate());
+
+		}else{
+			
+			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
+			model.addAttribute("collaborationsList", collaborationDao.getCollaborations(collaboration.getRate()));
+		
+		}
+		
+		
 		return "admin/main";
 	
 	}
@@ -216,9 +236,9 @@ public class AdminController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("admin", adminDao.getAdmin(username));
 		
@@ -232,14 +252,14 @@ public class AdminController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		AdminValidator adminValidator = new AdminValidator();
 		
-		adminValidator.setAdminDAO(adminDao);
+		adminValidator.setAdminDAO(adminDao, studentDao);
 		
 		adminValidator.validateUpdate(admin, bindingResult);
 		
@@ -277,7 +297,7 @@ public class AdminController {
 		
 		AdminValidator adminValidator = new AdminValidator();
 		
-		adminValidator.setAdminDAO(adminDao);
+		adminValidator.setAdminDAO(adminDao, studentDao);
 		
 		adminValidator.validateConsult(admin, bindingResult);
 		
@@ -298,9 +318,9 @@ public class AdminController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("admin", new Admin());
 		
@@ -313,14 +333,14 @@ public class AdminController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		AdminValidator adminValidator = new AdminValidator();
 		
-		adminValidator.setAdminDAO(adminDao);
+		adminValidator.setAdminDAO(adminDao, studentDao);
 		
 		adminValidator.validateAdd(admin, bindingResult);
 		
@@ -342,9 +362,9 @@ public class AdminController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("admin", adminDao.getAdmin(username));
 		
@@ -358,14 +378,14 @@ public class AdminController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		AdminValidator adminValidator = new AdminValidator();
 		
-		adminValidator.setAdminDAO(adminDao);
+		adminValidator.setAdminDAO(adminDao, studentDao);
 		
 		adminValidator.validateUpdate(admin, bindingResult);
 		
@@ -387,9 +407,9 @@ public class AdminController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("admin", adminDao.getAdmin(username));
 		
@@ -403,9 +423,9 @@ public class AdminController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		if (bindingResult.hasErrors()) {

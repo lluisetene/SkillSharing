@@ -38,15 +38,13 @@ public class OfferValidator implements Validator {
 		Offer offer = (Offer) obj;
 		
 		// ------- IDOFFER ------ /
-		if ( offer.getIdOffer() .trim().equals("") )
-			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < offersList.size(); i++ )
-				if ( offersList.get(i).getIdOffer().toLowerCase().equals(offer.getIdOffer().toLowerCase()) )  {
-					errors.rejectValue("idOffer", "required", "Este IdOffer ya está en uso");
-					break;
-				}
-		}
+
+		for ( int i = 0; i < offersList.size(); i++ )
+			if ( offersList.get(i).getIdOffer() == offer.getIdOffer())   {
+				errors.rejectValue("idOffer", "required", "Este IdOffer ya está en uso");
+				break;
+			}
+
 		
 		
 		// -------- NID -------- //
@@ -86,21 +84,17 @@ public class OfferValidator implements Validator {
 		
 		
 		// ------- IDSKILL ------ /
-		if ( offer.getIdSkill() .trim().equals("") )
-			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
-		else if ( offer.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "El IDSkill debe tener más de 5 caracteres");
-		else {
-			for ( int i = 0; i < skillsList.size(); i++ )
-				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(offer.getIdSkill().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado )
-				errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
-			encontrado = false;
-		}			
-	}
+		
+		for ( int i = 0; i < skillsList.size(); i++ )
+			if ( skillsList.get(i).getIdSkill() == offer.getIdSkill())   {
+				encontrado = true;
+				break;
+			}
+		if ( !encontrado )
+			errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
+		encontrado = false;
+	}			
+	
 
 	@Override
 	public void validateUpdate(Object obj, Errors errors) {
@@ -109,23 +103,19 @@ public class OfferValidator implements Validator {
 		
 		
 		// ------- IDOFFER ------ /
-		if ( offer.getIdOffer().trim().equals("") )
-			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
+
+
+		for ( int i = 0; i < offersList.size(); i++ )
+			if ( offersList.get(i).getIdOffer() == offer.getIdOffer() )  {
+				encontrado = true;
+				break;
+			}
 		
-		else {
-			for ( int i = 0; i < offersList.size(); i++ )
-				if ( offersList.get(i).getIdOffer().toLowerCase().equals(offer.getIdOffer().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
+		if (!encontrado)
 			
-			if (!encontrado)
-				
-				errors.rejectValue("idOffer", "required", "Este IDOffer no existe");
-			
-			
-		}
+			errors.rejectValue("idOffer", "required", "Este IDOffer no existe");
 		
+		encontrado = false;
 		
 		// -------- NID -------- //
 		if ( offer.getNid().trim().equals("") )
@@ -134,13 +124,16 @@ public class OfferValidator implements Validator {
 			errors.rejectValue("nid", "required", "Tamaño incorrecto");
 		else {
 			for ( int i = 0; i < studentsList.size(); i++ ) {
-				if ( studentsList.get(i).getNid().toLowerCase().equals(offer.getNid().toLowerCase()) ) {
+			
+				if ( studentsList.get(i).getNid().toLowerCase().equals(offer.getNid().toLowerCase()) ) {		
 					encontrado = true;
 					break;
 				}
 			}
-			if ( !encontrado )
+			if ( !encontrado ){
+			
 				errors.rejectValue("nid", "required", "El NID introducido no existe");
+			}
 			encontrado = false;
 		}
 		
@@ -148,33 +141,28 @@ public class OfferValidator implements Validator {
 		// -------- NAME ----- //
 		if ( offer.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( offer.getName().length() < 5 )
+		else if ( offer.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		for ( int i = 0; i < offersList.size(); i++ )
-			if ( offersList.get(i).getName().toLowerCase().equals(offer.getName().toLowerCase()) && offersList.get(i).getIdOffer().equals(offer.getIdOffer()) == false) {
+			if ( offersList.get(i).getName().toLowerCase().equals(offer.getName().toLowerCase()) && offersList.get(i).getIdOffer() == offer.getIdOffer() == false) {
 				errors.rejectValue("name", "required", "Este name ya está en uso");
 				break;
 			}
 		
 		
 		// ------- IDSKILL ------ /
-		if ( offer.getIdSkill() .trim().equals("") )
-			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
-		else if ( offer.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "El IDSkill debe tener más de 5 caracteres");
-		else {
-			for ( int i = 0; i < skillsList.size(); i++ )
-				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(offer.getIdSkill().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado )
-				errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
-			encontrado = false;
-		}	
+
+		for ( int i = 0; i < skillsList.size(); i++ )
+			if ( skillsList.get(i).getIdSkill() == offer.getIdSkill() )  {
+				encontrado = true;
+				break;
+			}
+		if ( !encontrado )
+			errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
+		encontrado = false;
+	}	
 		
-	}
 
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
@@ -185,7 +173,7 @@ public class OfferValidator implements Validator {
 		
 		for(int i = 0; i < collaborationsList.size(); i++){
 			
-			if (collaborationsList.get(i).getIdOffer().equals(offer.getIdOffer().trim().toLowerCase())){
+			if (collaborationsList.get(i).getIdOffer() == offer.getIdOffer()){
 				
 				errors.rejectValue("idOffer", "required", "No se puede borrar, elimina primero las colaboraciones que tengan esta oferta");
 				
@@ -202,23 +190,19 @@ public class OfferValidator implements Validator {
 		boolean encontrado = false;
 		
 		//---------- IDOFFER ----------//
-		if ( offer.getIdOffer().trim().equals("") )
-			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
+
+		for ( int i = 0; i < offersList.size(); i++ )
+			if ( offersList.get(i).getIdOffer() == offer.getIdOffer())   {
+				encontrado = true;
+				break;
+			}
 		
-		else {
-			for ( int i = 0; i < offersList.size(); i++ )
-				if ( offersList.get(i).getIdOffer().toLowerCase().equals(offer.getIdOffer().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
+		if (!encontrado)
 			
-			if (!encontrado)
-				
-				errors.rejectValue("idOffer", "required", "Este IDOffer no existe");
-			
+			errors.rejectValue("idOffer", "required", "Este IDOffer no existe");
+		
 			
 		}
 		
 	}
 
-}

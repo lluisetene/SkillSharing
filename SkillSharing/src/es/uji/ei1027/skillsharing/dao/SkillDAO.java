@@ -44,7 +44,7 @@ private JdbcTemplate jdbcTemplate;
 			
 			Skill skill = new Skill();
 			
-			skill.setIdSkill(rs.getString("idSkill"));
+			skill.setIdSkill(rs.getInt("idSkill"));
 			skill.setName(rs.getString("name"));
 			skill.setLevel(rs.getString("level"));
 			skill.setDescription(rs.getString("description"));
@@ -62,7 +62,19 @@ private JdbcTemplate jdbcTemplate;
 	
 	}
 	
-	public Skill getSkill(String idSkill) {
+	public List<Skill> getSkillsDistinctName() {
+		
+		return this.jdbcTemplate.query("SELECT distinct on (name) idskill, name, level, description FROM skill;", new SkillMapper());
+	
+	}
+	
+	public List<Skill> getSkills(String name) {
+		
+		return this.jdbcTemplate.query("select * from skill WHERE name = ?", new Object[]{name}, new SkillMapper());
+	
+	}
+	
+	public Skill getSkill(int idSkill) {
 	
 		return this.jdbcTemplate.queryForObject("select * from skill where idSkill = ?", new Object[] {idSkill}, new SkillMapper());
 	
@@ -74,7 +86,7 @@ private JdbcTemplate jdbcTemplate;
 	
 	}
 	
-	public void deleteSkill(String idSkill){
+	public void deleteSkill(int idSkill){
 	
 		this.jdbcTemplate.update("delete from skill where idSkill = ?", idSkill);
 	

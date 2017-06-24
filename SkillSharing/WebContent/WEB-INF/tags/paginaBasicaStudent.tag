@@ -7,12 +7,12 @@
 <div class="panel-body" style="background-color:073763; border-radius:10px 10px 10px 10px;">
       
    	<div class="panel-body" style="width:20%;display:inline-block; background-color:eeeeee; margin-left:0.5%; height:60px; border-radius:10px 10px 10px 10px;">
-   		<i class="fa fa-thumbs-o-up fa-2x" style="color:black"></i>
+   		<i class="fa fa-hourglass-start fa-2x" style="color:black"></i>
    		<b style="color:black"><FONT SIZE=4>Horas Ofertas: ${studentLogin.getOfferHours()}</FONT></b>
    	</div>
          
    	<div class="panel-body" style="width:22%;display:inline-block; background-color:eeeeee; margin-left:18.5%; height:60px; border-radius:10px 10px 10px 10px;">
-   		<i class="fa fa-thumbs-o-down fa-2x" style="color:black"></i>
+   		<i class="fa fa-hourglass-end fa-2x" style="color:black"></i>
    		<b style="color:black"><FONT SIZE=4>Horas Demandas: ${studentLogin.getDemandHours()}</FONT></b>
    	</div>
          

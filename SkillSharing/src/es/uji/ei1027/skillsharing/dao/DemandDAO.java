@@ -13,6 +13,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Offer;
 
 @Repository
 public class DemandDAO {
@@ -45,10 +46,10 @@ public class DemandDAO {
 			
 			Demand demand = new Demand();
 			
-			demand.setIdDemand(rs.getString("iddemand"));
+			demand.setIdDemand(rs.getInt("iddemand"));
 			demand.setNid(rs.getString("nid"));
 			demand.setName(rs.getString("name"));
-			demand.setIdSkill(rs.getString(4) + "/" + rs.getString(5) + "/" + rs.getString(6));
+			demand.setIdSkill(rs.getInt("idskill"));
 			demand.setDescription(rs.getString("description"));
 			demand.setBeginningDate(rs.getDate("beginningdate"));
 			demand.setEndingDate(rs.getDate("endingdate"));
@@ -61,11 +62,17 @@ public class DemandDAO {
 	
 	public List<Demand> getDemands() {
 		
-		return this.jdbcTemplate.query("SELECT * from demand order by iddemand DESC;", new DemandMapper());
+		return this.jdbcTemplate.query("SELECT * from demand WHERE endingdate >= CURRENT_DATE order by idDemand DESC;", new DemandMapper());
 	
 	}
 	
-	public Demand getDemand(String idDemand) {
+	public List<Demand> getDemands(String name) {
+		
+		return this.jdbcTemplate.query("SELECT dem.iddemand, dem.nid, dem.name, dem.idskill, dem.description, dem.beginningDate, dem.endingDate FROM demand AS dem JOIN Skill ON dem.idskill = skill.idskill WHERE skill.name = ? AND endingdate >= CURRENT_DATE;",new Object[]{name}, new DemandMapper());
+	
+	}
+	
+	public Demand getDemand(int idDemand) {
 	
 		return this.jdbcTemplate.queryForObject("select * from demand where idDemand = ?", new Object[] {idDemand}, new DemandMapper());
 	
@@ -73,11 +80,11 @@ public class DemandDAO {
 	
 	public void updateDemand(Demand demand) {
 	
-		this.jdbcTemplate.update("update demand set nid = ?, name = ?, idskill = ?, description = ?, beginningdate = ?, endingdate = ? where iddemand = ?", demand.getNid(), demand.getName(), demand.getIdSkill(), demand.getDescription(), demand.getBeginningDate(), demand.getEndingDate(), demand.getIdDemand());
+		this.jdbcTemplate.update("update demand set nid = ?, name = ?, idskill = ?, description = ?, beginningdate = ?, endingdate = ? where iddemand = ?", demand.getNid(), demand.getName(), demand.getIdSkill(), demand.getDescription(), demand.getBeginningDateBD(), demand.getEndingDateBD(), demand.getIdDemand());
 	
 	}
 	
-	public void deleteDemand(String idDemand) {
+	public void deleteDemand(int idDemand) {
 	
 		this.jdbcTemplate.update("delete from demand where idDemand = ?", idDemand);
 	
@@ -86,23 +93,6 @@ public class DemandDAO {
 	public void addDemand(Demand demand) {
 	
 		this.jdbcTemplate.update("insert into demand(iddemand, nid, name, idskill, description, beginningdate, endingdate) values(?, ?, ?, ?, ?, ?, ?)", demand.getIdDemand(), demand.getNid(), demand.getName(), demand.getIdSkill(), demand.getDescription(), demand.getBeginningDate(), demand.getEndingDate());
-	
-	}
-	
-	public List<Demand> getDemandsWithNameSkill() {
-		
-		return this.jdbcTemplate.query("select dem.iddemand, dem.nid, dem.name,skill.idSkill, skill.name, skill.level, dem.description, dem.beginningdate, dem.endingdate from demand AS dem JOIN skill ON dem.idskill = skill.idskill WHERE endingdate >= CURRENT_DATE order by iddemand DESC;", new DemandMapper());
-	
-	}
-	
-	public List<Demand> getDemands2(String idSkill) {
-		
-		return this.jdbcTemplate.query("select dem.iddemand, dem.nid, dem.name,skill.idSkill, skill.name, skill.level, dem.description, dem.beginningdate, dem.endingdate from demand AS dem JOIN skill ON dem.idskill = skill.idskill WHERE skill.idSkill = ? AND endingdate >= CURRENT_DATE order by iddemand DESC;", new Object[] {idSkill}, new DemandMapper());
-	
-	}
-	public Demand getDemandWithNameSkill(String iddemand) {
-
-		return this.jdbcTemplate.queryForObject("select dem.iddemand, dem.nid, dem.name,skill.idSkill, skill.name, skill.level, dem.description, dem.beginningdate, dem.endingdate from demand AS dem JOIN skill ON dem.idskill = skill.idskill WHERE idDemand = ? AND endingdate >= CURRENT_DATE order by iddemand DESC;", new Object[] {iddemand}, new DemandMapper());
 	
 	}
 	

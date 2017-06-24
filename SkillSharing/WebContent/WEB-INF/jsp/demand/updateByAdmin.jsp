@@ -55,11 +55,11 @@
 	            buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 	            buttonImageOnly: true,
 	            dateFormat:"dd/mm/yy",
-	            minDate:0,
+	            minDate:"${demand.getBeginningDate()}",
 				onClose: function todate(selectedDate) {
 					$("#to").datepicker("option", "minDate", selectedDate);
 				}
-			}).datepicker("setDate", new Date());
+			}).datepicker("setDate", "${demand.getBeginningDate()}");
 			$("#to").datepicker({				
 				changeMonth:true,
 				changeYear:true,
@@ -71,7 +71,7 @@
 				onClose: function fromdate(selectedDate) {
 				$("#from").datepicker("option", "maxDate", selectedDate);
 				}
-			}).datepicker("setDate", new Date());
+			}).datepicker("setDate", "${demand.getEndingDate()}");
 		
 		  });
 		
@@ -291,7 +291,7 @@
 					                <td><form:label path="idSkill">Habilidad</form:label></td>
 					                <td style = "width:150px"><select Class="form-control" style = "color:black;width:250px; border:1px solid black" id="idSkill" name="idSkill">
 										
-										<option value = "${Skill.split('/')[0]}">(Seleccionada) ${Skill.split('/')[1]}  (${Skill.split('/')[2]}) </option>
+										<option value = "${Skill.idSkill}">(Seleccionada) ${Skill.name}  (${Skill.level}) </option>
 										
 										<c:forEach items="${skillsSelect}" var="skill">
 							
@@ -336,7 +336,7 @@
 		       			
 	    
 				<div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-				<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal"/>
+				<input type = "button" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal"/>
 	       
 	               <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
 					   <!-- Modal -->

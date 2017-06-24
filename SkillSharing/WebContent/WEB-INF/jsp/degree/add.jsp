@@ -218,7 +218,7 @@
     
     				<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:100%; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
    						
-    					<h1 style = "color:black;margin:0; padding-left:20px">Añadir DNI a Grado</h1>
+    					<h1 style = "color:black;margin:0; padding-left:20px">Añadir Grado</h1>
     					
     					<div style = "height:2px; width:40%; background-color:black"></div>
     
@@ -249,7 +249,7 @@
 				       	</table>
 	    
 				<div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-				<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('idDegree').disabled=false;"/>
+				<input type = "button" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('idDegree').disabled=false;"/>
 	       
 	               <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
 					   <!-- Modal -->
@@ -260,10 +260,10 @@
 							      <div class="modal-content">
 							        <div class="modal-header">
 							          <button type="button" class="close" data-dismiss="modal">&times;</button>
-							          <h4 style = "color:black" class="modal-title">Añadir DNI a Grado</h4>
+							          <h4 style = "color:black" class="modal-title">Añadir Grado</h4>
 							        </div>
 							        <div class="modal-body">
-							          <p><i>¿Seguro que desea Añadir este DNI a este Grado?</i></p>
+							          <p><i>¿Seguro que desea Añadir este Grado?</i></p>
 							        </div>
 							        <div  class="modal-footer" style = "background-color:eeeeee">
 							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">

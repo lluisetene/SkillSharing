@@ -101,9 +101,9 @@ public class SkillController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		//Esto deberia ir en el modelo pero de momento se queda aqui por las pruebas
@@ -111,16 +111,16 @@ public class SkillController {
 		
 		List<Skill> skills= skillDao.getSkills();
 		Skill skill = new Skill();
-		String idSkill;
+		int idSkill;
 		
 		if (skills.isEmpty()){
 			
-			idSkill = "1";
+			idSkill = 1;
 			skill.setIdSkill(idSkill);
 			
 		}else{
 		
-			idSkill = String.valueOf(Integer.parseInt(skills.get(0).getIdSkill()) + 1);
+			idSkill = skills.get(0).getIdSkill() + 1;
 			skill.setIdSkill(idSkill);
 		}
 		model.addAttribute("skill", skill);
@@ -136,9 +136,9 @@ public class SkillController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		SkillValidator skillValidator = new SkillValidator();
@@ -159,14 +159,14 @@ public class SkillController {
 	
 	//----------- actualización ------------------
 	@RequestMapping(value="/update/{idSkill}", method = RequestMethod.GET)
-	public String processUpdateSubmit(Model model, @PathVariable String idSkill) {
+	public String processUpdateSubmit(Model model, @PathVariable int idSkill) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("skill", skillDao.getSkill(idSkill));
 		
@@ -175,14 +175,14 @@ public class SkillController {
 	}
 	
 	@RequestMapping(value="/update/{idSkill}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult, Model model) {
+	public String processUpdateSubmit(@PathVariable int idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult, Model model) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		SkillValidator skillValidator = new SkillValidator();
@@ -204,14 +204,14 @@ public class SkillController {
 	
 	//----------- eliminación ------------------
 	@RequestMapping(value="/delete/{idSkill}", method = RequestMethod.GET)
-	public String processDeleteSubmit(Model model, @PathVariable String idSkill) {
+	public String processDeleteSubmit(Model model, @PathVariable int idSkill) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("skill", skillDao.getSkill(idSkill));
 		
@@ -220,14 +220,14 @@ public class SkillController {
 	}
 	
 	@RequestMapping(value="/delete/{idSkill}", method = RequestMethod.POST) 
-	public String processDeleteSubmit(@PathVariable String idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult, Model model) {
+	public String processDeleteSubmit(@PathVariable int idSkill, @ModelAttribute("skill") Skill skill, BindingResult bindingResult, Model model) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		SkillValidator skillValidator = new SkillValidator();

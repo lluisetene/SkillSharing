@@ -214,11 +214,11 @@
 					
 				</div>
 				
-				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:60%; margin-bottom:270px">
+				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:55%; margin-bottom:305px">
     
     				<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:100%; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
    						
-    					<h1 style = "color:black;margin:0; padding-left:20px">Eliminar DNI de Grado</h1>
+    					<h1 style = "color:black;margin:0; padding-left:20px">Eliminar Grado</h1>
     					
     					<div style = "height:2px; width:40%; background-color:black"></div>
     
@@ -240,16 +240,11 @@
 				                
 				            </tr>
 				            
-				            <tr style = "height:50px">
-				            
-				                <td style = width:25%><form:label style = "padding-right: 50px" path="nid">DNI Estudiante</form:label></td>
-								<td><form:input style = "width:25%; border:1px solid black; color:black"  cssClass="form-control" type = "text" maxlength = "9" path="nid" disabled = "true" readonly = "true"/><form:errors path = "nid" cssClass = "error" /></td>
-				                
-				            </tr>
+				          
 				       	</table>
 	    
 				<div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-				<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('idDegree').disabled=false,
+				<input type = "button" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('idDegree').disabled=false,
 																																																													   document.getElementById('name').disabled=false,
 																																																													   document.getElementById('nid').disabled=false;"/>
 	       
@@ -262,10 +257,10 @@
 							      <div class="modal-content">
 							        <div class="modal-header">
 							          <button type="button" class="close" data-dismiss="modal">&times;</button>
-							          <h4 style = "color:black" class="modal-title">Eliminar DNI de Grado</h4>
+							          <h4 style = "color:black" class="modal-title">Eliminar Grado</h4>
 							        </div>
 							        <div class="modal-body">
-							          <p><i>¿Seguro que desea Eliminar el DNI de este Grado?</i></p>
+							          <p><i>¿Seguro que desea Eliminar este Grado?</i></p>
 							        </div>
 							        <div  class="modal-footer" style = "background-color:eeeeee">
 							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">

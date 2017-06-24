@@ -5,63 +5,81 @@ import java.util.Date;
 
 public class Collaboration {
 		
-	private String idCollaboration;
-	private String idOffer;
-	private String idDemand;
+	private int idCollaboration;
+	private int idOffer;
+	private int idDemand;
 	private Date beginningDate;
 	private Date endingDate;
 	private String hours;
 	private float rate;
 	
-	public String getIdCollaboration() {
+	public int getIdCollaboration() {
 		
 		return idCollaboration;
 		
 	}
 
-	public void setIdCollaboration(String idCollaboration) {
+	public void setIdCollaboration(int idCollaboration) {
 		
 		this.idCollaboration = idCollaboration;
 		
 	}
 
-	public String getIdOffer() {
+	public int getIdOffer() {
 		
 		return idOffer;
 		
 	}
 
-	public void setIdOffer(String idOffer) {
+	public void setIdOffer(int idOffer) {
 		
 		this.idOffer = idOffer;
 		
 	}
 
-	public String getIdDemand() {
+	public int getIdDemand() {
 		
 		return idDemand;
 		
 	}
 
-	public void setIdDemand(String idDemand) {
+	public void setIdDemand(int idDemand) {
 		
 		this.idDemand = idDemand;
 		
 	}
+	
+	public String getBeginningDate(){
+		
+		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		
+		return formateador.format(beginningDate);
+		
+	}
 
-	public Date getBeginningDate() {
+	public Date getBeginningDateBD() {
 		
 		return beginningDate;
 		
 	}
+	
+	
 
 	public void setBeginningDate(Date beginningDate) {
 		
 		this.beginningDate = beginningDate;
 		
 	}
-
-	public Date getEndingDate() {
+	
+	public String getEndingDate(){
+	
+		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+	
+		return formateador.format(endingDate);
+	
+	}
+	
+	public Date getEndingDateBD() {
 		
 		return endingDate;
 		

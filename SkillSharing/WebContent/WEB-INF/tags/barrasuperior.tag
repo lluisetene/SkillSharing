@@ -17,8 +17,6 @@
 				<c:when test='${adminLogin == null && studentLogin == null}'>
 				 <li class="dropdown">
 		         <li><a href ="${pageContext.request.contextPath}/index.jsp"><b>Página Principal</b></a>
-				 <li><a href = "${pageContext.request.contextPath}/offer/list.html"><b>Ofertas</b></a></li>
-				 <li><a href = "${pageContext.request.contextPath}/demand/list.html"><b>Demandas</b></a></li>
 		                 
 			     <!-- LOGIN -->
 			     <li class="dropdown">

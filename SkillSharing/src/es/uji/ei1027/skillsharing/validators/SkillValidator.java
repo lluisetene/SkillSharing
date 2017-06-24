@@ -37,16 +37,13 @@ public class SkillValidator implements Validator {
 		Skill skill = (Skill) obj;
 		
 		//---------- IDSKILL ----------//
-		if ( skill.getIdSkill().trim().equals("") )
-			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
-		
-		else {
-			for ( int i = 0; i < skillsList.size(); i++ )
-				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(skill.getIdSkill().toLowerCase()) )  {
-					errors.rejectValue("idSkill", "required", "Este IDSkill ya está en uso");
-					break;
-				}
-		}
+
+		for ( int i = 0; i < skillsList.size(); i++ )
+			if ( skillsList.get(i).getIdSkill() == skill.getIdSkill())  {
+				errors.rejectValue("idSkill", "required", "Este IDSkill ya está en uso");
+				break;
+			}
+
 		
 		// -------- NAME ----- //
 		if ( skill.getName().trim().equals("") )
@@ -78,22 +75,18 @@ public class SkillValidator implements Validator {
 		boolean encontrado = false;
 		
 		//---------- IDSKILL ----------//
-		if ( skill.getIdSkill().trim().equals("") )
-			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
 		
-		else {
-			for ( int i = 0; i < skillsList.size(); i++ )
-				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(skill.getIdSkill().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
+	
+		for ( int i = 0; i < skillsList.size(); i++ )
+			if ( skillsList.get(i).getIdSkill() == skill.getIdSkill() )  {
+				encontrado = true;
+				break;
+			}
+		
+		if (!encontrado)
 			
-			if (!encontrado)
-				
-				errors.rejectValue("idSkill", "required", "Este IDSkill no existe");
+			errors.rejectValue("idSkill", "required", "Este IDSkill no existe");
 			
-			
-		}
 		
 		// -------- NAME ----- //
 		if ( skill.getName().trim().equals("") )
@@ -103,8 +96,10 @@ public class SkillValidator implements Validator {
 		
 		
 		for ( int i = 0; i < skillsList.size(); i++ )
-			if ( skillsList.get(i).getName().toLowerCase().equals(skill.getName().toLowerCase()) && skillsList.get(i).getIdSkill().equals(skill.getIdSkill()) == false) {
-				errors.rejectValue("name", "required", "Este nombre ya está en uso");
+			if ( skillsList.get(i).getName().toLowerCase().equals(skill.getName().toLowerCase()) && 
+					skillsList.get(i).getLevel().equals(skill.getLevel()) &&
+					(skillsList.get(i).getIdSkill() != skill.getIdSkill())) {
+				errors.rejectValue("name", "required", "Ya existe una habilidad con este nombre y nivel");
 				break;
 			}
 			
@@ -120,7 +115,7 @@ public class SkillValidator implements Validator {
 		//---------- IDSKILL ----------//
 		for (int i = 0; i < offerList.size(); i++){
 	
-			if (skill.getIdSkill().trim().toLowerCase().equals(offerList.get(i).getIdSkill().split("/")[0])){
+			if (skill.getIdSkill() == offerList.get(i).getIdSkill()){
 				
 				errors.rejectValue("idSkill", "required", "No se puede borrar, elimina primero las ofertas que tengan esta habilidad");
 				break;
@@ -130,7 +125,7 @@ public class SkillValidator implements Validator {
 		
 		for (int i = 0; i < demandList.size(); i++){
 			
-			if (skill.getIdSkill().trim().toLowerCase().equals(demandList.get(i).getIdSkill().split("/")[0])){
+			if (skill.getIdSkill() == demandList.get(i).getIdSkill()){
 				
 				errors.rejectValue("idSkill", "required", "No se puede borrar, elimina primero las demandas que tengan esta habilidad");
 				break;
@@ -145,23 +140,18 @@ public class SkillValidator implements Validator {
 
 		Skill skill = (Skill) obj;
 		boolean encontrado = false;
+
+		for ( int i = 0; i < skillsList.size(); i++ )
+			if ( skillsList.get(i).getIdSkill() == skill.getIdSkill())   {
+				encontrado = true;
+				break;
+			}
 		
-		//---------- IDSKILL ----------//
-		if ( skill.getIdSkill().trim().equals("") )
-			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
-		
-		else {
-			for ( int i = 0; i < skillsList.size(); i++ )
-				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(skill.getIdSkill().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
+		if (!encontrado)
 			
-			if (!encontrado)
-				
-				errors.rejectValue("idSkill", "required", "Este IDSkill no existe");
+			errors.rejectValue("idSkill", "required", "Este IDSkill no existe");
 		
-		}
+
 	}
 }
 

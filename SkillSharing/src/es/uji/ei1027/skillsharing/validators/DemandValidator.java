@@ -40,15 +40,13 @@ public class DemandValidator implements Validator {
 		
 		
 		// ------- IDDEMAND ------ /
-		if ( demand.getIdDemand() .trim().equals("") )
-			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(demand.getIdDemand().toLowerCase()) )  {
-					errors.rejectValue("idDemand", "required", "Este IdDemand ya está en uso");
-					break;
-				}
-		}
+
+		for ( int i = 0; i < demandsList.size(); i++ )
+			if ( demandsList.get(i).getIdDemand() == demand.getIdDemand() )  {
+				errors.rejectValue("idDemand", "required", "Este IdDemand ya está en uso");
+				break;
+			}
+		
 		
 		
 		// -------- NID -------- //
@@ -88,21 +86,16 @@ public class DemandValidator implements Validator {
 		
 		
 		// ------- IDSKILL ------ //
-		if ( demand.getIdSkill() .trim().equals("") )
-			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
-		else if ( demand.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "El IDSkill debe tener más de 5 caracteres");
-		else {
-			for ( int i = 0; i < skillsList.size(); i++ )
-				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(demand.getIdSkill().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado )
-				errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
-			encontrado = false;
-		}				
-	}
+		
+		for ( int i = 0; i < skillsList.size(); i++ )
+			if ( skillsList.get(i).getIdSkill() == demand.getIdSkill() )  {
+				encontrado = true;
+				break;
+			}
+		if ( !encontrado )
+			errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
+		encontrado = false;
+	}				
 
 	@Override
 	public void validateUpdate(Object obj, Errors errors) {
@@ -111,22 +104,19 @@ public class DemandValidator implements Validator {
 		
 		
 		// ------- IDOFFER ------ /
-		if ( demand.getIdDemand().trim().equals("") )
-			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
 		
-		else {
-			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(demand.getIdDemand().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
+		for ( int i = 0; i < demandsList.size(); i++ )
+			if ( demandsList.get(i).getIdDemand() == demand.getIdDemand() )  {
+				encontrado = true;
+				break;
+			}
+		
+		if (!encontrado)
 			
-			if (!encontrado)
-				
-				errors.rejectValue("idDemand", "required", "Este IDDemand no existe");
-			
-			
-		}
+			errors.rejectValue("idDemand", "required", "Este IDDemand no existe");
+		
+		encontrado = false;
+		
 		
 		
 		// -------- NID -------- //
@@ -150,33 +140,29 @@ public class DemandValidator implements Validator {
 		// -------- NAME ----- //
 		if ( demand.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( demand.getName().length() < 5 )
+		else if ( demand.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		for ( int i = 0; i < demandsList.size(); i++ )
-			if ( demandsList.get(i).getName().toLowerCase().equals(demand.getName().toLowerCase()) && demandsList.get(i).getIdDemand().equals(demand.getIdDemand()) == false) {
+			if ( demandsList.get(i).getName().toLowerCase().equals(demand.getName().toLowerCase()) && demandsList.get(i).getIdDemand() == demand.getIdDemand() == false) {
 				errors.rejectValue("name", "required", "Este nombre ya está en uso");
 				break;
 			}
 		
-		
 		// ------- IDSKILL ------ /
-		if ( demand.getIdSkill() .trim().equals("") )
-			errors.rejectValue("idSkill", "required", "Este campo es obligatorio");
-		else if ( demand.getIdSkill() .trim().length() > 5 )
-			errors.rejectValue("idSkill", "required", "El IDSkill debe tener más de 5 caracteres");
-		else {
-			for ( int i = 0; i < skillsList.size(); i++ )
-				if ( skillsList.get(i).getIdSkill().toLowerCase().equals(demand.getIdSkill().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado )
-				errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
-			encontrado = false;
-		}	
 		
-	}
+		
+		for ( int i = 0; i < skillsList.size(); i++ )
+			if ( skillsList.get(i).getIdSkill() == demand.getIdSkill() )  {
+				encontrado = true;
+				break;
+			}
+		if ( !encontrado )
+			errors.rejectValue("idSkill", "required", "El IdSkill introducido no existe");
+		encontrado = false;
+	}	
+		
+
 
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
@@ -186,7 +172,7 @@ public class DemandValidator implements Validator {
 		
 		for(int i = 0; i < collaborationsList.size(); i++){
 			
-			if (collaborationsList.get(i).getIdDemand().trim().toLowerCase().equals(demand.getIdDemand().trim().toLowerCase())){
+			if (collaborationsList.get(i).getIdDemand() == demand.getIdDemand()){
 				
 				errors.rejectValue("idDemand", "required", "No se puede borrar, elimina primero las colaboraciones que tengan esta demanda");
 				
@@ -203,23 +189,19 @@ public class DemandValidator implements Validator {
 		boolean encontrado = false;
 		
 		//---------- IDDEMAND ----------//
-		if ( demand.getIdDemand().trim().equals("") )
-			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
+	
+		for ( int i = 0; i < demandsList.size(); i++ )
+			if ( demandsList.get(i).getIdDemand() == demand.getIdDemand() )  {
+				encontrado = true;
+				break;
+			}
 		
-		else {
-			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(demand.getIdDemand().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
+		if (!encontrado)
 			
-			if (!encontrado)
-				
-				errors.rejectValue("idDemand", "required", "Este IdDemand no existe");
-			
-			
-		}
+			errors.rejectValue("idDemand", "required", "Este IdDemand no existe");
+		
 		
 	}
+		
 
 }

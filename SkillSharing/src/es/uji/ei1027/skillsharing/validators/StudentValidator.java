@@ -4,25 +4,31 @@ import java.util.List;
 
 import org.springframework.validation.Errors;
 
+import es.uji.ei1027.skillsharing.dao.AdminDAO;
 import es.uji.ei1027.skillsharing.dao.CollaborationDAO;
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Admin;
 import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Student;
 
 public class StudentValidator implements Validator {
 
 	private List<Student> studentsList;
+	private List<Admin> adminsList;
 	private List<Collaboration> collaborationsList;
 	private OfferDAO offerDao;
 	private DemandDAO demandDao;
+	private AdminDAO adminDao;
 	
-	public void setStudentDAO(StudentDAO studentDAO, CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao) {
+	public void setStudentDAO(StudentDAO studentDAO, CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao, AdminDAO adminDao) {
 		studentsList = studentDAO.getStudents();
+		adminsList = adminDao.getAdmins();
 		collaborationsList = collaborationDao.getCollaborations();
 		this.offerDao = offerDao;
 		this.demandDao = demandDao;
+		
 	}
 	
 	@Override
@@ -57,7 +63,7 @@ public class StudentValidator implements Validator {
 		// ------ USERNAME ------ //
 		if ( student.getUsername().trim().equals("") )
 			errors.rejectValue("username", "required", "Este campo es obligatorio");
-		else if ( student.getUsername().length() < 3 )
+		else if ( student.getUsername().length() <= 3 )
 			errors.rejectValue("username", "required", "El nombre de usuario debe tener más de 3 caracteres");
 		else {
 			for ( int i = 0; i < studentsList.size(); i++ )
@@ -66,12 +72,19 @@ public class StudentValidator implements Validator {
 					break;
 				}
 			}
+			for ( int i = 0; i < adminsList.size(); i++ )
+				if ( adminsList.get(i).getUsername().toLowerCase().equals(student.getUsername().toLowerCase()) ) {
+					errors.rejectValue("username", "required", "Este nombre de usuario ya está en uso");
+					break;
+				}
+			
+
 		
 		
 		// ----- PASSWORD ---- //
 		if ( student.getPassword().trim().equals("") )
 			errors.rejectValue("password", "required", "Este campo es obligatorio");
-		else if ( student.getPassword().length() < 6 )
+		else if ( student.getPassword().length() <= 6 )
 			errors.rejectValue("password",  "required", "La contraseña debe tener más de 6 caracteres");
 		
 		// ------ MAIL ----- //
@@ -80,6 +93,13 @@ public class StudentValidator implements Validator {
 		else {
 			for ( int i = 0; i < studentsList.size(); i++ )
 				if ( studentsList.get(i).getMail().toLowerCase().equals(student.getMail().toLowerCase() )) {
+					errors.rejectValue("mail", "required", "Este mail ya está en uso");
+					break;
+					
+				}
+			
+			for ( int i = 0; i < adminsList.size(); i++ )
+				if ( adminsList.get(i).getMail().toLowerCase().equals(student.getMail().toLowerCase() )) {
 					errors.rejectValue("mail", "required", "Este mail ya está en uso");
 					break;
 					
@@ -176,8 +196,8 @@ public class StudentValidator implements Validator {
 		
 		for(int indice = 0; indice < collaborationsList.size(); indice += 1){
 			
-			String idOffer = collaborationsList.get(indice).getIdOffer();
-			String idDemand = collaborationsList.get(indice).getIdDemand();
+			int idOffer = collaborationsList.get(indice).getIdOffer();
+			int idDemand = collaborationsList.get(indice).getIdDemand();
 			String nidOffer = offerDao.getOffer(idOffer).getNid();
 			String nidDemand = demandDao.getDemand(idDemand).getNid();
 			

@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Degree;
 import es.uji.ei1027.skillsharing.model.Skill;
+import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.DegreeValidator;
 
 @Controller
@@ -57,9 +59,29 @@ public class DegreeController {
 	}
 	
 	//----------- listado ------------------
-	@RequestMapping("/list")
-	public String listDegree(Model model) {
+	@RequestMapping("/list/{idDegree}")
+	public String listDegree(Model model, @PathVariable int idDegree) {
 		
+		model.addAttribute("degreeName", degreeDao.getDegree(idDegree).getName());
+		List<Student> studentsDegree = new LinkedList<Student>();
+		List<Degree> degrees = degreeDao.getDegreeList(degreeDao.getDegree(idDegree).getName());
+		
+		for (int i = 0; i < degrees.size(); i++){
+			
+			Student student = studentDao.getStudent(degrees.get(i).getNid());
+			studentsDegree.add(student);
+			
+		}
+		
+		model.addAttribute("studentsDegree", studentsDegree);
+		
+		model.addAttribute("studentsSelect", studentDao.getStudents());
+		model.addAttribute("adminsSelect", adminDao.getAdmins());
+		model.addAttribute("skillsSelect", skillDao.getSkills());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
+		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("degrees", degreeDao.getDegrees());
 		
 		return "degree/list";
@@ -90,7 +112,7 @@ public class DegreeController {
 		
 			return "degree/consult";
 		
-		model.addAttribute("degreeResponse", degreeDao.getDegreeList(degree.getIdDegree()));
+		model.addAttribute("degreeResponse", degreeDao.getDegreeList(degree.getName()));
 		
 		return "degree/consult";
 	
@@ -103,9 +125,9 @@ public class DegreeController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("degree", new Degree());
 		
@@ -114,16 +136,16 @@ public class DegreeController {
 		
 		List<Degree> degrees= degreeDao.getDegrees();
 		Degree degree = new Degree();
-		String idDegree;
+		int idDegree;
 		
 		if (degrees.isEmpty()){
-			
-			idDegree = "1";
+		
+			idDegree = 1;
 			degree.setIdDegree(idDegree);
 			
 		}else{
 			
-			idDegree = String.valueOf(Integer.parseInt(degrees.get(0).getIdDegree()) + 1);
+			idDegree = degrees.get(0).getIdDegree() + 1;
 			degree.setIdDegree(idDegree);
 		}
 
@@ -139,9 +161,9 @@ public class DegreeController {
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		DegreeValidator degreeValidator = new DegreeValidator();
@@ -163,14 +185,14 @@ public class DegreeController {
 
 	//----------- actualización ------------------
 	@RequestMapping(value="/update/{idDegree}", method = RequestMethod.GET)
-	public String processUpdateSubmit(Model model, @PathVariable String idDegree) {
+	public String processUpdateSubmit(Model model, @PathVariable int idDegree) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("degree", degreeDao.getDegree(idDegree));
 		
@@ -179,14 +201,15 @@ public class DegreeController {
 	}
 	
 	@RequestMapping(value="/update/{idDegree}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable String idDegree, @ModelAttribute("degree") Degree degree, BindingResult bindingResult, Model model) {
+	public String processUpdateSubmit(@PathVariable int idDegree, @ModelAttribute("degree") Degree degree, BindingResult bindingResult, Model model) {
 		
+		String lastName = degreeDao.getDegree(idDegree).getName();
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		DegreeValidator degreeValidator = new DegreeValidator();
@@ -199,7 +222,7 @@ public class DegreeController {
 			
 			 return "degree/update";
 		
-		 degreeDao.updateDegree(degree);
+		 degreeDao.updateDegree(degree, lastName);
 		 
 		 return "redirect: ../../admin/main.html";
 		 
@@ -207,14 +230,14 @@ public class DegreeController {
 	
 	//----------- eliminación ------------------
 	@RequestMapping(value="/delete/{idDegree}", method = RequestMethod.GET)
-	public String processDeleteSubmit(Model model, @PathVariable String idDegree) {
+	public String processDeleteSubmit(Model model, @PathVariable int idDegree) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("degree", degreeDao.getDegree(idDegree));
 		
@@ -223,14 +246,14 @@ public class DegreeController {
 	}
 	
 	@RequestMapping(value="/delete/{idDegree}", method = RequestMethod.POST) 
-	public String processDeleteSubmit(@PathVariable String idDegree, @ModelAttribute("degree") Degree degree, BindingResult bindingResult, Model model) {
+	public String processDeleteSubmit(@PathVariable int idDegree, @ModelAttribute("degree") Degree degree, BindingResult bindingResult, Model model) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		if (bindingResult.hasErrors()) 

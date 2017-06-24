@@ -53,24 +53,23 @@
 				changeYear:true,
 	            buttonImageOnly: true,
 	            dateFormat:"dd/mm/yy",
-	            minDate:0,
+	            minDate:"${collaboration.getBeginningDate()}",
 				onClose: function todate(selectedDate) {
 					$("#to").datepicker("option", "minDate", selectedDate);
 				}
-			}).datepicker("setDate", new Date());
+			}).datepicker("setDate", "${collaboration.getBeginningDate()}");
 			$("#to").datepicker({				
 				changeMonth:true,
 				changeYear:true,
 	            buttonImageOnly: true,
 	            dateFormat:"dd/mm/yy",
-	            minDate:0,
+	            minDate:"${collaboration.getEndingDate()}",
 				onClose: function fromdate(selectedDate) {
 				$("#from").datepicker("option", "maxDate", selectedDate);
 				}
-			}).datepicker("setDate", new Date());
+			}).datepicker("setDate", "${collaboration.getEndingDate()}");
 		
 		  });
-		
 		</script>
 	    
 	
@@ -322,11 +321,7 @@
 				            </table>
 
 				<div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-				<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('idCollaboration').disabled=false, 
-	        																   document.getElementById('idOffer').disabled=false,
-	        																   document.getElementById('idDemand').disabled=false,
-	        																   document.getElementById('beginningDate').disabled=false,
-	        																   document.getElementById('endingDate').disabled=false;"/>
+				<input type = "button" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" />
 	       
 	               <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
 					   <!-- Modal -->
@@ -343,7 +338,11 @@
 							          <p><i>¿Seguro que desea Eliminar esta Colaboración?</i></p>
 							        </div>
 							        <div  class="modal-footer" style = "background-color:eeeeee">
-							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">
+							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar" onclick = "document.getElementById('idCollaboration').disabled=false, 
+	        																   document.getElementById('idOffer').disabled=false,
+	        																   document.getElementById('idDemand').disabled=false,
+	        																   document.getElementById('beginningDate').disabled=false,
+	        																   document.getElementById('endingDate').disabled=false;">
 							        </div>
 							      </div>
 							      

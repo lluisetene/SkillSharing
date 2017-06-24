@@ -241,12 +241,41 @@
 				            </tr>
 				            
 				            <tr style = "height:50px">
-				            
+				            	<c:set var="nivel" scope="request" value="${skill.level}" />
 				                <td><form:label style = "padding-right: 50px" path="level">Nivel</form:label></td>
 								<td><select style = "width:15%; border:1px solid black; color:black"  Class="form-control" id="level" name="level">
-									<option value="medio" selected="selected">medio</option>
-									<option value="alto">alto</option>
-									<option value="bajo">bajo</option>
+									
+										
+									
+									<c:choose>
+									
+										<c:when test="${nivel == 'bajo'}">	
+									
+											<option value="bajo">bajo</option>
+											<option value="medio">medio</option>
+											<option value="alto">alto</option>
+											
+										</c:when>
+										
+										<c:when test="${nivel == 'medio'}">
+										
+											<option value="medio">medio</option>
+											<option value="bajo">bajo</option>
+											<option value="alto">alto</option>
+										
+										</c:when>
+										
+										<c:when test="${nivel == 'alto'}">
+											
+											<option value="alto">alto</option>
+											<option value="bajo">bajo</option>
+											<option value="medio">medio</option>
+										
+										</c:when>
+									
+								</c:choose>
+								
+								
 								</select></td>
 				                
 				            </tr>
@@ -267,7 +296,7 @@
 				       			 </table>
 	    
 				<div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-				<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('idSkill').disabled=false;"/>
+				<input type = "button" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('idSkill').disabled=false;"/>
 	       
 	               <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
 					   <!-- Modal -->

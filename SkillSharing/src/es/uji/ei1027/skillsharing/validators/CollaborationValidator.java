@@ -38,12 +38,12 @@ public class CollaborationValidator implements Validator {
 		Collaboration collaboration = (Collaboration) obj;
 		String NIDoferta = null;
 		String NIDdemand = null;
-		String idSkillOffer = null;
-		String idSkillDemand = null;
+		int idSkillOffer = -1;
+		int idSkillDemand = -1;
 		
 		for (int i = 0; i < collaborationsList.size(); i++){
 			
-			if (collaborationsList.get(i).getIdOffer().equals(collaboration.getIdOffer()) && collaborationsList.get(i).getIdDemand().equals(collaboration.getIdDemand())){
+			if (collaborationsList.get(i).getIdOffer() == collaboration.getIdOffer() && collaborationsList.get(i).getIdDemand() == collaboration.getIdDemand()){
 				
 				errors.rejectValue("idCollaboration", "required", "Las IdOffer e IdDemand ya existen como colaboración");
 			
@@ -53,7 +53,7 @@ public class CollaborationValidator implements Validator {
 
 		for (int i = 0; i < offersList.size(); i++){
 			
-			if (offersList.get(i).getIdOffer().equals(collaboration.getIdOffer())){
+			if (offersList.get(i).getIdOffer() == collaboration.getIdOffer()){
 				
 				NIDoferta = offersList.get(i).getNid();
 				idSkillOffer = offersList.get(i).getIdSkill();
@@ -63,7 +63,7 @@ public class CollaborationValidator implements Validator {
 		
 		for (int i = 0; i < demandsList.size(); i++){	
 			
-			if (demandsList.get(i).getIdDemand().equals(collaboration.getIdDemand())){
+			if (demandsList.get(i).getIdDemand() ==collaboration.getIdDemand()){
 			
 				NIDdemand = demandsList.get(i).getNid();
 				idSkillDemand = demandsList.get(i).getIdSkill();
@@ -76,7 +76,7 @@ public class CollaborationValidator implements Validator {
 			
 			errors.rejectValue("idCollaboration", "required", "No puedes crear una colaboración en el que la oferta y la demanda sea del mismo estudiante");
 			
-		}else if((idSkillOffer != null && idSkillDemand != null) && idSkillOffer.split("/")[0].equals(idSkillDemand.split("/")[0]) == false)
+		}else if((idSkillOffer != -1 && idSkillDemand != -1) && idSkillOffer != idSkillDemand)
 	
 			errors.rejectValue("idCollaboration", "required", "La oferta y la demanda no tienen la misma habilidad");
 		
@@ -89,42 +89,34 @@ public class CollaborationValidator implements Validator {
 	
 		
 		// ------ IDCOLLABORATION -------- //
-		if ( collaboration.getIdCollaboration() .trim().equals("") )
-			errors.rejectValue("idCollaboration", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < collaborationsList.size(); i++ )
-				if ( collaborationsList.get(i).getIdCollaboration().toLowerCase().equals(collaboration.getIdCollaboration().toLowerCase()) )  {
-					errors.rejectValue("idCollaboration", "required", "Este IdCollaboration ya está en uso");
-					break;
-			}
+	
+		for ( int i = 0; i < collaborationsList.size(); i++ )
+			if ( collaborationsList.get(i).getIdCollaboration() == collaboration.getIdCollaboration() )  {
+				errors.rejectValue("idCollaboration", "required", "Este IdCollaboration ya está en uso");
+				break;
 		}
+
 		
 		// ------ IDOFFER ----------- //
-		if ( collaboration.getIdOffer().trim().equals("") )
-			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < offersList.size(); i++ )
-				if ( offersList.get(i).getIdOffer().toLowerCase().equals(collaboration.getIdOffer().toLowerCase()) ) {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado ) {
-				errors.rejectValue("idOffer", "required", "El IdOffer introducido no existe");
-				
+		
+		for ( int i = 0; i < offersList.size(); i++ )
+			if ( offersList.get(i).getIdOffer() == collaboration.getIdOffer() ) {
+				encontrado = true;
+				break;
 			}
-			encontrado = false;
+		if ( !encontrado ) {
+			errors.rejectValue("idOffer", "required", "El IdOffer introducido no existe");
 			
 		}
+		encontrado = false;
+		
+		
 		
 		
 		// ------- IDDEMAND ----------- //
-		if ( collaboration.getIdDemand().trim().equals("") )
-			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
-		else if ( collaboration.getIdDemand() .trim().length() > 5 )
-			errors.rejectValue("idDemand", "required", "Este IdDemand debe tener más de 5 caracteres");
-		else {
+	
 			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(collaboration.getIdDemand().toLowerCase()) ) {
+				if ( demandsList.get(i).getIdDemand() == collaboration.getIdDemand()) {
 					encontrado = true;
 					break;
 				}
@@ -134,7 +126,6 @@ public class CollaborationValidator implements Validator {
 			}
 			encontrado = false;
 		
-		}
 		
 		
 		
@@ -148,78 +139,70 @@ public class CollaborationValidator implements Validator {
 		
 		
 		//---------- IDCOLLABORATION ----------//
-		if ( collaboration.getIdCollaboration().trim().equals("") )
-			errors.rejectValue("idCollaboration", "required", "Este campo es obligatorio");
-		
-		else {
+
 			
-			for (int i = 0; i < collaborationsList.size(); i++){
-				
-				if (collaborationsList.get(i).getIdCollaboration().equals(collaboration.getIdCollaboration().trim()) && collaborationsList.get(i).getIdOffer().equals(collaboration.getIdOffer().trim()) && collaborationsList.get(i).getIdDemand().equals(collaboration.getIdDemand().trim())){
-					valido = true;
-					break;
-				}
-				
-				
+		for (int i = 0; i < collaborationsList.size(); i++){
+			
+			if (collaborationsList.get(i).getIdCollaboration() == collaboration.getIdCollaboration() && collaborationsList.get(i).getIdOffer() == collaboration.getIdOffer() && collaborationsList.get(i).getIdDemand() == collaboration.getIdDemand()){
+				valido = true;
+				break;
 			}
-			
-			if (!valido){
-				
-				errors.rejectValue("idCollaboration", "required", "Las IdOffer e IdDemand no figuran como colaboración");
-				
-			}
-			
-			
-			for ( int i = 0; i < collaborationsList.size(); i++ )
-				if ( collaborationsList.get(i).getIdCollaboration().toLowerCase().equals(collaboration.getIdCollaboration().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			
-			if (!encontrado)
-				
-				errors.rejectValue("idCollaboration", "required", "Este IDCollaboration no existe");
 			
 			
 		}
+		
+		if (!valido){
+		
+			errors.rejectValue("idCollaboration", "required", "Las IdOffer e IdDemand no figuran como colaboración");
+			
+		}
+		
+		
+		for ( int i = 0; i < collaborationsList.size(); i++ )
+			if ( collaborationsList.get(i).getIdCollaboration() == collaboration.getIdCollaboration() )  {
+				encontrado = true;
+				break;
+			}
+		
+		if (!encontrado){
+	
+			errors.rejectValue("idCollaboration", "required", "Este IDCollaboration no existe");
+		}
+		
 		
 		// ------ IDOFFER ----------- //
-		if ( collaboration.getIdOffer().trim().equals("") )
-			errors.rejectValue("idOffer", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < offersList.size(); i++ )
-				if ( offersList.get(i).getIdOffer().toLowerCase().equals(collaboration.getIdOffer().toLowerCase()) ) {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado ) {
-				errors.rejectValue("idOffer", "required", "El IdOffer introducido no existe");
-				
+		
+		for ( int i = 0; i < offersList.size(); i++ )
+			if ( offersList.get(i).getIdOffer() == collaboration.getIdOffer() ) {
+				encontrado = true;
+				break;
 			}
-			encontrado = false;
+		if ( !encontrado ) {
+
+			errors.rejectValue("idOffer", "required", "El IdOffer introducido no existe");
 			
 		}
+		encontrado = false;
 		
+	
+	
 		
 		// ------- IDDEMAND ----------- //
-		if ( collaboration.getIdDemand().trim().equals("") )
-			errors.rejectValue("idDemand", "required", "Este campo es obligatorio");
-		else if ( collaboration.getIdDemand() .trim().length() > 5 )
-			errors.rejectValue("idDemand", "required", "Este IdDemand debe tener más de 5 caracteres");
-		else {
-			for ( int i = 0; i < demandsList.size(); i++ )
-				if ( demandsList.get(i).getIdDemand().toLowerCase().equals(collaboration.getIdDemand().toLowerCase()) ) {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado ) {
-				errors.rejectValue("idDemand", "required", "El IdDemand introducido no existe");
-				
-			}
-			encontrado = false;
 		
+		for ( int i = 0; i < demandsList.size(); i++ )
+			if ( demandsList.get(i).getIdDemand() == collaboration.getIdDemand() ) {
+				encontrado = true;
+				break;
+			}
+		if ( !encontrado ) {
+
+			errors.rejectValue("idDemand", "required", "El IdDemand introducido no existe");
+			
 		}
+		encontrado = false;
+	
 	}
+	
 
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
@@ -231,21 +214,19 @@ public class CollaborationValidator implements Validator {
 	@Override
 	public void validateConsult(Object obj, Errors errors) {
 		Collaboration collaboration = (Collaboration) obj;
-		
-		if ( collaboration.getIdCollaboration() .trim().equals("") )
-			errors.rejectValue("idCollaboration", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < collaborationsList.size(); i++ )
-				if ( collaborationsList.get(i).getIdCollaboration().toLowerCase().equals(collaboration.getIdCollaboration().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			if ( !encontrado ) {
-				errors.rejectValue("idCollaboration", "required", "El IdCollaboration introducido no existe");
-				encontrado = false;
+	
+
+		for ( int i = 0; i < collaborationsList.size(); i++ )
+			if ( collaborationsList.get(i).getIdCollaboration() == collaboration.getIdCollaboration() )  {
+				encontrado = true;
+				break;
 			}
+		if ( !encontrado ) {
+			errors.rejectValue("idCollaboration", "required", "El IdCollaboration introducido no existe");
+			encontrado = false;
 		}
-		
 	}
+	
+
 
 }

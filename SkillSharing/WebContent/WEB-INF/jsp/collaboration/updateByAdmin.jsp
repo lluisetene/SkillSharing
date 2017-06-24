@@ -55,11 +55,11 @@
 	            buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 	            buttonImageOnly: true,
 	            dateFormat:"dd/mm/yy",
-	            minDate:0,
+	            minDate:"${collaboration.getBeginningDate()}",
 				onClose: function todate(selectedDate) {
 					$("#to").datepicker("option", "minDate", selectedDate);
 				}
-			}).datepicker("setDate", new Date());
+			}).datepicker("setDate", "${collaboration.getBeginningDate()}");
 			$("#to").datepicker({				
 				changeMonth:true,
 				changeYear:true,
@@ -71,7 +71,7 @@
 				onClose: function fromdate(selectedDate) {
 				$("#from").datepicker("option", "maxDate", selectedDate);
 				}
-			}).datepicker("setDate", new Date());
+			}).datepicker("setDate", "${collaboration.getEndingDate()}");
 		
 		  });
 		
@@ -269,7 +269,7 @@
 					                <td style = "width:175px"><form:label path = "idCollaboration">IdColaboracion</form:label></td>
 					                <td><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idCollaboration" disabled = "true" readonly = "true"/><form:errors path = "idCollaboration" cssClass = "error" /></td>
 					            
-					                <td style = "width:250px; padding-left:100px"><form:label path="idOffer">Oferta</form:label></td>
+					                <td style = "width:250px; padding-left:100px"><form:label path="idOffer">IdOferta</form:label></td>
 					             	<td ><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idOffer" disabled = "true" readonly = "true"/><form:errors path = "idOffer" cssClass = "error" /></td>
 									               
 					                <td style = "width:250px; padding-left:100px"><form:label path="idDemand">IdDemanda</form:label></td>
@@ -302,10 +302,68 @@
 								<tr style = "height:50px">
 								
 									 <td style = "width:175px"><form:label path="hours">Horas</form:label></td>
-									 <td><form:input style = "width:100px; border:1px solid black; color:black" cssClass = "form-control" type = "text" path="hours" disabled = "true"/></td>
+									 <td><select style = "width:150px; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours">
+									 	
+									 	<c:choose>
+									 	
+									 		<c:when test = "${collaboration.hours == '' || collaboration.hours == null }">
+									 	
+									 			<option value="">No establecidas</option>
+									 	
+									 		</c:when>
+									 		<c:otherwise>
+									 		
+									 			<option value="${collaboration.hours}">(Actual) ${collaboration.hours}</option>
+									 		
+									 		</c:otherwise>
+									 	
+									 	</c:choose>
+									 	
+								 			
+					 						<option value="01:00">01:00</option>
+					 						<option value="02:00">02:00</option>
+					 						<option value="03:00">03:00</option>
+					 						<option value="04:00">04:00</option>
+					 						<option value="05:00">05:00</option>
+					 						<option value="06:00">06:00</option>
+					 						<option value="07:00">07:00</option>
+					 						<option value="08:00">08:00</option>
+					 						<option value="09:00">09:00</option>
+					 						<option value="10:00">10:00</option>
+									 
+									 
+									 </select></td>
 								
-									 <td style = "width:450px; padding-left:250px"><form:label path="rate">Valoración</form:label></td>
-									 <td><form:input style = "width:50px; border:1px solid black; color:black" cssClass = "form-control" type = "text" path="rate" disabled = "true"/></td>
+									 <td style = "width:400px; padding-left:200px"><form:label path="rate">Valoración</form:label></td>
+									 <td><select style = "width:150px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate">
+									 		
+									 		<c:choose>
+									 	
+									 		<c:when test = "${collaboration.rate == 0}">
+									 	
+									 			<option value="0">No establecidas</option>
+									 	
+									 		</c:when>
+									 		<c:otherwise>
+									 		
+									 			<option value="${collaboration.rate}">(Actual) ${collaboration.rate}</option>
+									 		
+									 		</c:otherwise>
+									 	
+									 	</c:choose>
+									 							
+					 						<option value="1">1</option>
+					 						<option value="2">2</option>
+					 						<option value="3">3</option>
+					 						<option value="4">4</option>
+					 						<option value="5">5</option>
+					 						<option value="6">6</option>
+					 						<option value="7">7</option>
+					 						<option value="8">8</option>
+					 						<option value="9">9</option>
+					 						<option value="10">10</option>
+									 
+									 </select></td>
 								
 								</tr>
 							
@@ -326,11 +384,7 @@
 				            </table>
 
 				<div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-				<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('idCollaboration').disabled=false, 
-	        																   document.getElementById('idOffer').disabled=false,
-	        																   document.getElementById('idDemand').disabled=false,
-	        																   document.getElementById('hours').disabled=false,
-	        																   document.getElementById('rate').disabled=false;"/>
+				<input type = "button" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal"/>
 	       
 	               <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
 					   <!-- Modal -->
@@ -347,7 +401,9 @@
 							          <p><i>¿Seguro que desea Modificar esta Colaboración?</i></p>
 							        </div>
 							        <div  class="modal-footer" style = "background-color:eeeeee">
-							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">
+							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar" onclick = "document.getElementById('idCollaboration').disabled=false, 
+	        																   document.getElementById('idOffer').disabled=false,
+	        																   document.getElementById('idDemand').disabled=false;">
 							        </div>
 							      </div>
 							      

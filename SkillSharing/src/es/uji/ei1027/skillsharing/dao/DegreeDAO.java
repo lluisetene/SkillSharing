@@ -32,7 +32,7 @@ public class DegreeDAO {
 			
 			Degree degree = new Degree();
 			
-			degree.setIdDegree(rs.getString("iddegree"));
+			degree.setIdDegree(rs.getInt("iddegree"));
 			degree.setName(rs.getString("name"));
 			degree.setNid(rs.getString("nid"));
 			
@@ -54,13 +54,19 @@ public class DegreeDAO {
 	
 	}
 	
-	public void updateDegree(Degree degree) {
+	public List<Degree> getDegreesDistinctName() {
 		
-		this.jdbcTemplate.update("update degree set name = ? , nid = ? where iddegree = ?", degree.getName(), degree.getNid(), degree.getIdDegree());
+		return this.jdbcTemplate.query("SELECT distinct on (name) iddegree, name, nid FROM degree;", new DegreeMapper());
+		
+	}
+	
+	public void updateDegree(Degree degree, String lastName) {
+		
+		this.jdbcTemplate.update("update degree set name = ? where name = ?;", degree.getName(), lastName);
 	
 	}
 	
-	public void deleteDegree(String idDegree) {
+	public void deleteDegree(int idDegree) {
 		
 		this.jdbcTemplate.update("delete from degree where iddegree = ? ", idDegree);
 	
@@ -72,14 +78,8 @@ public class DegreeDAO {
 	
 	}
 	
-	public List<Degree> getDistinctDegree(){
-		
-		return this.jdbcTemplate.query("SELECT count(iddegree) AS iddegree, name, count(nid) AS nid FROM degree GROUP BY name;",   new DegreeMapper());
-
-		
-	}
 	
-	public Degree getDegree(String idDegree) {
+	public Degree getDegree(int idDegree) {
 		
 		return this.jdbcTemplate.queryForObject("select * from degree where idDegree = ?", new Object[] {idDegree}, new DegreeMapper());
 	

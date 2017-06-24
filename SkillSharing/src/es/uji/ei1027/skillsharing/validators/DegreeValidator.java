@@ -31,15 +31,13 @@ public class DegreeValidator implements Validator {
 		
 		
 		// ----- IDDEGREE ------ //
-		if ( degree.getIdDegree() .trim().equals("") )
-			errors.rejectValue("idDegree", "required", "Este campo es obligatorio");
-		else {
-			for ( int i = 0; i < degreesList.size(); i++ )
-				if ( degreesList.get(i).getIdDegree().toLowerCase().equals(degree.getIdDegree().toLowerCase()) )  {
-					errors.rejectValue("idDegree", "required", "Este IdDegree ya está en uso");
-					break;
-				}
-		}
+		
+		for ( int i = 0; i < degreesList.size(); i++ )
+			if ( degreesList.get(i).getIdDegree() == degree.getIdDegree() )  {
+				errors.rejectValue("idDegree", "required", "Este IdDegree ya está en uso");
+				break;
+			}
+		
 		
 		// -------- NAME ----- //
 		if ( degree.getName().trim().equals("") )
@@ -94,67 +92,28 @@ public class DegreeValidator implements Validator {
 		boolean encontrado = false;
 		
 		//---------- IDDEGREE ----------//
-		if ( degree.getIdDegree().trim().equals("") )
-			errors.rejectValue("idDegree", "required", "Este campo es obligatorio");
 		
-		else {
-			for ( int i = 0; i < degreesList.size(); i++ )
-				if ( degreesList.get(i).getIdDegree().toLowerCase().equals(degree.getIdDegree().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
+		for ( int i = 0; i < degreesList.size(); i++ )
+			if ( degreesList.get(i).getIdDegree() == degree.getIdDegree() )  {
+				encontrado = true;
+				break;
+			}
+		
+		if (!encontrado)
 			
-			if (!encontrado)
-				
-				errors.rejectValue("idDegree", "required", "Este IDDegree no existe");
-			
-			
-		}
+			errors.rejectValue("idDegree", "required", "Este IDDegree no existe");
+		
+		
+		
 		
 		// -------- NAME ----- //
 		if ( degree.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( degree.getName().length() < 5 ){
+		else if ( degree.getName().length() <= 5 ){
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
-		}else{
-			
-			for ( int i = 0; i < degreesList.size(); i++ )
-				if ( degreesList.get(i).getName().toLowerCase().equals(degree.getName().toLowerCase()) &&
-						degree.getNid().trim().toLowerCase().equals(degreesList.get(i).getNid().trim().toLowerCase()))  {
-					errors.rejectValue("name", "required", "Este grado ya contiene al estudiante");
-					break;
-				}
 		}
 		
 		
-		// -------- NID -------- //
-		if ( degree.getNid().trim().equals("") )
-			errors.rejectValue("nid", "required", "Este campo es obligatorio");
-		else if ( degree.getNid().length() != 9 )
-			errors.rejectValue("nid", "required", "Tamaño incorrecto");
-		else{	
-	
-			for (int i = 0; i < studentList.size(); i++){
-				
-				if (degree.getNid().equals(studentList.get(i).getNid())){
-					
-					notFound = false;
-					break;
-					
-				}else{
-					
-					notFound = true;
-					
-				}
-				
-			}
-			
-			if (notFound){
-				
-				errors.rejectValue("nid", "required", "Este NID no existe");
-				
-			}
-		}
 		
 	}
 
@@ -173,23 +132,19 @@ public class DegreeValidator implements Validator {
 		boolean encontrado = false;
 		
 		//---------- IDDEGREE ----------//
-		if ( degree.getIdDegree().trim().equals("") )
-			errors.rejectValue("idDegree", "required", "Este campo es obligatorio");
 		
-		else {
-			for ( int i = 0; i < degreesList.size(); i++ )
-				if ( degreesList.get(i).getIdDegree().toLowerCase().equals(degree.getIdDegree().toLowerCase()) )  {
-					encontrado = true;
-					break;
-				}
-			
-			if (!encontrado)
-				
-				errors.rejectValue("idDegree", "required", "Este IDDegree no existe");
-			
-			
-		}
+		for ( int i = 0; i < degreesList.size(); i++ )
+			if ( degreesList.get(i).getIdDegree() == degree.getIdDegree() )  {
+				encontrado = true;
+				break;
+			}
 		
+		if (!encontrado)
+			
+			errors.rejectValue("idDegree", "required", "Este IDDegree no existe");
+		
+		
+	
 	}
 
 }

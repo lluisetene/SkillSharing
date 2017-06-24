@@ -89,7 +89,7 @@ width:300px;
 			      		
 			      		
 				      		 <div class = "panel-body" style = "width:37%; display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-book" style="color:black"></i><b style = "color:black"> ${offer.name} </b></div>	
-				             <div class = "panel-body" style = "width:25%;display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-bookmark" style="color:black"></i><b style = "color:black"> ${offer.idSkill.split("/")[1]} </b></div>
+				             <div class = "panel-body" style = "width:25%;display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-bookmark" style="color:black"></i><b style = "color:black"> ${offer.idSkill} </b></div>
 				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"></i><b style = "color:black"> ${offer.beginningDate} </b></div>
 				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"></i><b style = "color:black"> ${offer.endingDate} </b></div>
 							 <c:choose>
@@ -120,8 +120,8 @@ width:300px;
 									</tr>
 									<tr>
 									
-										<td><h6>Habilidad: ${offer.idSkill.split("/")[1]}</h6></td>
-										<td><h6 style = "padding-left:15%">Nivel: ${offer.idSkill.split("/")[2]}</h6></td>
+										<td><h6>Habilidad: ${offer.idSkill}</h6></td>
+										<td><h6 style = "padding-left:15%">Nivel: ${offer.idSkill}</h6></td>
 									
 									</tr>
 									<tr>

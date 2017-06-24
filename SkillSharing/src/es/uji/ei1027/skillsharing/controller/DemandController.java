@@ -24,7 +24,6 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
-import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
 
@@ -81,7 +80,7 @@ public class DemandController {
 	@RequestMapping("/list")
 	public String listDemands(Model model) {
 		
-		model.addAttribute("demands", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("demands", demandDao.getDemands());
 		model.addAttribute("skills", skillDao.getSkills());
 		model.addAttribute("demand", new Demand());
 
@@ -92,15 +91,15 @@ public class DemandController {
 	@RequestMapping(value="/list", method=RequestMethod.POST)
 	public String processListSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
 	
-		model.addAttribute("demands", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("demands", demandDao.getDemands());
 		model.addAttribute("skills", skillDao.getSkills());
 		
-		if (demand.getIdSkill().equals("Todas")){
+		if (demand.getIdSkill() == -1){
 
-			model.addAttribute("demand", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("demand", demandDao.getDemands());
 		}else{
 		
-			model.addAttribute("demands", demandDao.getDemands2(demand.getIdSkill()));
+			model.addAttribute("demands", demandDao.getDemand(demand.getIdSkill()));
 		}
 		return "demand/list";
 	
@@ -148,16 +147,16 @@ public class DemandController {
 		
 		List<Demand> demands= demandDao.getDemands();
 		Demand demand = new Demand();
-		String idDemand;
+		int idDemand;
 		
 		if (demands.isEmpty()){
 			
-			idDemand = "1";
+			idDemand = 1;
 			demand.setIdDemand(idDemand);
 			
 		}else{
 		
-			idDemand = String.valueOf(Integer.parseInt(demands.get(0).getIdDemand()) + 1);
+			idDemand = demands.get(0).getIdDemand() + 1;
 			demand.setIdDemand(idDemand);
 		}
 		
@@ -188,9 +187,9 @@ public class DemandController {
 	
 	//----------- actualización ------------------
 	@RequestMapping(value="/update/{idDemand}", method = RequestMethod.GET)
-	public String processUpdateSubmit(Model model, @PathVariable String idDemand) {
+	public String processUpdateSubmit(Model model, @PathVariable int idDemand) {
 		
-		model.addAttribute("demand", demandDao.getDemandWithNameSkill(idDemand));
+		model.addAttribute("demand", demandDao.getDemand(idDemand));
 		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
@@ -200,7 +199,7 @@ public class DemandController {
 	}
 	
 	@RequestMapping(value="/update/{idDemand}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
+	public String processUpdateSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
@@ -220,32 +219,34 @@ public class DemandController {
 	  
 	   //----------- actualización admin -----------------//
 		@RequestMapping(value="/updateByAdmin/{idDemand}", method = RequestMethod.GET)
-		public String processUpdateByAdminSubmit(Model model, @PathVariable String idDemand) {
+		public String processUpdateByAdminSubmit(Model model, @PathVariable int idDemand) {
 			
 			model.addAttribute("studentsSelect", studentDao.getStudents());
 			model.addAttribute("adminsSelect", adminDao.getAdmins());
 			model.addAttribute("skillsSelect", skillDao.getSkills());
-			model.addAttribute("degreesSelect", degreeDao.getDegrees());
-			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+			model.addAttribute("offersSelect", offerDao.getOffers());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
-			model.addAttribute("demand", demandDao.getDemandWithNameSkill(idDemand));
-			model.addAttribute("Skill", demandDao.getDemandWithNameSkill(idDemand).getIdSkill());
+			
+			model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
+			
+			model.addAttribute("demand", demandDao.getDemand(idDemand));
 			return "demand/updateByAdmin"; 
 			
 		}
 		
 		@RequestMapping(value="/updateByAdmin/{idDemand}", method = RequestMethod.POST) 
-		public String processUpdateByAdminSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+		public String processUpdateByAdminSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
 			
 			model.addAttribute("studentsSelect", studentDao.getStudents());
 			model.addAttribute("adminsSelect", adminDao.getAdmins());
 			model.addAttribute("skillsSelect", skillDao.getSkills());
-			model.addAttribute("degreesSelect", degreeDao.getDegrees());
-			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+			model.addAttribute("offersSelect", offerDao.getOffers());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
-			model.addAttribute("Skill", demandDao.getDemandWithNameSkill(idDemand).getIdSkill());
+			model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
 			
 			DemandValidator demandValidator = new DemandValidator();
 			
@@ -265,7 +266,7 @@ public class DemandController {
 	
 	//----------- eliminación ------------------
 	@RequestMapping(value="/delete/{idDemand}", method = RequestMethod.GET)
-	public String processDeleteSubmit(Model model, @PathVariable String idDemand) {
+	public String processDeleteSubmit(Model model, @PathVariable int idDemand) {
 		
 		model.addAttribute("demand", demandDao.getDemand(idDemand));
 		
@@ -277,7 +278,7 @@ public class DemandController {
 	}
 	
 	@RequestMapping(value="/delete/{idDemand}", method = RequestMethod.POST) 
-	public String processDeleteSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
+	public String processDeleteSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
@@ -297,32 +298,32 @@ public class DemandController {
 	  
 	   //----------- eliminación admin------------------
 		@RequestMapping(value="/deleteByAdmin/{idDemand}", method = RequestMethod.GET)
-		public String processdeleteByAdminSubmit(Model model, @PathVariable String idDemand) {
+		public String processdeleteByAdminSubmit(Model model, @PathVariable int idDemand) {
 			
 			model.addAttribute("studentsSelect", studentDao.getStudents());
 			model.addAttribute("adminsSelect", adminDao.getAdmins());
 			model.addAttribute("skillsSelect", skillDao.getSkills());
-			model.addAttribute("degreesSelect", degreeDao.getDegrees());
-			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+			model.addAttribute("offersSelect", offerDao.getOffers());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
-			model.addAttribute("demand", demandDao.getDemandWithNameSkill(idDemand));
-			model.addAttribute("Skill", demandDao.getDemandWithNameSkill(idDemand).getIdSkill());
+			model.addAttribute("demand", demandDao.getDemand(idDemand));
+			model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
 			return "demand/deleteByAdmin"; 
 			
 		}
 		
 		@RequestMapping(value="/deleteByAdmin/{idDemand}", method = RequestMethod.POST) 
-		public String processDeleteByAdminSubmit(@PathVariable String idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+		public String processDeleteByAdminSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
 			
 			model.addAttribute("studentsSelect", studentDao.getStudents());
 			model.addAttribute("adminsSelect", adminDao.getAdmins());
 			model.addAttribute("skillsSelect", skillDao.getSkills());
-			model.addAttribute("degreesSelect", degreeDao.getDegrees());
-			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+			model.addAttribute("offersSelect", offerDao.getOffers());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
-			model.addAttribute("Skill", demandDao.getDemandWithNameSkill(idDemand).getIdSkill());
+			model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
 		
 			DemandValidator demandValidator = new DemandValidator();
 			

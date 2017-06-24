@@ -105,7 +105,7 @@ border-radius: 20px;
 			                	<option value="1" selected="selected">Primero</option>
 				                	<option value="2">Segundo</option>
 				                	<option value="3">Tercero</option>
-				                	<option value="2">Cuarto</option>                	
+				                	<option value="4">Cuarto</option>                	
 				                	</select>
 				                </td>
 		                

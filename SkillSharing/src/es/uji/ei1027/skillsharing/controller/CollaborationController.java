@@ -130,16 +130,16 @@ public class CollaborationController {
 		
 		List<Collaboration> collaborations= collaborationDao.getCollaborations();
 		Collaboration collaboration = new Collaboration();
-		String idCollaboration;
+		int idCollaboration;
 		
 		if (collaborations.isEmpty()){
 			
-			idCollaboration = "1";
+			idCollaboration = 1;
 			collaboration.setIdCollaboration(idCollaboration);
 			
 		}else{
 		
-			idCollaboration = String.valueOf(Integer.parseInt(collaborations.get(0).getIdCollaboration()) + 1);
+			idCollaboration = collaborations.get(0).getIdCollaboration() + 1;
 			collaboration.setIdCollaboration(idCollaboration);
 		}
 		
@@ -181,7 +181,7 @@ public class CollaborationController {
 	}
 	
 	@RequestMapping(value="/valoration/{idCollaboration}", method = RequestMethod.GET)
-	public String valoration(Model model, @PathVariable String idCollaboration) {
+	public String valoration(Model model, @PathVariable int idCollaboration) {
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		model.addAttribute("offerName", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
@@ -195,7 +195,7 @@ public class CollaborationController {
 	}
 	
 	@RequestMapping(value="/valoration/{idCollaboration}", method = RequestMethod.POST) 
-	public String processValorationSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model) {
+	public String processValorationSubmit(@PathVariable int idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model) {
 		
 		model.addAttribute("offerName", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
 		model.addAttribute("demandName", demandDao.getDemand(collaborationDao.getCollaboration(idCollaboration).getIdDemand()));
@@ -221,7 +221,7 @@ public class CollaborationController {
 	
 	//----------- actualización ------------------
 	@RequestMapping(value="/update/{idCollaboration}", method = RequestMethod.GET)
-	public String processUpdateSubmit(Model model, @PathVariable String idCollaboration){
+	public String processUpdateSubmit(Model model, @PathVariable int idCollaboration){
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		model.addAttribute("offer", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
@@ -235,7 +235,7 @@ public class CollaborationController {
 	}
 	
 	@RequestMapping(value="/update/{idCollaboration}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(Model model, @PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
+	public String processUpdateSubmit(Model model, @PathVariable int idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		model.addAttribute("offer", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
@@ -263,14 +263,14 @@ public class CollaborationController {
 	  
 	  //----------- actualización admin -----------------//
 		@RequestMapping(value="/updateByAdmin/{idCollaboration}", method = RequestMethod.GET)
-		public String processUpdateByAdminSubmit(Model model, @PathVariable String idCollaboration) {
+		public String processUpdateByAdminSubmit(Model model, @PathVariable int idCollaboration) {
 			
 			model.addAttribute("studentsSelect", studentDao.getStudents());
 			model.addAttribute("adminsSelect", adminDao.getAdmins());
 			model.addAttribute("skillsSelect", skillDao.getSkills());
-			model.addAttribute("degreesSelect", degreeDao.getDegrees());
-			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+			model.addAttribute("offersSelect", offerDao.getOffers());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 			model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 			
@@ -282,14 +282,14 @@ public class CollaborationController {
 		}
 		
 		@RequestMapping(value="/updateByAdmin/{idCollaboration}", method = RequestMethod.POST) 
-		public String processUpdateByAdminSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model) {
+		public String processUpdateByAdminSubmit(@PathVariable int idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model) {
 			
 			model.addAttribute("studentsSelect", studentDao.getStudents());
 			model.addAttribute("adminsSelect", adminDao.getAdmins());
 			model.addAttribute("skillsSelect", skillDao.getSkills());
-			model.addAttribute("degreesSelect", degreeDao.getDegrees());
-			model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-			model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+			model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+			model.addAttribute("offersSelect", offerDao.getOffers());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 			
 			model.addAttribute("offerName", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
@@ -301,9 +301,10 @@ public class CollaborationController {
 			
 			collaborationValidator.validateUpdate(collaboration, bindingResult);
 			
-			if (bindingResult.hasErrors()) 
+			if (bindingResult.hasErrors()) {
 				
 				 return "collaboration/updateByAdmin";
+			}
 			
 			 collaborationDao.updateCollaboration(collaboration);
 			 
@@ -313,7 +314,7 @@ public class CollaborationController {
 	
 	//----------- eliminación ------------------
 	@RequestMapping(value="/delete/{idCollaboration}", method = RequestMethod.GET)
-	public String processDeleteSubmit(Model model, @PathVariable String idCollaboration) {
+	public String processDeleteSubmit(Model model, @PathVariable int idCollaboration) {
 		
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		
@@ -325,7 +326,7 @@ public class CollaborationController {
 	}
 	
 	@RequestMapping(value="/delete/{idCollaboration}", method = RequestMethod.POST) 
-	public String processDeleteSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
+	public String processDeleteSubmit(@PathVariable int idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult) {
 		
 		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 		
@@ -343,14 +344,14 @@ public class CollaborationController {
 	  
 	  //----------- eliminación admin -----------------//
 	@RequestMapping(value="/deleteByAdmin/{idCollaboration}", method = RequestMethod.GET)
-	public String processDeleteByAdminSubmit(Model model, @PathVariable String idCollaboration) {
+	public String processDeleteByAdminSubmit(Model model, @PathVariable int idCollaboration) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		
@@ -362,14 +363,14 @@ public class CollaborationController {
 	}
 	
 	@RequestMapping(value="/deleteByAdmin/{idCollaboration}", method = RequestMethod.POST) 
-	public String processDeleteByAdminSubmit(@PathVariable String idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model) {
+	public String processDeleteByAdminSubmit(@PathVariable int idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model) {
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
-		model.addAttribute("degreesSelect", degreeDao.getDegrees());
-		model.addAttribute("offersSelect", offerDao.getOffersWithNameSkill());
-		model.addAttribute("demandsSelect", demandDao.getDemandsWithNameSkill());
+		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
+		model.addAttribute("offersSelect", offerDao.getOffers());
+		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
 		model.addAttribute("offerName", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));

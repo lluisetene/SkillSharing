@@ -21,6 +21,7 @@ import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Degree;
 import es.uji.ei1027.skillsharing.model.Skill;
+import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.DegreeValidator;
 
@@ -35,6 +36,7 @@ public class DegreeController {
 	private OfferDAO offerDao;
 	private DemandDAO demandDao;
 	private CollaborationDAO collaborationDao;
+	private Statistics estadisticas = new Statistics();
 	
 	@Autowired
 	public void setDegreeDao(DegreeDAO degreeDao, StudentDAO studentDao, AdminDAO adminDao, SkillDAO skillDao, OfferDAO offerDao, DemandDAO demandDao, CollaborationDAO collaborationDao) {
@@ -122,6 +124,13 @@ public class DegreeController {
 	@RequestMapping("/add")
 	public String addDegree(Model model) {
 		
+		
+		estadisticas = studentDao.getEstadisticas();
+		estadisticas.setDatos(offerDao.getOffers(), demandDao.getDemands(), collaborationDao.getCollaborations());
+		
+		model.addAttribute("statistics", estadisticas);
+		
+		model.addAttribute("degreesStudent", degreeDao.getDegreesDistinctName());
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
 		model.addAttribute("skillsSelect", skillDao.getSkills());
@@ -157,6 +166,13 @@ public class DegreeController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("degree") Degree degree, BindingResult bindingResult, Model model) {
+	
+		estadisticas = studentDao.getEstadisticas();
+		estadisticas.setDatos(offerDao.getOffers(), demandDao.getDemands(), collaborationDao.getCollaborations());
+		
+		model.addAttribute("statistics", estadisticas);
+		
+		model.addAttribute("degreesStudent", degreeDao.getDegreesDistinctName());
 		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
@@ -178,7 +194,7 @@ public class DegreeController {
 			
 		degreeDao.addDegree(degree);
 		
-		return "redirect:../admin/main.html";
+		return "redirect:../student/update/" + degree.getNid() + ".html";
 		
 	}
 	

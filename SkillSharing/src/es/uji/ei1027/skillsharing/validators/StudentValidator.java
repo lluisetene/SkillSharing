@@ -121,6 +121,7 @@ public class StudentValidator implements Validator {
 		
 		
 		// -------- NID -------- //
+		System.out.println(student);
 		if ( student.getNid().trim().equals("") )
 			errors.rejectValue("nid", "required", "Este campo es obligatorio");
 		else if ( student.getNid().length() != 9 )
@@ -142,11 +143,12 @@ public class StudentValidator implements Validator {
 		
 		
 		// ----- PASSWORD ---- //
-		if ( student.getPassword().trim().equals("") )
+		if ( student.getPassword().trim().equals("") ){
 			errors.rejectValue("password", "required", "Este campo es obligatorio");
-		else if ( student.getPassword().length() < 6 )
+			
+		}else if ( student.getPassword().length() <= 6 ){
 			errors.rejectValue("password",  "required", "La contraseña debe tener más de 6 caracteres");
-		
+		}	
 		// ------ MAIL ----- //
 		if( student.getMail().trim().equals("") )
 			errors.rejectValue("mail", "required", "Este campo es obligatorio");

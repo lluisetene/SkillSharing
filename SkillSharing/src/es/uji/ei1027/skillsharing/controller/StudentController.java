@@ -25,6 +25,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Degree;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.StudentValidator;
@@ -160,8 +161,12 @@ public class StudentController {
 		
 	}
 	
+	
+	
 	@RequestMapping(value="/update/{nid}", method = RequestMethod.GET)
 	public String updateStudent(Model model, @PathVariable String nid) {
+		
+		model.addAttribute("degreesStudent", degreeDao.getStudentDegreeList(nid));
 		
 		model.addAttribute("student", studentDao.getStudent(nid));
 		
@@ -175,10 +180,10 @@ public class StudentController {
 	@RequestMapping(value="/update/{nid}", method=RequestMethod.POST)
 	public String processUpdateSubmit(Model model, @PathVariable String nid, @ModelAttribute("student") Student student, BindingResult bindingResult) {
 		
-		model.addAttribute("student", studentDao.getStudent(nid));
-		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
+		
+		model.addAttribute("degreesStudent", degreeDao.getStudentDegreeList(nid));
 		
 		StudentValidator studentValidator = new StudentValidator();
 
@@ -288,5 +293,15 @@ public class StudentController {
 		 return "redirect:../../admin/main.html"; 
 		 
 	  }
+	
+	@RequestMapping(value="/addDegree", method = RequestMethod.GET)
+	public String processDeleteDesdePerfilSubmit(@ModelAttribute("degree") Degree degree) {
+		
+		degreeDao.addDegree(degree);
+		
+		return "redirect:../../index.jsp"; 
+		
+	}
+
 	
 }

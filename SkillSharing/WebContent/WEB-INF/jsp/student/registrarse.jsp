@@ -140,8 +140,8 @@ border-radius: 20px;
 		        
 				        </table>
 				    
-				    	<input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:105px; height:35px" type = "submit" name = "submit" value = "Registrarse">
-				        <input class = "btn" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:2%;width:105px; height:35px" type = "button" onclick = "location='${pageContext.request.contextPath}/index.jsp'" name = "cancel" value = "Cancelar">
+				    	<input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:90px; height:35px" type = "button" onclick = "location='${pageContext.request.contextPath}/index.jsp'" name = "cancel" value = "Cancelar" >
+				        <input class = "btn" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:2%;width:105px; height:35px" type = "submit" name = "submit" value = "Registrarse">
 				    
 				    </form:form>
 				    

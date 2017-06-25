@@ -42,7 +42,7 @@ public class DegreeValidator implements Validator {
 		// -------- NAME ----- //
 		if ( degree.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( degree.getName().length() < 5 )
+		else if ( degree.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < degreesList.size(); i++ )

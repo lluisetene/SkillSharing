@@ -48,6 +48,12 @@ public class DegreeDAO {
 		
 	}
 	
+	public List<Degree> getStudentDegreeList (String nid){
+		
+		return this.jdbcTemplate.query("select * from degree WHERE nid = ? order by idDegree DESC;", new Object[] {nid}, new DegreeMapper());
+		
+	}
+	
 	public List<Degree> getDegreeList(String name) {
 		
 		return this.jdbcTemplate.query("select * from degree where name = ?", new Object[] {name}, new DegreeMapper());

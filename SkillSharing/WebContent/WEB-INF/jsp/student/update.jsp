@@ -61,8 +61,8 @@
 		            <tr>
 		            
 		                <td><form:label path="password">Contraseña</form:label></td>
-		                <td><form:input style = "border:1px solid black; color:black" cssClass="form-control" type = "password" maxlength = "30" path="password"/></td>
-		                <td><form:errors path="password" cssClass="error" /></td>
+		                <td><form:input style = "border:1px solid black; color:black" cssClass="form-control" type = "password" maxlength = "30" path="password"/><form:errors path="password" cssClass="error" /></td>
+		             
 		                
 		            </tr>
 		            
@@ -77,7 +77,7 @@
 		            <tr> 
 		            
 		                <td><form:label path="course">Curso</form:label></td>
-		                <td><form:input style = "width:25%; border:1px solid black; color:black" cssClass="form-control" type = "number" maxlength = "1" name = "course" min = "1" max = "4" value = "${student.course}" placeholder="º" path="course"/></td>
+		                <td><form:input style = "width:25%; border:1px solid black; color:black" cssClass="form-control" type = "number" maxlength = "1" name = "course" min = "1" max = "4" value = "${student.course}" placeholder="º" path="course" required="true"/></td>
 		                <td><form:errors path="course" cssClass="error" /></td>
 		                
 		            </tr>
@@ -97,22 +97,17 @@
 		             <tr>
 		            
 		                <td><form:label path="banned">Baneado</form:label></td>
-		                <td><form:input style = "width:40%;border:1px solid black; color:black; " Class="form-control" id="banned" name="banned" path="banned" disabled="true" /></td> 
+		                <td><form:input style = "background-color:eeeeee;width:40%;border:1px solid black; color:black; " Class="form-control" id="banned" name="banned" path="banned" disabled="true" /></td> 
 		            
 		            </tr>
 		        
 		        </table>
 		        <div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
-		       	<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onclick = "document.getElementById('nid').disabled=false,
-																																																								       		document.getElementById('username').disabled=false,
-																																																								       		document.getElementById('name').disabled=false,
-																																																								       		document.getElementById('password').disabled=false,
-																																																								       		document.getElementById('course').disabled=false,
-																																																								       		document.getElementById('offerHours').disabled=false,
-																																																								       		document.getElementById('demandHours').disabled=false,
-																																																								       		document.getElementById('mail').disabled=false
-																																																								       		document.getElementById('banned').disabled=false;"/>
-		        <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/admin/main.html'" name = "cancel" value = "Cancelar">
+		       	<input type = "button" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" />
+		        <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%; margin-top:5%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
+		  
+		  
+		  
 		   <!-- Modal -->
 				  <div class="modal fade" id="myModal" role="dialog">
 				    <div class="modal-dialog">
@@ -127,18 +122,68 @@
 				          <p><i>¿Seguro que desea modificar sus datos?</i></p>
 				        </div>
 				        <div  class="modal-footer" style = "background-color:eeeeee">
-				         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar">
+				         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar" onclick = "document.getElementById('nid').disabled=false,
+																																																				         document.getElementById('name').disabled=false,
+																																																				         document.getElementById('username').disabled=false,
+																																																				         document.getElementById('mail').disabled=false,
+																																																				         document.getElementById('offerHours').disabled=false,
+																																																				         document.getElementById('demandHours').disabled=false,
+																																																		       		document.getElementById('banned').disabled=false;">
 				        </div>
 				      </div>
 				      
 				    </div>
-				  </div>
-		   
-		   
+				  </div> 
    			</form:form>
+   			
+   			
+   			
    			</div>
+
    			</div>
    			
    		</div>
 
 </div>
+
+<div class = "col-lg-8 panel-body" style = "margin-top:10px;background-color:073763; border-radius:10px 10px 10px 10px;">
+
+	<div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
+	
+		<h1 style = "color:black;margin:0; padding-top:10px; padding-left:20px">Mis grados <button style = "background-color:eeeeee;  border:none" onclick = "location='http:${pageContext.request.contextPath}/degree/add.html'"><span style = "color: black; background-color:eeeeee" class="fa fa-plus-circle"></span></button></h1>
+    					
+    	<div style = "height:2px; width:40%; background-color:black"></div>
+    	
+    	<c:choose>
+    	
+    		<c:when test = "${degreesStudent.size() == 0}">
+    		
+    			<br>
+    			<p style = "text-align:center"><i>No estás apuntado en ningún grado actualmente</i></p>
+    			<br>
+    		
+    		</c:when>
+    		<c:otherwise>
+    		
+    			<c:forEach items="${degreesStudent}" var="degree">
+					
+					<br>		
+					<option value="${degree.name}">${degree.name} </option>
+					
+					<br>
+		
+				</c:forEach>
+    		
+    		
+    		</c:otherwise>
+    	
+    	
+    	</c:choose>
+    
+		
+		
+		
+			</div>
+			</div>
+
+		  

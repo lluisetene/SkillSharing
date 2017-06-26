@@ -143,7 +143,6 @@ public class OfferController {
 	@RequestMapping("/add")
 	public String addOffer(Model model) {
 		
-		
 		model.addAttribute("skills", skillDao.getSkills());
 		
 		estadisticas = studentDao.getEstadisticas();

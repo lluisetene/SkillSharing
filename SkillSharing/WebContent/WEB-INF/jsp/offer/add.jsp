@@ -35,63 +35,74 @@
     <form:form method="post" style = "padding-top:10; padding-left:25" modelAttribute="offer">
 	       
 		<table>
-        	
-        	<tr>
-                <td>
-                	<form:label path="idOffer">IdOferta</form:label>
-                	<form:input type = "text" maxlength = "5" path="idOffer" readonly = "true" disabled = "true"/>
-                </td>
+		        	
+        	<tr style = "height:50px">
+                
+                <td style = "width:225px"><form:label path="idOffer">IdOferta</form:label></td>
+                <td><form:input cssClass="form-control" style = "color:black;width:75px;border:1px solid black" type = "text" maxlength = "5" path="idOffer" disabled = "true" readonly = "true"/><form:errors path="idOffer" cssClass="error"/></td>
+            	
             </tr>
             
-            <tr>
-                <td>
-                	<form:label path="name">Nombre de la Oferta</form:label>
-                	<form:input type = "text" style="width:485px" maxlength = "100" path="name"  />
-            		<form:errors path="name" cssClass="error" />
-            	</td>
+            <tr style = "height:50px">
+            
+                <td><form:label path="nid">DNI</form:label></td>
+                <td><form:input cssClass="form-control" style = "color:black;width:150px;border:1px solid black" type = "text" maxlength = "9" path="nid" /><form:errors path="nid" cssClass="error"/></td>
+        
             </tr>
             
-            <tr>
-                <td>
-                <form:label path="idSkill">Habilidad</form:label>
-         		<select style = "width:563px; border:1px solid black; background-color:white;" id = "idSkill" name = "idSkill">
-					<option value="---">---</option>	
-					<c:forEach items="${skills}" var="skill">
-						<option value="${skill.getIdSkill()}">${skill.getName()} (${skill.getLevel()})</option>
-					</c:forEach>
-				</select>
-				</td>
+            <tr style = "height:50px">
+            
+                <td><form:label path="name">Nombre</form:label></td>
+                <td><form:input cssClass="form-control" style = "color:black;width:675px;border:1px solid black" type = "text" maxlength = "100" path="name" /><form:errors path="name" cssClass="error" /></td>
+  
             </tr>
             
-            <tr>
-                <td><form:label path="description">Descripcion<FONT SIZE=2>(máximo 300 caracteres)</FONT></form:label></td>
+            <tr style = "height:50px">
+                
+                <td><form:label path="idSkill">Habilidad</form:label></td>
+                <td style = "width:150px"><select Class="form-control" style = "color:black;width:250px; border:1px solid black" id="idSkill" name="idSkill">
+					
+					<option value = "${Skill.idSkill}">(Actual) ${Skill.name}  (${Skill.level}) </option>
+					
+					<c:forEach items="${skillsSelect}" var="skill">
+		
+						<option value="${skill.idSkill}">${skill.name} (${skill.level})</option>
+
+					</c:forEach>											
+
+					</select>		
             </tr>
             
-            <tr>
-                <td><textarea maxlength="300" rows="4" cols="68" style="resize:none;" name="description"></textarea>
-            </td>
+             <tr style = "height:50px">
+           
+               	<td colspan="2"><form:label path="description">Descripción <h6 style = "display:inline-block">(300 Caracteres)</h6></form:label></td>
+               
+           	</tr>
+           
+          		<tr>
+           
+           		<td colspan="4"><form:textarea  style = "resize:none; border:1px solid black; color:black" maxlength = "300" rows = "5" cols = "59" cssClass = "form-control" path="description" />
+           	
+           	
+           	</tr>
+           	
+           	</table>
+           	<table>
             
-            <tr>
-  	            <td>
-  	            	<form:label path="beginningDate" style="padding-left:150px">Fecha inicio</form:label>
-                	<form:label path="endingDate" style="padding-left:150px">Fecha fin</form:label>
-                <td>
-            </tr>
-            
-            <tr>
-                <td style="padding-left:140px">
-                	<form:input type="text" path="beginningDate" name="beginningdate" id="from" size="10" readonly="true"/>
-                	<b style="padding-left:100px"></b>
-                	<form:input type="text" path="endingDate" name="endingdate" id="to" size="10" readonly="true" />
-                <td>
-            </tr>
-            
-            <tr>
-                <td><form:input type = "hidden" maxlength = "9" path="nid" value='${studentLogin.getNid()}' readonly = "true" disabled = "true"/></td>
-            	<td><form:errors path="nid" cssClass="error"/></td>
-            </tr>
-            
-        </table>
+	            <tr style = "height:100px">
+	            
+	                <td style = "width:200px"><form:label path="beginningDate">Fecha inicio</form:label></td>
+	                <td><form:input cssClass="form-control" style = "background-color:white;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="beginningDate" name="datepicker" id = "from"  size="10" readonly="true"/><form:errors path="beginningDate" cssClass="error" /></td>
+	        
+	          		<td style = "padding-left:200px;width:400px"><form:label path="endingDate">Fecha fin</form:label></td>
+               		<td><form:input cssClass="form-control" style = "background-color:white;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="endingDate" name="datepicker" id="to" size="10" readonly="true"/><form:errors path="endingDate" cssClass="error" /><td>
+	          		
+	            </tr>
+	            
+          		
+          
+    		</table>
+		       			
         
         <div style = "margin-top:25px; height:2px; width:97%; background-color:black"></div>
 		<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%;margin-top:5%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal" onClick = "document.getElementById('idOffer').disabled=false, 

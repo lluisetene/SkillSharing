@@ -302,6 +302,17 @@ public class StudentController {
 		return "redirect:../../index.jsp"; 
 		
 	}
+	
+	//---------------- eliminación ---------------
+	@RequestMapping(value="/delete/{nid}", method = RequestMethod.GET)
+	public String processDeleteDesdePerfilSubmit(Model model, @PathVariable String nid, HttpSession session) {
+
+		studentDao.deleteStudent(nid);
+		session.invalidate();
+		
+		return "redirect:../../index.jsp"; 
+		
+	}
 
 	
 }

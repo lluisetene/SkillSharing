@@ -185,5 +185,69 @@
 		
 			</div>
 			</div>
+			
+<div class = "col-lg-8 panel-body" style = "margin-top:10px;background-color:073763; border-radius:10px 10px 10px 10px;">
+
+	<div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
+	
+		<h1 style = "color:black;margin:0; padding-top:10px; padding-left:20px">Eliminar cuenta </h1>
+    					
+    	<div style = "height:2px; width:40%; background-color:black"></div>
+    	
+    		<form:form method="post" style = "padding-top:10; padding-left:25; margin-bottom:5%" modelAttribute="student">
+    	
+	    		<table>
+							
+		        	<tr>
+		        	
+		                <td><form:label path="nid" hidden="true">DNI Estudiante</form:label></td>
+		                <td><form:input style = "border:1px solid black; color:black" cssClass="form-control" type = "hidden" maxlength = "9" path="nid" disabled="true" readonly="true"/><form:errors path="username" cssClass="error" /></td>
+		                
+		                	                
+		            </tr>
+			            
+	      		</table>
+	      		
+	      		<input type = "button" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:35%; width:100px; height:35px" class = "btn" value = "Aceptar" data-toggle="modal" data-target="#myModal2" onclick = "document.getElementById('nid').disabled=false;"/>
+	            <input style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:3%;width:100px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
+    	
+    			<!-- Modal -->
+			  	<div class="modal fade" id="myModal2" role="dialog">
+			    	
+			    	<div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        
+			      	<div class="modal-header">
+			          
+			        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+			          	<h4 style = "color:black" class="modal-title">Eliminar Perfil</h4>
+			        
+			        </div>
+			        
+			        <div class="modal-body">
+			        
+			          <p><i>¿Seguro que desea Eliminar su cuenta de Estudiante?</i></p>
+			        
+			        </div>
+			        
+			        <div  class="modal-footer" style = "background-color:eeeeee">
+			        
+			        	<input type="button" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/student/delete/${studentLogin.nid}.html'">
+			        
+			        </div>
+			      
+			      </div>
+			      
+			    </div>
+			  
+			  </div>
+			  
+			 </form:form>
+    	
+	</div>
+	
+</div>
 
 		  

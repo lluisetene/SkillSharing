@@ -121,7 +121,6 @@ public class StudentValidator implements Validator {
 		
 		
 		// -------- NID -------- //
-		System.out.println(student);
 		if ( student.getNid().trim().equals("") )
 			errors.rejectValue("nid", "required", "Este campo es obligatorio");
 		else if ( student.getNid().length() != 9 )

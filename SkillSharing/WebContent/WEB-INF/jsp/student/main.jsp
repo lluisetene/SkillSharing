@@ -169,16 +169,7 @@
 						           		<td>${collaboration.endingDate}</td>
 						           		<td>${collaboration.hours}</td>
 						           		<td>${collaboration.rate}</td>
-						           		<td>
-											<c:choose>
-												<c:when test="${collaboration.colaboracionCaducada() == true }">
-													<i class="fa fa-lock" style="color:black"></i>
-												</c:when>
-												<c:otherwise>
-													<button style = "width:100%;text-align:center" class="btn fa fa-check-circle" type = "submit" onClick ="location='http:${pageContext.request.contextPath}/collaboration/valoration/${collaboration.idCollaboration}.html'"/></button>
-												</c:otherwise>
-											</c:choose>
-						           		</td>
+						         
 						           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
 							            <td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
 					               		

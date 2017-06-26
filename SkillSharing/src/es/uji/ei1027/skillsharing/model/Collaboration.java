@@ -8,8 +8,8 @@ public class Collaboration {
 	private int idCollaboration;
 	private int idOffer;
 	private int idDemand;
-	private Date beginningDate;
-	private Date endingDate;
+	private String beginningDate;
+	private String endingDate;
 	private String hours;
 	private float rate;
 	
@@ -51,21 +51,21 @@ public class Collaboration {
 	
 	public String getBeginningDate(){
 		
-		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
-		
-		return formateador.format(beginningDate);
+		return beginningDate;
 		
 	}
 
 	public Date getBeginningDateBD() {
 		
-		return beginningDate;
+	//Año -1900 porque empieza en 1900, Mes-1 porque va de 0 a 11
+		
+		return new Date(Integer.parseInt(beginningDate.split("/")[2])-1900, Integer.parseInt(beginningDate.split("/")[1])-1, Integer.parseInt(beginningDate.split("/")[0]));
 		
 	}
 	
 	
 
-	public void setBeginningDate(Date beginningDate) {
+	public void setBeginningDate(String beginningDate) {
 		
 		this.beginningDate = beginningDate;
 		
@@ -73,19 +73,19 @@ public class Collaboration {
 	
 	public String getEndingDate(){
 	
-		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
-	
-		return formateador.format(endingDate);
+		return endingDate;
 	
 	}
 	
 	public Date getEndingDateBD() {
 		
-		return endingDate;
+		//Año -1900 porque empieza en 1900, Mes-1 porque va de 0 a 11
+		
+		return new Date(Integer.parseInt(endingDate.split("/")[2])-1900, Integer.parseInt(endingDate.split("/")[1])-1, Integer.parseInt(endingDate.split("/")[0]));
 		
 	}
 
-	public void setEndingDate(Date endingDate) {
+	public void setEndingDate(String endingDate) {
 		
 		this.endingDate = endingDate;
 		
@@ -115,21 +115,6 @@ public class Collaboration {
 		
 	}
 	
-	public boolean colaboracionCaducada() {
-		
-	   Date date = new Date();
-	   SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-	   String fechaDeHoy[] = ft.format(date).split("-");
-	   String finalColaboracion[] = ft.format(endingDate).split("-");
-	   
-	   if ( Integer.parseInt(finalColaboracion[0]) <= Integer.parseInt(fechaDeHoy[0]) ) 
-		   if ( Integer.parseInt(finalColaboracion[1]) <= Integer.parseInt(fechaDeHoy[1]) ) 
-			   if ( Integer.parseInt(finalColaboracion[2]) <= Integer.parseInt(fechaDeHoy[2]) )
-				   return false;
-	   return true;
-	  
-	}
-
 	@Override
 	public String toString() {
 		

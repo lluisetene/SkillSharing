@@ -2,6 +2,7 @@ package es.uji.ei1027.skillsharing.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -51,8 +52,11 @@ public class DemandDAO {
 			demand.setName(rs.getString("name"));
 			demand.setIdSkill(rs.getInt("idskill"));
 			demand.setDescription(rs.getString("description"));
-			demand.setBeginningDate(rs.getDate("beginningdate"));
-			demand.setEndingDate(rs.getDate("endingdate"));
+			
+			SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+			
+			demand.setBeginningDate(formateador.format(rs.getDate("beginningdate")));
+			demand.setEndingDate(formateador.format(rs.getDate("endingdate")));
 		
 			return demand;
 		

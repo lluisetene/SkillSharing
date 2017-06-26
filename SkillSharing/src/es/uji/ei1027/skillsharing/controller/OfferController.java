@@ -162,14 +162,18 @@ public class OfferController {
 			idOffer = offers.get(0).getIdOffer() + 1;
 			offer.setIdOffer(idOffer);
 		}
-		
 		model.addAttribute("offer", offer);
 		return "offer/add";
 		
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
+	public String processAddSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("skills", skillDao.getSkills());
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		offerValidator = new OfferValidator();
 		
@@ -183,7 +187,6 @@ public class OfferController {
 		
 		offerDao.addOffer(offer);
 		
-		System.out.println(offer);
 		
 		return "redirect:../student/main.html";
 		
@@ -192,8 +195,11 @@ public class OfferController {
 	//----------- actualización -----------------//
 	@RequestMapping(value="/update/{idOffer}", method = RequestMethod.GET)
 	public String processUpdateSubmit(Model model, @PathVariable int idOffer) {
+	
+		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("Skill", skillDao.getSkill(offerDao.getOffer(idOffer).getIdSkill()));
 		
-		model.addAttribute("offer", offerDao.getOffers());
+		model.addAttribute("offer", offerDao.getOffer(idOffer));
 
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
@@ -203,7 +209,13 @@ public class OfferController {
 	}
 	
 	@RequestMapping(value="/update/{idOffer}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable int idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
+	public String processUpdateSubmit(@PathVariable int idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("Skill", skillDao.getSkill(offerDao.getOffer(idOffer).getIdSkill()));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		offerValidator = new OfferValidator();
 		
@@ -273,6 +285,7 @@ public class OfferController {
 	@RequestMapping(value="/delete/{idOffer}", method = RequestMethod.GET)
 	public String processDeleteSubmit(Model model, @PathVariable int idOffer) {
 		
+		model.addAttribute("Skill", skillDao.getSkill(offerDao.getOffer(idOffer).getIdSkill()));
 		model.addAttribute("offer", offerDao.getOffer(idOffer));
 
 		estadisticas = studentDao.getEstadisticas();
@@ -283,7 +296,12 @@ public class OfferController {
 	}
 	
 	@RequestMapping(value="/delete/{idOffer}", method = RequestMethod.POST) 
-	public String processDeleteSubmit(@PathVariable int idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult) {
+	public String processDeleteSubmit(@PathVariable int idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("Skill", skillDao.getSkill(offerDao.getOffer(idOffer).getIdSkill()));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		offerValidator = new OfferValidator();
 		

@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.model;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,8 +11,8 @@ public class Offer {
 	private String name;
 	private int idSkill;
 	private String description;
-	private Date beginningDate;
-	private Date endingDate;
+	private String beginningDate;
+	private String endingDate;
 	
 	public int getIdOffer() {
 		
@@ -75,19 +76,19 @@ public class Offer {
 	//Este lo convertimos para mostrarlo bien durante su uso y de vuelta a la BD usamos el otro
 	public String getBeginningDate(){
 		
-		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
-		
-		return formateador.format(beginningDate);
+		return beginningDate;
 		
 	}
 	//Es necesario porque en la base de datos se guarda como DATE
 	public Date getBeginningDateBD(){
 		
-		return beginningDate;
+		//Año -1900 porque empieza en 1900, Mes-1 porque va de 0 a 11
+		
+		return new Date(Integer.parseInt(beginningDate.split("/")[2])-1900, Integer.parseInt(beginningDate.split("/")[1])-1, Integer.parseInt(beginningDate.split("/")[0]));
 		
 	}
 
-	public void setBeginningDate(Date beginningDate) {
+	public void setBeginningDate(String beginningDate) {
 		
 		this.beginningDate = beginningDate;
 		
@@ -96,19 +97,20 @@ public class Offer {
 	
 	public String getEndingDate(){
 		
-		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		return endingDate;
 		
-		return formateador.format(endingDate);
 		
 	}
 	
 	public Date getEndingDateBD(){
 		
-		return endingDate;
+		//Año -1900 porque empieza en 1900, Mes-1 porque va de 0 a 11
+		
+		return new Date(Integer.parseInt(endingDate.split("/")[2])-1900, Integer.parseInt(endingDate.split("/")[1])-1, Integer.parseInt(endingDate.split("/")[0]));
 		
 	}
 
-	public void setEndingDate(Date endingDate) {
+	public void setEndingDate(String endingDate) {
 		
 		this.endingDate = endingDate;
 		

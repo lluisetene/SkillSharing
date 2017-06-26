@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillsharing.model;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class Statistics {
 		
 		if ( diccOfertas.containsKey(nid) ) {
 			for ( int i = 0; i < diccOfertas.get(nid).size(); i++ ) {
-				fecha = diccOfertas.get(nid).get(i).getBeginningDate().toString().split("-");
+				fecha = diccOfertas.get(nid).get(i).getBeginningDate().toString().split("/");
 				if ( Integer.parseInt(fecha[1]) == mes )
 					contador++;
 				}
@@ -123,7 +124,7 @@ public class Statistics {
 		
 		if ( diccDemandas.containsKey(nid) ) {
 			for ( int i = 0; i < diccDemandas.get(nid).size(); i++ ) {
-				fecha = diccDemandas.get(nid).get(i).getBeginningDate().toString().split("-");
+				fecha = diccDemandas.get(nid).get(i).getBeginningDate().toString().split("/");
 				if ( Integer.parseInt(fecha[1]) == mes )
 					contador++;
 			}

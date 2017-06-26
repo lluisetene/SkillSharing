@@ -68,7 +68,7 @@ public class OfferValidator implements Validator {
 		// -------- NAME ----- //
 		if ( offer.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( offer.getName().length() < 5 )
+		else if ( offer.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		else {
 			for ( int i = 0; i < offersList.size(); i++ )

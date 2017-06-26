@@ -2,6 +2,7 @@ package es.uji.ei1027.skillsharing.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -35,8 +36,11 @@ public class CollaborationDAO {
 			collaboration.setIdCollaboration(rs.getInt("idcollaboration"));
 			collaboration.setIdOffer(rs.getInt("idoffer"));
 			collaboration.setIdDemand(rs.getInt("iddemand"));
-			collaboration.setBeginningDate(rs.getDate("beginningDate"));
-			collaboration.setEndingDate(rs.getDate("endingDate"));
+			
+			SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+			
+			collaboration.setBeginningDate(formateador.format(rs.getDate("beginningdate")));
+			collaboration.setEndingDate(formateador.format(rs.getDate("endingdate")));
 			collaboration.setHours(rs.getString("hours"));
 			collaboration.setRate(rs.getFloat("rate"));
 			

@@ -36,14 +36,14 @@
 	       
 	<table>
 		        	
-       	<tr style = "height:50px">
+       	<tr style = "display:none; height:50px">
                
                <td style = "width:225px"><form:label path="idOffer">IdOferta</form:label></td>
                <td><form:input cssClass="form-control" style = "color:black;width:75px;border:1px solid black" type = "text" maxlength = "5" path="idOffer" disabled = "true" readonly = "true"/><form:errors path="idOffer" cssClass="error"/></td>
            	
            </tr>
            
-           <tr style = "display:none;height:50px">
+           <tr style = "display:none; height:50px">
            
                <td><form:label path="nid">DNI</form:label></td>
                <td><form:input cssClass="form-control" style = "color:black;width:150px;border:1px solid black; " type = "text" maxlength = "9" path="nid" value = "${studentLogin.nid}"/><form:errors path="nid" cssClass="error"/></td>
@@ -53,14 +53,14 @@
            <tr style = "height:50px">
            
                <td><form:label path="name">Nombre</form:label></td>
-               <td><form:input cssClass="form-control" style = "color:black;width:675px;border:1px solid black" type = "text" maxlength = "100" path="name" /><form:errors path="name" cssClass="error" /></td>
+               <td style="padding-left:2%"><form:input cssClass="form-control" style = "color:black;width:675px;border:1px solid black" type = "text" maxlength = "100" path="name" /><form:errors path="name" cssClass="error" /></td>
  
            </tr>
            
            <tr style = "height:50px">
                
                <td><form:label path="idSkill">Habilidad</form:label></td>
-               <td style = "width:150px"><select Class="form-control" style = "color:black;width:250px; border:1px solid black" id="idSkill" name="idSkill">
+               <td style = "padding-left:2%; width:150px"><select Class="form-control" style = "color:black;width:250px; border:1px solid black" id="idSkill" name="idSkill">
 				
 				<c:forEach items="${skills}" var="skill">
 	

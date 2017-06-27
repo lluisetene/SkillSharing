@@ -83,6 +83,8 @@ public class DemandController {
 		model.addAttribute("demands", demandDao.getDemands());
 		model.addAttribute("skills", skillDao.getSkills());
 		model.addAttribute("demand", new Demand());
+		model.addAttribute("student", studentDao);
+		model.addAttribute("skill", skillDao);
 
 		return "demand/list";
 
@@ -91,8 +93,10 @@ public class DemandController {
 	@RequestMapping(value="/list", method=RequestMethod.POST)
 	public String processListSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
 	
+		model.addAttribute("student", studentDao);
 		model.addAttribute("demands", demandDao.getDemands());
 		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("skill", skillDao);
 		
 		if (demand.getIdSkill() == -1){
 

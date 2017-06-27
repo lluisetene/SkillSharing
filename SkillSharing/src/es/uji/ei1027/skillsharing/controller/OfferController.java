@@ -24,7 +24,6 @@ import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Offer;
-import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.validators.OfferValidator;
 
@@ -79,9 +78,11 @@ public class OfferController {
 	@RequestMapping("/list")
 	public String listOffers(Model model) {
 		
+		model.addAttribute("student", studentDao);
 		model.addAttribute("offers", offerDao.getOffers());
 		model.addAttribute("skills", skillDao.getSkills());
 		model.addAttribute("offer", new Offer());
+		model.addAttribute("skill", skillDao);
 
 		return "offer/list";
 
@@ -90,8 +91,10 @@ public class OfferController {
 	@RequestMapping(value="/list", method=RequestMethod.POST)
 	public String processListSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
 	
+		model.addAttribute("student", studentDao);
 		model.addAttribute("offers", offerDao.getOffers());
 		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("skill", skillDao);
 		
 		if (offer.getIdSkill() == -1){
 

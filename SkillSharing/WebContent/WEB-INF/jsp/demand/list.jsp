@@ -70,9 +70,9 @@ width:300px;
 						<option value="Todas" >Todas</option>	
 						
 						<c:forEach items="${skills}" var="skill">
-		
-							<option value="${skill.idSkill}">${skill.name}</option>
-
+						
+								<option value="${skill.idSkill}">${skill.name}</option>
+								
 						</c:forEach>
 						
 					</select>
@@ -116,12 +116,13 @@ width:300px;
 									<tr>
 									
 										<td><h6>Demanda: ${demand.name}</h6></td>
+										<td><h6 style = "padding-left:15%">Demandante: ${student.getStudent(demand.nid).getUsername()}</h6>
 									
 									</tr>
 									<tr>
 									
-										<td><h6>Habilidad: ${demand.idSkill}</h6></td>
-										<td><h6 style = "padding-left:15%">Nivel: ${demand.idSkill}</h6></td>
+										<td><h6>Habilidad: ${skill.getSkill(demand.idSkill).getName()}</h6></td>
+										<td><h6 style = "padding-left:15%">Nivel: ${skill.getSkill(demand.idSkill).getLevel()}</h6></td>
 									
 									</tr>
 									<tr>

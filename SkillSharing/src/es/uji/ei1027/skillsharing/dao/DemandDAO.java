@@ -14,7 +14,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.skillsharing.model.Demand;
-import es.uji.ei1027.skillsharing.model.Offer;
 
 @Repository
 public class DemandDAO {

@@ -59,7 +59,7 @@
 						
 						Si eres nuevo, no lo dudes y créate una nueva cuenta:
 						<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; width:130px; height:35px" class = "btn" type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/registrarse.html'" name = "cancel" value = "Resgistrarse">
-						
+
 						</i></b></p>
 						
 					</div>

@@ -95,12 +95,13 @@ width:300px;
 									<tr>
 									
 										<td><h6>Oferta: ${offer.name}</h6></td>
+										<td><h6 style = "padding-left:15%">Ofertante: ${student.getStudent(offer.nid).getUsername()}</h6></td>
 									
 									</tr>
 									<tr>
 									
-										<td><h6>Habilidad: ${offer.idSkill}</h6></td>
-										<td><h6 style = "padding-left:15%">Nivel: ${offer.idSkill}</h6></td>
+										<td><h6>Habilidad: ${skill.getSkill(offer.idSkill).getName()}</h6></td>
+										<td><h6 style = "padding-left:15%">Nivel: ${skill.getSkill(offer.idSkill).getLevel()}</h6></td>
 									
 									</tr>
 									<tr>

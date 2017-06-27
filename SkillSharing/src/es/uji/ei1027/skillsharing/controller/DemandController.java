@@ -167,7 +167,12 @@ public class DemandController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
+	public String processAddSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("skills", skillDao.getSkills());
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
@@ -189,6 +194,9 @@ public class DemandController {
 	@RequestMapping(value="/update/{idDemand}", method = RequestMethod.GET)
 	public String processUpdateSubmit(Model model, @PathVariable int idDemand) {
 		
+		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
+		
 		model.addAttribute("demand", demandDao.getDemand(idDemand));
 		
 		estadisticas = studentDao.getEstadisticas();
@@ -199,7 +207,13 @@ public class DemandController {
 	}
 	
 	@RequestMapping(value="/update/{idDemand}", method = RequestMethod.POST) 
-	public String processUpdateSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
+	public String processUpdateSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		DemandValidator demandValidator = new DemandValidator();
 		
@@ -268,6 +282,7 @@ public class DemandController {
 	@RequestMapping(value="/delete/{idDemand}", method = RequestMethod.GET)
 	public String processDeleteSubmit(Model model, @PathVariable int idDemand) {
 		
+		model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
 		model.addAttribute("demand", demandDao.getDemand(idDemand));
 		
 		estadisticas = studentDao.getEstadisticas();
@@ -278,7 +293,12 @@ public class DemandController {
 	}
 	
 	@RequestMapping(value="/delete/{idDemand}", method = RequestMethod.POST) 
-	public String processDeleteSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult) {
+	public String processDeleteSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+		
+		model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		DemandValidator demandValidator = new DemandValidator();
 		

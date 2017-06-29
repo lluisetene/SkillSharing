@@ -68,7 +68,7 @@
 			
 		</head>
 	
-		<body style = "background-color:eeeeee">
+		<body style = "background-color:eeeeee" onload="load()">
 			
 				<div class = "col-md-3" style="width:25%; margin-left:0%; margin-top:1%">
 				
@@ -209,29 +209,6 @@
 								</table>
 							
 							</div>
-							
-							<!-- ESTADISTICAS ADMIN -->
-							<div class ="panel-body" style = "font-size:30;width:100%;border:1px solid black;padding:11;background-color:eeeeee;color:black">
-							
-								<div style = "width:100%;border:1px solid black;margin-bottom:8;padding:10;background-color:eeeeee;color:black">
-									<table>
-										<tr>
-											<td><h4 style="text-align:left"><b>Colaboraciones</b></h4></td>
-											<td style="padding-left:20px">
-			                        			<select class = "form-control" style="border: 1px solid black; color:black;width:170px;" name="selectFecha" id="selectFecha" >
-													<option selected id="selectAño">Este Año</option>
-													<option id="selectMes">Este Mes</option>
-												</select>
-											</td>
-										</tr>
-									</table>
-                        		</div>
-		                        	<!--  ESTADÍSTICAS  -->
-		                        	<div class="panel-body" id="divAño" style="height: 450px; witdh:380px; position: relative; display:block"></div>
-									<div class="panel-body" id="divMes" style="height: 550px; width:350px; position: relative; display:block"></div>
-								</div>
-									
-							<!--  FIN ESTADISTICAS -->
 						
 						</div>
 						
@@ -239,7 +216,7 @@
 					
 				</div>
 				
-				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:396%; margin-bottom:15px">
+				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:454%; margin-bottom:15px">
 		
 						<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:350; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
 						
@@ -769,14 +746,46 @@
 							
 						</div>
 						
-				</div>
-	
-		</body>
+						
+						
+						<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:380; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
+						
+							<table>
+							
+								<tr>
+
+									<td style="font-size:30px">Estadísticas</td>
+									<td style="padding-left:20px"></td>
+									<td><form name="grafica" style="padding-top:20px;">
+	                        				<select class = "form-control" style="border: 1px solid black; color:black;width:270px;" name="selectFecha" id="selectFecha" >
+												<option selected id="selectAño">Ofertas/Demandas de este Año</option>
+												<option id="selectMes">Ofertas/Demandas de este Mes</option>
+											</select>
+									</form></td>
+								</tr>
+							</table>
+		                      
+							<div  id="divAño" style="height:300px;"></div>
+							<div  id="divMes" style="height:300px;"></div>
+							
+					
+						
+						</div>
+					</div>
+			</body>						
 <t:barrainferior>
 </t:barrainferior>
 
 
-<script>
+<script type="text/javascript">
+
+function load() {
+	var show = document.getElementById('divAño');
+	show.style.display="block";
+	var hide = document.getElementById('divMes');
+	hide.style.display="none";
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     Morris.Bar({
     	element: "divAño",
@@ -802,37 +811,37 @@ document.addEventListener('DOMContentLoaded', function() {
     Morris.Bar({
       element: "divMes",
       data: [
-    	  { y: 'Día 1', a: ${statistics.getOfertasFecha(1, 7)}, b: 2 },
-          { y: 'Día 2', a: ${statistics.getOfertasFecha(2, 7)},  b: 5 },
-          { y: 'Día 3', a: ${statistics.getOfertasFecha(3, 7)},  b: 3 },
-          { y: 'Día 4', a: ${statistics.getOfertasFecha(4, 7)},  b: 2 },
-          { y: 'Día 5', a: ${statistics.getOfertasFecha(5, 7)},  b: 1 },
-          { y: 'Día 6', a: ${statistics.getOfertasFecha(6, 7)},  b: 1 },
-          { y: 'Día 7', a: ${statistics.getOfertasFecha(7, 7)},  b: 3 },
-          { y: 'Día 8', a: ${statistics.getOfertasFecha(8, 7)},  b: 5 },
-    	  { y: 'Día 9', a: ${statistics.getOfertasFecha(9, 7)}, b: 2 },
-          { y: 'Día 10', a: ${statistics.getOfertasFecha(10, 7)},  b: 5 },
-          { y: 'Día 11', a: ${statistics.getOfertasFecha(11, 7)},  b: 3 },
-          { y: 'Día 12', a: ${statistics.getOfertasFecha(12, 7)},  b: 2 },
-          { y: 'Día 13', a: ${statistics.getOfertasFecha(13, 7)},  b: 1 },
-          { y: 'Día 14', a: ${statistics.getOfertasFecha(14, 7)},  b: 1 },
-          { y: 'Día 15', a: ${statistics.getOfertasFecha(15, 7)},  b: 3 },
-          { y: 'Día 16', a: ${statistics.getOfertasFecha(16, 7)},  b: 5 },
-    	  { y: 'Día 17', a: ${statistics.getOfertasFecha(17, 7)}, b: 2 },
-          { y: 'Día 18', a: ${statistics.getOfertasFecha(18, 7)},  b: 5 },
-          { y: 'Día 19', a: ${statistics.getOfertasFecha(19, 7)},  b: 3 },
-          { y: 'Día 20', a: ${statistics.getOfertasFecha(20, 7)},  b: 2 },
-          { y: 'Día 21', a: ${statistics.getOfertasFecha(21, 7)},  b: 1 },
-          { y: 'Día 22', a: ${statistics.getOfertasFecha(22, 7)},  b: 1 },
-          { y: 'Día 23', a: ${statistics.getOfertasFecha(23, 7)},  b: 3 },
-          { y: 'Día 24', a: ${statistics.getOfertasFecha(24, 7)},  b: 5 },
-    	  { y: 'Día 25', a: ${statistics.getOfertasFecha(25, 7)}, b: 2 },
-          { y: 'Día 26', a: ${statistics.getOfertasFecha(26, 7)},  b: 5 },
-          { y: 'Día 27', a: ${statistics.getOfertasFecha(27, 7)},  b: 3 },
-          { y: 'Día 28', a: ${statistics.getOfertasFecha(28, 7)},  b: 2 },
-          { y: 'Día 29', a: ${statistics.getOfertasFecha(29, 7)},  b: 1 },
-          { y: 'Día 30', a: ${statistics.getOfertasFecha(30, 7)},  b: 1 },
-          { y: 'Día 31', a: ${statistics.getOfertasFecha(31, 7)},  b: 3 },
+    	  { y: 'Día 1', a: ${statistics.getOfertasFecha(1, 7)},  b: ${statistics.getDemandasFecha(1, 7)} },
+          { y: 'Día 2', a: ${statistics.getOfertasFecha(2, 7)},  b: ${statistics.getDemandasFecha(2, 7)} },
+          { y: 'Día 3', a: ${statistics.getOfertasFecha(3, 7)},  b: ${statistics.getDemandasFecha(3, 7)} },
+          { y: 'Día 4', a: ${statistics.getOfertasFecha(4, 7)},  b: ${statistics.getDemandasFecha(4, 7)} },
+          { y: 'Día 5', a: ${statistics.getOfertasFecha(5, 7)},  b: ${statistics.getDemandasFecha(5, 7)} },
+          { y: 'Día 6', a: ${statistics.getOfertasFecha(6, 7)},  b: ${statistics.getDemandasFecha(6, 7)} },
+          { y: 'Día 7', a: ${statistics.getOfertasFecha(7, 7)},  b: ${statistics.getDemandasFecha(7, 7)} },
+          { y: 'Día 8', a: ${statistics.getOfertasFecha(8, 7)},  b: ${statistics.getDemandasFecha(8, 7)} },
+    	  { y: 'Día 9', a: ${statistics.getOfertasFecha(9, 7)},  b: ${statistics.getDemandasFecha(9, 7)} },
+          { y: 'Día 10', a: ${statistics.getOfertasFecha(10, 7)},  b: ${statistics.getDemandasFecha(10, 7)} },
+          { y: 'Día 11', a: ${statistics.getOfertasFecha(11, 7)},  b: ${statistics.getDemandasFecha(11, 7)} },
+          { y: 'Día 12', a: ${statistics.getOfertasFecha(12, 7)},  b: ${statistics.getDemandasFecha(12, 7)} },
+          { y: 'Día 13', a: ${statistics.getOfertasFecha(13, 7)},  b: ${statistics.getDemandasFecha(13, 7)} },
+          { y: 'Día 14', a: ${statistics.getOfertasFecha(14, 7)},  b: ${statistics.getDemandasFecha(14, 7)} },
+          { y: 'Día 15', a: ${statistics.getOfertasFecha(15, 7)},  b: ${statistics.getDemandasFecha(15, 7)} },
+          { y: 'Día 16', a: ${statistics.getOfertasFecha(16, 7)},  b: ${statistics.getDemandasFecha(16, 7)} },
+    	  { y: 'Día 17', a: ${statistics.getOfertasFecha(17, 7)}, b: ${statistics.getDemandasFecha(17, 7)} },
+          { y: 'Día 18', a: ${statistics.getOfertasFecha(18, 7)},  b: ${statistics.getDemandasFecha(18, 7)} },
+          { y: 'Día 19', a: ${statistics.getOfertasFecha(19, 7)},  b: ${statistics.getDemandasFecha(19, 7)} },
+          { y: 'Día 20', a: ${statistics.getOfertasFecha(20, 7)},  b: ${statistics.getDemandasFecha(20, 7)} },
+          { y: 'Día 21', a: ${statistics.getOfertasFecha(21, 7)},  b: ${statistics.getDemandasFecha(21, 7)} },
+          { y: 'Día 22', a: ${statistics.getOfertasFecha(22, 7)},  b: ${statistics.getDemandasFecha(22, 7)} },
+          { y: 'Día 23', a: ${statistics.getOfertasFecha(23, 7)},  b: ${statistics.getDemandasFecha(23, 7)} },
+          { y: 'Día 24', a: ${statistics.getOfertasFecha(24, 7)},  b: ${statistics.getDemandasFecha(24, 7)} },
+    	  { y: 'Día 25', a: ${statistics.getOfertasFecha(25, 7)}, b: ${statistics.getDemandasFecha(25, 7)} },
+          { y: 'Día 26', a: ${statistics.getOfertasFecha(26, 7)},  b: ${statistics.getDemandasFecha(26, 7)} },
+          { y: 'Día 27', a: ${statistics.getOfertasFecha(27, 7)},  b: ${statistics.getDemandasFecha(27, 7)} },
+          { y: 'Día 28', a: ${statistics.getOfertasFecha(28, 7)},  b: ${statistics.getDemandasFecha(28, 7)} },
+          { y: 'Día 29', a: ${statistics.getOfertasFecha(29, 7)},  b: ${statistics.getDemandasFecha(29, 7)} },
+          { y: 'Día 30', a: ${statistics.getOfertasFecha(30, 7)},  b: ${statistics.getDemandasFecha(30, 7)} },
+          { y: 'Día 31', a: ${statistics.getOfertasFecha(31, 7)},  b: ${statistics.getDemandasFecha(31, 7)} },
       ],
       xkey: 'y',
       ykeys: ['a', 'b'],
@@ -841,12 +850,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById("selectFecha").addEventListener('change', function() {
  		if ( document.getElementById('selectAño').selected == true ) {
-		    document.getElementById('divMes').style.display = 'none';
-		    document.getElementById('divAño').style.display = 'block';
+		    document.getElementById('divMes').style.display='none';
+		    document.getElementById('divAño').style.display='block';
 		    console.log("selectAño");
 		} else {
-		    document.getElementById('divAño').style.display = 'none';
-		    document.getElementById('divMes').style.display = 'block';
+		    document.getElementById('divAño').style.display='none';
+		    document.getElementById('divMes').style.display='block';
 		    console.log("selectMes");
 		} 
 		

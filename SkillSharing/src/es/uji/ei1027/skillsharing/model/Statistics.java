@@ -177,6 +177,27 @@ public class Statistics {
 	}
 	
 	
+	public int getDemandasFecha(int dia, int mes) {
+		int contador = 0;
+		
+		Set<String> dnis = diccDemandas.keySet();
+		Iterator<String> iter = dnis.iterator();
+		
+		while ( iter.hasNext() ) {
+			List<Demand> demandasEstudiante = diccDemandas.get(iter.next());
+			for ( int i = 0; i < demandasEstudiante.size(); i++) {
+				String fecha[] =  demandasEstudiante.get(i).getBeginningDate().toString().split("/");
+				if ( Integer.parseInt(fecha[0]) == dia && Integer.parseInt(fecha[1]) == mes )
+					contador++;
+			}
+		}
+		
+		
+		return contador;
+	}
+	
+	
+	
 	
 	// ------------------ COLABORACIONES --------------- //
 	public void setColaboraciones(List<Collaboration> listaColaboraciones) {

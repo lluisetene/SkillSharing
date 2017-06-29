@@ -101,7 +101,7 @@ width:300px;
 								</c:when>
 								<c:when test="${studentLogin != null}"> 
 	
-									<div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/collaboration/add.html'"></div>
+									<div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/collaboration/addDemand/${demand.idDemand}.html'"></div>
 		
 								</c:when>
 								

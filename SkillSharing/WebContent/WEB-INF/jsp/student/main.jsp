@@ -137,8 +137,7 @@
                             	<div class="huge">Mis Colaboraciones</div>
                         	</div>
    	                    	<div class="col-xs-5 text-right">
-                       	 		<div class="huge">Añadir
-                       	 			<button style = "border:none" type="button" onClick="location='${pageContext.request.contextPath}/collaboration/add.html'"><span style = "color: black; background-color:eeeeee" class="fa fa-plus-circle"></span></button>
+                       	 		
                        	 		</div>
                     		</div>
                     		<div style = "overflow-y:scroll;height:280;margin-top:10px;border:2px solid black; margin-bottom:15px">
@@ -146,34 +145,69 @@
 	                            	
 	                            	<tr style = "color:black; background-color:cccccc;font-size:12px">
 										
-										<th>IdColaboracion</th>
-										<th>IdOferta</th>
-										<th>IdDemanda</th>
+					
 										<th>Fecha Inicio</th>
-										<th>Fecha Fin</th>
+										<th>Fecha Fin &nbsp;<i class="fa fa-info-circle" style = "font-size:17px;" title = "Se muestran las colaboraciones con fecha final >= al més actual"></i></th>
 										<th>Horas</th>
-										<th>Valoración</th>
-										<th>Puntuar</th>
+										<th>Puntuación</th>
+										<th>Estado</th>
 										<th></th>
 										<th></th>
-								
+										<th></th>
+									
 									</tr>	
 									
 									<c:forEach items="${statistics.getColaboracionesEstudiante(nid)}" var="collaboration">
 
 		         						<tr>
-						          		<td>${collaboration.idCollaboration}</td>
-						                <td>${collaboration.idOffer}</td>
-						           		<td>${collaboration.idDemand}</td>
-						           		<td>${collaboration.beginningDate}</td>
-						           		<td>${collaboration.endingDate}</td>
-						           		<td>${collaboration.hours}</td>
-						           		<td>${collaboration.rate}</td>
-						         
-						           		<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
-							            <td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
-					               		
-		          						</tr>
+	          
+							                <td>${collaboration.beginningDate}</td>
+							           		<td>${collaboration.endingDate}</td>	
+							           		<td>${collaboration.hours}</td>
+							           		
+							           		<c:choose>
+							           		
+							           			<c:when test = "${collaboration.rate != 0.0}">
+							           			
+							           				<td style = "width:5%">${collaboration.rate}</td>
+							           			
+							           			</c:when>
+							           			<c:otherwise>
+							           			
+							           				<td></td>
+							           		         			
+							           			</c:otherwise>
+
+							           		</c:choose>
+							           		
+							           		<c:choose>
+							           		
+							           			<c:when test = "${(collaboration.hours == null || collaboration.hours == '') || (collaboration.rate == 0)}">
+							           			
+							           				
+							           				<td style = " width:1%;text-align:center"><i class="fa fa-unlock-alt" style = "font-size:25px" ></i></td>
+							           				<td style = "width:10;text-align:center"><button class="btn fa fa-check-square" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/valoration/${collaboration.idCollaboration}.html'"></button></td>	
+							           				<td style = "width:10;text-align:center"><button class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
+							           				<td style = "width:10;text-align:center"><button class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
+							           			
+							           			</c:when>
+							           			<c:otherwise>
+							           			
+							           				
+							           				<td style = " width:1%;text-align:center"><i class="fa fa-lock" style = "font-size:25px" ></i></td>
+							           				<td style = "width:10;text-align:center"><button disabled class="btn fa fa-check-square" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/valoration/${collaboration.idCollaboration}.html'"></button></td>	
+							           				<td style = "width:10;text-align:center"><button disabled class="btn fa fa-pencil" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/update/${collaboration.idCollaboration}.html'"></button></td>
+							           				<td style = "width:10;text-align:center"><button disabled class="btn fa fa-times" type = "submit" onclick = "location='http:${pageContext.request.contextPath}/collaboration/delete/${collaboration.idCollaboration}.html'"></button></td>
+							           			
+							           			</c:otherwise>
+							           		
+							           		</c:choose>
+							           		
+						               		
+							           		
+							           			
+							           	
+	            						</tr>
 		          						
 			      					</c:forEach> 
 	                            	

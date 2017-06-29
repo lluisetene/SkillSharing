@@ -80,12 +80,6 @@ public class CollaborationValidator implements Validator {
 	
 			errors.rejectValue("idCollaboration", "required", "La oferta y la demanda no tienen la misma habilidad");
 		
-		//----------Control de horas--------------------//
-		if (Integer.parseInt(studentDao.getStudent(NIDdemand).getDemandHours().split(":")[0]) - Integer.parseInt(studentDao.getStudent(NIDdemand).getOfferHours().split(":")[0]) > 20){
-			
-			errors.rejectValue("idDemand", "required", "El NID " + studentDao.getStudent(NIDdemand) + "no tiene saldo");
-			
-		}
 	
 		
 		// ------ IDCOLLABORATION -------- //
@@ -226,7 +220,6 @@ public class CollaborationValidator implements Validator {
 			encontrado = false;
 		}
 	}
-	
 
 
 }

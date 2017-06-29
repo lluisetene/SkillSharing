@@ -1,10 +1,11 @@
 package es.uji.ei1027.skillsharing.model;
 
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class Statistics {
@@ -12,7 +13,6 @@ public class Statistics {
 	private Map<String, List<Offer>> diccOfertas;
 	private Map<String, List<Demand>> diccDemandas;
 	private List<Collaboration> listaColaboraciones;
-	
 	
 	public void setDatos(List<Offer> ofertas, List<Demand> demandas, List<Collaboration> colaboraciones) {
 		diccOfertas = new HashMap<String, List<Offer>>();
@@ -53,6 +53,17 @@ public class Statistics {
 			
 	}
 	
+	public int getOfertasAñoTodosEstudiantes(int mes) {
+		int contador = 0;
+		Set<String> dnis = diccOfertas.keySet();
+		Iterator<String> iter = dnis.iterator();
+		
+		while ( iter.hasNext() )
+			contador += getOfertasMes(mes, iter.next());
+		
+		return contador;
+	}
+	
 	
 	public List<Offer> getOfertasEstudiante(String nid) {
 		return diccOfertas.get(nid);
@@ -74,6 +85,25 @@ public class Statistics {
 					contador++;
 				}
 		}
+		
+		return contador;
+	}
+	
+	public int getOfertasFecha(int dia, int mes) {
+		int contador = 0;
+		
+		Set<String> dnis = diccOfertas.keySet();
+		Iterator<String> iter = dnis.iterator();
+		
+		while ( iter.hasNext() ) {
+			List<Offer> ofertasEstudiante = diccOfertas.get(iter.next());
+			for ( int i = 0; i < ofertasEstudiante.size(); i++) {
+				String fecha[] =  ofertasEstudiante.get(i).getBeginningDate().toString().split("/");
+				if ( Integer.parseInt(fecha[0]) == dia && Integer.parseInt(fecha[1]) == mes )
+					contador++;
+			}
+		}
+		
 		
 		return contador;
 	}
@@ -116,6 +146,19 @@ public class Statistics {
 	public Map<String, List<Demand>> getDiccDemandas() {
 		return diccDemandas;
 	}
+	
+	
+	public int getDemandasAñoTodosEstudiantes(int mes) {
+		int contador = 0;
+		Set<String> dnis = diccDemandas.keySet();
+		Iterator<String> iter = dnis.iterator();
+		
+		while ( iter.hasNext() )
+			contador += getDemandasMes(mes, iter.next());
+		
+		return contador;
+	}
+	
 	
 	
 	public int getDemandasMes(int mes, String nid) {
@@ -208,5 +251,10 @@ public class Statistics {
 		return colaboracionesEstudiante;
 		
 	}
+	
+	
+	
+	
+	
 	
 }

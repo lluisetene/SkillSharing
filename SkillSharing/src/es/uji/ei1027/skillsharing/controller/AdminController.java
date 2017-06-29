@@ -27,6 +27,7 @@ import es.uji.ei1027.skillsharing.model.Degree;
 import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Skill;
+import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.AdminValidator;
 
@@ -41,6 +42,7 @@ public class AdminController {
 	private DemandDAO demandDao;
 	private OfferDAO offerDao;
 	private StudentDAO studentDao;
+	private Statistics estadisticas;
 
 	
 	@Autowired
@@ -52,12 +54,14 @@ public class AdminController {
 		this.demandDao = demandDao;
 		this.offerDao = offerDao;
 		this.studentDao = studentDao;
+		studentDao.setDatos(offerDao.getOffers(), demandDao.getDemands(), collaborationDao.getCollaborations());
 	}
 	
 	//-------------------------------------------
 	@RequestMapping("/main")
 	public String mainUserLogin(Model model) {
 
+		
 		model.addAttribute("studentsSelect", studentDao.getStudents());
 		model.addAttribute("studentsList", studentDao.getStudents());
 		model.addAttribute("adminsSelect", adminDao.getAdmins());
@@ -75,6 +79,9 @@ public class AdminController {
 		model.addAttribute("collaborationsDistinctSelect", collaborationDao.getCollaborationsDistinctRate());
 		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
 		model.addAttribute("skillDao", skillDao);
+		
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		
 		return "admin/main";
@@ -99,6 +106,8 @@ public class AdminController {
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("collaborationsDistinctSelect", collaborationDao.getCollaborationsDistinctRate());
 		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
 		
 		if (student.getNid() != null){
 	

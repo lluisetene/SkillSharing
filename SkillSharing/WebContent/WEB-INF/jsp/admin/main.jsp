@@ -65,16 +65,16 @@
 				}
 			
 			</style>
-	
+			
 		</head>
 	
 		<body style = "background-color:eeeeee">
 			
 				<div class = "col-md-3" style="width:25%; margin-left:0%; margin-top:1%">
 				
-					<div style = "margin-bottom:5%;padding:3%;background-color:white; border:1px solid black; height:100%">
+					<div style = "margin-bottom:5%;padding:3%;background-color:white; border:1px solid black; height:1400px">
 					
-						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:22%; margin-left:0%; margin-right:0%; padding:5%">
+						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:12%; margin-left:0%; margin-right:0%; padding:5%">
 						
 							<div class = "col-md-3" style = "padding:0; width:75; display:inline-block">
 					
@@ -97,7 +97,7 @@
 
 						</div>
 						
-						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:76.5%; margin-left:0%; margin-right:0%; margin-top:3%;padding:5%">
+						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:87%; margin-left:0%; margin-right:0%; margin-top:3%;padding:5%">
 						
 							<div style = "font-size:30; width:100%;border:1px solid black;margin-bottom:10;margin-top:5;padding:11;background-color:eeeeee;color:black">
 							
@@ -194,7 +194,7 @@
 								</table>
 							
 							</div>
-							<div style = "font-size:30;width:100%;border:1px solid black;padding:11;background-color:eeeeee;color:black">
+							<div style = "font-size:30;width:100%;border:1px solid black;margin-bottom:10;padding:11;background-color:eeeeee;color:black">
 							
 								<table>
 								
@@ -209,6 +209,29 @@
 								</table>
 							
 							</div>
+							
+							<!-- ESTADISTICAS ADMIN -->
+							<div class ="panel-body" style = "font-size:30;width:100%;border:1px solid black;padding:11;background-color:eeeeee;color:black">
+							
+								<div style = "width:100%;border:1px solid black;margin-bottom:8;padding:10;background-color:eeeeee;color:black">
+									<table>
+										<tr>
+											<td><h4 style="text-align:left"><b>Colaboraciones</b></h4></td>
+											<td style="padding-left:20px">
+			                        			<select class = "form-control" style="border: 1px solid black; color:black;width:170px;" name="selectFecha" id="selectFecha" >
+													<option selected id="selectAño">Este Año</option>
+													<option id="selectMes">Este Mes</option>
+												</select>
+											</td>
+										</tr>
+									</table>
+                        		</div>
+		                        	<!--  ESTADÍSTICAS  -->
+		                        	<div class="panel-body" id="divAño" style="height: 450px; witdh:380px; position: relative; display:block"></div>
+									<div class="panel-body" id="divMes" style="height: 550px; width:350px; position: relative; display:block"></div>
+								</div>
+									
+							<!--  FIN ESTADISTICAS -->
 						
 						</div>
 						
@@ -743,7 +766,7 @@
 								</table>
 								
 							</div>
-						
+							
 						</div>
 						
 				</div>
@@ -751,4 +774,92 @@
 		</body>
 <t:barrainferior>
 </t:barrainferior>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Morris.Bar({
+    	element: "divAño",
+        data: [
+      	  { y: 'Enero', a: ${statistics.getOfertasAñoTodosEstudiantes(1)}, b: ${statistics.getDemandasAñoTodosEstudiantes(1)} },
+            { y: 'Febrero', a: ${statistics.getOfertasAñoTodosEstudiantes(2)},  b: ${statistics.getDemandasAñoTodosEstudiantes(2)} },
+            { y: 'Marzo', a: ${statistics.getOfertasAñoTodosEstudiantes(3)},  b: ${statistics.getDemandasAñoTodosEstudiantes(3)} },
+            { y: 'Abril', a: ${statistics.getOfertasAñoTodosEstudiantes(4)},  b: ${statistics.getDemandasAñoTodosEstudiantes(4)} },
+            { y: 'Mayo', a: ${statistics.getOfertasAñoTodosEstudiantes(5)},  b: ${statistics.getDemandasAñoTodosEstudiantes(5)} },
+            { y: 'Junio', a: ${statistics.getOfertasAñoTodosEstudiantes(6)},  b: ${statistics.getDemandasAñoTodosEstudiantes(6)} },
+            { y: 'Julio', a: ${statistics.getOfertasAñoTodosEstudiantes(7)},  b: ${statistics.getDemandasAñoTodosEstudiantes(7)} },
+            { y: 'Agosto', a: ${statistics.getOfertasAñoTodosEstudiantes(8)},  b: ${statistics.getDemandasAñoTodosEstudiantes(8)} },
+            { y: 'Septiembre', a: ${statistics.getOfertasAñoTodosEstudiantes(9)},  b: ${statistics.getDemandasAñoTodosEstudiantes(9)} },
+            { y: 'Octubre', a: ${statistics.getOfertasAñoTodosEstudiantes(10)},  b: ${statistics.getDemandasAñoTodosEstudiantes(10)} },
+            { y: 'Noviembre', a: ${statistics.getOfertasAñoTodosEstudiantes(11)},  b: ${statistics.getDemandasAñoTodosEstudiantes(11)} },
+            { y: 'Diciembre', a: ${statistics.getOfertasAñoTodosEstudiantes(12)}, b: ${statistics.getDemandasAñoTodosEstudiantes(12)} }
+        ],
+        xkey: 'y',
+        ykeys: ['a', 'b'],
+        labels: ['Oferta', 'Demanda'],
+    });
+     
+    Morris.Bar({
+      element: "divMes",
+      data: [
+    	  { y: 'Día 1', a: ${statistics.getOfertasFecha(1, 7)}, b: 2 },
+          { y: 'Día 2', a: ${statistics.getOfertasFecha(2, 7)},  b: 5 },
+          { y: 'Día 3', a: ${statistics.getOfertasFecha(3, 7)},  b: 3 },
+          { y: 'Día 4', a: ${statistics.getOfertasFecha(4, 7)},  b: 2 },
+          { y: 'Día 5', a: ${statistics.getOfertasFecha(5, 7)},  b: 1 },
+          { y: 'Día 6', a: ${statistics.getOfertasFecha(6, 7)},  b: 1 },
+          { y: 'Día 7', a: ${statistics.getOfertasFecha(7, 7)},  b: 3 },
+          { y: 'Día 8', a: ${statistics.getOfertasFecha(8, 7)},  b: 5 },
+    	  { y: 'Día 9', a: ${statistics.getOfertasFecha(9, 7)}, b: 2 },
+          { y: 'Día 10', a: ${statistics.getOfertasFecha(10, 7)},  b: 5 },
+          { y: 'Día 11', a: ${statistics.getOfertasFecha(11, 7)},  b: 3 },
+          { y: 'Día 12', a: ${statistics.getOfertasFecha(12, 7)},  b: 2 },
+          { y: 'Día 13', a: ${statistics.getOfertasFecha(13, 7)},  b: 1 },
+          { y: 'Día 14', a: ${statistics.getOfertasFecha(14, 7)},  b: 1 },
+          { y: 'Día 15', a: ${statistics.getOfertasFecha(15, 7)},  b: 3 },
+          { y: 'Día 16', a: ${statistics.getOfertasFecha(16, 7)},  b: 5 },
+    	  { y: 'Día 17', a: ${statistics.getOfertasFecha(17, 7)}, b: 2 },
+          { y: 'Día 18', a: ${statistics.getOfertasFecha(18, 7)},  b: 5 },
+          { y: 'Día 19', a: ${statistics.getOfertasFecha(19, 7)},  b: 3 },
+          { y: 'Día 20', a: ${statistics.getOfertasFecha(20, 7)},  b: 2 },
+          { y: 'Día 21', a: ${statistics.getOfertasFecha(21, 7)},  b: 1 },
+          { y: 'Día 22', a: ${statistics.getOfertasFecha(22, 7)},  b: 1 },
+          { y: 'Día 23', a: ${statistics.getOfertasFecha(23, 7)},  b: 3 },
+          { y: 'Día 24', a: ${statistics.getOfertasFecha(24, 7)},  b: 5 },
+    	  { y: 'Día 25', a: ${statistics.getOfertasFecha(25, 7)}, b: 2 },
+          { y: 'Día 26', a: ${statistics.getOfertasFecha(26, 7)},  b: 5 },
+          { y: 'Día 27', a: ${statistics.getOfertasFecha(27, 7)},  b: 3 },
+          { y: 'Día 28', a: ${statistics.getOfertasFecha(28, 7)},  b: 2 },
+          { y: 'Día 29', a: ${statistics.getOfertasFecha(29, 7)},  b: 1 },
+          { y: 'Día 30', a: ${statistics.getOfertasFecha(30, 7)},  b: 1 },
+          { y: 'Día 31', a: ${statistics.getOfertasFecha(31, 7)},  b: 3 },
+      ],
+      xkey: 'y',
+      ykeys: ['a', 'b'],
+      labels: ['Ofertas', 'Demandas']
+    });
+    
+    document.getElementById("selectFecha").addEventListener('change', function() {
+ 		if ( document.getElementById('selectAño').selected == true ) {
+		    document.getElementById('divMes').style.display = 'none';
+		    document.getElementById('divAño').style.display = 'block';
+		    console.log("selectAño");
+		} else {
+		    document.getElementById('divAño').style.display = 'none';
+		    document.getElementById('divMes').style.display = 'block';
+		    console.log("selectMes");
+		} 
+		
+	}); 
+		
+
+});
+
+</script>
+
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+
 </html>

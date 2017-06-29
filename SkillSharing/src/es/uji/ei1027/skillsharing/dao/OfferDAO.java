@@ -68,6 +68,18 @@ public class OfferDAO {
 	
 	}
 	
+	public List<Offer> getOffersWithoutOwner(String nid){
+		
+		return this.jdbcTemplate.query("SELECT * from offer WHERE endingdate >= CURRENT_DATE AND nid != ? order by idOffer DESC;", new Object[]{nid}, new OfferMapper());
+		
+	}
+	
+	public List<Offer> getOffersWithoutOwner(String name, String nid){
+		
+		return this.jdbcTemplate.query("SELECT off.idoffer, off.nid, off.name, off.idskill, off.description, off.beginningDate, off.endingDate FROM offer AS off JOIN Skill ON off.idskill = skill.idskill WHERE skill.name = ? AND endingdate >= CURRENT_DATE AND off.nid != ?;",new Object[]{name, nid}, new OfferMapper());
+		
+	}
+	
 	public List<Offer> getOffers(String name) {
 		
 		return this.jdbcTemplate.query("SELECT off.idoffer, off.nid, off.name, off.idskill, off.description, off.beginningDate, off.endingDate FROM offer AS off JOIN Skill ON off.idskill = skill.idskill WHERE skill.name = ? AND endingdate >= CURRENT_DATE;",new Object[]{name}, new OfferMapper());

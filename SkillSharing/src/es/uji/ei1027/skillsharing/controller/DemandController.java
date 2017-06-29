@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
 import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Statistics;
+import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.DemandValidator;
 
 
@@ -78,10 +81,11 @@ public class DemandController {
 	
 	//----------- listado ------------------
 	@RequestMapping("/list")
-	public String listDemands(Model model) {
+	public String listDemands(Model model, HttpSession sesion) {
 		
-		model.addAttribute("demands", demandDao.getDemands());
-		model.addAttribute("skills", skillDao.getSkills());
+		Student student = (Student) sesion.getAttribute("studentLogin");
+		model.addAttribute("demands", demandDao.getDemandsWithoutOwner(student.getNid()));
+		model.addAttribute("skills", skillDao.getSkillsDistinctName());
 		model.addAttribute("demand", new Demand());
 		model.addAttribute("student", studentDao);
 		model.addAttribute("skill", skillDao);
@@ -91,20 +95,18 @@ public class DemandController {
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
-	public String processListSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+	public String processListSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model, HttpSession sesion) {
 	
 		model.addAttribute("student", studentDao);
-		model.addAttribute("demands", demandDao.getDemands());
-		model.addAttribute("skills", skillDao.getSkills());
+		model.addAttribute("skills", skillDao.getSkillsDistinctName());
 		model.addAttribute("skill", skillDao);
+		Student student = (Student) sesion.getAttribute("studentLogin");
+		model.addAttribute("demands", demandDao.getDemandsWithoutOwner(student.getNid()));
 		
-		if (demand.getIdSkill() == -1){
+		List<Demand> demandsList = demandDao.getDemandsWithoutOwner(skillDao.getSkill(demand.getIdSkill()).getName(), student.getNid());
+		
+		model.addAttribute("demands", demandsList);
 
-			model.addAttribute("demand", demandDao.getDemands());
-		}else{
-		
-			model.addAttribute("demands", demandDao.getDemand(demand.getIdSkill()));
-		}
 		return "demand/list";
 	
 	}

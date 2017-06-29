@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -23,8 +25,10 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Statistics;
+import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.OfferValidator;
 
 @Controller
@@ -76,11 +80,12 @@ public class OfferController {
 	
 	//----------- listado ------------------
 	@RequestMapping("/list")
-	public String listOffers(Model model) {
+	public String listOffers(Model model, HttpSession sesion) {
 		
 		model.addAttribute("student", studentDao);
-		model.addAttribute("offers", offerDao.getOffers());
-		model.addAttribute("skills", skillDao.getSkills());
+		Student student = (Student) sesion.getAttribute("studentLogin");
+		model.addAttribute("offers", offerDao.getOffersWithoutOwner(student.getNid()));
+		model.addAttribute("skills", skillDao.getSkillsDistinctName());
 		model.addAttribute("offer", new Offer());
 		model.addAttribute("skill", skillDao);
 
@@ -89,20 +94,17 @@ public class OfferController {
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
-	public String processListSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
+	public String processListSubmit(@ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model, HttpSession sesion) {
 	
 		model.addAttribute("student", studentDao);
-		model.addAttribute("offers", offerDao.getOffers());
-		model.addAttribute("skills", skillDao.getSkills());
+		Student student = (Student) sesion.getAttribute("studentLogin");
+		model.addAttribute("offers", offerDao.getOffersWithoutOwner(student.getNid()));
+		model.addAttribute("skills", skillDao.getSkillsDistinctName());
 		model.addAttribute("skill", skillDao);
+		List<Offer> offersList = offerDao.getOffersWithoutOwner(skillDao.getSkill(offer.getIdSkill()).getName(), student.getNid());
 		
-		if (offer.getIdSkill() == -1){
-
-			model.addAttribute("offers", offerDao.getOffers());
-		}else{
+		model.addAttribute("offers", offersList);
 		
-			model.addAttribute("offers", offerDao.getOffers());
-		}
 		return "offer/list";
 	
 	}

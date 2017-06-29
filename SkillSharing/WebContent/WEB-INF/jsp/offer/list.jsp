@@ -9,7 +9,7 @@
 <script> 
 $(document).ready(function(){
   $(".flip").click(function(){
-    $(this).next(".panel").slideToggle("slow");
+    $(this).next().next().next().next().next().next(".panel").slideToggle("slow");
   });
 });
 </script>
@@ -87,8 +87,28 @@ width:300px;
 			      		
 			      		<div style = "padding-left:8px;border:2px solid black; background-color:white">
 			      		
-			      			 <div class = "flip" style = "padding:0px; margin-right:2%; display:inline-block"><button type="button" class="btn" style = "background-color:white; border: 2px solid black; height:35px"><span class="glyphicon glyphicon-chevron-down"></span></button></div>
-			      			 <div class="panel" style = "border-top: thick double black;background-color:white; padding: 10px 25px 10px 50px;margin:0; padding-right:25px">
+			      			 <div class = "flip" style = "padding:0px; margin-left:1%; margin-right:1%; display:inline-block"><button type="button" class="btn" style = "background-color:white; border: 2px solid black; height:35px"><span class="glyphicon glyphicon-chevron-down"></span></button></div>
+			      			
+				      		 <div class = "panel-body" style = "width:37%; display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-book" style="color:black"></i><b style = "color:black"> ${offer.name} </b></div>	
+				             <div class = "panel-body" style = "width:25%;display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-bookmark" style="color:black"></i><b style = "color:black"> ${skill.getSkill(offer.idSkill).name} </b></div>
+				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"></i><b style = "color:black"> ${offer.beginningDate} </b></div>
+				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"></i><b style = "color:black"> ${offer.endingDate} </b></div>
+							 <c:choose>
+
+								<c:when test='${adminLogin == null && studentLogin == null}'>
+							 
+									 <div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/login.html'"></div>
+							
+								</c:when>
+								<c:when test="${studentLogin != null}"> 
+	
+									<div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/collaboration/addOffer/${offer.idOffer}.html'"></div>
+		
+								</c:when>
+								
+							
+							</c:choose>
+							 <div class="panel" style = "border-top: thick double black;background-color:white; padding: 10px 25px 10px 50px;margin:0; padding-right:25px">
 								
 								<table style = "display:inline-block">
 								
@@ -117,26 +137,6 @@ width:300px;
 								<textarea style="border: 1px solid black; resize:none; width:46%" rows="4" id="comment" readonly>${offer.description}</textarea>
 
 							</div>
-				      		 <div class = "panel-body" style = "width:37%; display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-book" style="color:black"></i><b style = "color:black"> ${offer.name} </b></div>	
-				             <div class = "panel-body" style = "width:25%;display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-bookmark" style="color:black"></i><b style = "color:black"> ${offer.idSkill} </b></div>
-				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"></i><b style = "color:black"> ${offer.beginningDate} </b></div>
-				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"></i><b style = "color:black"> ${offer.endingDate} </b></div>
-							 <c:choose>
-
-								<c:when test='${adminLogin == null && studentLogin == null}'>
-							 
-									 <div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/login.html'"></div>
-							
-								</c:when>
-								<c:when test="${studentLogin != null}"> 
-	
-									<div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/collaboration/addOffer/${offer.idOffer}.html'"></div>
-		
-								</c:when>
-								
-							
-							</c:choose>
-							
 							 
 			      		</div>
 			      		<div style = "padding:5px;background-color:597eaa"></div>

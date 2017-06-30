@@ -72,9 +72,9 @@
 			
 				<div class = "col-md-3" style="width:25%; margin-left:0%; margin-top:1%">
 				
-					<div style = "margin-bottom:5%;padding:3%;background-color:white; border:1px solid black; height:1400px">
+					<div style = "margin-bottom:5%;padding:3%;background-color:white; border:1px solid black; height:100%">
 					
-						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:12%; margin-left:0%; margin-right:0%; padding:5%">
+						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:22%; margin-left:0%; margin-right:0%; padding:5%">
 						
 							<div class = "col-md-3" style = "padding:0; width:75; display:inline-block">
 					
@@ -97,7 +97,7 @@
 
 						</div>
 						
-						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:87%; margin-left:0%; margin-right:0%; margin-top:3%;padding:5%">
+						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:76%; margin-left:0%; margin-right:0%; margin-top:3%;padding:5%">
 						
 							<div style = "font-size:30; width:100%;border:1px solid black;margin-bottom:10;margin-top:5;padding:11;background-color:eeeeee;color:black">
 							
@@ -216,7 +216,7 @@
 					
 				</div>
 				
-				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:454%; margin-bottom:15px">
+				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:457%; margin-bottom:15px">
 		
 						<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:350; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
 						

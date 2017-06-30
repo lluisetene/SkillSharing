@@ -63,8 +63,6 @@ width:300px;
 				
 				<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="offer">
 				
-					<button style = "background-color:597eaa;  border:none" type="submit"><span style = "color: black; background-color:597eaa" class="glyphicon glyphicon-search"></span></button>
-				
 					<select style="width:300px" id="idSkill" name="idSkill">
 					
 						<option value="Todas" >Todas</option>	
@@ -76,6 +74,8 @@ width:300px;
 						</c:forEach>
 						
 					</select>
+					
+					<button style = "background-color:597eaa;  border:none" type="submit"><span style = "color: black; background-color:597eaa" class="glyphicon glyphicon-search"></span></button>
 			
 				</form:form>
 			</div>

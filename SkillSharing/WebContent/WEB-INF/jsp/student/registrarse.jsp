@@ -114,7 +114,7 @@ border-radius: 20px;
 		          		  	<tr>
 	            
 				                <td><select id = "offerHours" name = "offerHours" style="display:none">
-									<option value="20:00" selected="selected">20 horas (por defecto)</option>
+									<option value="00:00" selected="selected">00 horas (por defecto)</option>
 								</select></td>
 			          
 			            	</tr>

@@ -130,7 +130,13 @@ public class Student {
 		horas = demandHours.split(":");
 		int hDemandas = Integer.parseInt(horas[0]);
 		
-		int restante = hOfertas - hDemandas;
+		int restante = (hOfertas - hDemandas) + 20;
+		
+		if (restante < 0){
+		
+			restante = 0;
+			
+		}
 		
 		String horasRestantes = restante + ":00";
 		

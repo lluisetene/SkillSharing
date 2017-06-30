@@ -44,7 +44,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String checkLogin(@ModelAttribute("login") Login login, BindingResult bindingResult, HttpSession session) {
+	public String checkLogin(@ModelAttribute("login") Login login, BindingResult bindingResult, HttpSession session, Model model) {
 	
 		LoginValidator loginValidator = new LoginValidator();
 		
@@ -74,6 +74,15 @@ public class LoginController {
 		for ( int i = 0; i < studentList.size(); i++ )
 			
 			if ( studentList.get(i).getUsername().equals(login.getUsername()) ) {
+				
+				Student student = studentList.get(i);
+				
+				if (student.getBanned() == true){
+					
+					model.addAttribute("banned", true);
+					return "login";
+					
+				}
 				
 				session.setAttribute("studentLogin", studentList.get(i));
 				

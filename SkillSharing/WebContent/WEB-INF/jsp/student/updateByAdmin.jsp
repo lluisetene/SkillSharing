@@ -290,7 +290,7 @@
 										<option value="08:00">08:00</option>
 										<option value="09:00">09:00</option>
 										<option value="10:00">10:00</option>
-										<option value="20:00">20:00 horas (por defecto)</option>
+										<option value="00:00">00:00 horas (por defecto)</option>
 									</select></td>
 									
 									<td><form:label path="demandHours" style = "padding-right: 30px">Horas Demandadas</form:label></td>

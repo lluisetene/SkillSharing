@@ -21,12 +21,16 @@ public class DemandValidator implements Validator {
 	private List<Collaboration> collaborationsList;
 	private List<Skill> skillsList;
 	boolean encontrado = false;
+	private StudentDAO studentDao;
+	private DemandDAO demandDao;
 	
 	public void setDemandDAO(DemandDAO demandDao, StudentDAO studentDao, CollaborationDAO collaborationDao, SkillDAO skillDao) {
 		demandsList = demandDao.getDemands();
 		studentsList = studentDao.getStudents();
 		collaborationsList = collaborationDao.getCollaborations();
 		skillsList = skillDao.getSkills();
+		this.studentDao = studentDao;
+		this.demandDao = demandDao;
 	}
 	
 	@Override
@@ -84,6 +88,13 @@ public class DemandValidator implements Validator {
 				
 		}
 		
+		//Control de horas//
+		
+		if (Integer.parseInt(studentDao.getStudent(demandDao.getDemand(demand.getIdDemand()).getNid()).getHorasRestantes().split(":")[0]) == 0){
+			
+			errors.rejectValue("idDemand", "required", "No tiene saldo");
+			
+		}
 		
 		// ------- IDSKILL ------ //
 		

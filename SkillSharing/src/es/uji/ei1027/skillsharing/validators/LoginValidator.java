@@ -87,10 +87,8 @@ public class LoginValidator implements ValidatorLogin {
 			
 		
 	
-		if ( student == true )
-			if ( estudiante.getBanned() == true )
-				errors.rejectValue("username", "required", "Este usuario está baneado");
-	}
-		
+			
+		}
+			
 		
 }

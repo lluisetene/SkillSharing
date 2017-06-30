@@ -205,6 +205,14 @@ public class CollaborationController {
 	@RequestMapping(value="/addOffer/{idOffer}", method=RequestMethod.POST)
 	public String processAddOfferSubmit(@ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, HttpSession sesion, Model model, @PathVariable int idOffer) {
 		
+		//No se si aqui puede dar problemas.
+		CollaborationValidator collaborationValidator = new CollaborationValidator();
+		
+		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
+		
+		collaborationValidator.validateAdd(collaboration, bindingResult);
+		
+		
 		model.addAttribute("offers", offerDao.getOffers());
 		model.addAttribute("demands", demandDao.getDemands());
 		model.addAttribute("offer", offerDao.getOffer(idOffer));
@@ -257,15 +265,6 @@ public class CollaborationController {
 			model.addAttribute("demanda", demand);
 			
 		}
-		
-		
-		
-		CollaborationValidator collaborationValidator = new CollaborationValidator();
-		
-		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
-		
-		collaborationValidator.validateAdd(collaboration, bindingResult);
-
 		
 
 		if (bindingResult.hasErrors()) 

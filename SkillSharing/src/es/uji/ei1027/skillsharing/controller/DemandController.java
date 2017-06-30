@@ -311,6 +311,7 @@ public class DemandController {
 	public String processDeleteSubmit(@PathVariable int idDemand, @ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
 		
 		model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
+		model.addAttribute("demand", demandDao.getDemand(idDemand));
 		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);

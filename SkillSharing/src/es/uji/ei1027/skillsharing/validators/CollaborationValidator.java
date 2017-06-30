@@ -20,12 +20,15 @@ public class CollaborationValidator implements Validator {
 	private StudentDAO studentDao;
 	boolean encontrado = false;
 	
+	private DemandDAO demandDao;
+	
 	public void setCollaborationDAO(CollaborationDAO collaborationDao, OfferDAO offerDao, DemandDAO demandDao, StudentDAO studentDao) {
 	
 		collaborationsList = collaborationDao.getCollaborations();
 		offersList = offerDao.getOffers();
 		demandsList = demandDao.getDemands();
 		this.studentDao = studentDao;
+		this.demandDao = demandDao;
 	}
 	
 	@Override
@@ -111,7 +114,13 @@ public class CollaborationValidator implements Validator {
 			}
 			encontrado = false;
 		
-		
+		//Control de horas//
+			
+		if (Integer.parseInt(studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid()).getHorasRestantes().split(":")[0]) == 0){
+			
+			errors.rejectValue("idCollaboration", "required", "No tiene saldo");
+			
+		}
 		
 		
 	}

@@ -36,7 +36,7 @@
 	       
 		<table>
 		        	
-					        	<tr style = "display:none;height:50px">
+					        	<tr style = "height:50px">
 					                <td style = "width:175px"><form:label path = "idCollaboration">IdColaboracion</form:label></td>
 					                <td><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idCollaboration" disabled = "true" readonly = "true"/><form:errors path = "idCollaboration" cssClass = "error" /></td>
 					            

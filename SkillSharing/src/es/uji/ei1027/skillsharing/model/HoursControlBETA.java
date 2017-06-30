@@ -2,6 +2,8 @@ package es.uji.ei1027.skillsharing.model;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
@@ -23,19 +25,26 @@ public class HoursControlBETA {
 	}
 	
 	
-	public void addHours(String hours){
+	public void addHours(String hours, HttpSession sesion){
 		
-		String NIDOfferer = offerDao.getOffer(collaboration.getIdOffer()).getNid();
-		String NIDDemandant = demandDao.getDemand(collaboration.getIdDemand()).getNid();
-		Student studentOffer = studentDao.getStudent(NIDOfferer);
-		Student studentDemand = studentDao.getStudent(NIDDemandant);
+		Student student = (Student)sesion.getAttribute("studentLogin");
+		Student studentOffer = null;
+		Student studentDemand = null;
 		
-		System.out.println("Ofertante: " + studentOffer);
-		System.out.println("studentDemand " + studentDemand);
+		if (offerDao.getOffer(collaboration.getIdOffer()).getNid().trim().toUpperCase().equals(student.getNid().trim().toUpperCase())){
 		
+			studentOffer = student;
+			studentDemand = studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid());
+			
+		}else if (demandDao.getDemand(collaboration.getIdDemand()).getNid().trim().toUpperCase().equals(student.getNid().trim().toUpperCase())){
+			
+			studentDemand = student;
+			studentOffer = studentDao.getStudent(offerDao.getOffer(collaboration.getIdOffer()).getNid());
+			
+		}
 		String [] horasActuales = studentOffer.getOfferHours().split(":");
 		int horasTengo = Integer.parseInt(horasActuales[0]);
-		String [] horasAcumular = hours.split((":"));
+		String [] horasAcumular = collaboration.getHours().split((":"));
 		int horasSumar = Integer.parseInt(horasAcumular[0]);
 		int sumado = horasTengo + horasSumar;
 		String setHoras = String.valueOf(sumado) + ":" + "00"; 
@@ -45,7 +54,7 @@ public class HoursControlBETA {
 		
 		String [] horasActuales2 = studentDemand.getDemandHours().split(":");
 		int horasTengo2 = Integer.parseInt(horasActuales2[0]);
-		String [] horasAcumular2 = hours.split((":"));
+		String [] horasAcumular2 = collaboration.getHours().split((":"));
 		int horasSumar2 = Integer.parseInt(horasAcumular2[0]);
 		int sumado2 = horasTengo2 + horasSumar2;
 		String setHoras2 = String.valueOf(sumado2) + ":" + "00"; 

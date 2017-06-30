@@ -470,7 +470,8 @@ public class CollaborationController {
 	public String processValorationSubmit(@PathVariable int idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model, HttpSession sesion) {
 		
 		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
-		controlHoras.addHours(collaboration.getHours());
+		
+		
 		model.addAttribute("skill", skillDao.getSkill(offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()).getIdSkill()));
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		model.addAttribute("offerName", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
@@ -485,7 +486,7 @@ public class CollaborationController {
 			
 			 return "collaboration/valoration";
 		
-		 
+		controlHoras.addHours(collaboration.getHours(), sesion);
 		 collaborationDao.updateCollaboration(collaboration);
 
 		 return "redirect:../../student/main.html"; 

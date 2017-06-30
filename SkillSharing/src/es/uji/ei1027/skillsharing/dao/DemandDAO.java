@@ -75,6 +75,12 @@ public class DemandDAO {
 		
 	}
 	
+	public List<Demand> getDemandsOwner(String nid){
+		
+		return this.jdbcTemplate.query("SELECT * from demand WHERE endingdate >= CURRENT_DATE AND nid = ? order by idDemand DESC;", new Object[]{nid}, new DemandMapper());
+		
+	}
+	
 	public List<Demand> getDemandsWithoutOwner(String name, String nid){
 		
 		return this.jdbcTemplate.query("SELECT dem.iddemand, dem.nid, dem.name, dem.idskill, dem.description, dem.beginningDate, dem.endingDate FROM demand AS dem JOIN Skill ON dem.idskill = skill.idskill WHERE skill.name = ? AND endingdate >= CURRENT_DATE AND dem.nid != ?;",new Object[]{name, nid}, new DemandMapper());

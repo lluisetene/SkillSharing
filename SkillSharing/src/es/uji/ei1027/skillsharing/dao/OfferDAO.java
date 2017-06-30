@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
+import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Offer;
 
 @Repository
@@ -71,6 +72,12 @@ public class OfferDAO {
 	public List<Offer> getOffersWithoutOwner(String nid){
 		
 		return this.jdbcTemplate.query("SELECT * from offer WHERE endingdate >= CURRENT_DATE AND nid != ? order by idOffer DESC;", new Object[]{nid}, new OfferMapper());
+		
+	}
+	
+	public List<Offer> getOffersOwner(String nid){
+		
+		return this.jdbcTemplate.query("SELECT * from offer WHERE endingdate >= CURRENT_DATE AND nid = ? order by idOffer DESC;", new Object[]{nid}, new OfferMapper());
 		
 	}
 	

@@ -101,9 +101,18 @@ public class OfferController {
 		model.addAttribute("offers", offerDao.getOffersWithoutOwner(student.getNid()));
 		model.addAttribute("skills", skillDao.getSkillsDistinctName());
 		model.addAttribute("skill", skillDao);
-		List<Offer> offersList = offerDao.getOffersWithoutOwner(skillDao.getSkill(offer.getIdSkill()).getName(), student.getNid());
 		
-		model.addAttribute("offers", offersList);
+		if(offer.getIdSkill() == -1){
+		
+			model.addAttribute("offers", offerDao.getOffersWithoutOwner(student.getNid()));
+			
+		}else{
+		
+			List<Offer> offersList = offerDao.getOffersWithoutOwner(skillDao.getSkill(offer.getIdSkill()).getName(), student.getNid());
+			
+			model.addAttribute("offers", offersList);
+		
+		}
 		
 		return "offer/list";
 	

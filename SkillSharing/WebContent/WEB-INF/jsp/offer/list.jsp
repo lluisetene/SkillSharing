@@ -62,10 +62,10 @@ width:300px;
 				<h4 style="color:black; padding-left:10px; padding-right:30px; display:inline-block">Habilidad</h4>
 				
 				<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="offer">
-				
+
 					<select style="width:300px" id="idSkill" name="idSkill">
 					
-						<option value="Todas" >Todas</option>	
+						<option value=-1 >Todas</option>	
 						
 						<c:forEach items="${skills}" var="skill">
 		

@@ -133,7 +133,8 @@ public class CollaborationController {
 		model.addAttribute("offer", offerDao.getOffer(idOffer));
 		model.addAttribute("skill", skillDao.getSkill(offerDao.getOffer(idOffer).getIdSkill()));
 		
-		List<Demand> demandas = demandDao.getDemands();
+		Student student = (Student) sesion.getAttribute("studentLogin");
+		List<Demand> demandas = demandDao.getDemandsOwner(student.getNid());
 		
 		boolean encontrada = false;
 		
@@ -166,7 +167,6 @@ public class CollaborationController {
 				demand.setIdDemand(idDemand);
 			}
 			
-			Student student = (Student) sesion.getAttribute("studentLogin");
 			demand.setNid(student.getNid());
 			demand.setName(offerDao.getOffer(idOffer).getName());
 			demand.setIdSkill(offerDao.getOffer(idOffer).getIdSkill());
@@ -210,7 +210,10 @@ public class CollaborationController {
 		model.addAttribute("offer", offerDao.getOffer(idOffer));
 		model.addAttribute("skill", skillDao.getSkill(offerDao.getOffer(idOffer).getIdSkill()));
 		
-		List<Demand> demandas = demandDao.getDemands();
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
+		Student student = (Student) sesion.getAttribute("studentLogin");
+		List<Demand> demandas = demandDao.getDemandsOwner(student.getNid());
 		boolean encontrada = false;
 		
 		for (int i=0; i < demandas.size(); i++){
@@ -242,7 +245,6 @@ public class CollaborationController {
 				demand.setIdDemand(idDemand);
 			}
 			
-			Student student = (Student) sesion.getAttribute("studentLogin");
 			demand.setNid(student.getNid());
 			demand.setName(offerDao.getOffer(idOffer).getName());
 			demand.setIdSkill(offerDao.getOffer(idOffer).getIdSkill());
@@ -250,6 +252,7 @@ public class CollaborationController {
 			demand.setEndingDate(offerDao.getOffer(idOffer).getEndingDate());
 			
 			//El añadir demanda no he de acerlo aqui porque si cancela la añadiria igualmente.
+			
 			demandDao.addDemand(demand);
 			model.addAttribute("demanda", demand);
 			
@@ -263,7 +266,7 @@ public class CollaborationController {
 		
 		collaborationValidator.validateAdd(collaboration, bindingResult);
 
-		//HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
+		
 
 		if (bindingResult.hasErrors()) 
 
@@ -272,7 +275,6 @@ public class CollaborationController {
 		
 		
 		collaborationDao.addCollaboration(collaboration);
-		//controlHoras.addHours(collaboration.getHours());
 		
 		/*NotificarColaboraciones notificacion = new NotificarColaboraciones();
 		String ofertante = studentDao.getStudent(offerDao.getOffer(collaboration.getIdOffer()).getNid()).getMail();
@@ -293,7 +295,8 @@ public class CollaborationController {
 		model.addAttribute("demanda", demandDao.getDemand(idDemand));
 		model.addAttribute("skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
 		
-		List<Offer> ofertas = offerDao.getOffers();
+		Student student = (Student) sesion.getAttribute("studentLogin");
+		List<Offer> ofertas = offerDao.getOffersOwner(student.getNid());
 		
 		boolean encontrada = false;
 		
@@ -325,8 +328,7 @@ public class CollaborationController {
 				idOffer = offers.get(0).getIdOffer() + 1;
 				offer.setIdOffer(idOffer);
 			}
-			
-			Student student = (Student) sesion.getAttribute("studentLogin");
+
 			offer.setNid(student.getNid());
 			offer.setName(demandDao.getDemand(idDemand).getName());
 			offer.setIdSkill(demandDao.getDemand(idDemand).getIdSkill());
@@ -370,7 +372,11 @@ public class CollaborationController {
 		model.addAttribute("demanda", demandDao.getDemand(idDemand));
 		model.addAttribute("skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
 		
-		List<Offer> ofertas = offerDao.getOffers();
+		estadisticas = studentDao.getEstadisticas();
+		model.addAttribute("statistics", estadisticas);
+		
+		Student student = (Student) sesion.getAttribute("studentLogin");
+		List<Offer> ofertas = offerDao.getOffersOwner(student.getNid());
 		
 		boolean encontrada = false;
 		
@@ -403,7 +409,7 @@ public class CollaborationController {
 				offer.setIdOffer(idOffer);
 			}
 			
-			Student student = (Student) sesion.getAttribute("studentLogin");
+			
 			offer.setNid(student.getNid());
 			offer.setName(demandDao.getDemand(idDemand).getName());
 			offer.setIdSkill(demandDao.getDemand(idDemand).getIdSkill());
@@ -426,8 +432,6 @@ public class CollaborationController {
 		
 		collaborationValidator.validateAdd(collaboration, bindingResult);
 
-		//HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
-
 		if (bindingResult.hasErrors()) 
 
 			return "collaboration/add";
@@ -435,7 +439,6 @@ public class CollaborationController {
 		
 		
 		collaborationDao.addCollaboration(collaboration);
-		//controlHoras.addHours(collaboration.getHours());
 		
 		/*NotificarColaboraciones notificacion = new NotificarColaboraciones();
 		String ofertante = studentDao.getStudent(offerDao.getOffer(collaboration.getIdOffer()).getNid()).getMail();
@@ -464,8 +467,10 @@ public class CollaborationController {
 	}
 	
 	@RequestMapping(value="/valoration/{idCollaboration}", method = RequestMethod.POST) 
-	public String processValorationSubmit(@PathVariable int idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model) {
+	public String processValorationSubmit(@PathVariable int idCollaboration, @ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, Model model, HttpSession sesion) {
 		
+		HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
+		controlHoras.addHours(collaboration.getHours());
 		model.addAttribute("skill", skillDao.getSkill(offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()).getIdSkill()));
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		model.addAttribute("offerName", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
@@ -474,12 +479,15 @@ public class CollaborationController {
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
 		
+		
+		
 		if (bindingResult.hasErrors()) 
 			
 			 return "collaboration/valoration";
 		
-		 collaborationDao.updateCollaboration(collaboration);
 		 
+		 collaborationDao.updateCollaboration(collaboration);
+
 		 return "redirect:../../student/main.html"; 
 		
 	}
@@ -514,7 +522,8 @@ public class CollaborationController {
 		
 		model.addAttribute("offers", offerDao.getOffers());
 		model.addAttribute("demands", demandDao.getDemands());
-		model.addAttribute("skill", skillDao.getSkill(skillDao.getSkill(collaborationDao.getCollaboration(idCollaboration).getIdOffer()).getIdSkill()));
+		
+		model.addAttribute("skill", skillDao.getSkill(offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()).getIdSkill()));
 		model.addAttribute("collaboration", collaborationDao.getCollaboration(idCollaboration));
 		model.addAttribute("offer", offerDao.getOffer(collaborationDao.getCollaboration(idCollaboration).getIdOffer()));
 		model.addAttribute("demanda", demandDao.getDemand(collaborationDao.getCollaboration(idCollaboration).getIdDemand()));
@@ -621,14 +630,14 @@ public class CollaborationController {
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
 		
-		
+		//Peta sino se han establecido las horas
 		//HoursControlBETA controlHoras = new HoursControlBETA(studentDao, offerDao, demandDao, collaboration);
 		
 		if (bindingResult.hasErrors()) 
 			
 			 return "collaboration/delete";
 		
-		// controlHoras.removeHours(collaboration.getHours());
+		//controlHoras.removeHours(collaboration.getHours());
 		
 		 collaborationDao.deleteCollaboration(idCollaboration);
 		 

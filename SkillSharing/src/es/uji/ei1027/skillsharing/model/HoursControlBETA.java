@@ -25,88 +25,36 @@ public class HoursControlBETA {
 	
 	public void addHours(String hours){
 		
-		System.out.println("addHours: " + hours);
-		
 		String NIDOfferer = offerDao.getOffer(collaboration.getIdOffer()).getNid();
 		String NIDDemandant = demandDao.getDemand(collaboration.getIdDemand()).getNid();
-		List<Student> studentsCollaboration = studentDao.getStudents();
+		Student studentOffer = studentDao.getStudent(NIDOfferer);
+		Student studentDemand = studentDao.getStudent(NIDDemandant);
 		
+		System.out.println("Ofertante: " + studentOffer);
+		System.out.println("studentDemand " + studentDemand);
 		
-		for (int indice = 0; indice < studentsCollaboration.size(); indice += 1){
-			
-			Student student = studentsCollaboration.get(indice);
-			
-			if (student.getNid().trim().toUpperCase().equals(NIDOfferer.trim().toUpperCase())){
-			
-				String [] horasActuales = student.getOfferHours().split(":");
-				int horasTengo = Integer.parseInt(horasActuales[0]);
-				String [] horasAcumular = hours.split((":"));
-				int horasSumar = Integer.parseInt(horasAcumular[0]);
-				int sumado = horasTengo + horasSumar;
-				String setHoras = String.valueOf(sumado) + ":" + "00"; 
-				
-				student.setOfferHours(setHoras);
-				studentDao.updateStudent(student);
-				
-			}else if (student.getNid().trim().toUpperCase().equals(NIDDemandant.trim().toUpperCase())){
-				
-				String [] horasActuales = student.getDemandHours().split(":");
-				int horasTengo = Integer.parseInt(horasActuales[0]);
-				String [] horasAcumular = hours.split((":"));
-				int horasSumar = Integer.parseInt(horasAcumular[0]);
-				int sumado = horasTengo + horasSumar;
-				String setHoras = String.valueOf(sumado) + ":" + "00"; 
-				
-				student.setDemandHours(setHoras);
-				studentDao.updateStudent(student);
-			
-			}
-		}
-		
-	}
+		String [] horasActuales = studentOffer.getOfferHours().split(":");
+		int horasTengo = Integer.parseInt(horasActuales[0]);
+		String [] horasAcumular = hours.split((":"));
+		int horasSumar = Integer.parseInt(horasAcumular[0]);
+		int sumado = horasTengo + horasSumar;
+		String setHoras = String.valueOf(sumado) + ":" + "00"; 
 	
-	public void removeHours(String hours){
+		studentOffer.setOfferHours(setHoras);
+		studentDao.updateStudent(studentOffer);
 		
-		System.out.println("removeHours: " + hours);
+		String [] horasActuales2 = studentDemand.getDemandHours().split(":");
+		int horasTengo2 = Integer.parseInt(horasActuales2[0]);
+		String [] horasAcumular2 = hours.split((":"));
+		int horasSumar2 = Integer.parseInt(horasAcumular2[0]);
+		int sumado2 = horasTengo2 + horasSumar2;
+		String setHoras2 = String.valueOf(sumado2) + ":" + "00"; 
 		
-		String NIDOfferer = offerDao.getOffer(collaboration.getIdOffer()).getNid();
-		String NIDDemandant = demandDao.getDemand(collaboration.getIdDemand()).getNid();
-		List<Student> studentsCollaboration = studentDao.getStudents();
-		
-		
-		for (int indice = 0; indice < studentsCollaboration.size(); indice += 1){
-			
-			Student student = studentsCollaboration.get(indice);
-			
-			if (student.getNid().trim().toUpperCase().equals(NIDOfferer.trim().toUpperCase())){
-				
-				
-				String [] horasActuales = student.getOfferHours().split(":");
-				int horasTengo = Integer.parseInt(horasActuales[0]);
-				String [] horasAcumular = hours.split((":"));
-				int horasSumar = Integer.parseInt(horasAcumular[0]);
-				int sumado = horasTengo - horasSumar;
-				String setHoras = String.valueOf(sumado) + ":" + "00"; 
-				
-				student.setOfferHours(setHoras);
-				studentDao.updateStudent(student);
-				
-				
-			}else if (student.getNid().trim().toUpperCase().equals(NIDDemandant.trim().toUpperCase())){
-				
-				String [] horasActuales = student.getDemandHours().split(":");
-				int horasTengo = Integer.parseInt(horasActuales[0]);
-				String [] horasAcumular = hours.split((":"));
-				int horasSumar = Integer.parseInt(horasAcumular[0]);
-				int sumado = horasTengo - horasSumar;
-				String setHoras = String.valueOf(sumado) + ":" + "00"; 
-				
-				student.setDemandHours(setHoras);
-				studentDao.updateStudent(student);
-			}
-			
-		}
+		studentDemand.setDemandHours(setHoras2);
+		studentDao.updateStudent(studentDemand);
+	
 		
 	}
+
 }
 	

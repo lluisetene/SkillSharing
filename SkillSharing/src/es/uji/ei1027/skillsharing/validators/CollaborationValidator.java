@@ -69,16 +69,7 @@ public class CollaborationValidator implements Validator {
 				idSkillDemand = demandsList.get(i).getIdSkill();
 				
 		}
-			
 		}
-		
-		if ((NIDoferta != null && NIDdemand != null) && NIDoferta.equals(NIDdemand)){
-			
-			errors.rejectValue("idCollaboration", "required", "No puedes crear una colaboración en el que la oferta y la demanda sea del mismo estudiante");
-			
-		}else if((idSkillOffer != -1 && idSkillDemand != -1) && idSkillOffer != idSkillDemand)
-	
-			errors.rejectValue("idCollaboration", "required", "La oferta y la demanda no tienen la misma habilidad");
 		
 	
 		

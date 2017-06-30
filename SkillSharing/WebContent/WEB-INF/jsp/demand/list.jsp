@@ -62,10 +62,10 @@ width:300px;
 				<h4 style="color:black; padding-left:10px; padding-right:30px; display:inline-block">Habilidad</h4>
 				
 				<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="demand">
-				
+
 					<select style="width:300px" id="idSkill" name="idSkill">
 					
-						<option value="Todas" >Todas</option>	
+						<option value=-1 >Todas</option>	
 						
 						<c:forEach items="${skills}" var="skill">
 						
@@ -76,7 +76,7 @@ width:300px;
 					</select>
 					
 					<button style = "background-color:597eaa;  border:none" type="submit"><span style = "color: black; background-color:597eaa" class="glyphicon glyphicon-search"></span></button>
-			
+				
 				</form:form>
 			</div>
 		<div class = "pre-scrollable panel-body" style = "max-height: 400px; height: 400px;border:2px solid black; background-color:597eaa">

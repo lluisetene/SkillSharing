@@ -99,13 +99,13 @@ public class Student {
 	}
 
 	public String getDemandHours() {
-		
+		System.out.println("GET" + demandHours);
 		return demandHours;
 		
 	}
 
 	public void setDemandHours(String demandHours) {
-		
+		System.out.println("SET" + demandHours);
 		this.demandHours = demandHours;
 		
 	}

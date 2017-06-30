@@ -103,10 +103,19 @@ public class DemandController {
 		Student student = (Student) sesion.getAttribute("studentLogin");
 		model.addAttribute("demands", demandDao.getDemandsWithoutOwner(student.getNid()));
 		
-		List<Demand> demandsList = demandDao.getDemandsWithoutOwner(skillDao.getSkill(demand.getIdSkill()).getName(), student.getNid());
+		if (demand.getIdSkill() == -1){
+			
+			model.addAttribute("demands", demandDao.getDemandsWithoutOwner(student.getNid()));
+			
+		}else{
+			
 		
-		model.addAttribute("demands", demandsList);
+			List<Demand> demandsList = demandDao.getDemandsWithoutOwner(skillDao.getSkill(demand.getIdSkill()).getName(), student.getNid());
+		
+			model.addAttribute("demands", demandsList);
 
+		}
+		
 		return "demand/list";
 	
 	}

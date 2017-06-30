@@ -2,15 +2,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>  
 
-<%@ page import = "es.uji.ei1027.skillsharing.dao.OfferDAO" %>
-<%@ page import = "es.uji.ei1027.skillsharing.model.Offer" %> 
-<%@ page import = "es.uji.ei1027.skillsharing.dao.DemandDAO" %>
-<%@ page import = "es.uji.ei1027.skillsharing.model.Demand" %> 
-<%@ page import = "es.uji.ei1027.skillsharing.dao.SkillDAO" %>
-<%@ page import = "es.uji.ei1027.skillsharing.model.Skill" %> 
-<%@ page import = "java.util.List"%> 
-
-
 <t:paginaBasica title="Skill Sharing">
 
 	<jsp:body>
@@ -47,7 +38,7 @@
 	  					<p><img src="imagenes/Imagen_Pagina_Principal.png" width="500" height="260"></p>
 					</div>
 					<div class="col-lg-6" align="center">
-						<p style="margin-top:100px; margin-left:75px; margin-right:75px; font-size:16px"><b><i>
+						<p style="margin-top:30px; margin-left:75px; margin-right:75px; font-size:16px"><b><i>
 						
 						Empieza creando nuevas ofertas y demandas para las habilidades disponibles actualmente en la web.
 						Visita las secciones de Ofertas y Demandas para seleccionar la que más se adecúe a tus necesiades.
@@ -55,12 +46,16 @@
 						
 						</i></b></p>
 						
-						<p style="margin-top:40px; margin-left:75px; margin-right:75px; font-size:16px"><b><i>
+						<p style="margin-top:40px; margin-left:50px; margin-right:75px; font-size:16px;"><b><i>
 						
-						Si eres nuevo, no lo dudes y créate una nueva cuenta:
-						<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; width:130px; height:35px" class = "btn" type = "button" onclick = "location='http://localhost:8080/SkillSharing/student/registrarse.html'" name = "cancel" value = "Resgistrarse">
-
+						Si quieres acceder a sus contenidos  
+						<input style="font-weight:bold; background-color:white; border: 2px solid; color:black; width:130px; height:35px" class = "btn" type = "button" onclick = "location='${pageContext.request.contextPath}/login.html'" name = "cancel" value = "Acceder">
+						
+						
 						</i></b></p>
+						
+						
+						
 						
 					</div>
 	            </div>

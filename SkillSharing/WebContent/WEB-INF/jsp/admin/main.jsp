@@ -72,9 +72,9 @@
 			
 				<div class = "col-md-3" style="width:25%; margin-left:0%; margin-top:1%">
 				
-					<div style = "margin-bottom:5%;padding:3%;background-color:white; border:1px solid black; height:100%">
+					<div style = "margin-bottom:5%;padding:3%;background-color:white; border:1px solid black; height:635px">
 					
-						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:22%; margin-left:0%; margin-right:0%; padding:5%">
+						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:21%; margin-left:0%; margin-right:0%; padding:5%">
 						
 							<div class = "col-md-3" style = "padding:0; width:75; display:inline-block">
 					
@@ -97,7 +97,7 @@
 
 						</div>
 						
-						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:76%; margin-left:0%; margin-right:0%; margin-top:3%;padding:5%">
+						<div class = "panel-body" style="background-color:073763; border:1px solid black; width:100%; height:78%; margin-left:0%; margin-right:0%; margin-top:3%;padding:5%">
 						
 							<div style = "font-size:30; width:100%;border:1px solid black;margin-bottom:10;margin-top:5;padding:11;background-color:eeeeee;color:black">
 							
@@ -216,7 +216,7 @@
 					
 				</div>
 				
-				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:457%; margin-bottom:15px">
+				<div class = "bordesRedondeados" style = "width:73%;margin-left:25%;margin-top:1%;padding:0.5%;background-color:073763; border:1px solid black; height:456%; margin-bottom:15px">
 		
 						<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:350; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
 						
@@ -226,9 +226,8 @@
 									<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="student">
 										
 										<td style = "font-size:30px;color:black">Usuarios</td>
-										<td style = "font-size:15px; padding-top:10px; padding-left:130px;color:black">DNI</td>
-										<td  style = "font-size:25px; padding-left:65px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
-										<td style = "padding-left:10px;color:black">
+										<td style = "font-size:15px; padding-top:3px; padding-left:180px;color:black">DNI</td>
+										<td style = "padding-left:10px; color:black">
 
 										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="nid" name="nid">
 					
@@ -242,7 +241,9 @@
 											
 										</select>
 										
-									</td>
+										</td>
+									
+									<td  style = "font-size:25px; padding-left:10px; color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
 									
 									</form:form>
 									
@@ -293,9 +294,8 @@
 									
 								<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="admin">
 									<td style = "font-size:30px;color:black">Admins</td>
-									<td style = "font-size:15px; padding-top:10px; padding-left:150px;color:black">Usuario</td>
-									<td style = "font-size:25px; padding-left:40px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
-									<td style = "padding-left:10px;color:black">
+									<td style = "font-size:15px; padding-top:3px; padding-left:175px;color:black">Usuario</td>
+									<td style = "padding-left:10px; color:black">
 									
 										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="username" name="username">
 					
@@ -308,6 +308,11 @@
 											</c:forEach>
 											
 										</select>
+										
+									</td>
+										
+									<td style = "font-size:25px; padding-left:10px; color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
+										
 									</form:form>
 									
 									<td style = "font-size:20px; padding-left:240px;color:black"><b>Añadir</b></td>
@@ -369,9 +374,8 @@
 								<tr>
 								<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="skill">
 									<td style = "font-size:30px;color:black">Habilidades</td>
-									<td style = "font-size:15px; padding-top:10px; padding-left:95px;color:black">Habilidad</td>
-									<td style = "font-size:25px; padding-left:30px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
-									<td style = "padding-left:10px;color:black">
+									<td style = "font-size:15px; padding-top:3px; padding-left:105px;color:black">Habilidad</td>
+									<td style = "padding-left:10px; color:black">
 
 										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idSkill" name="idSkill">
 					
@@ -384,6 +388,11 @@
 											</c:forEach>
 											
 										</select>
+										
+										</td>
+										
+									<td style = "font-size:25px; padding-left:10px; color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
+										
 									</form:form>
 								
 									<td style = "font-size:20px; padding-left:240px;color:black"><b>Añadir</b></td>
@@ -425,7 +434,6 @@
 							</div>
 						
 						</div>
-						
 						<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:350; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
 						
 							<table>
@@ -433,9 +441,8 @@
 								<tr>
 								<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="degree">
 									<td style = "font-size:30px;color:black">Grados</td>
-									<td style = "font-size:15px; padding-top:10px; padding-left:155px;color:black">Grado</td>
-									<td style = "font-size:25px; padding-left:50px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
-									<td style = "padding-left:10px;color:black">
+									<td style = "font-size:15px; padding-top:3px; padding-left:190px;color:black">Grado</td>
+									<td style = "padding-left:10px; color:black">
 									
 										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idDegree" name="idDegree">
 					
@@ -448,6 +455,11 @@
 											</c:forEach>
 											
 										</select>
+										
+										</td>
+										
+									<td style = "font-size:25px; padding-left:10px; color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
+										
 									</form:form>
 								
 								
@@ -493,9 +505,8 @@
 								<tr>
 								<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="offer">
 									<td style = "font-size:30px;color:black">Ofertas</td>
-									<td style = "font-size:15px; padding-top:10px; padding-left:155px;color:black">Habilidad</td>
-									<td style = "font-size:25px; padding-left:30px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
-									<td style = "padding-left:10px;color:black">
+									<td style = "font-size:15px; padding-top:3px; padding-left:175px;color:black">Habilidad</td>
+									<td style = "padding-left:10px; color:black">
 
 										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idOffer" name="idOffer">
 					
@@ -507,9 +518,12 @@
 					
 											</c:forEach>
 											
-										</select>									
-									
+										</select>
+										
 									</td>
+									
+									<td style = "font-size:25px; padding-left:10px; color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
+									
 								</form:form>
 								</tr>
 							
@@ -575,9 +589,8 @@
 								<tr>
 								<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="offer">
 									<td style = "font-size:30px;color:black">Demandas</td>
-									<td style = "font-size:15px; padding-top:10px; padding-left:110px;color:black">Habilidad</td>
-									<td style = "font-size:25px; padding-left:30px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
-									<td style = "padding-left:10px;color:black">
+									<td style = "font-size:15px; padding-top:3px; padding-left:130px;color:black">Habilidad</td>
+									<td style = "padding-left:10px; color:black">
 
 										<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="idDemand" name="idDemand">
 					
@@ -592,6 +605,9 @@
 										</select>									
 									
 									</td>
+									
+								<td style = "font-size:25px; padding-left:10px; color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
+								
 								</form:form>
 								</tr>
 							
@@ -657,9 +673,8 @@
 								<tr>
 								<form:form style = "margin: 0; display:inline-block" method="post" modelAttribute="collaboration">
 									<td style = "font-size:30px;color:black">Colaboraciones</td>
-									<td style = "font-size:15px; padding-top:10px; padding-left:45px;color:black">Puntuación</td>
-									<td style = "font-size:25px; padding-left:20px;color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
-									<td style = "padding-left:10px;color:black">
+									<td style = "font-size:15px; padding-top:3px; padding-left:60px;color:black">Puntuación</td>
+									<td style = "padding-left:10px; color:black">
 									
 									<select class = "form-control" style="border: 1px solid black; color:black;width:200px" id="rate" name="rate">
 										
@@ -674,6 +689,9 @@
 										</select>
 									
 									</td>
+									
+								<td style = "font-size:25px; padding-left:10px; color:black"><button style = "background-color:eeeeee;  border:none" type="submit"><span style = "color: black; background-color:eeeeee" class="fa fa-search"></span></button></td>
+									
 								</form:form>
 								</tr>
 							
@@ -745,9 +763,6 @@
 							</div>
 							
 						</div>
-						
-						
-						
 						<div class = "bordesRedondeados panel-body" style="background-color:eeeeee; border:1px solid black; width:100%; height:380; margin-left:0%; margin-right:0%; padding:1%; margin-bottom:1%">
 						
 							<table>
@@ -756,7 +771,7 @@
 
 									<td style="font-size:30px">Estadísticas</td>
 									<td style="padding-left:20px"></td>
-									<td><form name="grafica" style="padding-top:20px;">
+									<td><form name="grafica" style="padding-left:130px; padding-top:15px">
 	                        				<select class = "form-control" style="border: 1px solid black; color:black;width:270px;" name="selectFecha" id="selectFecha" >
 												<option selected id="selectAño">Ofertas/Demandas de este Año</option>
 												<option id="selectMes">Ofertas/Demandas de este Mes</option>
@@ -771,8 +786,9 @@
 					
 						
 						</div>
-					</div>
-			</body>						
+				</div>
+				
+		</body>						
 <t:barrainferior>
 </t:barrainferior>
 

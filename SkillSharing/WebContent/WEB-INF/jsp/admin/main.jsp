@@ -780,10 +780,8 @@
 								</tr>
 							</table>
 		                      
-							<div  id="divAño" style="height:300px;"></div>
-							<div  id="divMes" style="height:300px;"></div>
-							
-					
+							<div id="divAño" style="height:300px;"></div>
+							<div id="divMes" style="height:300px;"></div>
 						
 						</div>
 				</div>
@@ -800,6 +798,10 @@ function load() {
 	show.style.display="block";
 	var hide = document.getElementById('divMes');
 	hide.style.display="none";
+	var hideColYear = document.getElementById('divColYear');
+	hideColYear.style.display="none";
+	var hideColMonth = document.getElementById('divColMonth');
+	hideColMonth.style.display="none";
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -864,15 +866,14 @@ document.addEventListener('DOMContentLoaded', function() {
       labels: ['Ofertas', 'Demandas']
     });
     
+    
     document.getElementById("selectFecha").addEventListener('change', function() {
  		if ( document.getElementById('selectAño').selected == true ) {
 		    document.getElementById('divMes').style.display='none';
 		    document.getElementById('divAño').style.display='block';
-		    console.log("selectAño");
 		} else {
 		    document.getElementById('divAño').style.display='none';
 		    document.getElementById('divMes').style.display='block';
-		    console.log("selectMes");
 		} 
 		
 	}); 

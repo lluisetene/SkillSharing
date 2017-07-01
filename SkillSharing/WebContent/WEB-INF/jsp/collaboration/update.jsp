@@ -54,14 +54,14 @@
 							
 								<tr style = "height:50px">
 								
-									<td style = "width:150px"><label>Oferta</label></td>
+									<td style = "width:145px"><label>Oferta</label></td>
 									<td><input style = "width:625px; border:1px solid black; color:black" class = "form-control" type = "text" maxlength = "5"  value = "${offer.name}" disabled readonly/></td>
 								
 								</tr>	
 								
 								<tr style = "height:50px">
 								
-									<td style = "width:150px"><label>Demanda</label></td>
+									<td style = "width:145px"><label>Demanda</label></td>
 									<td><input style = "width:625px; border:1px solid black; color:black" class = "form-control" type = "text" maxlength = "5" value = "${demanda.name}" disabled readonly/></td>
 								
 								</tr>
@@ -74,10 +74,10 @@
 							
 								<tr style = "height:50px">
 								
-									<td style = "width:150px"><label>Habilidad</label></td>
+									<td style = "width:145px"><label>Habilidad</label></td>
 									<td><input style = "width:200px; border:1px solid black; color:black" class = "form-control" type = "text" value = "${skill.name}" disabled readonly/></td>
 									
-									<td style = "width:275px; padding-left:110px"><label>Nivel</label></td>
+									<td style = "width:195px; padding-left:60px"><label>Nivel</label></td>
 									<td><input style = "width:75px; border:1px solid black; color:black" class = "form-control" type = "text" value = "${skill.level}" disabled readonly/></td>
 								
 								</tr>
@@ -88,7 +88,7 @@
 							
 								<tr style = "height:50px">
 								
-									 <td style = "width:150px"><form:label path="hours">Horas</form:label></td>
+									 <td style = "width:145px"><form:label path="hours">Horas</form:label></td>
 									 <td><select style = "background-color:eeeeee;width:150px; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours" disabled>
 									 	
 									 	<c:choose>
@@ -121,8 +121,8 @@
 									 
 									 </select></td>
 								
-									 <td style = "width:325px; padding-left:160px"><form:label path="rate">Valoración</form:label></td>
-									 <td><select style = "background-color:eeeeee;width:150px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate" disabled>
+									 <td style = "width:195px; padding-left:112px"><form:label path="rate">Valoración</form:label></td>
+									 <td><select style = "background-color:eeeeee;width:170px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate" disabled>
 									 		
 									 		<c:choose>
 									 	
@@ -160,10 +160,10 @@
 								
 								<tr style = "height:100px">
 						            
-						                <td style = "width:150px"><form:label path="beginningDate">Fecha inicio</form:label></td>
+						                <td style = "width:145px"><form:label path="beginningDate">Fecha inicio</form:label></td>
 						                <td><form:input cssClass="form-control" style = "background-color:white;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="beginningDate" name="datepicker" id = "from"  size="10" readonly="true"/><form:errors path="beginningDate" cssClass="error" /></td>
 						        
-						          		<td style = "padding-left:195px;width:360px"><form:label path="endingDate">Fecha fin</form:label></td>
+						          		<td style = "padding-left:150px;width:190px"><form:label path="endingDate">Fecha fin</form:label></td>
 					               		<td><form:input cssClass="form-control" style = "background-color:white;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="endingDate" name="datepicker" id="to" size="10" readonly="true"/><form:errors path="endingDate" cssClass="error" /><td>
 						          		
 						        </tr>

@@ -36,134 +36,134 @@
 	       
 		<table>
 		        	
-					        	<tr style = "height:50px">
-					                <td style = "width:175px"><form:label path = "idCollaboration">IdColaboracion</form:label></td>
-					                <td><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idCollaboration" disabled = "true" readonly = "true"/><form:errors path = "idCollaboration" cssClass = "error" /></td>
-					            
-					                <td style = "width:250px; padding-left:100px"><form:label path="idOffer">IdOferta</form:label></td>
-					             	<td ><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idOffer" value="${offer.idOffer}" disabled = "true" readonly = "true"/><form:errors path = "idOffer" cssClass = "error" /></td>
-									               
-					                <td style = "width:250px; padding-left:100px"><form:label path="idDemand">IdDemanda</form:label></td>
-					                <td><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idDemand" value = "${demanda.idDemand}" disabled = "true" readonly = "true"/><form:errors path = "idDemand" cssClass = "error" /></td>
-					
-								</tr>
-								
-							</table>
+	       	<tr style = "height:50px; display:none">
+	               <td style = "width:175px"><form:label path = "idCollaboration">IdColaboracion</form:label></td>
+	               <td><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idCollaboration" disabled = "true" readonly = "true"/><form:errors path = "idCollaboration" cssClass = "error" /></td>
+	           
+	               <td style = "width:250px; padding-left:100px"><form:label path="idOffer">IdOferta</form:label></td>
+	            	<td ><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idOffer" value="${offer.idOffer}" disabled = "true" readonly = "true"/><form:errors path = "idOffer" cssClass = "error" /></td>
+				               
+	               <td style = "width:250px; padding-left:100px"><form:label path="idDemand">IdDemanda</form:label></td>
+	               <td><form:input style = "width:75px; border:1px solid black; color:black" cssClass = "form-control" type = "text" maxlength = "5" path="idDemand" value = "${demanda.idDemand}" disabled = "true" readonly = "true"/><form:errors path = "idDemand" cssClass = "error" /></td>
+	
+			</tr>
+						
+		</table>
 							
-							<table>
-							
-								<tr style = "height:50px">
-								
-									<td style = "width:150px"><label>Oferta</label></td>
-									<td><input style = "width:625px; border:1px solid black; color:black" class = "form-control" type = "text" maxlength = "5"  value = "${offer.name}" disabled readonly/></td>
-								
-								</tr>	
-								
-								<tr style = "height:50px">
-								
-									<td style = "width:150px"><label>Demanda</label></td>
-									<td><input style = "width:625px; border:1px solid black; color:black" class = "form-control" type = "text" maxlength = "5" value = "${demanda.name}" disabled readonly/></td>
-								
-								</tr>
-								
-							
-								
-							</table>
-							
-							<table>
-							
-								<tr style = "height:50px">
-								
-									<td style = "width:150px"><label>Habilidad</label></td>
-									<td><input style = "width:200px; border:1px solid black; color:black" class = "form-control" type = "text" value = "${skill.name}" disabled readonly/></td>
-									
-									<td style = "width:275px; padding-left:110px"><label>Nivel</label></td>
-									<td><input style = "width:75px; border:1px solid black; color:black" class = "form-control" type = "text" value = "${skill.level}" disabled readonly/></td>
-								
-								</tr>
-							
-							</table>
-							
-							<table>
-							
-								<tr style = "height:50px">
-								
-									 <td style = "width:150px"><form:label path="hours">Horas</form:label></td>
-									 <td><select style = "background-color:eeeeee;width:150px; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours" disabled>
-									 	
-									 	<c:choose>
-									 	
-									 		<c:when test = "${collaboration.hours == '' || collaboration.hours == null }">
-									 	
-									 			<option value="">No establecidas</option>
-									 	
-									 		</c:when>
-									 		<c:otherwise>
-									 		
-									 			<option value="${collaboration.hours}">(Actual) ${collaboration.hours}</option>
-									 		
-									 		</c:otherwise>
-									 	
-									 	</c:choose>
-									 	
-								 			
-					 						<option value="01:00">01:00</option>
-					 						<option value="02:00">02:00</option>
-					 						<option value="03:00">03:00</option>
-					 						<option value="04:00">04:00</option>
-					 						<option value="05:00">05:00</option>
-					 						<option value="06:00">06:00</option>
-					 						<option value="07:00">07:00</option>
-					 						<option value="08:00">08:00</option>
-					 						<option value="09:00">09:00</option>
-					 						<option value="10:00">10:00</option>
-									 
-									 
-									 </select></td>
-								
-									 <td style = "width:325px; padding-left:160px"><form:label path="rate">Valoración</form:label></td>
-									 <td><select style = "background-color:eeeeee;width:150px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate" disabled>
-									 		
-									 		<c:choose>
-									 	
-									 		<c:when test = "${collaboration.rate == 0}">
-									 	
-									 			<option value="0">No establecida</option>
-									 	
-									 		</c:when>
-									 		<c:otherwise>
-									 		
-									 			<option value="${collaboration.rate}">(Actual) ${collaboration.rate}</option>
-									 		
-									 		</c:otherwise>
-									 	
-									 	</c:choose>
-									 							
-					 						<option value="1">1</option>
-					 						<option value="2">2</option>
-					 						<option value="3">3</option>
-					 						<option value="4">4</option>
-					 						<option value="5">5</option>
-					 						<option value="6">6</option>
-					 						<option value="7">7</option>
-					 						<option value="8">8</option>
-					 						<option value="9">9</option>
-					 						<option value="10">10</option>
-									 
-									 </select></td>
-								
-								</tr>
-							
-							</table>
-							
-							<table>
+		<table>
+		
+			<tr style = "height:50px">
+			
+				<td style = "width:100px"><label>Oferta</label></td>
+				<td><input style = "width:625px; border:1px solid black; color:black" class = "form-control" type = "text" maxlength = "5"  value = "${offer.name}" disabled readonly/></td>
+			
+			</tr>	
+			
+			<tr style = "height:50px">
+			
+				<td style = "width:100px"><label>Demanda</label></td>
+				<td><input style = "width:625px; border:1px solid black; color:black" class = "form-control" type = "text" maxlength = "5" value = "${demanda.name}" disabled readonly/></td>
+			
+			</tr>
+			
+		
+			
+		</table>
+		
+		<table>
+		
+			<tr style = "height:50px">
+			
+				<td style = "width:100px"><label>Habilidad</label></td>
+				<td><input style = "width:200px; border:1px solid black; color:black" class = "form-control" type = "text" value = "${skill.name}" disabled readonly/></td>
+				
+				<td style = "width:90px; padding-left:145px;"><label>Nivel</label></td>
+				<td><input style = "width:75px; border:1px solid black; color:black" class = "form-control" type = "text" value = "${skill.level}" disabled readonly/></td>
+			
+			</tr>
+		
+		</table>
+		
+		<table>
+		
+			<tr style = "height:50px">
+			
+				 <td style = "width:100px"><form:label path="hours">Horas</form:label></td>
+				 <td><select style = "background-color:eeeeee;width:150px; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours" disabled>
+				 	
+				 	<c:choose>
+				 	
+				 		<c:when test = "${collaboration.hours == '' || collaboration.hours == null }">
+				 	
+				 			<option value="">No establecidas</option>
+				 	
+				 		</c:when>
+				 		<c:otherwise>
+				 		
+				 			<option value="${collaboration.hours}">(Actual) ${collaboration.hours}</option>
+				 		
+				 		</c:otherwise>
+				 	
+				 	</c:choose>
+				 	
+			 			
+ 						<option value="01:00">01:00</option>
+ 						<option value="02:00">02:00</option>
+ 						<option value="03:00">03:00</option>
+ 						<option value="04:00">04:00</option>
+ 						<option value="05:00">05:00</option>
+ 						<option value="06:00">06:00</option>
+ 						<option value="07:00">07:00</option>
+ 						<option value="08:00">08:00</option>
+ 						<option value="09:00">09:00</option>
+ 						<option value="10:00">10:00</option>
+				 
+				 
+				 </select></td>
+			
+				 <td style = "width:50px; padding-left:192px"><form:label path="rate">Valoración</form:label></td>
+				 <td style="padding-left:12px"><select style = "background-color:eeeeee;width:150px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate" disabled>
+				 		
+				 		<c:choose>
+				 	
+				 		<c:when test = "${collaboration.rate == 0}">
+				 	
+				 			<option value="0">No establecida</option>
+				 	
+				 		</c:when>
+				 		<c:otherwise>
+				 		
+				 			<option value="${collaboration.rate}">(Actual) ${collaboration.rate}</option>
+				 		
+				 		</c:otherwise>
+				 	
+				 	</c:choose>
+				 							
+ 						<option value="1">1</option>
+ 						<option value="2">2</option>
+ 						<option value="3">3</option>
+ 						<option value="4">4</option>
+ 						<option value="5">5</option>
+ 						<option value="6">6</option>
+ 						<option value="7">7</option>
+ 						<option value="8">8</option>
+ 						<option value="9">9</option>
+ 						<option value="10">10</option>
+				 
+				 </select></td>
+			
+			</tr>
+		
+		</table>
+		
+		<table>
 								
 								<tr style = "height:100px">
 						            
-						                <td style = "width:150px"><form:label path="beginningDate">Fecha inicio</form:label></td>
+						                <td style = "width:102px"><form:label path="beginningDate">Fecha inicio</form:label></td>
 						                <td><form:input cssClass="form-control" style = "background-color:white;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="beginningDate" name="datepicker" id = "from"  size="10" readonly="true"/><form:errors path="beginningDate" cssClass="error" /></td>
 						        
-						          		<td style = "padding-left:195px;width:360px"><form:label path="endingDate">Fecha fin</form:label></td>
+						          		<td style = "padding-left:210px;width:110px"><form:label path="endingDate">Fecha fin</form:label></td>
 					               		<td><form:input cssClass="form-control" style = "background-color:white;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="endingDate" name="datepicker" id="to" size="10" readonly="true"/><form:errors path="endingDate" cssClass="error" /><td>
 						          		
 						        </tr>

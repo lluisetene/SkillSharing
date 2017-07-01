@@ -93,7 +93,7 @@
                 <td style = "width:200px"><form:label path="beginningDate">Fecha inicio</form:label></td>
                 <td><form:input cssClass="form-control" style = "background-color:eeeeee;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="beginningDate" id="from" name="datepicker"  size="10" value="${offer.beginningDate }" disabled = "true" readonly="true"/><form:errors path="beginningDate" cssClass="error" /></td>
         
-          		<td style = "padding-left:200px;width:400px"><form:label path="endingDate">Fecha fin</form:label></td>
+          		<td style = "padding-left:340px;width:180px"><form:label path="endingDate">Fecha fin</form:label></td>
               		<td><form:input cssClass="form-control" style = "background-color:eeeeee;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="endingDate" id = "to" name="datepicker" size="10" value = "${offer.endingDate }" disabled = "true" readonly="true"/><form:errors path="endingDate" cssClass="error" /><td>
           		
             </tr>

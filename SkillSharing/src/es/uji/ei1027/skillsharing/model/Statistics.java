@@ -275,6 +275,36 @@ public class Statistics {
 	
 	
 	
+	public int getColaboracionesAñoTodosEstudiantes(int mes) {
+		int contador = 0;
+		
+		for ( int i = 0; i < listaColaboraciones.size(); i++ ) {
+			String fecha[] = listaColaboraciones.get(i).getBeginningDate().split("/");
+			int mesInicioColaboracion = Integer.parseInt(fecha[1]);
+			
+			if ( mesInicioColaboracion == mes )
+				contador++;
+		}
+		
+		return contador;
+	}
+	
+	public int getColaboracionesFecha(int dia, int mes) {
+		int contador = 0;
+		
+		for ( int i = 0; i < listaColaboraciones.size(); i++ ) {
+			String fecha[] = listaColaboraciones.get(i).getBeginningDate().split("/");
+			int diaInicioColaboracion = Integer.parseInt(fecha[0]);
+			int mesInicioColaboracion = Integer.parseInt(fecha[1]);
+			
+			if ( diaInicioColaboracion == dia && mesInicioColaboracion == mes )
+				contador++;
+		}
+		
+		return contador;
+	}
+	
+	
 	
 	
 	

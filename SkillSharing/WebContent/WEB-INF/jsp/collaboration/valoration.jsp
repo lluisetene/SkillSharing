@@ -100,7 +100,7 @@
 						 						<option value="10:00">10:00</option>
  										</select></td>
 								
-									 <td style = "width:225px; padding-left:75px"><form:label path="rate">Valoración</form:label></td>
+									 <td style = "width:195px; padding-left:75px"><form:label path="rate">Valoración</form:label></td>
 									 <td><select style = "width:170px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate">
 						 						<option value="1">1</option>
 						 						<option value="2">2</option>
@@ -125,7 +125,7 @@
 						                <td style = "width:145px"><form:label path="beginningDate">Fecha inicio</form:label></td>
 						                <td><form:input cssClass="form-control" style = "background-color:eeeeee;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="beginningDate" name="datepicker"  value ="${collaboration.beginningDate}" size="10" readonly="true" disabled = "true"/><form:errors path="beginningDate" cssClass="error" /></td>
 						        
-						          		<td style = "padding-left:150px;width:300px"><form:label path="endingDate">Fecha fin</form:label></td>
+						          		<td style = "padding-left:150px;width:190px"><form:label path="endingDate">Fecha fin</form:label></td>
 					               		<td><form:input cssClass="form-control" style = "background-color:eeeeee;display:inline-block;color:black;width:100px;border:1px solid black" type="text" path="endingDate" name="datepicker" value="${collaboration.endingDate}"  size="10" readonly="true" disabled = "true"/><form:errors path="endingDate" cssClass="error" /><td>
 						          		
 						        </tr>

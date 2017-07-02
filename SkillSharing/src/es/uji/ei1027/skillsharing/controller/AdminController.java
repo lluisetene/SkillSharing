@@ -226,11 +226,8 @@ public class AdminController {
 
 		if (collaboration.getRate() == 0){		
 			model.addAttribute("student", studentDao);
-			List<Offer> offersList = offerDao.getOffers();
-			model.addAttribute("offersList", offersList);
-
-			List<Demand> demandsList = demandDao.getDemands();
-			model.addAttribute("demandsList", demandsList);
+			model.addAttribute("listaOfertasColab", offerDao.getOffersWithoutDateRestriction());
+			model.addAttribute("listaDemandasColab", demandDao.getDemandsWithoutDateRestrict());
 			
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 			model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
@@ -238,11 +235,8 @@ public class AdminController {
 
 		}else{
 			model.addAttribute("student", studentDao);
-			List<Offer> offersList = offerDao.getOffers();
-			model.addAttribute("offersList", offersList);
-			
-			List<Demand> demandsList = demandDao.getDemands();
-			model.addAttribute("demandsList", demandsList);
+			model.addAttribute("listaOfertasColab", offerDao.getOffersWithoutDateRestriction());
+			model.addAttribute("listaDemandasColab", demandDao.getDemandsWithoutDateRestrict());
 			
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 			model.addAttribute("collaborationsList", collaborationDao.getCollaborations(collaboration.getRate()));

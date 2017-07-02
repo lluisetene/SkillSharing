@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import = "es.uji.ei1027.skillsharing.model.Admin" %>
 <%@ page import = "es.uji.ei1027.skillsharing.dao.SkillDAO" %>
+<%@ page import = "es.uji.ei1027.skillsharing.dao.StudentDAO" %>
 <%@ page import = "javax.servlet.http.HttpSession" %>
 <c:set var="adminLogin" scope="request" value="${session.getAttribute('adminLogin')}" />
 
@@ -545,7 +546,7 @@
 									
 									</tr>	
 									
-									<c:forEach items="${offersList}" var="offer">
+									<c:forEach items="${offersList1}" var="offer">
 	           						 	<tr>
 	          								<c:set var="skillOffer" scope="request" value="${offer.getIdSkill()}" />
 							          		
@@ -629,7 +630,7 @@
 									
 									</tr>	
 									
-									<c:forEach items="${demandsList}" var="demand">
+									<c:forEach items="${demandsList1}" var="demand">
 	           						 	<tr>
 	          								<c:set var="skillDemand" scope="request" value="${demand.getIdSkill()}" />
 							          		
@@ -703,6 +704,8 @@
 								
 									<tr style = "color:black; background-color:cccccc;font-size:12px">
 									
+										<th>Ofertante</th>
+										<th>Demandante</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Fin &nbsp;<i class="fa fa-info-circle" style = "font-size:17px;" title = "Se muestran las colaboraciones con fecha final >= al més actual"></i></th>
 										<th>Horas</th>
@@ -715,7 +718,37 @@
 									<c:forEach items="${collaborationsList}" var="collaboration">
 	          
 	           						 	<tr>
-	          
+	           						 	
+	           						 		<c:forEach items="${listaOfertasColab}" var="offer">
+	           						 		
+	           						 			<c:choose>
+	           						 			
+	           						 				<c:when test="${collaboration.idOffer == offer.idOffer }">
+	           						 				
+	           						 					<td>${student.getStudent(offer.nid).username}</td>
+	           						 				
+	           						 				</c:when>
+	           						 			
+	           						 			</c:choose>
+	           						 	
+	          									
+	          								
+	          								</c:forEach>
+	          								<c:forEach items="${listaDemandasColab}" var="demand">
+	           						 		
+	           						 			<c:choose>
+	           						 			
+	           						 				<c:when test="${collaboration.idDemand == demand.idDemand }">
+	           						 				
+	           						 					<td>${student.getStudent(demand.nid).username}</td>
+	           						 				
+	           						 				</c:when>
+	           						 			
+	           						 			</c:choose>
+	           						 	
+	          									
+	          								
+	          								</c:forEach>
 							                <td>${collaboration.beginningDate}</td>
 							           		<td>${collaboration.endingDate}</td>	
 							           		<td>${collaboration.hours}</td>

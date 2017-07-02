@@ -69,6 +69,12 @@ public class OfferDAO {
 	
 	}
 	
+	public List<Offer> getOffersWithoutDateRestriction() {
+		
+		return this.jdbcTemplate.query("SELECT * from offer order by idOffer DESC;", new OfferMapper());
+	
+	}
+	
 	public List<Offer> getOffersWithoutOwner(String nid){
 		
 		return this.jdbcTemplate.query("SELECT * from offer WHERE endingdate >= CURRENT_DATE AND nid != ? order by idOffer DESC;", new Object[]{nid}, new OfferMapper());

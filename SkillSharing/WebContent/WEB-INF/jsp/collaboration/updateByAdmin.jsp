@@ -302,7 +302,7 @@
 								<tr style = "height:50px">
 								
 									 <td style = "width:145px"><form:label path="hours">Horas</form:label></td>
-									 <td><select style = "width:150px; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours">
+									 <td><select style = "background-color:eeeeee;width:150px; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours" disabled>
 									 	
 									 	<c:choose>
 									 	
@@ -335,7 +335,7 @@
 									 </select></td>
 								
 									 <td style = "width:195px; padding-left:112px"><form:label path="rate">Valoración</form:label></td>
-									 <td><select style = "width:170px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate">
+									 <td><select style = "background-color:eeeeee;width:170px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate" disabled>
 									 		
 									 		<c:choose>
 									 	
@@ -402,7 +402,9 @@
 							        <div  class="modal-footer" style = "background-color:eeeeee">
 							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar" onclick = "document.getElementById('idCollaboration').disabled=false, 
 	        																   document.getElementById('idOffer').disabled=false,
-	        																   document.getElementById('idDemand').disabled=false;">
+	        																   document.getElementById('idDemand').disabled=false,
+	        																   document.getElementById('hours').disabled=false,
+	        																   document.getElementById('rate').disabled=false;">
 							        </div>
 							      </div>
 							      

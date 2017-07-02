@@ -72,9 +72,9 @@ public class DegreeDAO {
 	
 	}
 	
-	public void deleteDegree(int idDegree) {
+	public void deleteDegree(String name) {
 		
-		this.jdbcTemplate.update("delete from degree where iddegree = ? ", idDegree);
+		this.jdbcTemplate.update("delete from degree where name = ? ", name);
 	
 	}
 	

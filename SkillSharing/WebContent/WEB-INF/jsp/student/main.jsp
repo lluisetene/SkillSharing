@@ -145,7 +145,8 @@
 	                            	
 	                            	<tr style = "color:black; background-color:cccccc;font-size:12px">
 										
-					
+										<th>Ofertante</th>
+										<th>Demandante</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Fin &nbsp;<i class="fa fa-info-circle" style = "font-size:17px;" title = "Se muestran las colaboraciones con fecha final >= al més actual"></i></th>
 										<th>Horas</th>
@@ -157,10 +158,39 @@
 									
 									</tr>	
 									
-									<c:forEach items="${statistics.getColaboracionesEstudiante(nid)}" var="collaboration">
+									<c:forEach items="${collaborationsList}" var="collaboration">
 
 		         						<tr>
-	          
+	          								<c:forEach items="${listaOfertasColab}" var="offer">
+	           						 		
+	           						 			<c:choose>
+	           						 			
+	           						 				<c:when test="${collaboration.idOffer == offer.idOffer }">
+	           						 				
+	           						 					<td>${student.getStudent(offer.nid).username}</td>
+	           						 				
+	           						 				</c:when>
+	           						 			
+	           						 			</c:choose>
+	           						 	
+	          									
+	          								
+	          								</c:forEach>
+	          								<c:forEach items="${listaDemandasColab}" var="demand">
+	           						 		
+	           						 			<c:choose>
+	           						 			
+	           						 				<c:when test="${collaboration.idDemand == demand.idDemand }">
+	           						 				
+	           						 					<td>${student.getStudent(demand.nid).username}</td>
+	           						 				
+	           						 				</c:when>
+	           						 			
+	           						 			</c:choose>
+	           						 	
+	          									
+	          								
+	          								</c:forEach>
 							                <td>${collaboration.beginningDate}</td>
 							           		<td>${collaboration.endingDate}</td>	
 							           		<td>${collaboration.hours}</td>

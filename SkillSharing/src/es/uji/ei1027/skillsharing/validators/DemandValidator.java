@@ -88,13 +88,7 @@ public class DemandValidator implements Validator {
 				
 		}
 		
-		//Control de horas//
-		
-		if (Integer.parseInt(studentDao.getStudent(demandDao.getDemand(demand.getIdDemand()).getNid()).getHorasRestantes().split(":")[0]) == 0){
-			
-			errors.rejectValue("idDemand", "required", "No tiene saldo");
-			
-		}
+
 		
 		// ------- IDSKILL ------ //
 		
@@ -177,19 +171,7 @@ public class DemandValidator implements Validator {
 
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
-
-		Demand demand = (Demand) obj;
 		
-		
-		for(int i = 0; i < collaborationsList.size(); i++){
-			
-			if (collaborationsList.get(i).getIdDemand() == demand.getIdDemand()){
-				
-				errors.rejectValue("idDemand", "required", "No se puede borrar, elimina primero las colaboraciones que tengan esta demanda");
-				
-			}
-			
-		}
 		
 	}
 

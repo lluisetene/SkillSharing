@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,17 +73,20 @@ public class AdminController {
 		model.addAttribute("degreesSelect", degreeDao.getDegreesDistinctName());
 		model.addAttribute("degreesList", degreeDao.getDegreesDistinctName());
 		model.addAttribute("offersSelect", offerDao.getOffers());
-		model.addAttribute("offersList", offerDao.getOffers());
+		model.addAttribute("offersList1", offerDao.getOffers());
 		model.addAttribute("demandsSelect", demandDao.getDemands());
-		model.addAttribute("demandsList", demandDao.getDemands());
+		model.addAttribute("demandsList1", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("collaborationsDistinctSelect", collaborationDao.getCollaborationsDistinctRate());
 		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
 		model.addAttribute("skillDao", skillDao);
 		
+		model.addAttribute("student", studentDao);
+		model.addAttribute("listaOfertasColab", offerDao.getOffersWithoutDateRestriction());
+		model.addAttribute("listaDemandasColab", demandDao.getDemandsWithoutDateRestrict());
+		
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
-		
 		
 		return "admin/main";
 	}
@@ -108,6 +112,7 @@ public class AdminController {
 		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
+		
 		
 		if (student.getNid() != null){
 	
@@ -180,19 +185,19 @@ public class AdminController {
 			
 			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
 			model.addAttribute("offersSelect", offerDao.getOffers());
-			model.addAttribute("offersList", offerDao.getOffers());
+			model.addAttribute("offersList1", offerDao.getOffers());
 
 		}else{
-
+			
 			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
 			model.addAttribute("offersSelect", offerDao.getOffers());
 			
 			/*Es offer.getIdOffer y no offer.geIDSkill porque la id que cojo en el select idSkill ya la tiene
 			la tabla skill y si le pongo la misma me busca en los 2 a al vez.*/
-
+			
 			List<Offer> offersList = offerDao.getOffers(skillDao.getSkill(offer.getIdOffer()).getName());
 			
-			model.addAttribute("offersList", offersList);
+			model.addAttribute("offersList1", offersList);
 		
 		}
 
@@ -201,12 +206,12 @@ public class AdminController {
 			
 			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
 			model.addAttribute("demandsSelect", demandDao.getDemands());
-			model.addAttribute("demandsList", demandDao.getDemands());
+			model.addAttribute("demandsList1", demandDao.getDemands());
 
 		}else{
 
 			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
-			model.addAttribute("demandsSelect", demandDao.getDemands());
+			model.addAttribute("demandsSelect1", demandDao.getDemands());
 			
 			/*Es demand.getIdDemand y no offer.geIdSkill porque la id que cojo en el select idSkill ya la tiene
 			la tabla skill y si le pongo la misma me busca en los 2 a al vez.*/
@@ -219,14 +224,25 @@ public class AdminController {
 		
 		
 
-			
-		if (collaboration.getRate() == 0){
+		if (collaboration.getRate() == 0){		
+			model.addAttribute("student", studentDao);
+			List<Offer> offersList = offerDao.getOffers();
+			model.addAttribute("offersList", offersList);
+
+			List<Demand> demandsList = demandDao.getDemands();
+			model.addAttribute("demandsList", demandsList);
 			
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 			model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
 			model.addAttribute("collaborationDistinctSelect", collaborationDao.getCollaborationsDistinctRate());
 
 		}else{
+			model.addAttribute("student", studentDao);
+			List<Offer> offersList = offerDao.getOffers();
+			model.addAttribute("offersList", offersList);
+			
+			List<Demand> demandsList = demandDao.getDemands();
+			model.addAttribute("demandsList", demandsList);
 			
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 			model.addAttribute("collaborationsList", collaborationDao.getCollaborations(collaboration.getRate()));
@@ -274,7 +290,7 @@ public class AdminController {
 		
 		if (bindingResult.hasErrors()) 
 			
-			 return "admin/update";
+			 return "admin/configurarPerfil";
 		
 		 adminDao.updateAdmin(admin);
 		 

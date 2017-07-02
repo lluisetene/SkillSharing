@@ -21,6 +21,161 @@
 
 <t:paginaBasica title="Colaboración"/>
 <t:paginaBasicaStudent/>
+
+<body>
+	
+	   	<script>
+     
+	   		function popUp(){
+         
+	   			$("#mostrarmodal").modal("show");
+      		};
+      		
+      		function popUp2(){
+      			
+      			$("#mostrarmodal2").modal("show");
+      			
+      		};
+      		
+			function popUp3(){
+      			
+      			$("#mostrarmodal3").modal("show");
+      			
+      		};
+    
+    	</script>
+
+   		<div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      
+      		<div class="modal-dialog">
+        
+        		<div class="modal-content">
+           
+           			<div class="modal-header">
+          
+          				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              
+              			<h3>Crear Colaboración</h3>
+           
+           			</div>
+           
+           			<div class="modal-body">
+              
+              				<h4 style = "color:red"><b>No ha sido posible notificar al oferente y demandante</b></h4>
+	              			<i>La colaboración se ha realizado correctamente pero no ha sido posible notificar al oferente/demandante por un problema en el Servidor de Correos.</i>    
+       
+       				</div>
+           
+           			<div class="modal-footer">
+          
+          				<a href="#" data-dismiss="modal">Cerrar</a>
+           
+           			</div>
+      
+      			</div>
+   	
+   			</div>
+	
+		</div>
+		
+		<div class="modal fade" id="mostrarmodal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      
+      		<div class="modal-dialog">
+        
+        		<div class="modal-content">
+           
+           			<div class="modal-header">
+          
+          				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              
+              			<h3>Crear Colaboración</h3>
+           
+           			</div>
+           
+           			<div class="modal-body">
+              
+              				<h4 style = "color:red"><b>Colaboración existente</b></h4>
+	              			<i>La oferta y demanda que estás aceptando ya existen como colaboración.</i>    
+       
+       				</div>
+           
+           			<div class="modal-footer">
+          
+          				<a href="#" data-dismiss="modal">Cerrar</a>
+           
+           			</div>
+      
+      			</div>
+   	
+   			</div>
+	
+		</div>
+		
+		<div class="modal fade" id="mostrarmodal3" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      
+      		<div class="modal-dialog">
+        
+        		<div class="modal-content">
+           
+           			<div class="modal-header">
+          
+          				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              
+              			<h3>Crear Colaboración</h3>
+           
+           			</div>
+           
+           			<div class="modal-body">
+              
+              				<h4 style = "color:red"><b>Saldo insuficiente</b></h4>
+	              			<i>El usuario demandante no tiene saldo para poder establecer la colaboración.</i>    
+       
+       				</div>
+           
+           			<div class="modal-footer">
+          
+          				<a href="#" data-dismiss="modal">Cerrar</a>
+           
+           			</div>
+      
+      			</div>
+   	
+   			</div>
+	
+		</div>
+		
+		<c:choose>
+		
+			<c:when test = "${ErrorCorreo == true}">
+				<script type="text/javascript">
+					
+					 popUp();
+
+				</script>
+			
+			</c:when>
+			<c:when test = "${ErrorYaExisten == true }">
+			
+			<script type="text/javascript">
+					
+					 popUp2();
+
+				</script>
+			
+			</c:when>
+			<c:when test = "${SinSaldo == true }">
+			
+				<script type="text/javascript">
+					
+					 popUp3();
+
+				</script>
+			
+			</c:when>
+		
+		</c:choose>
+
+
 	
 	<div class="col-lg-8" style="background-color:073763; border-radius:10px 10px 10px 10px; margin-top:-350px">
     	<div class="panel-body" style="background-color:073763">
@@ -210,7 +365,7 @@
     </div>
     
 </html>
-
+</body>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script> 

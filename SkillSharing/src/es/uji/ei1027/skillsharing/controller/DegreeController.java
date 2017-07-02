@@ -276,7 +276,7 @@ public class DegreeController {
 			
 			 return "degree/delete";
 		
-		 degreeDao.deleteDegree(idDegree);
+		 degreeDao.deleteDegree(degree.getName());
 		 
 		 return "redirect: ../../admin/main.html";
 		 

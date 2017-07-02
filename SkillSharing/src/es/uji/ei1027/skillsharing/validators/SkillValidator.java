@@ -48,7 +48,7 @@ public class SkillValidator implements Validator {
 		// -------- NAME ----- //
 		if ( skill.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( skill.getName().length() < 5 )
+		else if ( skill.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		else{
 			
@@ -91,7 +91,7 @@ public class SkillValidator implements Validator {
 		// -------- NAME ----- //
 		if ( skill.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( skill.getName().length() < 5 )
+		else if ( skill.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		
@@ -110,29 +110,7 @@ public class SkillValidator implements Validator {
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
 
-		Skill skill = (Skill) obj;
-		
-		//---------- IDSKILL ----------//
-		for (int i = 0; i < offerList.size(); i++){
-	
-			if (skill.getIdSkill() == offerList.get(i).getIdSkill()){
-				
-				errors.rejectValue("idSkill", "required", "No se puede borrar, elimina primero las ofertas que tengan esta habilidad");
-				break;
-			}
-			
-		}
-		
-		for (int i = 0; i < demandList.size(); i++){
-			
-			if (skill.getIdSkill() == demandList.get(i).getIdSkill()){
-				
-				errors.rejectValue("idSkill", "required", "No se puede borrar, elimina primero las demandas que tengan esta habilidad");
-				break;
-			}
-			
-		}
-		
+
 	}
 
 	@Override

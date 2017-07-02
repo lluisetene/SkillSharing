@@ -167,20 +167,6 @@ public class OfferValidator implements Validator {
 	@Override
 	public void validateDelete(Object obj, Errors errors) {
 
-		Offer offer = (Offer) obj;
-		
-		//---------- IDOFFER ----------//
-		
-		for(int i = 0; i < collaborationsList.size(); i++){
-			
-			if (collaborationsList.get(i).getIdOffer() == offer.getIdOffer()){
-				
-				errors.rejectValue("idOffer", "required", "No se puede borrar, elimina primero las colaboraciones que tengan esta oferta");
-				
-			}
-			
-		}
-		
 	}
 
 	@Override

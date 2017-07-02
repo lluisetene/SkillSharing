@@ -67,6 +67,64 @@
 		</head>
 		
 		<body style = "background-color:eeeeee">
+		
+		
+		   	<script>
+	     
+		   		function popUp(){
+	         
+		   			$("#mostrarmodal").modal("show");
+	      		};
+	    
+	    	</script>
+	
+	   		<div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	      
+	      		<div class="modal-dialog">
+	        
+	        		<div class="modal-content">
+	           
+	           			<div class="modal-header">
+	          
+	          				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	              
+	              			<h3>Eliminar Usuario</h3>
+	           
+	           			</div>
+	           
+	           			<div class="modal-body">
+	              
+	              			<h4 style = "color:red"><b>No ha sido posible borrar al usuario</b></h4>
+	              			<i>El usuario que intentas eliminar tiene colaboraciones establecidas. Para poder borrar
+	              			a este usuario elimina primero sus colaboraciones.</i>    
+	       
+	       				</div>
+	           
+	           			<div class="modal-footer">
+	          
+	          				<a href="#" data-dismiss="modal">Cerrar</a>
+	           
+	           			</div>
+	      
+	      			</div>
+	   	
+	   			</div>
+		
+			</div>
+		
+			<c:choose>
+			
+				<c:when test = "${Error == true}">
+					
+					<script type="text/javascript">
+						
+						 popUp();
+	
+					</script>
+				
+				</c:when>
+			
+			</c:choose>
 			
 				<div class = "col-md-3" style="width:25%; margin-left:0%; margin-top:1%">
 				

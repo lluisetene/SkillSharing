@@ -22,6 +22,66 @@
 <t:paginaBasica title="Demanda"/>
 <t:paginaBasicaStudent/>
 	
+	<body>
+	
+	
+	   	<script>
+     
+	   		function popUp(){
+         
+	   			$("#mostrarmodal").modal("show");
+      		};
+    
+    	</script>
+
+   		<div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      
+      		<div class="modal-dialog">
+        
+        		<div class="modal-content">
+           
+           			<div class="modal-header">
+          
+          				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              
+              			<h3>Eliminar Demanda</h3>
+           
+           			</div>
+           
+           			<div class="modal-body">
+              
+              				<h4 style = "color:red"><b>No ha sido posible eliminar la demanda</b></h4>
+	              			<i>Esta demanda no se puede borrar porque forma parte de colaboraciones.</i>    
+       
+       				</div>
+           
+           			<div class="modal-footer">
+          
+          				<a href="#" data-dismiss="modal">Cerrar</a>
+           
+           			</div>
+      
+      			</div>
+   	
+   			</div>
+	
+		</div>
+		
+		<c:choose>
+		
+			<c:when test = "${Error == true}">
+				<script type="text/javascript">
+					
+					 popUp();
+
+				</script>
+			
+			</c:when>
+		
+		</c:choose>
+	
+	
+	
 	<div class="col-lg-8" style="background-color:073763; border-radius:10px 10px 10px 10px; margin-top:-350px">
     	<div class="panel-body" style="background-color:073763">
 			<div class="col-lg-12" style="background-color:eeeeee; border-radius:10px 10px 10px 10px;">
@@ -135,5 +195,6 @@
     </div>
     </div>
     </div>
+    </body>
     
 </html>

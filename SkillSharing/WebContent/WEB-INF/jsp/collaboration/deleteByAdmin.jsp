@@ -297,10 +297,70 @@
 								<tr style = "height:50px">
 								
 									 <td style = "width:145px"><form:label path="hours">Horas</form:label></td>
-									 <td><form:input style = "width:150px; border:1px solid black; color:black" cssClass = "form-control" type = "text" path="hours" disabled = "true"/></td>
+									 <td><select style = "background-color:eeeeee;width:150px; border:1px solid black; color:black"  Class="form-control" id="hours" name="hours" disabled>
+									 	
+									 	<c:choose>
+									 	
+									 		<c:when test = "${collaboration.hours == '' || collaboration.hours == null }">
+									 	
+									 			<option value="">No establecidas</option>
+									 	
+									 		</c:when>
+									 		<c:otherwise>
+									 		
+									 			<option value="${collaboration.hours}">(Actual) ${collaboration.hours}</option>
+									 		
+									 		</c:otherwise>
+									 	
+									 	</c:choose>
+									 	
+								 			
+					 						<option value="01:00">01:00</option>
+					 						<option value="02:00">02:00</option>
+					 						<option value="03:00">03:00</option>
+					 						<option value="04:00">04:00</option>
+					 						<option value="05:00">05:00</option>
+					 						<option value="06:00">06:00</option>
+					 						<option value="07:00">07:00</option>
+					 						<option value="08:00">08:00</option>
+					 						<option value="09:00">09:00</option>
+					 						<option value="10:00">10:00</option>
+									 
+									 
+									 </select></td>
+										
+										
 								
 									 <td style = "width:195px; padding-left:112px"><form:label path="rate">Valoración</form:label></td>
-									 <td><form:input style = "width:170px; border:1px solid black; color:black" cssClass = "form-control" type = "text" path="rate" disabled = "true"/></td>
+									 <td><select style = "background-color:eeeeee;width:170px; border:1px solid black; color:black"  Class="form-control" id="rate" name="rate" disabled>
+									 		
+									 		<c:choose>
+									 	
+									 		<c:when test = "${collaboration.rate == 0}">
+									 	
+									 			<option value="0">No establecida</option>
+									 	
+									 		</c:when>
+									 		<c:otherwise>
+									 		
+									 			<option value="${collaboration.rate}">(Actual) ${collaboration.rate}</option>
+									 		
+									 		</c:otherwise>
+									 	
+									 	</c:choose>
+									 							
+					 						<option value="1">1</option>
+					 						<option value="2">2</option>
+					 						<option value="3">3</option>
+					 						<option value="4">4</option>
+					 						<option value="5">5</option>
+					 						<option value="6">6</option>
+					 						<option value="7">7</option>
+					 						<option value="8">8</option>
+					 						<option value="9">9</option>
+					 						<option value="10">10</option>
+									 
+									 </select></td>
 								
 								</tr>
 							

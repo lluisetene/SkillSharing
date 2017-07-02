@@ -20,12 +20,12 @@
 
 </head>
 
-<t:paginaBasica title="Login">
 
-	<jsp:body>
-	
-		<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+<t:paginaBasica title="Login"/>
+
+	<body>
+	  
+		
 	   	<script>
      
 	   		function popUp(){
@@ -51,8 +51,8 @@
            
            			<div class="modal-body">
               
-              			<h4>Usuario Baneado</h4>
-              			El usuario que has introducido está baneado por incumplir las normas de la plataforma.    
+              				<h4 style = "color:red"><b>No ha sido posible el logueo con este usuario</b></h4>
+	              			<i>Este usuario ha sido baneado por un admnistrador por incumplir las normas de la plataforma.</i>    
        
        				</div>
            
@@ -119,8 +119,7 @@
    			
    		</div>
 
-	</jsp:body>
+	<body>
 
-</t:paginaBasica>
 
 <t:barrainferior/>

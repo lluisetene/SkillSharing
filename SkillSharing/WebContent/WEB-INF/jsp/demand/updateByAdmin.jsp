@@ -275,7 +275,7 @@
 					            <tr style = "height:50px">
 					            
 					                <td><form:label path="nid">DNI</form:label></td>
-					                <td><form:input cssClass="form-control" style = "color:black;width:150px;border:1px solid black" type = "text" maxlength = "9" path="nid" /><form:errors path="nid" cssClass="error"/></td>
+					                <td><form:input cssClass="form-control" style = "background-color:eeeeeecolor:black;width:150px;border:1px solid black" type = "text" maxlength = "9" path="nid" disabled = "true" readonly = "true"/><form:errors path="nid" cssClass="error"/></td>
 					        
 					            </tr>
 					            
@@ -289,7 +289,7 @@
 					            <tr style = "height:50px">
 					                
 					                <td><form:label path="idSkill">Habilidad</form:label></td>
-					                <td style = "width:150px"><select Class="form-control" style = "color:black;width:250px; border:1px solid black" id="idSkill" name="idSkill">
+					                <td style = "width:150px"><select Class="form-control" style = "color:black;width:250px; border:1px solid black" id="idSkill" name="idSkill" disabled>
 										
 										<option value = "${Skill.idSkill}">(Seleccionada) ${Skill.name}  (${Skill.level}) </option>
 										
@@ -352,7 +352,9 @@
 							          <p><i>¿Seguro que desea Modificar esta Demanda?</i></p>
 							        </div>
 							        <div  class="modal-footer" style = "background-color:eeeeee">
-							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar" onclick = "document.getElementById('idDemand').disabled=false;">
+							         <input type="submit" name = "submit" class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black;width:100px; height:35px" value = "Aceptar" onclick = "document.getElementById('idDemand').disabled=false,
+							         																																														  document.getElementById('nid').disabled= false,
+							         																																														  document.getElementById('idSkill').disabled=false;">
 							        </div>
 							      </div>
 							      

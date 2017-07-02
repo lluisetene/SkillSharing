@@ -25,7 +25,10 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Degree;
+import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.model.Student;
 import es.uji.ei1027.skillsharing.validators.StudentValidator;
@@ -70,6 +73,14 @@ public class StudentController {
 	public String mainStudents(Model model) {
 		
 		model.addAttribute("skills", skillDao);
+		model.addAttribute("student", studentDao);
+		List<Offer> offersList = offerDao.getOffersWithoutDateRestriction();
+		model.addAttribute("listaOfertasColab", offersList);
+
+		List<Demand> demandsList = demandDao.getDemandsWithoutDateRestrict();
+		model.addAttribute("listaDemandasColab", demandsList);
+		
+		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
 		
 		estadisticas = studentDao.getEstadisticas();
 		estadisticas.setDatos(offerDao.getOffers(), demandDao.getDemands(), collaborationDao.getCollaborations());
@@ -238,12 +249,16 @@ public class StudentController {
 		
 		studentValidator.validateUpdate(student, bindingResult);
 		
-		if (bindingResult.hasErrors()) 
+		if (bindingResult.hasErrors()){ 
 			
 			 return "student/updateByAdmin";
+		 
+		}
+		
+		
 		
 		 studentDao.updateStudent(student);
-
+		 
 		 return "redirect:../../admin/main.html"; 
 		 
 	  }
@@ -278,17 +293,29 @@ public class StudentController {
 		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
-		StudentValidator studentValidator = new StudentValidator();
-		
-		studentValidator.setStudentDAO(studentDao, collaborationDao, offerDao, demandDao, adminDao);
-		
-		studentValidator.validateDelete(student, bindingResult);
-		
 		
 		if (bindingResult.hasErrors()) {
 			
 			return  "student/deleteByAdmin"; 
 		}
+		
+		List<Collaboration> collaborationsList = collaborationDao.getCollaborations();
+		
+		for(int indice = 0; indice < collaborationsList.size(); indice += 1){
+			
+			int idOffer = collaborationsList.get(indice).getIdOffer();
+			int idDemand = collaborationsList.get(indice).getIdDemand();
+			String nidOffer = offerDao.getOffer(idOffer).getNid();
+			String nidDemand = demandDao.getDemand(idDemand).getNid();
+			
+			if (student.getNid().trim().toUpperCase().equals(nidOffer) || student.getNid().trim().toUpperCase().equals(nidDemand)){
+				model.addAttribute("Error", true);
+				return "student/deleteByAdmin";
+			
+			}
+			
+		}
+		
 		 studentDao.deleteStudent(nid);
 		 return "redirect:../../admin/main.html"; 
 		 

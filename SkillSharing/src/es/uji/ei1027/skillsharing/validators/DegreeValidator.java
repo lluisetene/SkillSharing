@@ -112,8 +112,16 @@ public class DegreeValidator implements Validator {
 		else if ( degree.getName().length() <= 5 ){
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		}
-		
-		
+	  
+		for (int i = 0; i < degreesList.size(); i++){
+			
+			if (degreesList.get(i).getName().trim().toLowerCase().equals(degree.getName().trim().toLowerCase()) && degreesList.get(i).getIdDegree() != degree.getIdDegree()){
+				
+				errors.rejectValue("name", "required", "Este nombre de grado ya está en uso");
+				break;
+			}
+			
+		}
 		
 	}
 

@@ -126,7 +126,7 @@
 				      
 						<table>
 			
-				        	<tr style = "height:50px">
+				        	<tr style = "display:none;height:50px">
 				        	
 				                <td style = width:25%><form:label style = "padding-right: 50px" path="idDegree">ID Grado</form:label></td>
 				                <td><form:input style = "width:10%; border:1px solid black; color:black"  cssClass="form-control" type = "text" maxlength = "5" path="idDegree" disabled = "true" readonly = "true"/><form:errors path = "idDegree" cssClass = "error" /></td>

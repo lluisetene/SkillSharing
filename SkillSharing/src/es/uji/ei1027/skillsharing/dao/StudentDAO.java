@@ -74,7 +74,7 @@ public class StudentDAO {
 	}
 	
 	public Student getStudent(String nid) {
-		
+
 		return this.jdbcTemplate.queryForObject("select * from student where nid = ?", new Object[] {nid}, new StudentMapper());
 	
 	}

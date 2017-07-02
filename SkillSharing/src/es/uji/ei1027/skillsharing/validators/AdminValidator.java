@@ -35,7 +35,7 @@ public class AdminValidator implements Validator {
 		//------ NAME -------//
 		if ( user.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( user.getName().length() < 5 )
+		else if ( user.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		
@@ -103,7 +103,7 @@ Admin user = (Admin) obj;
 		//------ NAME -------//
 		if ( user.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( user.getName().length() < 5 )
+		else if ( user.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 	
 		// ------ MAIL ----- //
@@ -123,6 +123,22 @@ Admin user = (Admin) obj;
 			}
 			
 		}
+		
+		for (int i = 0; i < studentsList.size(); i++){
+			
+			if (studentsList.get(i).getMail().trim().toLowerCase().equals(user.getMail().trim().toLowerCase())){
+				
+				if (!studentsList.get(i).getUsername().trim().toLowerCase().equals(user.getUsername().trim().toLowerCase())){
+					
+					errors.rejectValue("mail", "required", "Este email ya está en uso");
+					
+				}
+				
+			}
+			
+		}
+		
+		
 		
 		for (int i = 0; i < studentsList.size(); i++){
 			

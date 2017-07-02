@@ -18,6 +18,8 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Demand;
+import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Skill;
 import es.uji.ei1027.skillsharing.validators.SkillValidator;
 
@@ -230,17 +232,33 @@ public class SkillController {
 		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		
-		SkillValidator skillValidator = new SkillValidator();
-		
-		skillValidator.setSkillDAO(skillDao, offerDao, demandDao);
-		
-		skillValidator.validateDelete(skill, bindingResult);
-		
-		
 		if (bindingResult.hasErrors()) 
 			
 			 return "skill/delete";
 		
+		List<Offer> offerList = offerDao.getOffersWithoutDateRestriction();
+		
+		for (int i = 0; i < offerList.size(); i++){
+			
+			if (skill.getIdSkill() == offerList.get(i).getIdSkill()){
+				
+				model.addAttribute("Error", true);
+				return "skill/delete";
+			}
+			
+		}
+		
+		List<Demand> demandList = demandDao.getDemandsWithoutDateRestrict();
+		
+		for (int i = 0; i < demandList.size(); i++){
+			
+			if (skill.getIdSkill() == demandList.get(i).getIdSkill()){
+				
+				model.addAttribute("Error", true);
+				return "skill/delete";
+			}
+			
+		}
 		 skillDao.deleteSkill(idSkill);
 		 
 		 return "redirect:../../admin/main.html";

@@ -152,7 +152,7 @@ public class CollaborationController {
 		
 		if (!encontrada){
 			
-			List<Demand> demands= demandDao.getDemands();
+			List<Demand> demands= demandDao.getDemandsWithoutDateRestrict();
 			Demand demand = new Demand();
 			int idDemand;
 			
@@ -181,7 +181,7 @@ public class CollaborationController {
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
 		
-		List<Collaboration> collaborations= collaborationDao.getCollaborations();
+		List<Collaboration> collaborations= collaborationDao.getCollaborationsWithoutDateRestrict();
 		Collaboration collaboration = new Collaboration();
 		int idCollaboration;
 		
@@ -205,12 +205,7 @@ public class CollaborationController {
 	@RequestMapping(value="/addOffer/{idOffer}", method=RequestMethod.POST)
 	public String processAddOfferSubmit(@ModelAttribute("collaboration") Collaboration collaboration, BindingResult bindingResult, HttpSession sesion, Model model, @PathVariable int idOffer) {
 		
-		//No se si aqui puede dar problemas.
-		CollaborationValidator collaborationValidator = new CollaborationValidator();
 		
-		collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
-		
-		collaborationValidator.validateAdd(collaboration, bindingResult);
 		
 		
 		model.addAttribute("offers", offerDao.getOffers());
@@ -238,7 +233,7 @@ public class CollaborationController {
 		
 		if (!encontrada){
 			
-			List<Demand> demands= demandDao.getDemands();
+			List<Demand> demands= demandDao.getDemandsWithoutDateRestrict();
 			Demand demand = new Demand();
 			int idDemand;
 			
@@ -259,7 +254,6 @@ public class CollaborationController {
 			demand.setBeginningDate(offerDao.getOffer(idOffer).getBeginningDate());
 			demand.setEndingDate(offerDao.getOffer(idOffer).getEndingDate());
 			
-			//El añadir demanda no he de acerlo aqui porque si cancela la añadiria igualmente.
 			
 			demandDao.addDemand(demand);
 			model.addAttribute("demanda", demand);
@@ -267,21 +261,58 @@ public class CollaborationController {
 		}
 		
 
+			CollaborationValidator collaborationValidator = new CollaborationValidator();
+			
+			collaborationValidator.setCollaborationDAO(collaborationDao, offerDao, demandDao, studentDao);
+			
+			collaborationValidator.validateAdd(collaboration, bindingResult);
+
 		if (bindingResult.hasErrors()) 
 
 			return "collaboration/add";
 		
 		
 		
+	
+		
+		List<Collaboration> collaborationsList = collaborationDao.getCollaborationsWithoutDateRestrict();
+		
+		for (int i = 0; i < collaborationsList.size(); i++){
+			
+			if (collaborationsList.get(i).getIdOffer() == collaboration.getIdOffer() && collaborationsList.get(i).getIdDemand() == collaboration.getIdDemand()){
+				
+				model.addAttribute("ErrorYaExisten", true);
+				return "collaboration/add";
+			}
+			
+		}
+		
+		//Control de horas
+		
+		if (Integer.parseInt(studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid()).getHorasRestantes().split(":")[0]) == 0){
+			
+			model.addAttribute("SinSaldo", true);
+			return "collaboration/add";
+		}
+		
 		collaborationDao.addCollaboration(collaboration);
 		
-		/*NotificarColaboraciones notificacion = new NotificarColaboraciones();
-		String ofertante = studentDao.getStudent(offerDao.getOffer(collaboration.getIdOffer()).getNid()).getMail();
-		String demandante = studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid()).getMail();
-		String nombreOferta = offerDao.getOffer(collaboration.getIdOffer()).getName();
-		String nombreDemanda = demandDao.getDemand(collaboration.getIdDemand()).getName();
-		notificacion.notificarColaboracion(ofertante, demandante, collaboration, nombreOferta, nombreDemanda);*/
+		try{
 		
+			NotificarColaboraciones notificacion = new NotificarColaboraciones();
+			String ofertante = studentDao.getStudent(offerDao.getOffer(collaboration.getIdOffer()).getNid()).getMail();
+			String demandante = studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid()).getMail();
+			String nombreOferta = offerDao.getOffer(collaboration.getIdOffer()).getName();
+			String nombreDemanda = demandDao.getDemand(collaboration.getIdDemand()).getName();
+			notificacion.notificarColaboracion(ofertante, demandante, collaboration, nombreOferta, nombreDemanda);
+		
+		}catch (Exception e){
+			
+			model.addAttribute("ErrorCorreo", true);
+			return "collaboration/add";
+			
+			
+		}
 		return "redirect:../../student/main.html";
 		
 	}
@@ -313,7 +344,7 @@ public class CollaborationController {
 		
 		if (!encontrada){
 			
-			List<Offer> offers= offerDao.getOffers();
+			List<Offer> offers= offerDao.getOffersWithoutDateRestriction();
 			Offer offer = new Offer();
 			int idOffer;
 			
@@ -342,7 +373,7 @@ public class CollaborationController {
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
 		
-		List<Collaboration> collaborations= collaborationDao.getCollaborations();
+		List<Collaboration> collaborations= collaborationDao.getCollaborationsWithoutDateRestrict();
 		Collaboration collaboration = new Collaboration();
 		int idCollaboration;
 		
@@ -393,7 +424,7 @@ public class CollaborationController {
 		
 		if (!encontrada){
 			
-			List<Offer> offers= offerDao.getOffers();
+			List<Offer> offers= offerDao.getOffersWithoutDateRestriction();
 			Offer offer = new Offer();
 			int idOffer;
 			
@@ -415,7 +446,7 @@ public class CollaborationController {
 			offer.setBeginningDate(demandDao.getDemand(idDemand).getBeginningDate());
 			offer.setEndingDate(demandDao.getDemand(idDemand).getEndingDate());
 			
-			//El añadir demanda no he de acerlo aqui porque si cancela la añadiria igualmente.
+
 			offerDao.addOffer(offer);
 			model.addAttribute("offer", offer);
 			
@@ -435,17 +466,35 @@ public class CollaborationController {
 
 			return "collaboration/add";
 		
+		List<Collaboration> collaborationsList = collaborationDao.getCollaborationsWithoutDateRestrict();
 		
-		
+		for (int i = 0; i < collaborationsList.size(); i++){
+			
+			if (collaborationsList.get(i).getIdOffer() == collaboration.getIdOffer() && collaborationsList.get(i).getIdDemand() == collaboration.getIdDemand()){
+				
+				model.addAttribute("ErrorYaExisten", true);
+				return "collaboration/add";
+			}
+			
+		}
+	
 		collaborationDao.addCollaboration(collaboration);
 		
-		/*NotificarColaboraciones notificacion = new NotificarColaboraciones();
-		String ofertante = studentDao.getStudent(offerDao.getOffer(collaboration.getIdOffer()).getNid()).getMail();
-		String demandante = studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid()).getMail();
-		String nombreOferta = offerDao.getOffer(collaboration.getIdOffer()).getName();
-		String nombreDemanda = demandDao.getDemand(collaboration.getIdDemand()).getName();
-		notificacion.notificarColaboracion(ofertante, demandante, collaboration, nombreOferta, nombreDemanda);*/
+		try{
+			NotificarColaboraciones notificacion = new NotificarColaboraciones();
+			String ofertante = studentDao.getStudent(offerDao.getOffer(collaboration.getIdOffer()).getNid()).getMail();
+			String demandante = studentDao.getStudent(demandDao.getDemand(collaboration.getIdDemand()).getNid()).getMail();
+			String nombreOferta = offerDao.getOffer(collaboration.getIdOffer()).getName();
+			String nombreDemanda = demandDao.getDemand(collaboration.getIdDemand()).getName();
+			notificacion.notificarColaboracion(ofertante, demandante, collaboration, nombreOferta, nombreDemanda);
 		
+		}catch (Exception e){
+			
+			model.addAttribute("ErrorCorreo", true);
+			return "collaboration/add";
+			
+			
+		}
 		return "redirect:../../student/main.html";
 		
 	}

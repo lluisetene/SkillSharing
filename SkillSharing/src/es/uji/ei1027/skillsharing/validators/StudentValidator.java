@@ -43,7 +43,7 @@ public class StudentValidator implements Validator {
 		// -------- NAME ----- //
 		if ( student.getName().trim().equals("") )
 			errors.rejectValue("name", "required", "Este campo es obligatorio");
-		else if ( student.getName().length() < 5 )
+		else if ( student.getName().length() <= 5 )
 			errors.rejectValue("name", "required", "El nombre debe tener más de 5 caracteres");
 		
 		
@@ -193,22 +193,7 @@ public class StudentValidator implements Validator {
 	@Override
 	public void validateDelete(Object obj, Errors errors){
 	
-		Student student = (Student) obj;
 		
-		for(int indice = 0; indice < collaborationsList.size(); indice += 1){
-			
-			int idOffer = collaborationsList.get(indice).getIdOffer();
-			int idDemand = collaborationsList.get(indice).getIdDemand();
-			String nidOffer = offerDao.getOffer(idOffer).getNid();
-			String nidDemand = demandDao.getDemand(idDemand).getNid();
-			
-			if (student.getNid().trim().toUpperCase().equals(nidOffer) || student.getNid().trim().toUpperCase().equals(nidDemand)){
-				
-				errors.rejectValue("nid", "required", "No se puede borrar, elimina primero las colaboraciones de este estudiante");
-				
-			}
-			
-		}
 		
 	}
 	

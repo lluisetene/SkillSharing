@@ -44,8 +44,6 @@
 	
 		<head>
 		
-		<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script> 
 		$(document).ready(function() {
 			$("#from").datepicker({
@@ -102,6 +100,62 @@
 		</head>
 		
 		<body style = "background-color:eeeeee">
+		
+	
+	   	<script>
+     
+	   		function popUp(){
+         
+	   			$("#mostrarmodal").modal("show");
+      		};
+    
+    	</script>
+
+   		<div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      
+      		<div class="modal-dialog">
+        
+        		<div class="modal-content">
+           
+           			<div class="modal-header">
+          
+          				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              
+              			<h3>Eliminar Demanda</h3>
+           
+           			</div>
+           
+           			<div class="modal-body">
+              
+              				<h4 style = "color:red"><b>No ha sido posible eliminar la demanda</b></h4>
+	              			<i>Esta demanda no se puede borrar porque forma parte de colaboraciones.</i>    
+       
+       				</div>
+           
+           			<div class="modal-footer">
+          
+          				<a href="#" data-dismiss="modal">Cerrar</a>
+           
+           			</div>
+      
+      			</div>
+   	
+   			</div>
+	
+		</div>
+		
+		<c:choose>
+		
+			<c:when test = "${Error == true}">
+				<script type="text/javascript">
+					
+					 popUp();
+
+				</script>
+			
+			</c:when>
+		
+		</c:choose>
 			
 				<div class = "col-md-3" style="width:25%; margin-left:0%; margin-top:1%">
 				

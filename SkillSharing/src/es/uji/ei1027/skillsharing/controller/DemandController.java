@@ -25,6 +25,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Statistics;
 import es.uji.ei1027.skillsharing.model.Student;
@@ -182,7 +183,7 @@ public class DemandController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model) {
+	public String processAddSubmit(@ModelAttribute("demand") Demand demand, BindingResult bindingResult, Model model, HttpSession sesion) {
 		
 		model.addAttribute("skills", skillDao.getSkills());
 		
@@ -326,6 +327,18 @@ public class DemandController {
 			
 			 return "demand/delete";
 		
+		List<Collaboration> collaborationsList = collaborationDao.getCollaborationsWithoutDateRestrict();
+		
+		for(int i = 0; i < collaborationsList.size(); i++){
+			
+			if (collaborationsList.get(i).getIdDemand() == demand.getIdDemand()){
+				
+				model.addAttribute("Error", true);
+				return "demand/delete";
+			}
+			
+		}
+		
 		 demandDao.deleteDemand(idDemand);
 		 
 		 return "redirect:../../student/main.html"; 
@@ -360,16 +373,23 @@ public class DemandController {
 			model.addAttribute("demandsSelect", demandDao.getDemands());
 			model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 			model.addAttribute("Skill", skillDao.getSkill(demandDao.getDemand(idDemand).getIdSkill()));
+			model.addAttribute("demand", demandDao.getDemand(idDemand));
 		
-			DemandValidator demandValidator = new DemandValidator();
-			
-			demandValidator.setDemandDAO(demandDao, studentDao, collaborationDao, skillDao);
-			
-			demandValidator.validateDelete(demand, bindingResult);
-			
 			if (bindingResult.hasErrors()) {
 				 return "demand/deleteByAdmin";
 			}
+			
+			List<Collaboration> collaborationsList = collaborationDao.getCollaborationsWithoutDateRestrict();
+			for(int i = 0; i < collaborationsList.size(); i++){
+				
+				if (collaborationsList.get(i).getIdDemand() == demand.getIdDemand()){
+					
+					model.addAttribute("Error", true);
+					return "demand/deleteByAdmin";
+				}
+				
+			}
+			
 			 demandDao.deleteDemand(idDemand);
 			 
 			 return "redirect: ../../admin/main.html";

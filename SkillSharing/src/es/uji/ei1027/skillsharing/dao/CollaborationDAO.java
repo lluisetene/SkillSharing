@@ -52,7 +52,13 @@ public class CollaborationDAO {
 	
 	public List<Collaboration> getCollaborations() {
 		
-		return this.jdbcTemplate.query(" SELECT * FROM COLLABORATION WHERE EXTRACT(MONTH FROM endingdate) >= EXTRACT(MONTH FROM CURRENT_DATE) order by idCollaboration;", new CollaborationMapper());
+		return this.jdbcTemplate.query(" SELECT * FROM COLLABORATION WHERE EXTRACT(MONTH FROM endingdate) >= EXTRACT(MONTH FROM CURRENT_DATE) order by idCollaboration DESC;", new CollaborationMapper());
+	
+	}
+	
+	public List<Collaboration> getCollaborationsWithoutDateRestrict() {
+		
+		return this.jdbcTemplate.query(" SELECT * FROM COLLABORATION order by idCollaboration DESC;", new CollaborationMapper());
 	
 	}
 	

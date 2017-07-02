@@ -13,6 +13,7 @@
 		<link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		
+		
 		<!-- Estilos propios -->
 		<link href="${pageContext.request.contextPath}/css/errors.css" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/css/estrellas.css" rel="stylesheet">
@@ -47,6 +48,7 @@
 	</head>
 	
 	<body>
+		
 	
 		<t:barrasuperior/>
 		
@@ -57,8 +59,9 @@
 		<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
 		
 		<!-- Bootstrap Core JavaScript -->
+		 <script src="${pageContext.request.contextPath}/vendor/jquery/jquery-1.12.1.min.js"></script>
 		<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
-		
+
 		<!-- Metis Menu Plugin JavaScript -->
 		<script src="${pageContext.request.contextPath}/vendor/metisMenu/metisMenu.min.js"></script>
 		
@@ -70,6 +73,7 @@
 		<!-- Custom Theme JavaScript -->
 		<script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>
 	   
+
 	</body>
 	 
 </html>

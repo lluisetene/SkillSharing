@@ -68,7 +68,9 @@
 		</head>
 		
 		<body style = "background-color:eeeeee">
-			
+		
+		
+
 				<div class = "col-md-3" style="width:25%; margin-left:0%; margin-top:1%">
 				
 					<div style = "margin-bottom:5%;padding:3%;background-color:white; border:1px solid black; height:100%">

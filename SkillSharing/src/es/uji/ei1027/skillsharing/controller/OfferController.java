@@ -25,6 +25,7 @@ import es.uji.ei1027.skillsharing.dao.DemandDAO;
 import es.uji.ei1027.skillsharing.dao.OfferDAO;
 import es.uji.ei1027.skillsharing.dao.SkillDAO;
 import es.uji.ei1027.skillsharing.dao.StudentDAO;
+import es.uji.ei1027.skillsharing.model.Collaboration;
 import es.uji.ei1027.skillsharing.model.Demand;
 import es.uji.ei1027.skillsharing.model.Offer;
 import es.uji.ei1027.skillsharing.model.Statistics;
@@ -313,19 +314,26 @@ public class OfferController {
 	public String processDeleteSubmit(@PathVariable int idOffer, @ModelAttribute("offer") Offer offer, BindingResult bindingResult, Model model) {
 		
 		model.addAttribute("Skill", skillDao.getSkill(offerDao.getOffer(idOffer).getIdSkill()));
-		
+		model.addAttribute("offer", offerDao.getOffer(idOffer));
 		estadisticas = studentDao.getEstadisticas();
 		model.addAttribute("statistics", estadisticas);
-		
-		offerValidator = new OfferValidator();
-		
-		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
-		
-		offerValidator.validateDelete(offer, bindingResult);
 		
 		if (bindingResult.hasErrors()) 
 			
 			 return "offer/delete";
+		
+		List<Collaboration> collaborationsList = collaborationDao.getCollaborationsWithoutDateRestrict();
+		
+		for(int i = 0; i < collaborationsList.size(); i++){
+			
+			if (collaborationsList.get(i).getIdOffer() == offer.getIdOffer()){
+				
+				model.addAttribute("Error", true);
+				return "offer/delete";
+				
+			}
+			
+		}
 		
 		 offerDao.deleteOffer(idOffer);
 		 
@@ -361,16 +369,27 @@ public class OfferController {
 		model.addAttribute("demandsSelect", demandDao.getDemands());
 		model.addAttribute("collaborationsSelect", collaborationDao.getCollaborations());
 		model.addAttribute("Skill", skillDao.getSkill(offerDao.getOffer(idOffer).getIdSkill()));
-	
-		offerValidator = new OfferValidator();
+		model.addAttribute("offer", offerDao.getOffer(idOffer));
 		
-		offerValidator.setOfferDAO(offerDao, studentDao, collaborationDao, skillDao);
-		
-		offerValidator.validateDelete(offer, bindingResult);
 		
 		if (bindingResult.hasErrors()) {
 			 return "offer/deleteByAdmin";
 		}
+		
+		List<Collaboration> collaborationsList = collaborationDao.getCollaborationsWithoutDateRestrict();
+		
+		for(int i = 0; i < collaborationsList.size(); i++){
+			
+			if (collaborationsList.get(i).getIdOffer() == offer.getIdOffer()){
+				
+				model.addAttribute("Error", true);
+				return "offer/deleteByAdmin";
+				
+			}
+			
+		}
+		
+		
 		 offerDao.deleteOffer(idOffer);
 		 
 		 return "redirect: ../../admin/main.html";

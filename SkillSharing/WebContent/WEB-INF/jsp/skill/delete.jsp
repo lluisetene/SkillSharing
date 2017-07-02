@@ -67,6 +67,62 @@
 		</head>
 		
 		<body style = "background-color:eeeeee">
+		
+	
+	   	<script>
+     
+	   		function popUp(){
+         
+	   			$("#mostrarmodal").modal("show");
+      		};
+    
+    	</script>
+
+   		<div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      
+      		<div class="modal-dialog">
+        
+        		<div class="modal-content">
+           
+           			<div class="modal-header">
+          
+          				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              
+              			<h3>Eliminar Habilidad</h3>
+           
+           			</div>
+           
+           			<div class="modal-body">
+              
+              				<h4 style = "color:red"><b>No ha sido posible eliminar la habilidad</b></h4>
+	              			<i>Esta habilidad está siendo usada en ofertas/demandas y es por ello que no puede ser borrada.</i>    
+       
+       				</div>
+           
+           			<div class="modal-footer">
+          
+          				<a href="#" data-dismiss="modal">Cerrar</a>
+           
+           			</div>
+      
+      			</div>
+   	
+   			</div>
+	
+		</div>
+		
+		<c:choose>
+		
+			<c:when test = "${Error == true}">
+				<script type="text/javascript">
+					
+					 popUp();
+
+				</script>
+			
+			</c:when>
+		
+		</c:choose>
 			
 				<div class = "col-md-3" style="width:25%; margin-left:0%; margin-top:1%">
 				

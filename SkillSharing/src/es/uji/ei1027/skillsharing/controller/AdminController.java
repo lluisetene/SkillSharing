@@ -211,14 +211,14 @@ public class AdminController {
 		}else{
 
 			model.addAttribute("skillsDistinctSelect", skillDao.getSkillsDistinctName());
-			model.addAttribute("demandsSelect1", demandDao.getDemands());
+			model.addAttribute("demandsSelect", demandDao.getDemands());
 			
 			/*Es demand.getIdDemand y no offer.geIdSkill porque la id que cojo en el select idSkill ya la tiene
 			la tabla skill y si le pongo la misma me busca en los 2 a al vez.*/
 
 			List<Demand> demandsList = demandDao.getDemands(skillDao.getSkill(demand.getIdDemand()).getName());
 			
-			model.addAttribute("demandsList", demandsList);
+			model.addAttribute("demandsList1", demandsList);
 		
 		}
 		

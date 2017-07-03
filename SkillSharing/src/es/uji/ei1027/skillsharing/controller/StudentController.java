@@ -70,7 +70,7 @@ public class StudentController {
 	//---------- página de métodos ---------
 	
 	@RequestMapping("/main")
-	public String mainStudents(Model model) {
+	public String mainStudents(Model model, HttpSession sesion) {
 		
 		model.addAttribute("skills", skillDao);
 		model.addAttribute("student", studentDao);
@@ -80,7 +80,9 @@ public class StudentController {
 		List<Demand> demandsList = demandDao.getDemandsWithoutDateRestrict();
 		model.addAttribute("listaDemandasColab", demandsList);
 		
-		model.addAttribute("collaborationsList", collaborationDao.getCollaborations());
+		Student student = (Student) sesion.getAttribute("studentLogin");
+	
+		model.addAttribute("collaborationsList", collaborationDao.getCollaborationsStudent(student.getNid()));
 		
 		estadisticas = studentDao.getEstadisticas();
 		estadisticas.setDatos(offerDao.getOffers(), demandDao.getDemands(), collaborationDao.getCollaborations());

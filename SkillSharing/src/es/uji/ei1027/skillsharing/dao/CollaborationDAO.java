@@ -98,5 +98,11 @@ public class CollaborationDAO {
 	
 	}
 	
+	public List<Collaboration> getCollaborationsStudent(String nid) {
+		
+		return this.jdbcTemplate.query("SELECT col.idcollaboration, col.idoffer, col.iddemand, col.beginningdate, col.endingdate, col.hours, col.rate from collaboration AS col JOIN offer ON col.idOffer = offer.idOffer JOIN demand ON col.idDemand = demand.idDemand WHERE EXTRACT(MONTH FROM col.endingdate) >= EXTRACT(MONTH FROM CURRENT_DATE) AND offer.nid = ? OR demand.nid = ?;", new Object[] {nid, nid}, new CollaborationMapper());
+	
+	}
+	
 		
 }

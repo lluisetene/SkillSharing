@@ -1,0 +1,28 @@
+.panel, .flip {
+
+    background-color: white;
+  	padding-top:20; 
+  	padding-bottom:20;
+  	padding-left:40;
+}
+
+.panel {
+    padding: 70px;
+    display: none;
+ 	padding-top:10; padding-left:40
+}
+
+.bordesRedondeados{
+
+-khtml-border-radius: 20px;
+-moz-border-radius: 20px;
+-webkit-border-radius: 20px;
+border-radius: 20px;
+
+}
+
+td{
+
+width:300px;
+
+}

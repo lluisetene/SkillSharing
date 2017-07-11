@@ -93,17 +93,11 @@ width:300px;
 				             <div class = "panel-body" style = "display:inline-block; border: 2px solid black; background-color:white"><i class="glyphicon glyphicon-calendar"style="color:black"></i><b style = "color:black"> ${demand.endingDate} </b></div>
 							 <c:choose>
 
-								<c:when test='${adminLogin == null && studentLogin == null}'>
-							 
-									 <div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/login.html'"></div>
-							
-								</c:when>
 								<c:when test="${studentLogin != null}"> 
 	
 									<div class = "panel-body" style = "width:120px;display:inline-block"><input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:80px; height:35px" type = "submit" name = "submit" value = "Aceptar" onclick = "location='${pageContext.request.contextPath}/collaboration/addDemand/${demand.idDemand}.html'"></div>
 		
 								</c:when>
-								
 							
 							</c:choose>
 							
@@ -148,5 +142,4 @@ width:300px;
     <body>
 	
 
-<t:barrainferior>
-</t:barrainferior>
+<t:barrainferior/>

@@ -12,39 +12,6 @@
 
 	<t:paginaBasica title="Página Personal admin"/>
 	
-		 <%
-	        Admin admin = new Admin();
-	        HttpSession sesion = request.getSession();
-	        admin = (Admin)sesion.getAttribute("adminLogin");
-	        String correo = admin.getMail();   
-	        String [] nombreApellidos = admin.getName().split(" ");
-	        String nombre = " ";
-	        String apellidos = " ";
-	        String userName = admin.getUsername();
-	        
-	        if (nombreApellidos.length == 1){
-	        	
-	        	nombre = nombreApellidos[0];
-	        	
-	        }else if (nombreApellidos.length == 2){
-	        	
-	        	nombre = nombreApellidos[0];
-				apellidos = nombreApellidos[1];
-	        	
-	        }else if (nombreApellidos.length == 3){
-	        	
-	        	nombre = nombreApellidos[0];
-				apellidos = nombreApellidos[1] + " " + nombreApellidos[2];
-	        	
-	        }else{
-	        	
-	        	nombre = nombreApellidos[0] + " " + nombreApellidos[1];
-				apellidos = nombreApellidos[2] + " " + nombreApellidos[3];
-	        	
-	        }
-	        
-        %>
-	
 		<head>
 		
 			<style>
@@ -80,17 +47,16 @@
 							<div class = "col-md-3" style = "padding:0; width:75; display:inline-block">
 					
 								<span class = "fa fa-user-secret" style="font-size:90px; color:ffffff"></span>
-								<p style = "text-align:center;color:eeeeee"><%out.print(userName);%></p>
+								<p style = "text-align:center;color:eeeeee">${adminLogin.getUsername()}</p>
 							
 							</div>
 							<div  style = "padding-left:5%; width:70%; display:inline-block">
 						
 								<ul class = "nav">
 								
-									<li style = "height:30%;color:eeeeee"><%out.print(correo);%></li>
-									<li style = "height:30%;color:eeeeee"><%out.print(nombre);%></li>
-									<li style = "color:eeeeee"><%out.print(apellidos);%></li>
-								
+									<li style = "height:30%;color:eeeeee">${adminLogin.getMail()}</li>
+									<br>
+									<li style = "height:30%;color:eeeeee">${adminLogin.getName()}</li>
 								
 								</ul>
 							
@@ -913,6 +879,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 
 });
+
 
 </script>
 

@@ -51,8 +51,8 @@ border-radius: 20px;
 						
 							<tr>
 								
-				                <td><form:label  path="nid" style= "padding-right:100px; color:black">DNI</form:label></td>
-				                <td><form:input  type = "text" maxlength = "9" path="nid" style="width:100%; border-style:solid" /><br><form:errors path="nid" cssClass="error"/></td>
+				                <td><form:label path="nid" style= "padding-right:100px; color:black">DNI</form:label></td>
+				                <td><form:input type = "text" maxlength = "9" path="nid" style="width:100%; border-style:solid" /><br><form:errors path="nid" cssClass="error"/></td>
 				            
 
 				            </tr>
@@ -140,7 +140,7 @@ border-radius: 20px;
 		        
 				        </table>
 				    
-				    	<input class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:90px; height:35px" type = "button" onclick = "location='${pageContext.request.contextPath}/index.jsp'" name = "cancel" value = "Cancelar" >
+				    	<button class="btn"  style="text-align:left;font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:30%; width:90px; height:35px" type = "button" onclick = "location='${pageContext.request.contextPath}/index.jsp'" >Cancelar</button>
 				        <input class = "btn" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:2%;width:105px; height:35px" type = "submit" name = "submit" value = "Registrarse">
 				    
 				    </form:form>

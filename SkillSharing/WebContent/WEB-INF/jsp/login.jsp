@@ -108,7 +108,7 @@
    						  						
    						<br>
    						
-   						<input class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:21%; width:100px; height:35px" type = "button" onclick = "location='${pageContext.request.contextPath}/index.jsp'" name = "cancel" value = "Cancelar">
+   						<button class="btn"  style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:21%; width:100px; height:35px" type = "button" onclick = "window.history.back()" >Cancelar</button>
 				        <input class = "btn" style="font-weight:bold; background-color:white; border: 2px solid; color:black; margin-left:2%;width:100px; height:35px" type = "submit" name = "submit" value = "Log in">
 
    						<p style="font-size:10px; padding-left:25%; padding-top:10%">¿No estás registrado? <b>Registrate <a href = "${pageContext.request.contextPath}/student/registrarse.html">aquí</a></b></p>

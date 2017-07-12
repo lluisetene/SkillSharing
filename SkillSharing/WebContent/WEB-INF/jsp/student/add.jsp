@@ -12,8 +12,6 @@
 
 	</head>
 
-	</head>
-
 	<body>
     
     	<h2>Nuevo Estudiante</h2>
@@ -126,7 +124,7 @@
 	        </table>
 	    
 	    	<input type = "submit" name = "submit" value = "Aceptar">
-	        <input type = "button" onclick = "location='http:${pageContext.request.contextPath}/student/main.html'" name = "cancel" value = "Cancelar">
+	        <button type = "button" onclick = "location='http:${pageContext.request.contextPath}/student/main.html'">Cancelar</button>
 	    
 	    </form:form>
 	    	

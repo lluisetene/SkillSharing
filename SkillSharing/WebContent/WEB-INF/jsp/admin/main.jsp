@@ -55,7 +55,7 @@
 								<ul class = "nav">
 								
 									<li style = "height:30%;color:eeeeee">${adminLogin.getMail()}</li>
-									<br>
+									<li></li>
 									<li style = "height:30%;color:eeeeee">${adminLogin.getName()}</li>
 								
 								</ul>
